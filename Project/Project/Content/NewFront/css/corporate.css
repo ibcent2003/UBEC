@@ -1,0 +1,382 @@
+.main-nav{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
+
+.rev_slider img{
+    width:100%
+}
+
+.rev_slider::after{ 
+    width: 100%;
+	height:30%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:100;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,30) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.6))); 
+}
+
+.corporate-about h1{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.corporate-about p{
+    margin: 10px 0px 20px 0px;
+    line-height: 1.7;
+    color: #808080;
+}
+
+.corporate-about h6{
+    font-style: italic;
+}
+
+.corporate-box{
+    padding: 5px;
+}
+
+.corporate-box img{
+    width: 100%;
+}
+
+.front-signature{
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.front-signature img{
+    width: 100%;
+}
+
+.corporate-services{
+    background: #FFFF;
+    height: 260px;
+    padding: 40px 20px 0px 20px;
+    margin: 15px 0px 15px 0px;
+}
+
+.corporate-services .service-icon{
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+
+.corporate-services h6{
+    text-align: center;
+    margin: 15px 0px 10px 0px;
+    font-weight: 600;
+}
+
+.corporate-services p{
+    text-align: center;
+    font-size: 13px;
+    color: #808080;
+}
+
+.corporate-front-img img{
+    width: 100%;
+}
+
+.corporate-content{
+    margin-top: 40px;
+}
+
+.corporate-content h6{
+    margin: 5px 0px 10px 0px;
+    font-style: italic;
+    color: #15A9FA;
+}
+
+.corporate-content p{
+    color: #808080;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.gradient-box { 
+    background-image: linear-gradient(to right top, #1b76ff, #0085ff, #0092ff, #009efe, #15a9fa);
+    height: 250px;
+    margin: 60px 0px 160px 0px;
+}
+
+.gradient-box .contact-front{
+    background: #FFF;
+    width: 400px;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -moz-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -o-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    margin-top: -100px;
+    float: right;
+    position: relative;
+    padding: 35px 30px 30px 30px;
+}
+
+.gradient-box .contact-label{
+    float: left;
+    color: #FFF;
+    text-align: left;
+    padding: 70px 40px 70px 40px;
+}
+
+.gradient-box .contact-label h1{
+    text-align: left;
+}
+
+.customize2{
+    border: none;
+    -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+    border-radius: 0px;
+    background: #FAFCFC;
+    height: 45px;
+    padding: 6px 12px;
+    font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+	border: solid 1px #eff5f5;
+    color: #000;
+}
+
+.customize2:focus {
+  border-color: #e0ebeb;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.customize2::-moz-placeholder {
+  color: #333;
+  opacity: 1;
+}
+.customize2:-ms-input-placeholder {
+  color: #333;
+}
+.customize2::-webkit-input-placeholder {
+  color: #333;
+}
+
+.customize2::-ms-expand {
+  background-color: none;
+  border: 0;
+}
+
+.option-right{
+    float: right;
+    margin-top: -30px;
+}
+
+p.phone{
+    color: #15A9FA;
+}
+
+/* ========== #TO BE REPLACE ON THE CSS PAGE ========== */
+
+/* ================== 
+	1.5. LOADER. 
+   ================== */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1031;
+  background-color: #F2F2F2;
+}
+
+#loader {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 3px solid transparent;
+  border-top-color: #1B76FF;
+  border-radius: 50%;
+  animation: loader 2s linear infinite;
+}
+#loader::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 3px solid transparent;
+  border-top-color: #1B76FF;
+  border-radius: 50%;
+  animation: loader 3s linear infinite;
+}
+#loader::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 3px solid transparent;
+  border-top-color: #1B76FF;
+  border-radius: 50%;
+  animation: loader 1.5s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+hr.center{
+    width: 80px;
+    border-top: 3px solid #15A9FA;
+    margin: 15px auto 15px auto;
+}
+
+.footer-categories h6{
+	color: #15A9FA;
+}
+
+.subscribe-footer h6{
+	color: #15A9FA;
+	margin-bottom: 10px;
+}
+
+.newsletter-box .button {
+  	width: 25%;
+  	height: 38px;
+  	background-color: #15A9FA;
+  	border: none;
+  	border-radius: 0 5px 5px 0;
+  	font-family: inherit;
+  	font-weight: 500;
+  	color: inherit;
+  	letter-spacing: 1px;
+  	cursor: pointer;
+  	color: #FFF;
+  	font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.cd-top {
+  background-color: #15A9FA;    
+}
+
+.icon-fa:hover{
+    background: #15A9FA;
+	border: solid 1px #15A9FA;
+}
+
+.social-top .fa:hover{
+	color: #15A9FA;
+}
+
+.btn-custom {
+  color: #FFF;
+  background-color: #15A9FA;
+  border-color: #15A9FA;
+  transition: 0.3s;
+}
+.btn-custom:focus,
+.btn-custom.focus {
+  color: #FFF;
+  background-color: #1B76FF;
+  border-color: #1B76FF;
+}
+.btn-custom:hover {
+  color: #FFF;
+  background-color: #1B76FF;
+  border-color: #1B76FF;
+}
+.btn-custom:active,
+.btn-custom.active,
+.open > .dropdown-toggle.btn-custom {
+  color: #FFF;
+  background-color: #1B76FF;
+  border-color: #1B76FF;
+}
+
+
+.footer .no-margin-bottom{
+    margin-top: 0px;
+}
+
+.map-container-bottom{
+    background: #333;
+}
+
+@media (max-width:1150px){
+.gradient-box { 
+    margin: 90px 0px 160px 0px;
+}
+    
+} 
+
+@media (max-width:992px) {
+    
+.gradient-box { 
+    background-image: linear-gradient(to right top, #1b76ff, #0085ff, #0092ff, #009efe, #15a9fa);
+    height: 100%;
+    margin: 0px;
+    padding-bottom: 40px;
+}
+
+.gradient-box .contact-front{
+    float: none;
+    margin: 0px auto 0px auto;
+}
+
+.gradient-box .contact-label{
+    float: none;
+    color: #FFF;
+    text-align: center;
+    padding: 20px;
+}
+    
+.gradient-box .contact-label h1{
+    text-align: center;
+}
+    
+.corporate-services{
+    height: 100%;
+    padding: 40px 20px 50px 20px;
+}
+
+}
+
+@media (max-width:768px) {
+.corporate-about h1{
+    font-size: 30px;
+}
+    
+}
+
+@media (max-width:576px) {
+    
+.corporate-about h1{
+    font-size: 25px;
+}
+    
+}
+
+@media (max-width:576px) {
+
+.gradient-box .contact-front{
+    width: 100%;
+}
+    
+}

@@ -1,0 +1,677 @@
+.main-nav{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
+
+.rev_slider img{
+    width:100%
+}
+
+.rev_slider::after{ 
+    width: 100%;
+	height:30%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:100;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,30) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.6))); 
+}
+
+.gym-front-pic img{
+    width: 100%;
+}
+
+hr.short{
+    width: 60px;
+    border-top: 4px solid #111111;
+    margin: 15px 0px 15px 0px;
+}
+
+.gym-about p{
+    color: #666666;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.span-gym{
+    margin-top: 20px;
+}
+
+.gym-box{
+    padding: 10px 0px 10px 0px;
+}
+
+.gym-box .gym-icon{
+    width: 60px;
+    height: 60px;
+}
+
+.gym-box .gym-icon img{
+    width: 100%;
+}
+
+.gym-box h6{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #111111;
+    line-height: 2;
+}
+
+.gym-bar{
+    width: 100%;
+    height: 130px;
+    background: #94C026;
+}
+
+.no-padding{
+    padding: 0px 15px 0px 15px;
+}
+
+.bar-label{
+    padding: 20px 0px 20px 0px;
+    color: #FFF;
+    float: left;
+}
+
+.bar-label h5{
+    font-weight: 600;
+}
+
+.bar-btn{
+    float: right;
+    padding: 30px 0px 30px 0px;
+}
+
+.btn-gym {
+  color: #FFF;
+  background-color: transparent;
+  border-color: #FFF;
+  transition: 0.3s;
+}
+.btn-gym:focus,
+.btn-gym.focus {
+  color: #94C026;
+  background-color: #FFF;
+  border-color: #FFF;
+}
+.btn-gym:hover {
+  color: #94C026;
+  background-color: #FFF;
+  border-color: #FFF;
+}
+.btn-gym:active,
+.btn-gym.active,
+.open > .dropdown-toggle.btn-gym {
+  color: #94C026;
+  background-color: #FFF;
+  border-color: #FFF;
+}
+
+.gym-clases {
+  display: block;
+  line-height: 1.42857143;
+  background-color: #eff5f5;
+  -webkit-transition: border .2s ease-in-out;
+       -o-transition: border .2s ease-in-out;
+          transition: border .2s ease-in-out;
+  margin: 20px 0px 20px 0px;
+}
+.gym-clases > img,
+.gym-clases a > img {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+a.gym-clases:hover,
+a.gym-clases:focus,
+a.gym-clases.active {
+  border-color: #337ab7;
+}
+.gym-clases .caption {
+  padding: 9px;
+  color: #333;
+    text-align: center;
+}
+
+.tab-pane{
+    color: #666;
+    padding: 20px 0px 20px 0px;
+    text-align: left;
+}
+
+.tab-pane p{
+    color: #666;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #94C026;
+}
+
+.nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+    width: 25%;
+    text-align: center;
+    height: 50px;
+    background: #FAFCFC;
+ 
+}
+
+.nav-tabs > li > a {
+    margin-right: 0px;
+    line-height: 1.42857143;
+    border: none;
+    border-radius: 0px;
+    font-size: 16px;  
+    color: #333;
+    transition: 0.3s;
+    padding: 15px 0px 15px 0px;
+    height: 50px;
+}
+
+
+.nav-tabs > li > a:hover {
+    background-color: #94C026;
+    color: #fff;
+    height: 50px;
+    padding: 15px 0px 15px 0px;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: #fff;
+    cursor: default;
+    background-color: #94C026;
+    border: none;
+    border-bottom-color: none;
+    height: 50px;
+    padding: 15px 0px 15px 0px;
+}
+
+.nav-tabs.nav-justified {
+    width: 100%;
+    border-bottom: 0;
+}
+
+.nav-tabs.nav-justified > li {
+    float: none;
+}
+
+.nav-tabs.nav-justified > li > a {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.nav-tabs.nav-justified > .dropdown .dropdown-menu {
+    top: auto;
+    left: auto;
+}
+
+.tab-image{
+    width: 200px;
+    float: left;
+    margin-right: 20px;
+}
+
+.tab-image img{
+    width: 100%;
+}
+
+.class-pic{
+    width: 400px;
+    float: left;
+    margin-right: 20px;
+}
+
+.class-pic img{
+    width: 100%;
+}
+
+.inner-tabs{
+    height: 225px;
+}
+
+.inner-tabs .class-info p{
+    font-style: italic;
+}
+
+.inner-tabs .class-info h5{
+    margin-top: -15px;
+    color: #111111;
+    font-weight: 600;
+}
+
+.inner-tabs .class-info h6{
+     font-size: 15px;
+    color: #999999;
+}
+
+.btn-class{
+    margin-top: 20px;
+}
+
+.btn-class p{
+    font-style: normal;
+}
+
+hr.classes{
+    clear: both;
+    margin: 15px 0px 15px 0px;
+}
+
+.gym-parallax { 
+    background-image: url("../img/images/gym/img14.jpg");
+    height: 450px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 120px;
+}
+
+.parallax-content{
+    bottom: 50px;
+    color: #FFF;
+    max-width: 650px;
+}
+
+.parallax-content h1{
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.counter-facts{
+    margin-top: 30px;
+}
+
+.inner-facts{
+    width: 200px;
+    height: 70px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.facts-icon{
+    float: left;
+    margin-right: 15px;
+    width: 40px;
+}
+
+.facts-icon img{
+    width: 100%;
+}
+
+.inner-facts .counter{
+    margin: 0px;
+    text-align: left;
+    padding: 0px;
+    color: #FFF;
+    font-weight: 600;
+}
+
+.inner-facts p{
+    margin-top: 5px;
+}
+
+.gym-news {
+    display: block;
+    line-height: 1.42857143;
+    background-color: #fff;
+    -webkit-transition: border .2s ease-in-out;
+       -o-transition: border .2s ease-in-out;
+          transition: border .2s ease-in-out;
+}
+.gym-news > img,
+.gym-news a > img {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+a.gym-news:hover,
+a.gym-news:focus,
+a.gym-news.active {
+    border-color: #337ab7;
+}
+.gym-news .caption {
+    color: #333;
+    padding-bottom: 5px;
+}
+
+.left-panel{
+    width: 70px;
+    height: 120px;
+    background: #94C026;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 30px;
+}
+
+.date-box{
+    width: 100%;
+    height: 60px;
+    border-bottom: solid 1px #FFF;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    color: #FFF;
+}
+
+.date-box h5{
+    font-size: 13px;
+}
+
+ h5 span-number{
+    font-size: 20px;
+    color: #FFF;
+     line-height: 1.2;
+     font-weight: 600;
+}
+
+.comment-box{
+    text-align: center;
+    color: #FFF;
+    padding: 5px 0px 5px 0px;
+}
+
+.comment-box p{
+    color: #FFF;
+}
+
+.inner-caption{
+    padding: 10px 10px 0px 10px;
+    text-align: left;
+}
+
+.inner-caption h6{
+    line-height: 1.3;
+    margin-bottom: 5px;
+}
+
+.inner-caption p{
+    text-align: left;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========== #TO BE REPLACE ON THE CSS PAGE ========== */
+
+/* ================== 
+	1.5. LOADER. 
+   ================== */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1031;
+  background-color: #F2F2F2;
+}
+
+#loader {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 3px solid transparent;
+  border-top-color: #94C026;
+  border-radius: 50%;
+  animation: loader 2s linear infinite;
+}
+#loader::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 3px solid transparent;
+  border-top-color: #94C026;
+  border-radius: 50%;
+  animation: loader 3s linear infinite;
+}
+#loader::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 3px solid transparent;
+  border-top-color: #94C026;
+  border-radius: 50%;
+  animation: loader 1.5s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+hr.center{
+    width: 80px;
+    border-top: 3px solid #111111;
+    margin: 15px auto 15px auto;
+}
+
+.footer-categories h6{
+	color: #94C026;
+}
+
+.subscribe-footer h6{
+	color: #94C026;
+	margin-bottom: 10px;
+}
+
+.newsletter-box .button {
+  	width: 25%;
+  	height: 38px;
+  	background-color: #94C026;
+  	border: none;
+  	border-radius: 0 5px 5px 0;
+  	font-family: inherit;
+  	font-weight: 500;
+  	color: inherit;
+  	letter-spacing: 1px;
+  	cursor: pointer;
+  	color: #FFF;
+  	font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.cd-top {
+  background-color: #94C026;    
+}
+
+.icon-fa:hover{
+    background: #94C026;
+	border: solid 1px #94C026;
+}
+
+.social-top .fa:hover{
+	color: #94C026;
+}
+
+@media (max-width:1200px) {
+hr.short{
+    width: 60px;
+    border-top: 3px solid #111111;
+    margin: 10px 0px 10px 0px;
+}
+    
+.span-gym{
+    margin-top: 10px;
+}
+    
+.gym-about p{
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+    
+.gym-box .gym-icon{
+    width: 40px;
+    height: 40px;
+}
+    
+.gym-box h6{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #111111;
+    line-height: 1.4;
+    margin: 2px 0px 2px 0px;
+}
+    
+.gym-box p{
+    line-height: 1.4;
+    font-size: 13px;
+}
+    
+}
+
+
+@media (max-width:992px) {
+.gym-box .gym-icon{
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+    
+.gym-box h6{
+    text-align: center;
+    line-height: 2;
+    margin: 2px 0px 2px 0px;
+}
+    
+.gym-box p{
+    line-height: 1.4;
+    font-size: 14px;
+    text-align: center;
+}
+    
+.gym-news{
+    margin-bottom: 50px;
+}
+    
+}
+
+
+@media (max-width:768px) {
+.gym-bar{
+    width: 100%;
+    height: 100%;
+    padding: 20px 0px 20px 0px;
+}
+    
+.bar-label{
+    float: none;
+    text-align: center;
+    padding: 0px;
+}
+
+.bar-btn{
+    float: none;
+    text-align: center;
+    padding: 0px;
+    margin-top: 10px;
+}
+    
+.gym-parallax { 
+    height: 550px; 
+    padding-top: 210px;
+}
+    
+.parallax-content h1{
+    font-size: 30px;
+    line-height: 1.4
+}
+    
+.parallax-content{
+    max-width: 100%;
+}
+    
+.parallax-content p{
+    font-size: 13px;
+}
+    
+.class-pic{
+    width: 300px;
+}
+
+}
+
+@media (max-width:576px) {
+.gym-parallax { 
+    height: 550px; 
+    padding-top: 80px;
+}
+    
+.inner-facts{
+    width: 200px;
+    height: 70px;
+    display: block;
+    margin: 15px 0px 15px 0px;
+}
+    
+.inner-facts .counter{
+    font-size: 30px;
+}
+    
+.inner-facts p{
+    margin-top: 0px;
+}
+    
+.nav-tabs > li > a {
+  font-size: 14px;  
+}
+    
+.inner-tabs{
+    height: 100%;
+}
+    
+.class-pic{
+    width: 100%;
+    float: none;
+    margin: 0px 0px 20px 0px;
+}
+    
+.nav-tabs > li > a {
+  font-size: 12px;  
+}
+
+.gym-news{
+    margin-bottom: 20px;
+}
+   
+}
+
+@media (max-width:450px) {
+.gym-parallax {  
+    padding-top: 50px;
+}
+    
+}

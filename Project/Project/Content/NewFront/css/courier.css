@@ -1,0 +1,591 @@
+.main-nav{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
+
+.rev_slider img{
+    width:100%
+}
+
+.rev_slider::after{ 
+    width: 100%;
+	height:30%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:100;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,30) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.6))); 
+}
+
+.courier-front{
+    margin: 0px;
+    width: 100%;
+    height: 130px;
+    background: #007CBF;
+    padding: 15px 0px 15px 0px;
+    color: #FFF;
+}
+
+.courier-box-front{
+    clear: both;
+}
+
+.courier-map-icon{
+    float: left;
+    margin-right: 20px;
+    width: 50px;
+}
+
+.courier-map-icon img{
+    width: 100%;
+}
+
+.courier-services h6{
+    text-transform: uppercase;
+    color: #86c000;
+    font-size: 13px;
+}
+
+.courier-services h1{
+    font-weight: 600;
+}
+
+.courier-services p{
+    margin-bottom: 10px;
+    color: #808080;
+    line-height: 1.7;
+}
+
+.courier-service-pic{
+    border-right: solid 8px #86c000;
+    border-bottom: solid 8px #86c000;
+}
+
+.courier-service-pic img{
+    width: 100%;
+}
+
+.span-courier-services{
+    margin-top: 40px;
+    padding-right: 60px;
+}
+
+.span-courier-services .services-left{
+    float: left;
+    width: 300px;
+}
+
+.span-courier-services .services-right{
+    float: right;
+    width: 300px;
+}
+
+.inner-service-front{
+    clear: both;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
+.box-icon-container{
+    width: 60px;
+    height: 60px;
+    background: #86c000;
+    position: relative;
+    float: left;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.courier-icon{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+}
+
+.courier-icon img{
+    width: 100%;
+}
+
+.span-courier-services h6{
+    color: #333;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+.panel-image-1{
+    background-image: url("../img/images/courier/img11.jpg");
+    height: 250px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.panel-image-2{
+    background-image: url("../img/images/courier/img10.jpg");
+    height: 250px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.panel-image-3{
+    background-image: url("../img/images/courier/img12.jpg");
+    height: 250px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.panel-label{
+    background: #007CBF;
+    height: 250px;
+    color: #FFF;
+    padding: 50px 30px 50px 30px;
+    text-align: center;
+}
+
+.panel-label p{
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 10px 0px 15px 0px;
+}
+
+.btn-custom2 {
+  color: #FFF;
+  background-color: transparent;
+  border-color: #FFF;
+  transition: 0.3s;
+}
+.btn-custom2:focus,
+.btn-custom2.focus {
+  color: #FFF;
+  background-color: #86c000;
+  border-color: #86c000;
+}
+.btn-custom2:hover {
+  color: #FFF;
+  background-color: #86c000;
+  border-color: #86c000;
+}
+.btn-custom2:active,
+.btn-custom2.active,
+.open > .dropdown-toggle.btn-custom {
+  color: #FFF;
+  background-color: #86c000;
+  border-color: #86c000;
+}
+
+.construction-parallax { 
+    background-image: url("../img/images/courier/img8.jpg");
+    height: 450px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 120px;
+}
+
+.parallax-content{
+    bottom: 50px;
+    color: #FFF;
+    max-width: 650px;
+}
+
+.parallax-content h1{
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.counter-facts{
+    margin-top: 30px;
+}
+
+.inner-facts{
+    width: 200px;
+    height: 70px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.facts-icon{
+    float: left;
+    margin-right: 15px;
+    width: 40px;
+}
+
+.facts-icon img{
+    width: 100%;
+}
+
+.inner-facts .counter{
+    margin: 0px;
+    text-align: left;
+    padding: 0px;
+    color: #FFF;
+    font-weight: 600;
+}
+
+.inner-facts p{
+    margin-top: 5px;
+}
+
+.courier-about p{
+    color: #808080;
+    line-height: 1.7;
+    margin: 10px 0px 15px 0px;
+}
+
+.courier-about-img img{
+    width: 100%;
+}
+
+.span-about{
+    margin-top: 30px;
+    padding: 0px 20px 0px 20px;
+}
+
+.span-about .about-icons{
+    float: left;
+    margin-right: 20px;
+    width: 40px;
+}
+
+.span-about .about-icons img{
+    width: 100%;
+}
+
+.inner-about-courier{
+    margin-bottom: 20px;
+}
+
+.inner-about-courier h6{
+    text-transform: uppercase;
+    color: #666;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.inner-about-courier p{
+    margin-top: -2px; 
+    font-size: 13px;
+}
+
+.footer .no-margin-bottom{
+    margin-top: 0px;
+}
+
+.map-container-bottom{
+    background: #333;
+}
+
+hr.short{
+    width: 80px;
+    border-top: 3px solid #86c000;
+    margin: 5px 0px 15px 0px;
+}
+
+.form-tracker {
+  display: block;
+  width: 60%;
+  height: 30px;
+  padding: 6px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #fff;
+  font-style: italic;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #fff;
+  border-radius: 0px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  margin-top: 2px;
+}
+
+.form-tracker:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(126, 196, 49, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(126, 196, 49, .6);
+}
+
+.form-tracker::-moz-placeholder {
+  color: #fff;
+  opacity: 1;
+    
+}
+
+.form-tracker:-ms-input-placeholder {
+  color: #fff;
+}
+
+.form-tracker::-webkit-input-placeholder {
+  color: #fff;
+}
+
+/* ========== #TO BE REPLACE ON THE CSS PAGE ========== */
+
+/* ================== 
+	1.5. LOADER. 
+   ================== */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1031;
+  background-color: #F2F2F2;
+}
+
+#loader {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 3px solid transparent;
+  border-top-color: #86C000;
+  border-radius: 50%;
+  animation: loader 2s linear infinite;
+}
+#loader::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 3px solid transparent;
+  border-top-color: #86C000;
+  border-radius: 50%;
+  animation: loader 3s linear infinite;
+}
+#loader::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 3px solid transparent;
+  border-top-color: #86C000;
+  border-radius: 50%;
+  animation: loader 1.5s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+hr.center{
+    width: 80px;
+    border-top: 3px solid #86c000;
+    margin: 15px auto 15px auto;
+}
+
+.footer-categories h6{
+	color: #86c000;
+}
+
+.subscribe-footer h6{
+	color: #86c000;
+	margin-bottom: 10px;
+}
+
+.newsletter-box .button {
+  	width: 25%;
+  	height: 38px;
+  	background-color: #86c000;
+  	border: none;
+  	border-radius: 0 5px 5px 0;
+  	font-family: inherit;
+  	font-weight: 500;
+  	color: inherit;
+  	letter-spacing: 1px;
+  	cursor: pointer;
+  	color: #FFF;
+  	font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.cd-top {
+  background-color: #86c000;    
+}
+
+.icon-fa:hover{
+    background: #86c000;
+	border: solid 1px #86c000;
+}
+
+.social-top .fa:hover{
+	color: #86c000;
+}
+
+@media (max-width:1200px) {
+
+.span-courier-services .services-left{
+    float: left;
+    width: 230px;
+}
+
+.span-courier-services .services-right{
+    float: right;
+    width: 230px;
+}
+    
+.inner-service-front{
+    padding-right: 20px;
+}
+
+}
+
+
+@media (max-width:1100px) {
+.panel-label p{
+    line-height: 1.4;
+    margin: 10px 0px 10px 0px;
+}
+
+}
+
+@media (max-width:992px) {
+.courier-front{
+    width: 100%;
+    height: 100%;
+    padding: 15px 0px 15px 0px;
+    color: #FFF;
+}
+    
+.courier-box-front{
+   height: 100px;
+   border-bottom: solid 1px #FFF;
+    padding: 20px;
+}
+
+.no-padding{
+    padding: 0px;
+}
+    
+.no-border{
+    border-bottom: none;
+}
+    
+.courier-service-pic{
+    border-right: none;
+    border-bottom: none;
+}
+    
+.span-courier-services .services-left{
+    float: none;
+    width: 100%;
+}
+
+.span-courier-services .services-right{
+    float: none;
+    width: 100%;
+}
+    
+.panel-label{
+    height: 100%;
+    padding: 50px 20px 40px 20px;
+}
+
+.panel-label p{
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 10px 0px 15px 0px;
+}
+    
+.parallax-content{
+    color: #FFF;
+    max-width: 100%;
+}
+    
+}
+
+@media (max-width:768px) {
+.panel-label h6{
+    font-size: 18px;
+}    
+    
+.parallax-content h1{
+    font-size: 40px;
+}
+    
+.construction-parallax { 
+    height: 550px; 
+    padding-top: 120px;
+}
+    
+}
+
+@media (max-width:576px) {
+    
+    
+.construction-parallax { 
+    height: 550px; 
+    padding-top: 80px;
+}
+
+    
+.inner-quick-services h5{
+    font-size: 16px;
+}
+        
+.inner-facts{
+    width: 200px;
+    height: 70px;
+    display: block;
+    margin: 15px 0px 15px 0px;
+}
+    
+.inner-facts .counter{
+    font-size: 30px;
+}
+    
+.inner-facts p{
+    margin-top: 0px;
+}
+    
+}
+
+@media (max-width:450px) {
+    
+.construction-parallax { 
+    height: 600px; 
+}
+    
+.parallax-content h1{
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 5px 0px 10px 0px;
+}
+    
+.construction-news-box .media .media-left .media-object{
+    width: 100%;
+    margin-bottom: 10px;
+}
+    
+}

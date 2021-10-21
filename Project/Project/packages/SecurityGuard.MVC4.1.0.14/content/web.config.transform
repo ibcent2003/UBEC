@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="SecurityGuardEmailFrom" value="info@email.net"/>
+    <add key="SecurityGuardEmailSubject" value="Your Password has been reset."/>
+    <add key="SecurityGuardEmailTemplatePath" value="~/MailerTemplates/ResetPassword.html"/>  
+  </appSettings>
+  <system.web>
+    <authentication mode="Forms">
+      <forms loginUrl="~/SGAccount/Login" timeout="2880" />
+    </authentication>
+  </system.web>
+</configuration>

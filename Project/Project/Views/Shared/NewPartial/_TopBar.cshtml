@@ -1,0 +1,33 @@
+﻿<div class="top-nav">
+    <div class="section">
+        <div class="left-nav">
+            <div class="location-top"><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; support@merit.com</p></div>
+            <div class="location-top"><p><i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;  212-869-3323</p></div>
+        </div>
+        <div class="right-nav">
+            <div class="social-top"><p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></p></div>
+            <div class="social-top"><p><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></p></div>
+            <div class="social-top"><p><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></p></div>
+            <div class="social-top last-icon"><p><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></p></div>
+
+            @if (!Request.IsAuthenticated)
+            {                
+                <a href="@Url.Action("Login", "SGAccount", new { Area = ""})" style="color:white"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+
+            }
+            else
+            {
+                <a href="@Url.Action("Index", "Dashboard", new { Area = "Admin"})" style="color:white"><i class="fa fa-dashboard"></i> Dashboard</a>
+
+
+                using (Html.BeginForm("LogOff", "SGAccount", new { Area = "" }, FormMethod.Post, new { id = "logoutForm", style = "display: inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()" style="color:white">
+                        <i class="icon-log-out"></i> Log Out (@User.Identity.Name)
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+/* ========== #NAVBAR OVER SLIDER ========== */  
+.main-nav{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    clear: both;
+}
+
+.rev_slider img{
+    width:100%
+}
+
+.rev_slider::after{ 
+    width: 100%;
+	height:30%;
+	position: relative;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:100;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,30) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.6))); 
+
+}
+
+.call-banner{
+    clear: both;
+    background: #f0f0f0;
+    padding: 15px 0px 15px 0px;
+    height: 120px;
+    border-bottom: solid 1px #ddd;
+}
+
+.banner-left{
+    float: left;
+}
+
+.banner-left h3{
+    text-align: left;
+}
+
+.banner-left h6{
+    text-align: left;
+    color: #999;
+    font-size: 16px;
+}
+
+.banner-right{
+    float: right;
+    margin-top: 5px;
+}
+
+.banner-right .btn-offer {
+  color: #fff;
+  background-color: #FF404C;
+  border-color: #FF404C;
+    border-radius: 5px;
+}
+.banner-right .btn-offer:focus,
+.banner-right .btn-offer.focus {
+  color: #fff;
+  background-color: #ff1a29;
+  border-color: #ff1a29;
+}
+.banner-right .btn-offer:hover {
+  color: #fff;
+  background-color: #ff1a29;
+  border-color: #ff1a29;
+}
+.banner-right .btn-offer:active,
+.banner-right .btn-offer.active,
+.open > .dropdown-toggle.btn-offer {
+  color: #fff;
+  background-color: #ff1a29;
+  border-color: #ff1a29;
+}
+
+@media (max-width:767px) {
+    
+.rev_slider::after{ 
+    width: 100%;
+	height:30%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:100;
+    display:block;
+    transition:all .3s ease;
+    background: none; 
+    background: none; 
+}
+ 
+.call-banner{
+    padding: 15px 0px 15px 0px;
+    height: 100%;
+    height: 100%;
+}  
+    
+.banner-left{
+    float: none;
+}
+    
+.banner-left h3{
+    text-align: center;
+}
+
+.banner-left h6{
+    text-align: center;
+    font-size: 14px;
+}
+    
+.banner-right{
+    float: none;
+}  
+    
+.banner-right p{
+    text-align: center;
+    margin-top: 15px;
+}
+    
+}

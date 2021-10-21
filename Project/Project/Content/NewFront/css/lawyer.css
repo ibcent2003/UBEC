@@ -1,0 +1,631 @@
+/* ================================== 
+	1. LAWYER 
+   ================================== */
+.main-nav{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
+
+.rev_slider img{
+    width:100%
+}
+
+.rev_slider::after{ 
+    width: 100%;
+	height:30%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:100;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,30) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.6))); 
+}
+
+.law-front img{
+    width: 100%;
+}
+
+.law-about-front h2{
+    text-align: left;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #404040;
+}
+
+.law-about-front h6{
+    color: #978651;
+    font-style: italic;
+}
+
+.span-icons{
+    margin-top: 20px;
+}
+
+.law-icon{
+    width: 50px;
+}
+
+.law-icon img{
+    width: 100%;
+}
+
+.inner-law{
+    padding: 20px 0px 20px 0px;
+}
+
+.inner-law h4{
+    font-size: 18px;
+    line-height: 2;
+    font-weight: 600;
+    color: #404040;
+}
+
+.inner-law p{
+    font-size: 13px;
+}
+
+.law-parallax { 
+    background-image: url("../img/images/lawyer/law11.jpg");
+    height: 450px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 120px;
+    position: relative;
+}
+
+.parallax-content{
+    bottom: 50px;
+    color: #FFF;
+    max-width: 650px;
+}
+
+.parallax-content h1{
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.counter-facts{
+    margin-top: 30px;
+}
+
+.inner-facts{
+    width: 150px;
+    height: 70px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.facts-icon{
+    float: left;
+    margin-right: 15px;
+    width: 40px;
+}
+
+.facts-icon img{
+    width: 100%;
+}
+
+.inner-facts .counter{
+    margin: 0px;
+    text-align: left;
+    padding: 0px;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.inner-facts p{
+    margin-top: 5px;
+}
+
+/* ======================== 
+	TEAM.
+   ======================== */
+.our-team{
+    padding: 60px 0px 60px 0px;
+}
+
+.team-card-3{
+    text-align: center;
+}
+
+.team-card-3 h6{
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.team-card-3 p{
+    margin-top: -2px;
+    font-size: 13px;
+}
+
+.team-card-3 .caption{
+    margin: 15px 0px 15px 0px;
+}
+
+.team-card-3 .caption h6{
+    margin-top: -5px;
+}
+
+.team-photo img{
+    width: 100%;
+}
+
+.our-team h2{
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.our-team h6{
+    font-style: italic;
+    color: #978651;
+}
+
+.our-team p{
+    text-align: left;
+    color: #999;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.slick-dots {
+  text-align: center;
+  padding: 0;
+    
+}
+.slick-dots li {
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+
+}
+.slick-dots li.slick-active button {
+  background-color: #978651;
+}
+.slick-dots li button {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-color: #fff;
+  border: solid 1px #978651;
+  width: 30px;
+  height: 8px;
+  border-radius: 0%;
+}
+.slick-dots li :hover {
+  background-color: #978651;
+}
+
+.team-card-3 .responsive{
+    clear: both;
+}
+
+.team-card-3 .responsive div img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .next, .prev {
+    display: none !important;
+  }
+}
+
+.span-item img{
+    width: 100%;
+}
+
+/* ======================== 
+	SERVICES.
+   ======================== */
+
+.services-parallax { 
+    background-image: url("../img/images/lawyer/law18.jpg");
+    height: 100%; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding: 60px 0px 60px 0px;
+}
+
+.law-services{
+    text-align: center;
+    margin: 25px 0px 25px 0px;
+}
+
+.law-services-icon{
+    width: 60px;
+    margin: auto;
+}
+
+.law-services-icon img{
+    width: 100%;
+}
+
+.law-services h5{
+    line-height: 2;
+}
+
+hr.center{
+    width: 80px;
+    border-top: 3px solid #DEE0CA;
+    margin: 15px auto 15px auto;
+}
+
+.law-about-pic img{
+    width: 100%;
+}
+
+.law-about h2{
+    margin-bottom: 10px; 
+}
+
+.law-about h6{
+   font-style: italic;
+    color: #978651;
+}
+
+.law-about p{
+   line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.signature{
+    width: 210px;
+}
+
+.signature img{
+    width: 100%;
+}
+
+/* ======================== 
+	CONTACT FORM.
+   ======================== */
+
+.footer .no-margin-top{
+    margin-top: 0px;
+}
+
+.lawyer-map{
+    margin-bottom: 0px;
+    background: #333;
+    position: relative;
+}
+
+.lawyer-contact{
+    width: 500px;
+    height: 550px;
+    background: #FFF;
+    box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -moz-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -o-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    padding: 40px;
+    position: absolute;
+    margin-top: -620px;
+}
+
+.lawyer-contact h2{
+    text-align: left;
+    line-height: 2;
+}
+
+.customize-form{
+    border: none;
+    -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+    border-radius: 0px;
+    background: #FAFCFC;
+    height: 45px;
+    padding: 6px 12px;
+    font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+	border: solid 1px #eff5f5;
+    color: #000;
+}
+
+.customize-form:focus {
+  border-color: #e0ebeb;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.customize-form::-moz-placeholder {
+  color: #333;
+  opacity: 1;
+}
+.customize-form:-ms-input-placeholder {
+  color: #333;
+}
+.customize-form::-webkit-input-placeholder {
+  color: #333;
+}
+
+.customize-form::-ms-expand {
+  background-color: none;
+  border: 0;
+}
+
+.btn-custom {
+  color: #FFF;
+  background-color: #978651;
+  border-color: #978651;
+  transition: 0.3s;
+}
+.btn-custom:focus,
+.btn-custom.focus {
+  color: #FFF;
+  background-color: #3A310C;
+  border-color: #3A310C;
+}
+.btn-custom:hover {
+  color: #FFF;
+  background-color: #3A310C;
+  border-color: #3A310C;
+}
+.btn-custom:active,
+.btn-custom.active,
+.open > .dropdown-toggle.btn-custom {
+  color: #FFF;
+  background-color: #3A310C;
+  border-color: #3A310C;
+}
+
+
+/* ================== 
+	LOADER. 
+   ================== */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1031;
+  background-color: #F2F2F2;
+}
+
+#loader {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 3px solid transparent;
+  border-top-color: #978651;
+  border-radius: 50%;
+  animation: loader 2s linear infinite;
+}
+#loader::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 3px solid transparent;
+  border-top-color: #978651;
+  border-radius: 50%;
+  animation: loader 3s linear infinite;
+}
+#loader::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 3px solid transparent;
+  border-top-color: #978651;
+  border-radius: 50%;
+  animation: loader 1.5s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ======================== 
+	COLOR CHANGED.
+   ======================== */
+
+hr.center{
+    width: 80px;
+    border-top: 3px solid #3A310C;
+    margin: 15px auto 15px auto;
+}
+
+.footer-categories h6{
+	color: #978651;
+}
+
+.subscribe-footer h6{
+	color: #978651;
+	margin-bottom: 10px;
+}
+
+.newsletter-box .button {
+  	width: 25%;
+  	height: 38px;
+  	background-color: #978651;
+  	border: none;
+  	border-radius: 0 5px 5px 0;
+  	font-family: inherit;
+  	font-weight: 500;
+  	color: inherit;
+  	letter-spacing: 1px;
+  	cursor: pointer;
+  	color: #FFF;
+  	font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.cd-top {
+  background-color: #978651;    
+}
+
+.icon-fa:hover{
+    background: #978651;
+	border: solid 1px #978651;
+}
+
+.social-top .fa:hover{
+	color: #978651;
+}
+
+
+
+/* ==========================================================================
+   MEDIA QUERIES MODULE.
+   ========================================================================== */
+
+@media (max-width:1200px) {
+    
+.inner-law{
+    padding: 10px 0px 10px 0px;
+}
+    
+.law-icon{
+    width: 45px;
+}
+    
+.inner-law h4{
+    font-size: 18px;
+}
+    
+.our-team{
+    padding: 30px 0px 30px 0px;
+}
+    
+}
+
+@media (max-width:1100px) {  
+.our-team{
+    padding: 10px 0px 10px 0px;
+}
+    
+}
+
+@media (max-width:992px) {  
+.law-front{
+    margin-top: 30px;
+}
+    
+.our-team{
+    padding: 0px;
+    margin-bottom: 20px;
+}
+    
+.slick-dots li {
+    display: none;
+
+}
+    
+.law-about{
+    margin-bottom: 30px;
+}
+    
+}
+
+@media (max-width:768px) { 
+    
+.inner-law{
+    text-align: center;
+    padding: 20px 0px 20px 0px;
+}
+    
+.law-icon{
+    margin: auto;
+}
+    
+.parallax-content h1{
+    font-size: 40px;
+}
+    
+.parallax-content{
+    color: #FFF;
+    max-width: 100%;
+}
+    
+.law-services{
+    padding: 0px 60px 0px 60px;
+}
+    
+.lawyer-contact{
+    width: 100%;
+    height: 550px;
+    position: relative;
+    margin: -620px auto 0px auto;
+}
+
+}
+
+@media (max-width:576px) {  
+.parallax-content{
+    float: right;
+    bottom: 10px;
+    position: absolute;
+    color: #FFF;
+    max-width: 100%;
+}
+    
+.inner-quick-services h5{
+    font-size: 16px;
+}
+    
+.law-parallax { 
+    height: 550px; 
+    padding-top: 80px; 
+}
+    
+.inner-facts{
+    width: 200px;
+    height: 70px;
+    display: block;
+    margin: 15px 0px 15px 0px;
+}
+    
+.inner-facts .counter{
+    font-size: 30px;
+}
+    
+.inner-facts p{
+    margin-top: 0px;
+}
+}
+
+@media (max-width:450px) {  
+.law-parallax { 
+    height: 600px; 
+}
+    
+.parallax-content h1{
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 5px 0px 10px 0px;
+}
+    
+.law-services{
+    padding: 0px 30px 0px 30px;
+}
+    
+}

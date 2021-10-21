@@ -1,0 +1,359 @@
+.main-nav{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
+
+.rev_slider img{
+    width:100%
+}
+
+.rev_slider::after{ 
+    width: 100%;
+	height:30%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:100;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,30) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.6))); 
+}
+
+.reservation-bar{
+    height: 120px;
+    background: #FFF;
+    box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -moz-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -o-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    margin-top: -110px;
+    position: relative;  
+    padding: 35px 150px 35px 150px;
+}
+
+.inner-reservation{
+    background: #ddd;
+    height: 45px;
+    width: 100%;
+}
+
+input {
+  padding:10px;
+	font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  border-radius: 0 !important;
+}
+
+.form-control {
+  border-radius: 0 !important;
+  font-size: 12x;
+}
+
+.clickable { 
+    cursor: pointer; 
+}
+
+.inner-reservation .form-control {
+  display: block;
+  width: 100%;
+  height: 45px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #f2f2f2;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.inner-reservation .form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.inner-reservation .form-control::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.inner-reservation .form-control:-ms-input-placeholder {
+  color: #999;
+}
+.inner-reservation .form-control::-webkit-input-placeholder {
+  color: #999;
+}
+.inner-reservation .form-control::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.btn-reservation .btn-custom{
+    padding: 6px 50px;
+    border-radius: 0px;
+}
+
+.hotel-about-pic img{
+    width: 100%;
+}
+
+.hotel-about{
+    margin-top: 50px;
+}
+
+.hotel-about h6{
+    font-style: italic;
+    color: #999;
+}
+
+.hotel-about h1{
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.hotel-about p{
+    color: #808080;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.hotel-box{
+    padding: 5px;
+    position: relative;
+}
+
+.hotel-box img{
+    width: 100%;
+}
+
+.area-info{
+    position: absolute;
+    margin-top: -60px;
+    padding: 0px 20px 0px 20px;
+    color: #FFF;
+    transition: 0.3s;
+}
+
+.area-description{
+    display: none;
+}
+
+.hotel-box:hover .area-info{
+    margin-top: -100px;
+}
+
+.hotel-box:hover .area-description{
+    display: inherit;
+    transition: 0.3s;
+}
+
+.hotel-rooms{
+  display: block;
+  line-height: 1.42857143;
+  background-color: #FAFCFC;
+  -webkit-transition: border .2s ease-in-out;
+       -o-transition: border .2s ease-in-out;
+          transition: border .2s ease-in-out;
+ box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -moz-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+    -o-box-shadow: 0 0 10px rgba(204,204,204,0.6);
+}
+.hotel-rooms > img,
+.hotel-rooms  a > img {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+a.hotel-rooms:hover,
+a.hotel-rooms:focus,
+a.v.active {
+  border-color: #337ab7;
+}
+.hotel-rooms .caption {
+  padding: 20px;
+  color: #333;
+}
+
+.hotel-rooms .caption p{
+  text-align: left;
+    color: #808080;
+    margin-top: 10px;
+}
+
+hr.rooms{
+    width: 100%;
+    border-top: 1px solid #e6e6e6;
+    margin: 25px auto 15px auto;
+}
+
+.hotel-rating{
+    display: inline-block;
+    margin-right: 2px;
+}
+
+.hotel-rating .fa{
+    color: #FF404C;
+}
+
+.team-card-3{
+    text-align: center;
+}
+
+.team-card-3 h6{
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.team-card-3 p{
+    margin-top: -2px;
+    font-size: 13px;
+}
+
+.team-photo img{
+    width: 100%;
+}
+
+.our-team{
+    margin-top: 30px;
+}
+
+.our-team h6{
+    font-style: italic;
+    color: #999999;
+}
+
+.our-team h2{
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.our-team p{
+    text-align: left;
+    color: #999;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.hotel-signature {
+    width: 200px;
+    margin-top: 10px;
+}
+
+.hotel-signature img{
+    width: 100%;
+}
+
+.team-card-3 .slick-dots {
+  text-align: center;
+  padding: 0;
+}
+.team-card-3 .slick-dots li {
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+
+}
+
+.team-card-3 .slick-dots li.slick-active button {
+  background-color: #999;
+}
+
+.team-card-3 .slick-dots li button {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-color: #fff;
+  border: solid 1px #999;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.team-card-3 .slick-dots li :hover {
+  background-color: #999;
+}
+
+.team-card-3 .responsive{
+    clear: both;
+}
+
+.team-card-3 .responsive div img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .next, .prev {
+    display: none !important;
+  }
+}
+
+.span-item img{
+    width: 100%;
+}
+
+@media (max-width:992px) {
+.reservation-bar{
+    height: 100%;
+    margin-top: -50px;
+    padding: 35px 100px 35px 100px;
+}
+    
+.inner-reservation{
+    margin: 15px 0px 15px 0px;
+}
+
+.hotel-about{
+    margin: 0px 0px 40px 0px;
+}
+
+.center-room{
+    margin: 30px 0px 30px 0px;
+}
+    
+.our-team{
+    margin: 0px 0px 30px 0px;
+}
+    
+.responsive-hide{
+    display: none;
+}
+    
+.hotel-about h1{
+    font-size: 30px;
+    line-height: 1.2;   
+}
+    
+.area-info{
+    position: absolute;
+    margin-top: -40px;
+    padding: 0px 20px 0px 20px;
+    color: #FFF;
+    transition: 0.3s;
+}
+    
+}
+
+@media (max-width:768px) {
+     
+}
+
+@media (max-width:576px) {
+.reservation-bar{
+    padding: 35px;
+} 
+    
+}
+
