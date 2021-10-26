@@ -188,12 +188,14 @@
           <Property Name="PropertyValueBinary" Type="image" Nullable="false" />
           <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Project">
+        <EntityType Name="ProjectApplication">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TransactionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="WorkFlowId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
@@ -446,10 +448,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Payment_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Project">
+            <Principal Role="ProjectApplication">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Payment">
@@ -459,36 +461,36 @@
         </Association>
         <Association Name="FK_Project_Contractor">
           <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
-          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractor">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Project">
+            <Dependent Role="ProjectApplication">
               <PropertyRef Name="ContractorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Project_LGA">
           <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
-          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LGA">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Project">
+            <Dependent Role="ProjectApplication">
               <PropertyRef Name="LGAId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Project_Workflow">
           <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
-          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workflow">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Project">
+            <Dependent Role="ProjectApplication">
               <PropertyRef Name="WorkFlowId" />
             </Dependent>
           </ReferentialConstraint>
@@ -506,10 +508,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectDocumentInfo_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
           <End Role="ProjectDocumentInfo" Type="Self.ProjectDocumentInfo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Project">
+            <Principal Role="ProjectApplication">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ProjectDocumentInfo">
@@ -714,7 +716,7 @@
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectApplication" EntityType="Self.ProjectApplication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectDocumentInfo" EntityType="Self.ProjectDocumentInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourcesInRole" EntityType="Self.ResourcesInRole" Schema="dbo" store:Type="Tables" />
@@ -761,27 +763,27 @@
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
           <AssociationSet Name="FK_Payment_Project" Association="Self.FK_Payment_Project">
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
           <AssociationSet Name="FK_Project_Contractor" Association="Self.FK_Project_Contractor">
             <End Role="Contractor" EntitySet="Contractor" />
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="FK_Project_LGA" Association="Self.FK_Project_LGA">
             <End Role="LGA" EntitySet="LGA" />
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="FK_Project_Workflow" Association="Self.FK_Project_Workflow">
             <End Role="Workflow" EntitySet="Workflow" />
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="FK_ProjectDocumentInfo_DocumentInfo" Association="Self.FK_ProjectDocumentInfo_DocumentInfo">
             <End Role="DocumentInfo" EntitySet="DocumentInfo" />
             <End Role="ProjectDocumentInfo" EntitySet="ProjectDocumentInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_ProjectDocumentInfo_Project" Association="Self.FK_ProjectDocumentInfo_Project">
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
             <End Role="ProjectDocumentInfo" EntitySet="ProjectDocumentInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_UserDetail_Users" Association="Self.FK_UserDetail_Users">
@@ -865,7 +867,7 @@
           <EntitySet Name="Payment" EntityType="PROModel.Payment" />
           <EntitySet Name="PaymentType" EntityType="PROModel.PaymentType" />
           <EntitySet Name="Profiles" EntityType="PROModel.Profiles" />
-          <EntitySet Name="Project" EntityType="PROModel.Project" />
+          <EntitySet Name="ProjectApplication" EntityType="PROModel.ProjectApplication" />
           <EntitySet Name="Resource" EntityType="PROModel.Resource" />
           <EntitySet Name="ResourcesInRole" EntityType="PROModel.ResourcesInRole" />
           <EntitySet Name="Roles" EntityType="PROModel.Roles" />
@@ -902,7 +904,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_Project_Contractor" Association="PROModel.FK_Project_Contractor">
             <End Role="Contractor" EntitySet="Contractor" />
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="FK_DocumentType_DocumentCategory" Association="PROModel.FK_DocumentType_DocumentCategory">
             <End Role="DocumentCategory" EntitySet="DocumentCategory" />
@@ -918,7 +920,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_Project_LGA" Association="PROModel.FK_Project_LGA">
             <End Role="LGA" EntitySet="LGA" />
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="MembershipUser" Association="PROModel.MembershipUser">
             <End Role="Users" EntitySet="Users" />
@@ -929,7 +931,7 @@
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
           <AssociationSet Name="FK_Payment_Project" Association="PROModel.FK_Payment_Project">
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
           <AssociationSet Name="UserProfile" Association="PROModel.UserProfile">
@@ -938,7 +940,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_Project_Workflow" Association="PROModel.FK_Project_Workflow">
             <End Role="Workflow" EntitySet="Workflow" />
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="FK_UserDetail_Users" Association="PROModel.FK_UserDetail_Users">
             <End Role="Users" EntitySet="Users" />
@@ -966,7 +968,7 @@
           </AssociationSet>
           <AssociationSet Name="ProjectDocumentInfo" Association="PROModel.ProjectDocumentInfo">
             <End Role="DocumentInfo" EntitySet="DocumentInfo" />
-            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="UsersInRoles" Association="PROModel.UsersInRoles">
             <End Role="Roles" EntitySet="Roles" />
@@ -1038,7 +1040,7 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Project" Relationship="PROModel.FK_Project_Contractor" FromRole="Contractor" ToRole="Project" />
+          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Project_Contractor" FromRole="Contractor" ToRole="ProjectApplication" />
         </EntityType>
         <EntityType Name="DataGenerator">
           <Key>
@@ -1085,7 +1087,7 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="DocumentType" Relationship="PROModel.FK_DocumentInfo_DocumentType" FromRole="DocumentInfo" ToRole="DocumentType" />
-          <NavigationProperty Name="Project" Relationship="PROModel.ProjectDocumentInfo" FromRole="DocumentInfo" ToRole="Project" />
+          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.ProjectDocumentInfo" FromRole="DocumentInfo" ToRole="ProjectApplication" />
         </EntityType>
         <EntityType Name="DocumentType">
           <Key>
@@ -1113,7 +1115,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="State" Relationship="PROModel.FK_LGA_State" FromRole="LGA" ToRole="State" />
-          <NavigationProperty Name="Project" Relationship="PROModel.FK_Project_LGA" FromRole="LGA" ToRole="Project" />
+          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Project_LGA" FromRole="LGA" ToRole="ProjectApplication" />
         </EntityType>
         <EntityType Name="Memberships">
           <Key>
@@ -1152,7 +1154,7 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="PaymentType" Relationship="PROModel.FK_Payment_PaymentType" FromRole="Payment" ToRole="PaymentType" />
-          <NavigationProperty Name="Project" Relationship="PROModel.FK_Payment_Project" FromRole="Payment" ToRole="Project" />
+          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Payment_Project" FromRole="Payment" ToRole="ProjectApplication" />
         </EntityType>
         <EntityType Name="PaymentType">
           <Key>
@@ -1176,12 +1178,14 @@
           <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Users" Relationship="PROModel.UserProfile" FromRole="Profiles" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Project">
+        <EntityType Name="ProjectApplication">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TransactionId" Type="Guid" Nullable="false" />
+          <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="WorkFlowId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1197,11 +1201,11 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Contractor" Relationship="PROModel.FK_Project_Contractor" FromRole="Project" ToRole="Contractor" />
-          <NavigationProperty Name="LGA" Relationship="PROModel.FK_Project_LGA" FromRole="Project" ToRole="LGA" />
-          <NavigationProperty Name="Payment" Relationship="PROModel.FK_Payment_Project" FromRole="Project" ToRole="Payment" />
-          <NavigationProperty Name="Workflow" Relationship="PROModel.FK_Project_Workflow" FromRole="Project" ToRole="Workflow" />
-          <NavigationProperty Name="DocumentInfo" Relationship="PROModel.ProjectDocumentInfo" FromRole="Project" ToRole="DocumentInfo" />
+          <NavigationProperty Name="Contractor" Relationship="PROModel.FK_Project_Contractor" FromRole="ProjectApplication" ToRole="Contractor" />
+          <NavigationProperty Name="LGA" Relationship="PROModel.FK_Project_LGA" FromRole="ProjectApplication" ToRole="LGA" />
+          <NavigationProperty Name="Payment" Relationship="PROModel.FK_Payment_Project" FromRole="ProjectApplication" ToRole="Payment" />
+          <NavigationProperty Name="Workflow" Relationship="PROModel.FK_Project_Workflow" FromRole="ProjectApplication" ToRole="Workflow" />
+          <NavigationProperty Name="DocumentInfo" Relationship="PROModel.ProjectDocumentInfo" FromRole="ProjectApplication" ToRole="DocumentInfo" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -1291,7 +1295,7 @@
           <Property Name="guideline" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Alert" Relationship="PROModel.FK_Alert_WorkFlow" FromRole="Workflow" ToRole="Alert" />
-          <NavigationProperty Name="Project" Relationship="PROModel.FK_Project_Workflow" FromRole="Workflow" ToRole="Project" />
+          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Project_Workflow" FromRole="Workflow" ToRole="ProjectApplication" />
           <NavigationProperty Name="WorkFlowActions" Relationship="PROModel.FK_WorkFlowActions_Workflow" FromRole="Workflow" ToRole="WorkFlowActions" />
           <NavigationProperty Name="WorkflowSteps" Relationship="PROModel.FK_WorkflowSteps_Workflow" FromRole="Workflow" ToRole="WorkflowSteps" />
           <NavigationProperty Name="DocumentType" Relationship="PROModel.WorkflowDocument" FromRole="Workflow" ToRole="DocumentType" />
@@ -1413,12 +1417,12 @@
         </Association>
         <Association Name="FK_Project_Contractor">
           <End Type="PROModel.Contractor" Role="Contractor" Multiplicity="1" />
-          <End Type="PROModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractor">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Project">
+            <Dependent Role="ProjectApplication">
               <PropertyRef Name="ContractorId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1461,12 +1465,12 @@
         </Association>
         <Association Name="FK_Project_LGA">
           <End Type="PROModel.LGA" Role="LGA" Multiplicity="1" />
-          <End Type="PROModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LGA">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Project">
+            <Dependent Role="ProjectApplication">
               <PropertyRef Name="LGAId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1496,10 +1500,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Payment_Project">
-          <End Type="PROModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
           <End Type="PROModel.Payment" Role="Payment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Project">
+            <Principal Role="ProjectApplication">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Payment">
@@ -1521,12 +1525,12 @@
         </Association>
         <Association Name="FK_Project_Workflow">
           <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="1" />
-          <End Type="PROModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workflow">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Project">
+            <Dependent Role="ProjectApplication">
               <PropertyRef Name="WorkFlowId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1597,7 +1601,7 @@
         </Association>
         <Association Name="ProjectDocumentInfo">
           <End Type="PROModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
-          <End Type="PROModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
         </Association>
         <Association Name="UsersInRoles">
           <End Type="PROModel.Roles" Role="Roles" Multiplicity="*" />
@@ -1803,9 +1807,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Project">
-            <EntityTypeMapping TypeName="PROModel.Project">
-              <MappingFragment StoreEntitySet="Project">
+          <EntitySetMapping Name="ProjectApplication">
+            <EntityTypeMapping TypeName="PROModel.ProjectApplication">
+              <MappingFragment StoreEntitySet="ProjectApplication">
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1821,6 +1825,8 @@
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1959,7 +1965,7 @@
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="PROModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
-            <EndProperty Name="Project">
+            <EndProperty Name="ProjectApplication">
               <ScalarProperty Name="Id" ColumnName="ProjectId" />
             </EndProperty>
             <EndProperty Name="DocumentInfo">

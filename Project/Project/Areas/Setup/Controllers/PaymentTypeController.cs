@@ -9,17 +9,19 @@ using System.Web.Mvc;
 
 namespace Project.Areas.Setup.Controllers
 {
-    public class CustomerController : Controller
+    public class PaymentTypeController : Controller
     {
+        //
+        // GET: /Setup/PaymentType/
         private PROEntities db = new PROEntities();
 
         public ActionResult Index()
         {
             try
             {
-                CustomerViewModel model = new CustomerViewModel();
-                var Getcustomer = db.Customer.ToList();
-                model.CustomerList = Getcustomer;
+                PaymentTypeViewModel model = new PaymentTypeViewModel();
+                var Getpayment = db.PaymentType.ToList();
+                model.PaymentTypeList = Getpayment;
                 return View(model);
             }
             catch (Exception ex)
@@ -31,11 +33,11 @@ namespace Project.Areas.Setup.Controllers
             }
         }
 
-        public ActionResult NewCustomer()
+        public ActionResult NewPaymentType()
         {
             try
             {
-                CustomerViewModel model = new CustomerViewModel();               
+                PaymentTypeViewModel model = new PaymentTypeViewModel();
                 return View(model);
             }
             catch (Exception ex)
@@ -48,34 +50,31 @@ namespace Project.Areas.Setup.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewCustomer(CustomerViewModel model)
+        public ActionResult NewPaymentType(PaymentTypeViewModel model)
         {
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    var getCustomer = db.Customer.Where(x => x.Name == model.customerForm.Name).ToList();
-                    if(getCustomer.Any())
+                    var getpayment = db.PaymentType.Where(x => x.Name == model.paymentTypeForm.Name).ToList();
+                    if (getpayment.Any())
                     {
-                        TempData["message"] = "ERROR: The customer name " + model.customerForm.Name + " already exist. Please enter different name.";
+                        TempData["message"] = "ERROR: The payment type name " + model.paymentTypeForm.Name + " already exist. Please enter different name.";
                         TempData["messageType"] = "danger";
                         return View(model);
                     }
                     //do insert here
-                    Customer addnew = new Customer
+                    PaymentType addnew = new PaymentType
                     {
-                        Name = model.customerForm.Name,
-                        MobileNo = model.customerForm.MobileNo,
-                        EmailAddress = model.customerForm.EmailAddress,
-                        ContactAddress = model.customerForm.ContactAddress,
-                        IsDeleted = model.customerForm.IsDeleted,
+                        Name = model.paymentTypeForm.Name,
+                        IsDeleted = model.paymentTypeForm.IsDeleted,
                         ModifiedBy = User.Identity.Name,
                         ModifiedDate = DateTime.Now
                     };
-                    db.Customer.AddObject(addnew);
+                    db.PaymentType.AddObject(addnew);
                     db.SaveChanges();
-                    TempData["message"] = "<b>" +model.customerForm.Name+ "</b> has been added successfully.";
+                    TempData["message"] = "<b>" + model.paymentTypeForm.Name + "</b> has been added successfully.";
                     return RedirectToAction("Index");
                 }
                 TempData["message"] = "There is error submitting customer information. Please sure you enter all filds with * sign.";
@@ -91,28 +90,26 @@ namespace Project.Areas.Setup.Controllers
             }
         }
 
-        public ActionResult EditCustomer(int Id)
+
+        public ActionResult EditPaymentType(int Id)
         {
             try
             {
-                CustomerViewModel model = new CustomerViewModel();
-                var getCustomer = db.Customer.Where(x => x.Id == Id).FirstOrDefault();
-                if(getCustomer == null)
+                PaymentTypeViewModel model = new PaymentTypeViewModel();
+                var getpayment = db.PaymentType.Where(x => x.Id == Id).FirstOrDefault();
+                if (getpayment == null)
                 {
-                    TempData["message"] = "Ops! Something wrong. Please start the process of editting a customer.";
+                    TempData["message"] = "Ops! Something wrong. Please start the process of editting a payment type.";
                     TempData["messageType"] = "danger";
                     return RedirectToAction("Index");
                 }
-                model.customerForm = new CustomerForm();
-                model.customerForm.Id = getCustomer.Id;
-                model.customerForm.Name = getCustomer.Name;
-                model.customerForm.MobileNo = getCustomer.MobileNo;
-                model.customerForm.EmailAddress = getCustomer.EmailAddress;
-                model.customerForm.ContactAddress = getCustomer.ContactAddress;
-                model.customerForm.IsDeleted = getCustomer.IsDeleted;
+                model.paymentTypeForm = new  PaymentTypeForm();
+                model.paymentTypeForm.Id = getpayment.Id;
+                model.paymentTypeForm.Name = getpayment.Name;
+                model.paymentTypeForm.IsDeleted = getpayment.IsDeleted;
                 return View(model);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
                 TempData["message"] = Settings.Default.GenericExceptionMessage;
@@ -122,37 +119,35 @@ namespace Project.Areas.Setup.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditCustomer(CustomerViewModel model)
+        public ActionResult EditPaymentType(PaymentTypeViewModel model)
         {
             try
             {
-                var getCustomer = db.Customer.Where(x => x.Id == model.customerForm.Id).FirstOrDefault();
-                if (getCustomer == null)
+                var getPayment = db.PaymentType.Where(x => x.Id == model.paymentTypeForm.Id).FirstOrDefault();
+                if (getPayment == null)
                 {
-                    TempData["message"] = "Ops! Something wrong. Please start the process of editting a customer.";
+                    TempData["message"] = "Ops! Something wrong. Please start the process of payment type a contractor.";
                     TempData["messageType"] = "danger";
                     return RedirectToAction("Index");
                 }
                 if (ModelState.IsValid)
                 {
-                    getCustomer.Name = model.customerForm.Name;
-                    getCustomer.MobileNo = model.customerForm.MobileNo;
-                    getCustomer.EmailAddress = model.customerForm.EmailAddress;
-                    getCustomer.ContactAddress = model.customerForm.ContactAddress;
-                    getCustomer.IsDeleted = model.customerForm.IsDeleted;
-                    getCustomer.ModifiedBy = User.Identity.Name;
-                    getCustomer.ModifiedDate = DateTime.Now;
-                    db.Employee.Context.SaveChanges();
+                    getPayment.Name = model.paymentTypeForm.Name;
+
+                    getPayment.IsDeleted = model.paymentTypeForm.IsDeleted;
+                    getPayment.ModifiedBy = User.Identity.Name;
+                    getPayment.ModifiedDate = DateTime.Now;
+                    db.Contractor.Context.SaveChanges();
                     db.SaveChanges();
-                    TempData["message"] = "<b>" + model.customerForm.Name + "</b> has been updated successfully.";
+                    TempData["message"] = "<b>" + model.paymentTypeForm.Name + "</b> has been updated successfully.";
                     return RedirectToAction("Index");
                 }
-                TempData["message"] = "There is error submitting customer information. Please sure you enter all filds with * sign.";
+                TempData["message"] = "There is error submitting payment type information. Please sure you enter all filds with * sign.";
                 TempData["messageType"] = "danger";
                 return View(model);
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
                 TempData["message"] = Settings.Default.GenericExceptionMessage;

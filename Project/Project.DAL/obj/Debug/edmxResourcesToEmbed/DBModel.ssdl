@@ -183,12 +183,14 @@
     <Property Name="PropertyValueBinary" Type="image" Nullable="false" />
     <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="Project">
+  <EntityType Name="ProjectApplication">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TransactionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="WorkFlowId" Type="int" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
@@ -441,10 +443,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Payment_Project">
-    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
     <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Project">
+      <Principal Role="ProjectApplication">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Payment">
@@ -454,36 +456,36 @@
   </Association>
   <Association Name="FK_Project_Contractor">
     <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
-    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Contractor">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Project">
+      <Dependent Role="ProjectApplication">
         <PropertyRef Name="ContractorId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Project_LGA">
     <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
-    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="LGA">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Project">
+      <Dependent Role="ProjectApplication">
         <PropertyRef Name="LGAId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Project_Workflow">
     <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
-    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Workflow">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Project">
+      <Dependent Role="ProjectApplication">
         <PropertyRef Name="WorkFlowId" />
       </Dependent>
     </ReferentialConstraint>
@@ -501,10 +503,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectDocumentInfo_Project">
-    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
     <End Role="ProjectDocumentInfo" Type="Self.ProjectDocumentInfo" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Project">
+      <Principal Role="ProjectApplication">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ProjectDocumentInfo">
@@ -709,7 +711,7 @@
     <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectApplication" EntityType="Self.ProjectApplication" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProjectDocumentInfo" EntityType="Self.ProjectDocumentInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResourcesInRole" EntityType="Self.ResourcesInRole" Schema="dbo" store:Type="Tables" />
@@ -756,27 +758,27 @@
       <End Role="Payment" EntitySet="Payment" />
     </AssociationSet>
     <AssociationSet Name="FK_Payment_Project" Association="Self.FK_Payment_Project">
-      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="Payment" EntitySet="Payment" />
     </AssociationSet>
     <AssociationSet Name="FK_Project_Contractor" Association="Self.FK_Project_Contractor">
       <End Role="Contractor" EntitySet="Contractor" />
-      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
     <AssociationSet Name="FK_Project_LGA" Association="Self.FK_Project_LGA">
       <End Role="LGA" EntitySet="LGA" />
-      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
     <AssociationSet Name="FK_Project_Workflow" Association="Self.FK_Project_Workflow">
       <End Role="Workflow" EntitySet="Workflow" />
-      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
     <AssociationSet Name="FK_ProjectDocumentInfo_DocumentInfo" Association="Self.FK_ProjectDocumentInfo_DocumentInfo">
       <End Role="DocumentInfo" EntitySet="DocumentInfo" />
       <End Role="ProjectDocumentInfo" EntitySet="ProjectDocumentInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_ProjectDocumentInfo_Project" Association="Self.FK_ProjectDocumentInfo_Project">
-      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="ProjectDocumentInfo" EntitySet="ProjectDocumentInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_UserDetail_Users" Association="Self.FK_UserDetail_Users">

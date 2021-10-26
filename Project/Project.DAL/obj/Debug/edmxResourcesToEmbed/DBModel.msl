@@ -191,9 +191,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Project">
-      <EntityTypeMapping TypeName="PROModel.Project">
-        <MappingFragment StoreEntitySet="Project">
+    <EntitySetMapping Name="ProjectApplication">
+      <EntityTypeMapping TypeName="PROModel.ProjectApplication">
+        <MappingFragment StoreEntitySet="ProjectApplication">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -209,6 +209,8 @@
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -347,7 +349,7 @@
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="PROModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
-      <EndProperty Name="Project">
+      <EndProperty Name="ProjectApplication">
         <ScalarProperty Name="Id" ColumnName="ProjectId" />
       </EndProperty>
       <EndProperty Name="DocumentInfo">

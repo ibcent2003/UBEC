@@ -1,7 +1,7 @@
-﻿@model Project.Areas.Setup.Models.CustomerViewModel
+﻿@model Project.Areas.Setup.Models.ContractorViewModel
 @using Project.HtmlHelpers
 @{
-    ViewBag.Title = "Customer List";
+    ViewBag.Title = "Contractor List";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
 }
@@ -10,7 +10,7 @@
 
         <ul class="breadcrumb" id="breadcrumbs">
             <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
-            <li class="current"> <a title="" href="javascript: return void(0)"></a>Vustomer List </li>
+            <li class="current"> <a title="" href="javascript: return void(0)"></a>Contractor List </li>
         </ul>
     </div>
 }
@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="widget-header">
-             @Html.ActionLink("New Customer", "NewCustomer", null, new { @class = "btn btn-xs btn-warning" })
+             @Html.ActionLink("New Contractor", "NewContractor", null, new { @class = "btn btn-xs btn-warning" })
         </div>
         <br />
         <div class="widget-content">
@@ -26,8 +26,7 @@
                 <thead>
                     <tr style="font-size: 12px;">
                         <th>S/N</th>
-                        <th>Name</th>
-                        <th>Mobile No</th>
+                        <th>Name</th>                        
                         <th>Modified By</th>
                         <th>Modified Date</th>
                         <th>Is Deleted</th>
@@ -36,18 +35,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.CustomerList.Count != 0)
+                    @if (Model.ContractorList.Count != 0)
                     {
                         int i = 0;
-                        foreach (var item in Model.CustomerList)
+                        foreach (var item in Model.ContractorList)
                         {
                             ++i;
                     <tr style="font-size: 12px;">
                         <td>
                             @i
                         </td>
-                        <td>@Html.ActionLink(item.Name, "EditCustomer", new { Id = item.Id }, null)</td>
-                        <td>@item.MobileNo</td>
+                        <td>
+                            @item.Name
+                        </td>                       
 
                         <td>@item.ModifiedBy</td>
                         <td>@item.ModifiedDate</td>
@@ -62,7 +62,7 @@
                             }
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "EditCustomer", new { Id = item.Id }, new { @class = "btn btn-xs btn-success" })
+                            @Html.ActionLink("Edit", "EditContractor", new { Id = item.Id }, new { @class = "btn btn-xs btn-success" })
                         </td>
 
                     </tr>
