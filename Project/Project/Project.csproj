@@ -2300,6 +2300,7 @@
     <Content Include="Areas\Admin\Views\Project\Guideline.cshtml" />
     <Content Include="Areas\Admin\Views\Project\ProjectDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Project\ProjectPayment.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\UploadPhoto.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="MvcInstaller\ajax-loader.gif" />
     <Content Include="MvcInstaller\jquery-1.6.1.min.js" />

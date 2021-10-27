@@ -12,17 +12,23 @@ namespace Project.Areas.Admin.Models
     {
         public List<ProjectApplication> projectList { get; set; }
         public Workflow workflow { get; set; }
+        public bool AllPhotoUploaded { get; set; }
         public ProjectApplication project { get; set; }
         public List<PaymentType> AvailablePayment { get; set; }
         public List<Payment> ProjectPaymentList { get; set; }
         public List<IntegerSelectListItem> ContractorList { get; set; }
         public List<IntegerSelectListItem> StateList { get; set; }
-       // public int StateId { get; set; }
- 
+      
         public List<IntegerSelectListItem> LgaList { get; set; }
         public List<IntegerSelectListItem> PaymentTypeList { get; set; }
+        public List<IntegerSelectListItem> DocumentTypeList { get; set; }
         public ProjectDetailForm projectForm { get; set; }
         public ProjectPaymentForm  projectPaymentForm { get; set; }
+
+        public List<DocumentType> AvailableDocument { get; set; }
+        public List<DocumentInfo> DocumentInfoList { get; set; }
+        public string FullPhotoPath { get; set; }
+        public DocumentForm documentForm { get; set; }
     }
 
     public class ProjectDetailForm
@@ -75,6 +81,18 @@ namespace Project.Areas.Admin.Models
 
         [Required(ErrorMessage = "Please select payment type")]
         public decimal ProjectSum { get; set; }
+
+    }
+
+    public class DocumentForm
+    {
+        public int Id { get; set; }
+        
+        [Required]       
+        public HttpPostedFileBase Photo { get; set; }
+       
+        [Required(ErrorMessage = "Please select Photo type")]
+        public int DocumentTypeId { get; set; }
 
     }
 }
