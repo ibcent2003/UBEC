@@ -185,6 +185,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\Contracts\V1\Requests\LoginRequest.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Requests\ReportRequest.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\CodeList.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\ProjectRecord.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\ProjectResponse.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\ProjectsResponse.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\LGAsResponse.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\ContractorsResponse.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\LoginResponse.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\StatusMessage.cs" />
+    <Compile Include="ApiControllers\MobileController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

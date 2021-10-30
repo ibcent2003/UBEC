@@ -119,11 +119,24 @@ namespace Project.ApiControllers
             var resp = new ProjectsResponse();
             try
             {
-                var rows = db.Workflow.Where(x => x.IsDeleted == false).Select(x => new CodeList { Id = x.Id, Name = x.Name }).ToList();
+                var rows = db.ProjectApplication.Where(x => x.IsDeleted == false)
+                    .Select(x => new ProjectRecord { 
+                        ProjectId = x.Id, 
+                        SerialNo = x.SerialNo,
+                        ProjectType = x.Workflow.Name,
+                        Contractor = x.Contractor.Name,
+                        Description = x.Description,
+                        OwnedBy = x.ModifiedBy
+                    }).ToList();
                 if (rows != null)
                 {
                     resp.Records = rows;
                     resp.Message = "Success";
+                    resp.IsSuccessful = true;
+                }
+                else {
+                    resp.Records = new List<ProjectRecord>();
+                    resp.Message = "No Recores Found";
                     resp.IsSuccessful = true;
                 }
             }
@@ -137,38 +150,36 @@ namespace Project.ApiControllers
 
         }
 
+
         [HttpPost]
-        public ProjectResponse ReportProjectStatus(ProjectRequest request) {
+        public ProjectResponse ReportProjectStatus(ReportRequest request) {
             var resp = new ProjectResponse();
             try {
                 //checked for redundancy
                 var guidTId = request.TransactionId;//Guid.Parse(request.TransactionId);
-                var existRow = db.ProjectApplication.FirstOrDefault(x => x.TransactionId == guidTId);
+                var existRow = db.Inspection.FirstOrDefault(x => x.TransactionId == guidTId);
                 if (existRow != null) {
                     resp.IsSuccessful = true;
                     resp.Message = "Records Has Been Added Already";
                     return resp;
                 }
-                var entity = new ProjectApplication();
+                var entity = new Inspection();
                 entity.TransactionId = guidTId;
-                entity.WorkFlowId = request.workflowId;
-                entity.SerialNo = request.SerialNo;
-                entity.ContractorId = request.ContractorId;
-                entity.Description = request.Description;
+                entity.ProjectId = request.ProjectId;
                 entity.Location = request.Location;
                 entity.Coordinate = request.Coordinate;
-                entity.LGAId = request.LGAId;
+                entity.LgaId = request.LGAId;
                 entity.StageOfCompletion = request.StageOfCompletion;
                 entity.DescriptionOfCompletion = request.DescriptionOfCompletion;
                 entity.ProjectQuality = request.ProjectQuality;
                 entity.HasDefect = request.HasDefect;
                 entity.DescriptionOfDefect = request.DescriptionOfDefect;
-                entity.ContractSum = 0m;
-                entity.Status = request.Status;
+                entity.InspectionStatus = request.Status;
+                entity.InspectionDate = request.InspectionDate;
                 entity.ModifiedBy = request.Modifiedby;
                 entity.ModifiedDate = DateTime.Now;
 
-                db.ProjectApplication.AddObject(entity);
+                db.Inspection.AddObject(entity);
                 db.SaveChanges();
                 resp.IsSuccessful = true;
                 resp.Message = "Record Added Successful";
@@ -182,25 +193,22 @@ namespace Project.ApiControllers
         }
 
         [HttpGet]
-        public ProjectRequest Project() {
-            return db.ProjectApplication.Select(x => new ProjectRequest {
+        public ReportRequest Report() {
+            return db.Inspection.Select(x => new ReportRequest {
                 Id = x.Id,
-                ContractorId = x.ContractorId,
+                ProjectId = x.ProjectId,
                 TransactionId = x.TransactionId,
-                workflowId = x.WorkFlowId,
-                SerialNo = x.SerialNo,
-                Description = x.Description,
                 Location = x.Location,
                 Coordinate = x.Coordinate,
-                LGAId = x.LGAId,
+                LGAId = x.LgaId,
                 StageOfCompletion = x.StageOfCompletion,
                 DescriptionOfCompletion = x.DescriptionOfCompletion,
                 HasDefect = x.HasDefect,
                 DescriptionOfDefect = x.DescriptionOfDefect,
-                ContractSum = x.ContractSum,
                 Modifiedby = x.ModifiedBy,
                 ProjectQuality = x.ProjectQuality,
-                Status = x.Status
+                Status = x.InspectionStatus,
+                InspectionDate = x.InspectionDate
             }).FirstOrDefault();
         }
 
