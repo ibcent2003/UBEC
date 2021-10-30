@@ -3,6 +3,7 @@
     ViewBag.Title = ""+Model.workflow.Name+" Project List";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
+    var db = new Project.DAL.PROEntities();
 }
 @section Crumbs{
     <div class="crumbs">
@@ -56,14 +57,39 @@
                         <td>@item.LGA.State.Name</td>
                         <td>@item.LGA.Name</td>
                         <td>
-                            @if (item.Status == "draft")
-                            {
-                                <span class="label label-danger">draft</span>
+
+                            @{
+                                var getwork = db.Workflow.Where(x => x.Id == item.WorkFlowId).FirstOrDefault();
+
+                                var getdoctype = getwork.DocumentType.ToList();
+                                var getdocument = item.DocumentInfo.ToList();
+                                if (getdoctype.Count != getdocument.Count)
+                                {
+                                    if (item.Status == "draft")
+                                    {
+                                        <span class="label label-danger">draft</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-success">@item.Status</span>
+                                    }
+                                }
+                                else
+                                {
+                                    var getpayment = item.Payment.ToList();
+                                    if (getpayment.Count != 0)
+                                    {
+                                        <span class="label label-success">Awaiting Submission</span>
+                                    }
+                                    else
+                                    {
+                                         <span class="label label-primary">Awaiting Payment</span>
+                                    }
+
+                                }
                             }
-                            else
-                            {
-                                <span class="label label-success">@item.Status</span>
-                            }
+
+
                         </td>
                         <td>
                             
@@ -71,10 +97,42 @@
                             <div class="dropdown">
                                 <span class="btn dropdown-toggle btn-xs btn-success" type="button" id="dropdownMenu1" data-toggle="dropdown">Action List <i class="icon-angle-down"></i></span>
                                 <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation">@Html.ActionLink("Add Payment", "ProjectPayment", new { Id = item.TransactionId}, new { role = "menuitem", tabindex = "-1", onclick = "return DeleteConfirm()" })</li>
+                                    <li role="presentation">@Html.ActionLink("Add Payment", "ProjectPayment", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1", onclick = "return DeleteConfirm()" })</li>
                                     <li role="presentation">
-                                        @Html.ActionLink("Upload Photo", "UploadPhoto", new { Id = item.TransactionId}, new { role = "menuitem", tabindex = "-1" })
+                                        @Html.ActionLink("Assign Inspection Officer", "AssignOfficer", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })
                                     </li>
+                                    <li role="presentation">
+                                        @Html.ActionLink("Edit", "EditProject", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })
+                                    </li>
+                                    @*@if (Roles.GetRolesForUser(User.Identity.Name).Contains("Inspection Officer"))
+        {*@
+                                    <li role="presentation">
+                                        @Html.ActionLink("Inspection", "InspectionList", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                    </li>
+
+                                    @*@{
+
+            if (getdoctype.Count != getdocument.Count)
+            {
+
+            }
+            else
+            {
+                var getpayment = item.Payment.ToList();
+                if (getpayment.Count != 0)
+                {
+                    <li role="presentation">
+                        @Html.ActionLink("Details", "Detail", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })
+                    </li>
+                }
+                else
+                {
+
+                }
+
+            }
+        }*@
+
                                     <li role="presentation">
                                         <a data-toggle="modal" title="View Staff Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
                                     </li>
@@ -97,93 +155,80 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                @*<table class="my-acct">
+                                                <table class="my-acct">
                                                     <tr>
-                                                        <td>Full Name: </td>
-                                                        <td>@staff.FullName</td>
+                                                        <td><b>Serial No:</b> </td>
+                                                        <td>@item.SerialNo</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Identity Mode</td>
+                                                        <td><b>Location</b></td>
                                                         <td>
-                                                            @staff.IdentificationName
+                                                            @item.Location
                                                         </td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Identity Number</td>
-                                                        <td>@staff.IdentificationNumber</td>
-                                                    </tr>
-
-
-
-                                                    <tr>
-                                                        <td>TIN</td>
-                                                        <td>@staff.TIN</td>
+                                                        <td><b>Description</b></td>
+                                                        <td>@item.Description</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>SSNIT Number</td>
-                                                        <td>@staff.SNNITNumber</td>
+                                                        <td><b>Coordinate</b></td>
+                                                        <td>@item.Coordinate</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Qualification</td>
-                                                        <td>@staff.QualificationName</td>
+                                                        <td><b>Contractor</b></td>
+                                                        <td>@item.Contractor.Name</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Email Address</td>
-                                                        <td>@staff.EmailAddress</td>
+                                                        <td><b>Contract Sum</b></td>
+                                                        <td>@item.ContractSum</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Mobile Number</td>
-                                                        <td>@staff.MobileNo</td>
+                                                        <td><b>Stage Of Completion</b></td>
+                                                        <td>@item.StageOfCompletion</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Office Telephone Number</td>
-                                                        <td>@staff.OfficePhoneNo</td>
+                                                        <td><b>Description of Completion</b></td>
+                                                        <td>@item.DescriptionOfCompletion</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Sector/Collection</td>
-                                                        <td>@staff.SectorName</td>
+                                                        <td><b>Project Quanlity</b></td>
+                                                        <td>@item.ProjectQuality</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Position in CHA</td>
-                                                        <td>@staff.Desgination</td>
+                                                        <td><b>Has Defect</b></td>
+                                                        <td>@item.HasDefect</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Highest Educational Level</td>
-                                                        <td>@staff.QualificationName</td>
-                                                    </tr>
+                                                        <td><b>Description of Defect</b></td>
+                                                        <td>@item.DescriptionOfDefect</td>
+                                                    </tr>                                                 
 
-                                                    <tr>
+                                                    @*<tr>
                                                         <td>Identification Mode</td>
                                                         <td>
                                                             <a target="_blank" href="@Url.Action("DocumentsUploadedPath", new { Path = (Model.newDocumentPath) + staff.Path })"><i class="icon-download-alt"></i></a>
 
                                                         </td>
-                                                    </tr>
+                                                    </tr>*@
 
-                                                    <tr>
-                                                        <td>Highest Educational Certificate</td>
-                                                        <td>
-                                                            <a target="_blank" href="@Url.Action("DocumentsUploadedPath", new { Path = (Model.newDocumentPath) + staff.CertificatePath })"><i class="icon-download-alt"></i></a>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+                                                  
+                                                    @*<tr>
                                                         <td>Upload Passport Photograph</td>
                                                         <td>
                                                             <img src="@Url.Action("DocumentsUploadedPath", new { Path=(Model.newDocumentPath) + staff.Passport})" height="100" width="100" style="border:solid" />
                                                         </td>
-                                                    </tr>
+                                                    </tr>*@
 
-                                                </table>*@
+                                                </table>
 
                                             </div>
                                             <div class="modal-footer">

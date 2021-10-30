@@ -32,7 +32,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="widget-header">
-            <a href="@Url.Action("InspectionList", "Project", new {Id=Model.project.Id, area="Admin"})" class="btn btn-lg btn-warning">Back</a>
+            <a href="@Url.Action("InspectionList", "Project", new {Id=Model.project.Id, area="Admin"})" class="btn btn-xs btn-warning">Back</a>
             @*@if (Model.AllPhotoUploaded == true)
             {
                 @Html.ActionLink("Submit Project", "RemovePayment", new { Id = Model.project.TransactionId}, new { @class = "btn btn-lg btn-primary"})
@@ -49,72 +49,114 @@
                         <th>Location</th>
                         <th>State</th>
                         <th>LGA</th>
-                        <th>Status</th>
-
+                        <th>Has Inspection</th>
+                        <th>Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model.projectList.Count != 0)
                     {
-                        int i = 0;
-                        foreach (var item in Model.projectList)
-                        {
-                            ++i;
-                            <tr style="font-size: 12px;">
-                                <td>
-                                    @i
-                                </td>
-                                <td>
-                                    @item.SerialNo
-                                </td>
+                    int i = 0;
+                    foreach (var item in Model.projectList)
+                    {
+                    ++i;
+                    <tr style="font-size: 12px;">
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @item.SerialNo
+                        </td>
 
-                                <td>@item.Description</td>
-                                <td>@item.Location</td>
-                                <td>@item.LGA.State.Name</td>
-                                <td>@item.LGA.Name</td>
-                                <td>
-                                    @{
-                                        var getwork = db.Workflow.Where(x => x.Id == item.WorkFlowId).FirstOrDefault();
+                        <td>@item.Description</td>
+                        <td>@item.Location</td>
+                        <td>@item.LGA.State.Name</td>
+                        <td>@item.LGA.Name</td>
+                        <td>
 
-                                        var getdoctype = getwork.DocumentType.ToList();
-                                        var getdocument = item.DocumentInfo.ToList();
-                                        if (getdoctype.Count != getdocument.Count)
-                                        {
-                                            if (item.Status == "draft")
-                                            {
-                                                <span class="label label-danger">draft</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="label label-success">@item.Status</span>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            var getpayment = item.Payment.ToList();
-                                            if (getpayment.Count != 0)
-                                            {
-                                                <span class="label label-success">Awaiting Submission</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="label label-primary">Awaiting Payment</span>
-                                            }
+                            @{
+                            var getinspction = db.Inspection.Where(x => x.ProjectId == item.Id).ToList();
+                            if (getinspction.Any())
+                            {
 
-                                        }
-                                    }
-                                </td>
+                            <span class="label label-success">Yes</span>
+
+                            }
+                            else
+                            {
+                            <span class="label label-warning">No</span>
+                            }
+                            }
 
 
-                            </tr>
-                        }
+                        </td>
+                        <td>
+
+
+                            <a data-toggle="modal" title="Project Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+
+                            <div class="row">
+                                <div class="modal fade" id="@item.Id">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title">Project Information</h4>
+
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <table class="my-acct">
+                                                    <tr>
+                                                        <td><b>Serial No:</b> </td>
+                                                        <td>@item.SerialNo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Location</b></td>
+                                                        <td>
+                                                            @item.Location
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><b>Description</b></td>
+                                                        <td>@item.Description</td>
+                                                    </tr>
+
+
+
+                                                    <tr>
+                                                        <td><b>Contractor</b></td>
+                                                        <td>@item.Contractor.Name</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><b>Contract Sum</b></td>
+                                                        <td>@item.ContractSum</td>
+                                                    </tr>
+
+                                                </table>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                    }
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="8">No Records Found!...</td>
-                        </tr>
+                    <tr>
+                        <td colspan="8">No Records Found!...</td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -154,73 +196,132 @@
                     <tbody>
                         @if (Model.InspectionList.Count != 0)
                         {
-                            int i = 0;
-                            foreach (var item in Model.InspectionList)
-                            {
-                                ++i;
-                                <tr style="font-size: 12px;">
-                                    <td>
-                                        @i
-                                    </td>
-                                    <td>
-                                        @item.Location
-                                    </td>
+                        int i = 0;
+                        foreach (var item in Model.InspectionList)
+                        {
+                        ++i;
+                        <tr style="font-size: 12px;">
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @item.Location
+                            </td>
 
-                                    <td>@item.Coordinate</td>
-                                    <td>@item.LGA.State.Name</td>
-                                    <td>@item.LGA.Name</td>
-                                    <td>@item.StageOfCompletion</td>
-                                    <td>
-                                        @if (item.HasDefect == true)
-                                        {
-                                            <span class="label label-success">Yes</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="label label-danger">No</span>
-                                        }
-                                    </td>
-                                    <td>
-
-                                        @{
-                                            var getwork = db.Workflow.Where(x => x.Id == Model.project.WorkFlowId).FirstOrDefault();
-
-                                            var getdoctype = getwork.DocumentType.ToList();
-                                            var getdocument = item.DocumentInfo.ToList();
-                                            if (getdoctype.Count != getdocument.Count)
-                                            {
-                                                if (item.InspectionStatus == "Not Submitted")
-                                                {
-                                                    <span class="label label-danger">draft</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="label label-success">@item.InspectionStatus</span>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <span class="label label-success">Awaiting Submission</span>
-
-                                            }
-                                        }
+                            <td>@item.Coordinate</td>
+                            <td>@item.LGA.State.Name</td>
+                            <td>@item.LGA.Name</td>
+                            <td>@item.StageOfCompletion</td>
+                            <td>
+                                @if (item.HasDefect == true)
+                                {
+                                <span class="label label-success">Yes</span>
+                                }
+                                else
+                                {
+                                <span class="label label-danger">No</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.InspectionStatus == "Not Submitted")
+                                {
+                                <span class="label label-danger">draft</span>
+                                }
+                                else
+                                {
+                                <span class="label label-success">@item.InspectionStatus</span>
+                                }
 
 
-                                    </td>
-                                    <td>
-                                        <a data-toggle="modal" title="View Staff Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+                            </td>
+                            <td>
+                                <a data-toggle="modal" title="Inspection Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+                                <div class="row">
+                                    <div class="modal fade" id="@item.Id">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title">Inspection Information</h4>
 
-                                    </td>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <table class="my-acct">
+
+                                                        <tr>
+                                                            <td><b>Location</b></td>
+                                                            <td>
+                                                                @item.Location
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Coordinate</b></td>
+                                                            <td>@item.Coordinate</td>
+                                                        </tr>
 
 
-                                </tr>
-                            }
+
+                                                        <tr>
+                                                            <td><b>Stage Of Completion</b></td>
+                                                            <td>@item.StageOfCompletion</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><b>Description of Completion</b></td>
+                                                            <td>@item.DescriptionOfCompletion</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><b>Project Quanlity</b></td>
+                                                            <td>@item.ProjectQuality</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><b>Has Defect</b></td>
+                                                            <td>
+                                                                @if (item.HasDefect == true)
+                                                                {
+                                                                <span class="label label-danger">Yes</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                <span class="label label-success">No</span>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                        @if (item.HasDefect == true)
+                                                        {
+                                                        <tr>
+                                                            <td><b>Description of Defect</b></td>
+                                                            <td>@item.DescriptionOfDefect</td>
+                                                        </tr>
+                                                        }
+
+
+
+
+                                                    </table>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+
+                        </tr>
+                        }
                         }
                         else
                         {
-                            <tr>
-                                <td colspan="8">No Records Found!...</td>
-                            </tr>
+                        <tr>
+                            <td colspan="8">No Records Found!...</td>
+                        </tr>
                         }
                     </tbody>
                 </table>

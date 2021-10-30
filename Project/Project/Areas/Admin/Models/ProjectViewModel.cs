@@ -12,6 +12,7 @@ namespace Project.Areas.Admin.Models
     {
         public System.Web.Mvc.SelectList InspectionUser { get; set; }
         public string username { get; set; }
+        public Users user { get; set; }
         public bool HasAssigned { get; set; }
         public List<UserDetail> userDetail { get; set; }
         public List<Payment> paymentlist { get; set; }

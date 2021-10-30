@@ -39,6 +39,18 @@ namespace Project.Areas.Admin.Controllers
                 string[] roles = System.Web.Security.Roles.GetRolesForUser(User.Identity.Name);
                 if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
                 {
+                    var getuser = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+                    var CountConstruction = db.ProjectApplication.Where(x => x.WorkFlowId == Properties.Settings.Default.Construction).Count();
+                    model.TotalConstruction = CountConstruction;
+
+                    var CountRenovation = db.ProjectApplication.Where(x => x.WorkFlowId == Properties.Settings.Default.Renovation).Count();
+                    model.TotalRenovation = CountRenovation;
+
+                    var CountSupply = db.ProjectApplication.Where(x => x.WorkFlowId == Properties.Settings.Default.Supply).Count();
+                    model.TotalSupply = CountSupply;
+
+                    model.TotalProject = CountConstruction + CountRenovation + CountSupply;
+
                     return View(model);
                 }
                 else if (Roles.GetRolesForUser(User.Identity.Name).Contains("Inspection Officer"))

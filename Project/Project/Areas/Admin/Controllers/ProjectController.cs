@@ -37,6 +37,8 @@ namespace Project.Areas.Admin.Controllers
                 TempData["messageType"] = "danger";
                 return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
             }
+            var getuser = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            model.user = getuser;
             var getdraftProject = db.ProjectApplication.ToList();          
             model.projectList = getdraftProject;
             model.workflow = getworkflow;
@@ -369,7 +371,7 @@ namespace Project.Areas.Admin.Controllers
                 model.projectList = getdraftProject;
                 model.inspection = getInspection;
 
-                var inspectionlist = getproject.Inspection.ToList();
+                var inspectionlist = db.Inspection.Where(x=>x.Id==Id).ToList();
                 model.InspectionList = inspectionlist;
                 return View(model);
             }
@@ -572,12 +574,18 @@ namespace Project.Areas.Admin.Controllers
                 model.project = getproject;
                 var getdraftProject = db.ProjectApplication.Where(x => x.TransactionId == getproject.TransactionId).ToList();
                 model.projectList = getdraftProject;
+                model.inspection = getInspection;
                 model.FullPhotoPath = Properties.Settings.Default.FullPhotoPath;
                 model.DocumentInfoList = getInspection.DocumentInfo.ToList<DocumentInfo>();
-                var inspection = db.Inspection.Where(x=>x.ProjectId== getproject.Id).ToList();
+                var inspection = db.Inspection.Where(x=>x.Id== Id).ToList();
                 model.InspectionList = inspection;
                 var getpayment = getproject.Payment.ToList();
                 model.paymentlist = getpayment;
+                var inspectionofficer = db.UserDetail.Where(x => x.UserId == getproject.InspectionUserId).ToList();
+                if(inspectionofficer.Any())
+                {
+                    model.userDetail = inspectionofficer;
+                }
                 return View(model);
             }
             catch(Exception ex)
@@ -790,8 +798,6 @@ namespace Project.Areas.Admin.Controllers
             }
         }
 
-
-
         [HttpPost]
         public ActionResult NewInspection(ProjectViewModel model)
         {
@@ -845,8 +851,6 @@ namespace Project.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
             }
         }
-
-
         public ActionResult EditInspection(int Id)
         {
             try
@@ -895,7 +899,6 @@ namespace Project.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
             }
         }
-
         [HttpPost]
         public ActionResult EditInspection(ProjectViewModel model)
         {
@@ -941,6 +944,40 @@ namespace Project.Areas.Admin.Controllers
                 //return View(model);
             }
             catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        public ActionResult SubmitInspection(int Id)
+        {
+            try
+            {
+                ProjectViewModel model = new ProjectViewModel();
+                var getInspection = db.Inspection.Where(x => x.Id == Id).FirstOrDefault();
+                if (getInspection == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+
+                var getproject = db.ProjectApplication.Where(x => x.Id == getInspection.ProjectId).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+                getInspection.InspectionStatus = "Submitted";
+                db.SaveChanges();
+                TempData["message"] = "The Inspection report has been submitted successfully.";
+                return RedirectToAction("InspectionList", "Project", new { Id = getInspection.ProjectId, area = "Admin" });
+            }
+            catch(Exception ex)
             {
                 Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
                 TempData["message"] = Settings.Default.GenericExceptionMessage;

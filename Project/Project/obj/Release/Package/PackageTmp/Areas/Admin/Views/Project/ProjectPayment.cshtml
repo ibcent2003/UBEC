@@ -4,6 +4,7 @@
     ViewBag.Title = "Add Payment " + Model.project.SerialNo;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
+    var db = new Project.DAL.PROEntities();
 }
 @section Crumbs{
     <div class="crumbs">
@@ -55,13 +56,36 @@
                                     <td>@item.LGA.State.Name</td>
                                     <td>@item.LGA.Name</td>
                                     <td>
-                                        @if (item.Status == "draft")
-                                        {
-                                            <span class="label label-danger">draft</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="label label-success">@item.Status</span>
+
+                                        @{
+                                            var getwork = db.Workflow.Where(x => x.Id == item.WorkFlowId).FirstOrDefault();
+
+                                            var getdoctype = getwork.DocumentType.ToList();
+                                            var getdocument = item.DocumentInfo.ToList();
+                                            if (getdoctype.Count != getdocument.Count)
+                                            {
+                                                if (item.Status == "draft")
+                                                {
+                                                    <span class="label label-danger">draft</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="label label-success">@item.Status</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                var getpayment = item.Payment.ToList();
+                                                if (getpayment.Count != 0)
+                                                {
+                                                    <span class="label label-success">Awaiting Submission</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="label label-primary">Awaiting Payment</span>
+                                                }
+
+                                            }
                                         }
                                     </td>
 

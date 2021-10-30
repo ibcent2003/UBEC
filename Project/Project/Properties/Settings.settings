@@ -32,5 +32,14 @@
     <Setting Name="Keephere" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\UBECDocument\Photo\</Value>
     </Setting>
+    <Setting Name="Construction" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Renovation" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="Supply" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -17,12 +17,17 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="widget-header">            
+        @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+        {
+            <div class="widget-header">
 
-            <a href="@Url.Action("ProjectDetail", "Project", new {Id=Model.workflow.Id, area="Admin"})" class="btn btn-xs btn-warning">New Project</a>
-        </div>
-        <br />
-        <div class="widget-content">
+                <a href="@Url.Action("ProjectDetail", "Project", new { Id = Model.workflow.Id, area = "Admin" })" class="btn btn-xs btn-warning">New Project</a>
+            </div>
+            <br />
+        }
+    <div class="widget-content">
+        @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Inspection Officer"))
+        {
             <table class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr style="font-size: 12px;">
@@ -32,7 +37,7 @@
                         <th>Location</th>
                         <th>State</th>
                         <th>LGA</th>
-                        <th>Status</th>
+                        <th>Has Inspection</th>
                         <th>Action</th>
 
                     </tr>
@@ -41,9 +46,153 @@
                     @if (Model.projectList.Count != 0)
                     {
                         int i = 0;
-                        foreach (var item in Model.projectList)
+                        foreach (var item in Model.projectList.Where(x => x.InspectionUserId == Model.user.UserId))
                         {
                             ++i;
+                            <tr style="font-size: 12px;">
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @item.SerialNo
+                                </td>
+
+                                <td>@item.Description</td>
+                                <td>@item.Location</td>
+                                <td>@item.LGA.State.Name</td>
+                                <td>@item.LGA.Name</td>
+                                <td>
+
+                                    @{
+                                        var getinspction = db.Inspection.Where(x => x.ProjectId == item.Id).ToList();
+                                        if (getinspction.Any())
+                                        {
+
+                                            <span class="label label-success">Yes</span>
+
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-warning">No</span>
+                                        }
+                                    }
+
+
+                                </td>
+                                <td>
+
+
+                                    <div class="dropdown">
+                                        <span class="btn dropdown-toggle btn-xs btn-success" type="button" id="dropdownMenu1" data-toggle="dropdown">Action List <i class="icon-angle-down"></i></span>
+                                        <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu1">
+
+
+                                            @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+                                            {
+                                                <li role="presentation">@Html.ActionLink("Add Payment", "ProjectPayment", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1", onclick = "return DeleteConfirm()" })</li>
+                                                <li role="presentation">@Html.ActionLink("Assign Inspection Officer", "AssignOfficer", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })</li>
+                                                <li role="presentation">@Html.ActionLink("Edit", "EditProject", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })</li>
+                                                <li role="presentation">@Html.ActionLink("Inspection", "InspectionList", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })</li>
+                                                <li role="presentation"><a data-toggle="modal" title="Projet Information" href="#@item.Id"><i class="icon-eye-open"></i></a></li>
+                                            }
+                                            @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Inspection Officer"))
+                                            {
+                                                <li role="presentation">@Html.ActionLink("Inspection", "InspectionList", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })</li>
+                                                <li role="presentation">
+                                                    <a data-toggle="modal" title="Project Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="modal fade" id="@item.Id">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Project Information</h4>
+
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <table class="my-acct">
+                                                            <tr>
+                                                                <td><b>Serial No:</b> </td>
+                                                                <td>@item.SerialNo</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Location</b></td>
+                                                                <td>
+                                                                    @item.Location
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><b>Description</b></td>
+                                                                <td>@item.Description</td>
+                                                            </tr>
+
+
+
+                                                            <tr>
+                                                                <td><b>Contractor</b></td>
+                                                                <td>@item.Contractor.Name</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><b>Contract Sum</b></td>
+                                                                <td>@item.ContractSum</td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">No Records Found!...</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+                                        }
+                                        else if(Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+            {
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr style="font-size: 12px;">
+                <th>S/N</th>
+                <th>Project No</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>State</th>
+                <th>LGA</th>
+                <th>Has Inspection</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.projectList.Count != 0)
+            {
+                int i = 0;
+                foreach (var item in Model.projectList)
+                {
+                    ++i;
                     <tr style="font-size: 12px;">
                         <td>
                             @i
@@ -59,92 +208,48 @@
                         <td>
 
                             @{
-                                var getwork = db.Workflow.Where(x => x.Id == item.WorkFlowId).FirstOrDefault();
-
-                                var getdoctype = getwork.DocumentType.ToList();
-                                var getdocument = item.DocumentInfo.ToList();
-                                if (getdoctype.Count != getdocument.Count)
+                                var getinspction = db.Inspection.Where(x => x.ProjectId == item.Id).ToList();
+                                if (getinspction.Any())
                                 {
-                                    if (item.Status == "draft")
-                                    {
-                                        <span class="label label-danger">draft</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="label label-success">@item.Status</span>
-                                    }
+
+                                    <span class="label label-success">Yes</span>
+
                                 }
                                 else
                                 {
-                                    var getpayment = item.Payment.ToList();
-                                    if (getpayment.Count != 0)
-                                    {
-                                        <span class="label label-success">Awaiting Submission</span>
-                                    }
-                                    else
-                                    {
-                                         <span class="label label-primary">Awaiting Payment</span>
-                                    }
-
+                                    <span class="label label-warning">No</span>
                                 }
                             }
 
 
                         </td>
                         <td>
-                            
+
 
                             <div class="dropdown">
                                 <span class="btn dropdown-toggle btn-xs btn-success" type="button" id="dropdownMenu1" data-toggle="dropdown">Action List <i class="icon-angle-down"></i></span>
                                 <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation">@Html.ActionLink("Add Payment", "ProjectPayment", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1", onclick = "return DeleteConfirm()" })</li>
-                                    <li role="presentation">
-                                        @Html.ActionLink("Assign Inspection Officer", "AssignOfficer", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })
-                                    </li>
-                                    <li role="presentation">
-                                        @Html.ActionLink("Edit", "EditProject", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })
-                                    </li>
-                                    @*@if (Roles.GetRolesForUser(User.Identity.Name).Contains("Inspection Officer"))
-        {*@
-                                    <li role="presentation">
-                                        @Html.ActionLink("Inspection", "InspectionList", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
-                                    </li>
 
-                                    @*@{
 
-            if (getdoctype.Count != getdocument.Count)
-            {
-
-            }
-            else
-            {
-                var getpayment = item.Payment.ToList();
-                if (getpayment.Count != 0)
-                {
-                    <li role="presentation">
-                        @Html.ActionLink("Details", "Detail", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })
-                    </li>
-                }
-                else
-                {
-
-                }
-
-            }
-        }*@
-
-                                    <li role="presentation">
-                                        <a data-toggle="modal" title="View Staff Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
-                                    </li>
-
+                                    @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+                                    {
+                                        <li role="presentation">@Html.ActionLink("Add Payment", "ProjectPayment", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1", onclick = "return DeleteConfirm()" })</li>
+                                        <li role="presentation">@Html.ActionLink("Assign Inspection Officer", "AssignOfficer", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })</li>
+                                        <li role="presentation">@Html.ActionLink("Edit", "EditProject", new { Id = item.TransactionId }, new { role = "menuitem", tabindex = "-1" })</li>
+                                        <li role="presentation">@Html.ActionLink("Inspection", "InspectionList", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })</li>
+                                        <li role="presentation"><a data-toggle="modal" title="Projet Information" href="#@item.Id"><i class="icon-eye-open"></i></a></li>
+                                    }
+                                    @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Inspection Officer"))
+                                    {
+                                        <li role="presentation">@Html.ActionLink("Inspection", "InspectionList", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })</li>
+                                        <li role="presentation">
+                                            <a data-toggle="modal" title="Project Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
 
                             <div class="row">
-
-
-
-
                                 <div class="modal fade" id="@item.Id">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -172,10 +277,7 @@
                                                         <td>@item.Description</td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td><b>Coordinate</b></td>
-                                                        <td>@item.Coordinate</td>
-                                                    </tr>
+
 
                                                     <tr>
                                                         <td><b>Contractor</b></td>
@@ -187,47 +289,6 @@
                                                         <td>@item.ContractSum</td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td><b>Stage Of Completion</b></td>
-                                                        <td>@item.StageOfCompletion</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td><b>Description of Completion</b></td>
-                                                        <td>@item.DescriptionOfCompletion</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td><b>Project Quanlity</b></td>
-                                                        <td>@item.ProjectQuality</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td><b>Has Defect</b></td>
-                                                        <td>@item.HasDefect</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td><b>Description of Defect</b></td>
-                                                        <td>@item.DescriptionOfDefect</td>
-                                                    </tr>                                                 
-
-                                                    @*<tr>
-                                                        <td>Identification Mode</td>
-                                                        <td>
-                                                            <a target="_blank" href="@Url.Action("DocumentsUploadedPath", new { Path = (Model.newDocumentPath) + staff.Path })"><i class="icon-download-alt"></i></a>
-
-                                                        </td>
-                                                    </tr>*@
-
-                                                  
-                                                    @*<tr>
-                                                        <td>Upload Passport Photograph</td>
-                                                        <td>
-                                                            <img src="@Url.Action("DocumentsUploadedPath", new { Path=(Model.newDocumentPath) + staff.Passport})" height="100" width="100" style="border:solid" />
-                                                        </td>
-                                                    </tr>*@
-
                                                 </table>
 
                                             </div>
@@ -238,21 +299,25 @@
                                     </div>
                                 </div>
                             </div>
+
                         </td>
 
                     </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="8">No Records Found!...</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8">No Records Found!...</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+            }
+
+
     </div>
+        </div>
 </div>
 <script src="~/Content/Backend/DataTable/js/jquery.dataTables.min.js"></script>
 <script src="~/Content/Backend/DataTable/js/dataTables.buttons.min.js"></script>

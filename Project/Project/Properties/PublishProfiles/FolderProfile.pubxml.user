@@ -5,11 +5,11 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\USER\Desktop\ubec upload</_PublishTargetUrl>
-    <History>False|2021-10-27T16:22:40.3511483Z;False|2021-10-27T17:17:36.7782163+01:00;False|2021-10-27T17:16:28.4567483+01:00;</History>
+    <History>False|2021-10-30T09:40:54.2651415Z;False|2021-10-30T10:39:44.0810143+01:00;False|2021-10-30T10:38:57.5928755+01:00;False|2021-10-30T10:37:50.9313908+01:00;False|2021-10-27T17:22:40.3511483+01:00;False|2021-10-27T17:17:36.7782163+01:00;False|2021-10-27T17:16:28.4567483+01:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Admin/Views/Dashboard/Index.cshtml">
-      <publishTime>10/23/2021 21:40:30</publishTime>
+      <publishTime>10/28/2021 21:29:35</publishTime>
     </File>
     <File Include="Areas/Admin/Views/InspDashboard/Index.cshtml">
       <publishTime>10/23/2021 23:58:43</publishTime>
@@ -18,13 +18,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/24/2021 12:27:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Project/Index.cshtml">
-      <publishTime>10/26/2021 17:18:13</publishTime>
+      <publishTime>10/30/2021 10:12:01</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Project/ProjectDetail.cshtml">
       <publishTime>10/25/2021 21:00:50</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Project/ProjectPayment.cshtml">
-      <publishTime>10/26/2021 16:46:22</publishTime>
+      <publishTime>10/27/2021 23:41:30</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Project/UploadPhoto.cshtml">
       <publishTime>10/26/2021 23:03:59</publishTime>
@@ -210,19 +210,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/05/2018 23:46:22</publishTime>
     </File>
     <File Include="bin/Project.DAL.dll">
-      <publishTime>10/25/2021 20:58:45</publishTime>
+      <publishTime>10/30/2021 10:33:08</publishTime>
     </File>
     <File Include="bin/Project.DAL.dll.config">
       <publishTime>10/22/2021 22:39:52</publishTime>
     </File>
     <File Include="bin/Project.DAL.pdb">
-      <publishTime>10/25/2021 20:58:45</publishTime>
+      <publishTime>10/30/2021 10:33:08</publishTime>
     </File>
     <File Include="bin/Project.dll">
-      <publishTime>10/27/2021 17:26:16</publishTime>
+      <publishTime>10/30/2021 10:46:12</publishTime>
     </File>
     <File Include="bin/Project.pdb">
-      <publishTime>10/27/2021 17:26:16</publishTime>
+      <publishTime>10/30/2021 10:46:12</publishTime>
     </File>
     <File Include="bin/SecurityGuard.dll">
       <publishTime>05/05/2018 23:53:00</publishTime>
@@ -3870,7 +3870,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/08/2021 13:59:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/27/2021 17:16:25</publishTime>
+      <publishTime>10/30/2021 10:37:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

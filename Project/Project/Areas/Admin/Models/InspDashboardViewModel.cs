@@ -7,5 +7,9 @@ namespace Project.Areas.Admin.Models
 {
     public class InspDashboardViewModel
     {
+        public int TotalConstruction { get; set; }
+        public int TotalRenovation { get; set; }
+        public int TotalSupply { get; set; }
+        public int TotalProject { get; set; }
     }
 }

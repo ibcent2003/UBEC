@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Project.Areas.Admin.Models.InspDashboardViewModel
+@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
@@ -21,11 +22,9 @@
     <div class="col-sm-6 col-md-3">
         <div class="statbox widget box box-shadow">
             <div class="widget-content">
-                <div class="visual cyan">
-                    <div class="statbox-sparkline"><canvas style="display: inline-block; width: 44px; height: 19px; vertical-align: top;" width="44" height="19"></canvas></div>
-                </div>
-                <div class="title">Contruction</div>
-                <div class="value">45</div>
+                <div class="visual green"><i class="icon-building"></i></div>
+                <div class="title">Total Construction</div>
+                <div class="value">@Model.TotalConstruction</div>
                 <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>
@@ -33,11 +32,9 @@
     <div class="col-sm-6 col-md-3">
         <div class="statbox widget box box-shadow">
             <div class="widget-content">
-                <div class="visual green">
-                    <div class="statbox-sparkline"><canvas style="display: inline-block; width: 44px; height: 19px; vertical-align: top;" width="44" height="19"></canvas></div>
-                </div>
+                <div class="visual green"><i class="icon-road"></i></div>
                 <div class="title">Renovation</div>
-                <div class="value">4</div>
+                <div class="value">@Model.TotalRenovation</div>
                 <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>
@@ -47,7 +44,7 @@
             <div class="widget-content">
                 <div class="visual yellow"><i class="icon-dollar"></i></div>
                 <div class="title">Supply</div>
-                <div class="value">61</div>
+                <div class="value">@Model.TotalSupply</div>
                 <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>
@@ -57,7 +54,7 @@
             <div class="widget-content">
                 <div class="visual red"><i class="icon-user"></i></div>
                 <div class="title">Total Project</div>
-                <div class="value">19</div>
+                <div class="value">@Model.TotalProject</div>
                 <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>

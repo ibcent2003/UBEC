@@ -1,7 +1,7 @@
 ﻿@model Project.Areas.Admin.Models.ProjectViewModel
 @using Project.HtmlHelpers
 @{
-    ViewBag.Title = Model.project.SerialNo + "Details";
+    ViewBag.Title = Model.project.SerialNo + " Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
     var db = new Project.DAL.PROEntities();
@@ -49,17 +49,15 @@
                             <th>Description</th>
                             <th>Location</th>
                             <th>State</th>
-                            <th>LGA</th>
-                            <th>Status</th>
-
-
+                            <th>LGA</th> 
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (Model.projectList.Count != 0)
                         {
                             int i = 0;
-                            foreach (var item in Model.projectList)
+                            foreach (var pro in Model.projectList)
                             {
                                 ++i;
                                 <tr style="font-size: 12px;">
@@ -67,47 +65,66 @@
                                         @i
                                     </td>
                                     <td>
-                                        @item.SerialNo
+                                        @pro.SerialNo
                                     </td>
 
-                                    <td>@item.Description</td>
-                                    <td>@item.Location</td>
-                                    <td>@item.LGA.State.Name</td>
-                                    <td>@item.LGA.Name</td>
+                                    <td>@pro.Description</td>
+                                    <td>@pro.Location</td>
+                                    <td>@pro.LGA.State.Name</td>
+                                    <td>@pro.LGA.Name</td>   
                                     <td>
-                                        @{
-                                            var getwork = db.Workflow.Where(x => x.Id == item.WorkFlowId).FirstOrDefault();
+                                        <a data-toggle="modal" title="Project Information" href="#@pro.TransactionId"><i class="icon-eye-open"></i></a>
+                                        <div class="row">
+                                            <div class="modal fade" id="@pro.TransactionId">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <h4 class="modal-title">Project Information</h4>
 
-                                            var getdoctype = getwork.DocumentType.ToList();
-                                            var getdocument = item.DocumentInfo.ToList();
-                                            if (getdoctype.Count != getdocument.Count)
-                                            {
-                                                if (item.Status == "draft")
-                                                {
-                                                    <span class="label label-danger">draft</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="label label-success">@item.Status</span>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                var getpayment = item.Payment.ToList();
-                                                if (getpayment.Count != 0)
-                                                {
-                                                    <span class="label label-success">Awaiting Submission</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="label label-primary">Awaiting Payment</span>
-                                                }
+                                                        </div>
+                                                        <div class="modal-body">
 
-                                            }
-                                        }
+                                                            <table class="my-acct">
+                                                                <tr>
+                                                                    <td><b>Serial No:</b> </td>
+                                                                    <td>@pro.SerialNo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Location</b></td>
+                                                                    <td>
+                                                                        @pro.Location
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td><b>Description</b></td>
+                                                                    <td>@pro.Description</td>
+                                                                </tr>
+
+
+
+                                                                <tr>
+                                                                    <td><b>Contractor</b></td>
+                                                                    <td>@pro.Contractor.Name</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td><b>Contract Sum</b></td>
+                                                                    <td>@pro.ContractSum</td>
+                                                                </tr>
+
+                                                            </table>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
-
-
                                 </tr>
                             }
                         }
@@ -187,28 +204,13 @@
                                 }
                             </td>
                             <td>
-
-                                @{
-                                    var getwork = db.Workflow.Where(x => x.Id == Model.project.WorkFlowId).FirstOrDefault();
-
-                                    var getdoctype = getwork.DocumentType.ToList();
-                                    var getdocument = item.DocumentInfo.ToList();
-                                    if (getdoctype.Count != getdocument.Count)
-                                    {
-                                        if (item.InspectionStatus == "Not Submitted")
-                                        {
-                                            <span class="label label-danger">draft</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="label label-success">@item.InspectionStatus</span>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <span class="label label-success">Awaiting Submission</span>
-
-                                    }
+                                @if (item.InspectionStatus == "Not Submitted")
+                                {
+                                <span class="label label-danger">draft</span>
+                                }
+                                else
+                                {
+                                <span class="label label-success">@item.InspectionStatus</span>
                                 }
 
 
@@ -217,28 +219,30 @@
                                 <div class="dropdown">
                                     <span class="btn dropdown-toggle btn-xs btn-success" type="button" id="dropdownMenu1" data-toggle="dropdown">Action List <i class="icon-angle-down"></i></span>
                                     <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu1">
+                                        @if (item.InspectionStatus == "Submitted")
+                                        {
+                                            <li role="presentation">
+                                                @Html.ActionLink("Details", "Detail", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li role="presentation">
+                                                @Html.ActionLink("Details", "Detail", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                            <li role="presentation">
+                                                @Html.ActionLink("Upload Photo", "UploadPhoto", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                            <li role="presentation">
+                                                @Html.ActionLink("Edit Report", "EditInspection", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                        }
 
-                                        <li role="presentation">
-                                            @Html.ActionLink("Upload Photo", "UploadPhoto", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
-                                        </li>
-                                        <li role="presentation">
-                                            @Html.ActionLink("Edit Report", "EditInspection", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
-                                        </li>
 
-                                        @{
 
-                                            if (getdoctype.Count != getdocument.Count)
-                                            {
 
-                                            }
-                                            else
-                                            {
-                                                <li role="presentation">
-                                                    @Html.ActionLink("Details", "Detail", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
-                                                </li>
 
-                                            }
-                                        }                                      
+
 
                                     </ul>
                                 </div>
