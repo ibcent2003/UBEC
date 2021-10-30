@@ -50,8 +50,8 @@ C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Debug\Project.DAL.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Debug\Project.DAL.pdb
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Debug\EntityFramework.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Debug\EntityFramework.xml
-C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.csprojAssemblyReference.cache
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.csproj.CoreCompileInputs.cache
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.csproj.CopyComplete
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.pdb
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.csprojAssemblyReference.cache

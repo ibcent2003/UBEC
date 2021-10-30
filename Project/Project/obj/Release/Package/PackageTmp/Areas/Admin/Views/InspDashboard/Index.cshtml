@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.IsGreetings = "true";
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
+
+        </ul>
+    </div>
+}
+<a href="@Url.Action("Index", "Project", new {Id=1, area="Admin"})" class="btn btn-success btn-xs">Construction </a>
+<a href="@Url.Action("Index", "Project", new {Id=2, area="Setup"})" class="btn btn-danger btn-xs">Renovation  </a>
+<a href="@Url.Action("Index", "Project", new {Id=3, area="Setup"})" class="btn btn-warning btn-xs">Supply </a>
+<br />
+<br />
+<div class="row row-bg">
+    <div class="col-sm-6 col-md-3">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual cyan">
+                    <div class="statbox-sparkline"><canvas style="display: inline-block; width: 44px; height: 19px; vertical-align: top;" width="44" height="19"></canvas></div>
+                </div>
+                <div class="title">Contruction</div>
+                <div class="value">45</div>
+                <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual green">
+                    <div class="statbox-sparkline"><canvas style="display: inline-block; width: 44px; height: 19px; vertical-align: top;" width="44" height="19"></canvas></div>
+                </div>
+                <div class="title">Renovation</div>
+                <div class="value">4</div>
+                <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 hidden-xs">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual yellow"><i class="icon-dollar"></i></div>
+                <div class="title">Supply</div>
+                <div class="value">61</div>
+                <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 hidden-xs">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual red"><i class="icon-user"></i></div>
+                <div class="title">Total Project</div>
+                <div class="value">19</div>
+                <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

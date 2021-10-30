@@ -1,0 +1,217 @@
+﻿@model Project.Areas.Admin.Models.ProjectViewModel
+@{
+    ViewBag.Title = ""+Model.workflow.Name+" Project List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.IsGreetings = "true";
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
+
+        </ul>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget-header">            
+
+            <a href="@Url.Action("ProjectDetail", "Project", new {Id=Model.workflow.Id, area="Admin"})" class="btn btn-xs btn-warning">New Project</a>
+        </div>
+        <br />
+        <div class="widget-content">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr style="font-size: 12px;">
+                        <th>S/N</th>
+                        <th>Project No</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>State</th>
+                        <th>LGA</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.projectList.Count != 0)
+                    {
+                        int i = 0;
+                        foreach (var item in Model.projectList)
+                        {
+                            ++i;
+                    <tr style="font-size: 12px;">
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @item.SerialNo
+                        </td>
+
+                        <td>@item.Description</td>
+                        <td>@item.Location</td>
+                        <td>@item.LGA.State.Name</td>
+                        <td>@item.LGA.Name</td>
+                        <td>
+                            @if (item.Status == "draft")
+                            {
+                                <span class="label label-danger">draft</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success">@item.Status</span>
+                            }
+                        </td>
+                        <td>
+                            
+
+                            <div class="dropdown">
+                                <span class="btn dropdown-toggle btn-xs btn-success" type="button" id="dropdownMenu1" data-toggle="dropdown">Action List <i class="icon-angle-down"></i></span>
+                                <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">@Html.ActionLink("Add Payment", "ProjectPayment", new { Id = item.TransactionId}, new { role = "menuitem", tabindex = "-1", onclick = "return DeleteConfirm()" })</li>
+                                    <li role="presentation">
+                                        @Html.ActionLink("Upload Photo", "UploadPhoto", new { Id = item.TransactionId}, new { role = "menuitem", tabindex = "-1" })
+                                    </li>
+                                    <li role="presentation">
+                                        <a data-toggle="modal" title="View Staff Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div class="row">
+
+
+
+
+                                <div class="modal fade" id="@item.Id">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title">Project Information</h4>
+
+                                            </div>
+                                            <div class="modal-body">
+
+                                                @*<table class="my-acct">
+                                                    <tr>
+                                                        <td>Full Name: </td>
+                                                        <td>@staff.FullName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Identity Mode</td>
+                                                        <td>
+                                                            @staff.IdentificationName
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Identity Number</td>
+                                                        <td>@staff.IdentificationNumber</td>
+                                                    </tr>
+
+
+
+                                                    <tr>
+                                                        <td>TIN</td>
+                                                        <td>@staff.TIN</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>SSNIT Number</td>
+                                                        <td>@staff.SNNITNumber</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Qualification</td>
+                                                        <td>@staff.QualificationName</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Email Address</td>
+                                                        <td>@staff.EmailAddress</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Mobile Number</td>
+                                                        <td>@staff.MobileNo</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Office Telephone Number</td>
+                                                        <td>@staff.OfficePhoneNo</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Sector/Collection</td>
+                                                        <td>@staff.SectorName</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Position in CHA</td>
+                                                        <td>@staff.Desgination</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Highest Educational Level</td>
+                                                        <td>@staff.QualificationName</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Identification Mode</td>
+                                                        <td>
+                                                            <a target="_blank" href="@Url.Action("DocumentsUploadedPath", new { Path = (Model.newDocumentPath) + staff.Path })"><i class="icon-download-alt"></i></a>
+
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Highest Educational Certificate</td>
+                                                        <td>
+                                                            <a target="_blank" href="@Url.Action("DocumentsUploadedPath", new { Path = (Model.newDocumentPath) + staff.CertificatePath })"><i class="icon-download-alt"></i></a>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Upload Passport Photograph</td>
+                                                        <td>
+                                                            <img src="@Url.Action("DocumentsUploadedPath", new { Path=(Model.newDocumentPath) + staff.Passport})" height="100" width="100" style="border:solid" />
+                                                        </td>
+                                                    </tr>
+
+                                                </table>*@
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">No Records Found!...</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="~/Content/Backend/DataTable/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/Backend/DataTable/js/dataTables.buttons.min.js"></script>
+<script src="~/Content/Backend/DataTable/js/buttons.flash.min.js"></script>
+<script src="~/Content/Backend/DataTable/js/buttons.html5.min.js"></script>
+<script src="~/Content/Backend/DataTable/js/buttons.print.min.js"></script>
+

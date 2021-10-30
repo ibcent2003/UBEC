@@ -21,6 +21,15 @@
       <Value Profile="(Default)">~/Content/Backend/Photo/</Value>
     </Setting>
     <Setting Name="FullPhotoPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">G:\HostingSpaces\raukzdup\ubec.fortressenterprise.com.ng\wwwroot\Content\Backend\Photo\</Value>
+    </Setting>
+    <Setting Name="ServerPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">G:\HostingSpaces\raukzdup\ubec.fortressenterprise.com.ng\wwwroot\Content\Backend\Photo\</Value>
+    </Setting>
+    <Setting Name="InspectionUser" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Inspection Officer</Value>
+    </Setting>
+    <Setting Name="Keephere" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\UBECDocument\Photo\</Value>
     </Setting>
   </Settings>

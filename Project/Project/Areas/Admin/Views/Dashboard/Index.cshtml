@@ -8,14 +8,15 @@
 
         <ul class="breadcrumb" id="breadcrumbs">
             <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
-           
+
         </ul>
     </div>
 }
-<a href="@Url.Action("Index", "PaymentType", new { area="Setup"})" class="btn btn-success btn-xs">Construction </a>
- <a href="@Url.Action("Index", "PaymentType", new { area="Setup"})" class="btn btn-danger btn-xs">Renovation  </a>
-<a href="@Url.Action("Index", "PaymentType", new { area="Setup"})" class="btn btn-warning btn-xs">Supply </a>
-<br /><br />
+<a href="@Url.Action("Index", "Project", new {Id=1, area="Admin"})" class="btn btn-success btn-xs">Construction </a>
+<a href="@Url.Action("Index", "Project", new {Id=2, area="Setup"})" class="btn btn-danger btn-xs">Renovation  </a>
+<a href="@Url.Action("Index", "Project", new {Id=3, area="Setup"})" class="btn btn-warning btn-xs">Supply </a>
+<br />
+<br />
 <div class="row row-bg">
     <div class="col-sm-6 col-md-3">
         <div class="statbox widget box box-shadow">
