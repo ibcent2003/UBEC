@@ -56,6 +56,12 @@
         <AssociationConnector Association="PROModel.ProjectDocumentInfo" />
         <AssociationConnector Association="PROModel.UsersInRoles" />
         <AssociationConnector Association="PROModel.WorkflowDocument" />
+        <EntityTypeShape EntityType="PROModel.Inspection" Width="1.5" PointX="15.75" PointY="6.75" />
+        <AssociationConnector Association="PROModel.FK_Inspection_LGA" />
+        <AssociationConnector Association="PROModel.FK_Inspection_ProjectApplication" />
+        <AssociationConnector Association="PROModel.FK_ProjectApplication_ProjectApplication" />
+        <AssociationConnector Association="PROModel.FK_ProjectApplication_Users" />
+        <AssociationConnector Association="PROModel.InspectionDocumentInfo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
