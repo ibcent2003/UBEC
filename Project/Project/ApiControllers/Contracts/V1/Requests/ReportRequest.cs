@@ -5,15 +5,16 @@ using System.Web;
 
 namespace Project.ApiControllers.Contracts.V1.Requests
 {
-    public class ProjectRequest
+    public class ReportRequest
     {
 
         public int Id { get; set; }
         public Guid TransactionId { get; set; }
-        public int ContractorId { get; set; }
-        public int workflowId { get; set; }
-        public string SerialNo { get; set; }
-        public string Description { get; set; }
+        public int ProjectId { get; set; }
+        //public int ContractorId { get; set; }
+        //public int workflowId { get; set; }
+        //public string SerialNo { get; set; }
+        //public string Description { get; set; }
         public string Location { get; set; }
         public string Coordinate { get; set; }
         public int LGAId { get; set; }
@@ -24,6 +25,7 @@ namespace Project.ApiControllers.Contracts.V1.Requests
         public string DescriptionOfDefect { get; set; }
         public decimal ContractSum { get; set; }
         public string Status { get; set; }
+        public DateTime InspectionDate { get; set; }
         //public bool IsDeleted { get; set; }
         public string Modifiedby { get; set; }
 
