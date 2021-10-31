@@ -1,7 +1,7 @@
 ﻿@model Project.Areas.Admin.Models.ProjectViewModel
 @using Project.HtmlHelpers
 @{
-    ViewBag.Title = "Add Payment " + Model.project.SerialNo;
+    ViewBag.Title = "Assign Inspection Officer to " + Model.project.SerialNo + "";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
     var db = new Project.DAL.PROEntities();
@@ -11,14 +11,29 @@
 
         <ul class="breadcrumb" id="breadcrumbs">
             <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
-            <li class="current"> <a title="" href="javascript: return void(0)"></a>Add Payment</li>
+            <li class="current"> <a title="" href="javascript: return void(0)"></a>Assign Inspection Officer</li>
         </ul>
     </div>
 }
+<style>
+    img {
+        width: 100%;
+        height: 100%;
+    }
 
-<a href="@Url.Action("Index", "Project", new {Id=Model.project.WorkFlowId, area="Admin"})" class="btn btn-warning btn-xs">Back</a>
-<br />
-<br />
+    .item {
+        /*float: left;*/
+        margin: 3px;
+        padding: 3px;
+        width: 400px;
+        height: 300px;
+    }
+</style>
+<a href="@Url.Action("Index", "Project", new {Id=Model.project.WorkFlowId, area="Admin"})" class="btn btn-xs btn-warning">Back</a>
+
+<br /><br />
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="widget box">
@@ -134,39 +149,41 @@
 </div>
 
 <br />
-@using (Html.BeginForm("ProjectPayment", "Project", new { Id = Model.project.TransactionId }, FormMethod.Post, new { @enctype = "multipart/form-data", area = "Admin" }))
+<br />
+@if (Model.HasAssigned == false)
 {
-    @Html.HiddenFor(x => x.project.TransactionId)
-    <div class="row">
-        <div class="col-md-12">
-            <div class="widget box">
-                <div class="widget-header">
-                    <h4><i class="icon-reorder"></i>Add Payment to project</h4>
-                </div>
-                <div class="widget-content">
+    using (Html.BeginForm("AssignOfficer", "Project", new { Id = Model.project.TransactionId }, FormMethod.Post, new { @enctype = "multipart/form-data", area = "Admin" }))
+    {
+        @Html.HiddenFor(x => x.project.TransactionId)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget box">
+                    <div class="widget-header">
+                        <h4><i class="icon-reorder"></i>Select inspection officer</h4>
+                    </div>
+                    <div class="widget-content">
 
-                    <form class="form-vertical" action="#">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    @Html.DropDownListFor(m => Model.projectPaymentForm.PaymentTypeId, new SelectList(Model.AvailablePayment, "Id", "Name"), "Please ONE", new { @class = "form-control" })
-                                </div>
-
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(m => m.projectPaymentForm.ProjectSum, new { @class = "form-control", @placeholder = "Project Sum in ₦" })
-                                    @Html.ValidationMessageFor(model => model.projectPaymentForm.ProjectSum, null, new { @style = "color:red" })
-
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="submit" value="Add" class="btn btn-success btn-xs" />
+                        <form class="form-vertical" action="#">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        @Html.DropDownListFor(m => m.username, Model.InspectionUser, "Select", new { @class = "form-control", @placeholder = "" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="submit" value="Add" class="btn btn-success btn-xs" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+}
+else
+{
+
 }
 
 <div class="row">
@@ -175,7 +192,7 @@
             <div class="widget-header">
                 <h4>
                     <i class="icon-reorder"></i>
-                    Existing Payment
+                    Assinged Offier
                 </h4>
             </div>
             <div class="widget-content">
@@ -183,30 +200,44 @@
                     <thead>
                         <tr style="font-size: 12px;">
                             <th>S/N</th>
-                            <th>Payment Type</th>
-                            <th>Project Sum</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Mobile No</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.ProjectPaymentList.Count != 0)
+                        @if (Model.projectList.Count != 0)
                         {
+
                             int i = 0;
-                            foreach (var item in Model.ProjectPaymentList)
+                            foreach (var item in Model.projectList)
                             {
-                                ++i;
-                                <tr style="font-size: 12px;">
-                                    <td>
-                                        @i
-                                    </td>
-                                    <td>@item.PaymentType.Name</td>
-                                    <td>₦@String.Format("{0:n0}", item.ContractSum)</td>
+                                var getuser = db.UserDetail.Where(x => x.UserId == item.InspectionUserId).FirstOrDefault();
+                                if (getuser != null)
+                                {
+                                    ++i;
+                                    <tr style="font-size: 12px;">
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>@getuser.FirstName</td>
+                                        <td>@getuser.LastName</td>
+                                        <td>@getuser.EmailAddres</td>
+                                        <td>@getuser.MobileNumber</td>
+                                        <td>
+                                            @Html.ActionLink("Remve", "RemoveUser", new { Id = item.TransactionId }, new { @class = "btn btn-warning btn-xs", onclick = "return DeleteConfirm()" })
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8">No Records Found!...</td>
+                                    </tr>
+                                }
 
-                                    <td>
-                                        @Html.ActionLink("Delete", "RemovePayment", new { Id = item.ProjectId, paymentId = item.Id }, new { @class = "btn btn-warning btn-xs", onclick = "return DeleteConfirm()" })
-
-                                    </td>
-                                </tr>
                             }
                         }
                         else
@@ -230,7 +261,7 @@
         "use strict";
 
         function DeleteConfirm() {
-            if (confirm("Are you sure want to remove this Payment?"))
+            if (confirm("Are you sure want to remove this user?"))
                 return true;
             else
                 return false;

@@ -1,7 +1,7 @@
 ﻿@model Project.Areas.Admin.Models.ProjectViewModel
 @using Project.HtmlHelpers
 @{
-    ViewBag.Title = "Add Payment " + Model.project.SerialNo;
+    ViewBag.Title = Model.project.SerialNo + " Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
     var db = new Project.DAL.PROEntities();
@@ -11,14 +11,24 @@
 
         <ul class="breadcrumb" id="breadcrumbs">
             <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
-            <li class="current"> <a title="" href="javascript: return void(0)"></a>Add Payment</li>
+            <li class="current"> <a title="" href="javascript: return void(0)"></a>Detail</li>
         </ul>
     </div>
 }
+<style>
+    img {
+        width: 100%;
+        height: 100%;
+    }
 
-<a href="@Url.Action("Index", "Project", new {Id=Model.project.WorkFlowId, area="Admin"})" class="btn btn-warning btn-xs">Back</a>
-<br />
-<br />
+    .item {
+        /*float: left;*/
+        margin: 3px;
+        padding: 3px;
+        width: 400px;
+        height: 300px;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
         <div class="widget box">
@@ -39,7 +49,7 @@
                             <th>Description</th>
                             <th>Location</th>
                             <th>State</th>
-                            <th>LGA</th>
+                            <th>LGA</th> 
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -61,7 +71,7 @@
                                     <td>@pro.Description</td>
                                     <td>@pro.Location</td>
                                     <td>@pro.LGA.State.Name</td>
-                                    <td>@pro.LGA.Name</td>
+                                    <td>@pro.LGA.Name</td>   
                                     <td>
                                         <a data-toggle="modal" title="Project Information" href="#@pro.TransactionId"><i class="icon-eye-open"></i></a>
                                         <div class="row">
@@ -133,80 +143,114 @@
     </div>
 </div>
 
-<br />
-@using (Html.BeginForm("ProjectPayment", "Project", new { Id = Model.project.TransactionId }, FormMethod.Post, new { @enctype = "multipart/form-data", area = "Admin" }))
-{
-    @Html.HiddenFor(x => x.project.TransactionId)
-    <div class="row">
-        <div class="col-md-12">
-            <div class="widget box">
-                <div class="widget-header">
-                    <h4><i class="icon-reorder"></i>Add Payment to project</h4>
-                </div>
-                <div class="widget-content">
-
-                    <form class="form-vertical" action="#">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    @Html.DropDownListFor(m => Model.projectPaymentForm.PaymentTypeId, new SelectList(Model.AvailablePayment, "Id", "Name"), "Please ONE", new { @class = "form-control" })
-                                </div>
-
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(m => m.projectPaymentForm.ProjectSum, new { @class = "form-control", @placeholder = "Project Sum in ₦" })
-                                    @Html.ValidationMessageFor(model => model.projectPaymentForm.ProjectSum, null, new { @style = "color:red" })
-
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="submit" value="Add" class="btn btn-success btn-xs" />
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
+<a href="@Url.Action("Index", "Project", new {Id=Model.project.WorkFlowId, area="Admin"})" class="btn btn-xs btn-warning">Back</a>
+@Html.ActionLink("New Report", "NewInspection", new { Id = Model.project.Id }, new { @class = "btn btn-xs btn-primary" })
+<br /><br />
 <div class="row">
     <div class="col-md-12">
         <div class="widget box">
             <div class="widget-header">
                 <h4>
                     <i class="icon-reorder"></i>
-                    Existing Payment
+                    Inspection List
                 </h4>
+
+
             </div>
             <div class="widget-content">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr style="font-size: 12px;">
                             <th>S/N</th>
-                            <th>Payment Type</th>
-                            <th>Project Sum</th>
+                            <th>Location</th>
+                            <th>Coordinate</th>
+                            <th>State</th>
+                            <th>Lga</th>
+                            <th>State of Completion</th>
+                            <th>Has Defect</th>
+                            <th>Status</th>
                             <th>Action</th>
+
+
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.ProjectPaymentList.Count != 0)
+                        @if (Model.InspectionList.Count != 0)
                         {
                             int i = 0;
-                            foreach (var item in Model.ProjectPaymentList)
+                            foreach (var item in Model.InspectionList)
                             {
                                 ++i;
-                                <tr style="font-size: 12px;">
-                                    <td>
-                                        @i
-                                    </td>
-                                    <td>@item.PaymentType.Name</td>
-                                    <td>₦@String.Format("{0:n0}", item.ContractSum)</td>
+                        <tr style="font-size: 12px;">
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @item.Location
+                            </td>
 
-                                    <td>
-                                        @Html.ActionLink("Delete", "RemovePayment", new { Id = item.ProjectId, paymentId = item.Id }, new { @class = "btn btn-warning btn-xs", onclick = "return DeleteConfirm()" })
+                            <td>@item.Coordinate</td>
+                            <td>@item.LGA.State.Name</td>
+                            <td>@item.LGA.Name</td>
+                            <td>@item.StageOfCompletion</td>
+                            <td>
+                                @if (item.HasDefect == true)
+                                {
+                                    <span class="label label-success">Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger">No</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.InspectionStatus == "Not Submitted")
+                                {
+                                <span class="label label-danger">draft</span>
+                                }
+                                else
+                                {
+                                <span class="label label-success">@item.InspectionStatus</span>
+                                }
 
-                                    </td>
-                                </tr>
+
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <span class="btn dropdown-toggle btn-xs btn-success" type="button" id="dropdownMenu1" data-toggle="dropdown">Action List <i class="icon-angle-down"></i></span>
+                                    <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu1">
+                                        @if (item.InspectionStatus == "Submitted")
+                                        {
+                                            <li role="presentation">
+                                                @Html.ActionLink("Details", "Detail", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li role="presentation">
+                                                @Html.ActionLink("Details", "Detail", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                            <li role="presentation">
+                                                @Html.ActionLink("Upload Photo", "UploadPhoto", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                            <li role="presentation">
+                                                @Html.ActionLink("Edit Report", "EditInspection", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                        }
+
+
+
+
+
+
+
+                                    </ul>
+                                </div>
+
+                            </td>
+
+
+                        </tr>
                             }
                         }
                         else
@@ -218,9 +262,13 @@
                     </tbody>
                 </table>
             </div>
+
+
         </div>
     </div>
 </div>
+
+
 @section Scripts{
     @Scripts.Render("~/Content/Backend/plugins/datatables/jquery.dataTables.min.js")
     @Scripts.Render("~/Content/Backend/plugins/datatables/tabletools/TableTools.min.js")
@@ -230,7 +278,7 @@
         "use strict";
 
         function DeleteConfirm() {
-            if (confirm("Are you sure want to remove this Payment?"))
+            if (confirm("Are you sure want to remove this photo?"))
                 return true;
             else
                 return false;
