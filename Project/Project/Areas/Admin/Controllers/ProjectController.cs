@@ -39,7 +39,7 @@ namespace Project.Areas.Admin.Controllers
             }
             var getuser = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
             model.user = getuser;
-            var getdraftProject = db.ProjectApplication.ToList();          
+            var getdraftProject = db.ProjectApplication.Where(x=>x.WorkFlowId==Id).ToList();          
             model.projectList = getdraftProject;
             model.workflow = getworkflow;
             return View(model);
@@ -196,7 +196,7 @@ namespace Project.Areas.Admin.Controllers
                     TempData["messageType"] = "danger";
                     return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
                 }
-                List<int> list = (from x in getproject.Payment select x.Id).ToList<int>();
+                List<int> list = (from x in getproject.Payment select x.PaymentTypeId).ToList<int>();
                 model.AvailablePayment = (from d in this.db.PaymentType where !list.Contains(d.Id) &&  d.IsDeleted == false select d).ToList<PaymentType>();
                 model.ProjectPaymentList = getproject.Payment.ToList<Payment>();
                 model.project = getproject;
