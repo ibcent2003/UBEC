@@ -14,6 +14,9 @@ using System.Web.Security;
 using System.Web.Routing;
 using Project.DAL;
 using Roles = System.Web.Security.Roles;
+using System.Web;
+using System.IO;
+using System.Configuration;
 
 namespace Project.ApiControllers
 {
@@ -190,6 +193,113 @@ namespace Project.ApiControllers
                 resp.Message = "Server Error";
             }
             return resp;
+        }
+
+        [HttpPost]
+        public ProjectResponse ReportProjectStatusMultipart()
+        {
+            var resp = new ProjectResponse();
+            var now = DateTime.Now;
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                var files = SaveFiles;
+                if (files == null) {
+                    resp.IsSuccessful = false;
+                    resp.Message = "Please Upload Images";
+                    return resp;
+                }
+               
+                var request = HttpContext.Current.Request.Params;
+                //checked for redundancy
+                var guidTId = Guid.Parse(request["TransactionId"]);//Guid.Parse(request.TransactionId);
+                var existRow = db.Inspection.FirstOrDefault(x => x.TransactionId == guidTId);
+                if (existRow != null)
+                {
+                    resp.IsSuccessful = true;
+                    resp.Message = "Records Has Been Added Already";
+                    return resp;
+                }
+                var entity = new Inspection();
+                entity.TransactionId = guidTId;
+                entity.ProjectId = int.Parse(request["ProjectId"]);
+                entity.Location = request["Location"];
+                entity.Coordinate = request["Coordinate"];
+                entity.LgaId = int.Parse(request["LGAId"]);
+                entity.StageOfCompletion = request["StageOfCompletion"];
+                entity.DescriptionOfCompletion = request["DescriptionOfCompletion"];
+                entity.ProjectQuality = request["ProjectQuality"];
+                entity.HasDefect = request["HasDefect"]=="Yes"?true:false;
+                entity.DescriptionOfDefect = request["DescriptionOfDefect"];
+                entity.InspectionStatus = request["Status"];
+                entity.InspectionDate = DateTime.Parse(request["InspectionDate"]);
+                entity.ModifiedBy = request["Modifiedby"];
+                entity.ModifiedDate = now;
+                foreach (var file in files)
+                {
+                    var f = file.Key.Split('.');
+                    var id = appSettings[f[0]];
+                    var doc = new DocumentInfo
+                    {
+                        DocumentTypeId = int.Parse(id),
+                        Name = f[0],
+                        Path = file.Value,
+                        IssuedDate = now,
+                        ModifiedBy = request["Modifiedby"],
+                        ModifiedDate = now
+                    };
+                    entity.DocumentInfo.Add(doc);
+                }
+
+                db.Inspection.AddObject(entity);
+                db.SaveChanges();
+                resp.IsSuccessful = true;
+                resp.Message = "Record Added Successful";
+            }
+            catch (Exception ex)
+            {
+                //TODO:Log Error
+                resp.IsSuccessful = false;
+                resp.Message = "Server Error";
+            }
+            return resp;
+        }
+
+        private List<KeyValuePair<string, string>> SaveFiles
+        {
+            get
+            {
+                List<KeyValuePair<string, string>> resp = new List<KeyValuePair<string, string>>();
+                var count = HttpContext.Current.Request.Files.Count;
+                if (count == 0)
+                    return null;
+
+                var files = HttpContext.Current.Request.Files;
+                
+                for (var i=0; i<files.Count;i++)
+                {
+                    var file = files[i];
+                    //var field = files[i];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fArr = file.FileName.Split('.');
+                        var fileName = Guid.NewGuid().ToString()+"."+ fArr[1];//Path.GetFileName(file.FileName);
+
+                        var defaultPath = Properties.Settings.Default.FullPhotoPath;
+                       //var path = Path.Combine("c:\\uploads\\");
+                        var dir = Path.GetDirectoryName(defaultPath);
+
+                        if (!Directory.Exists(dir))
+                            Directory.CreateDirectory(dir);
+                        var filepath = Path.Combine(dir, fileName);
+
+                        file.SaveAs(filepath);
+                       // var fileNameArr = fileName.Split('_');
+                        resp.Add(new KeyValuePair<string, string>(file.FileName, fileName));
+                    }
+                }
+                return resp;
+            }
         }
 
         [HttpGet]
