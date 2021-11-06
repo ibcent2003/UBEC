@@ -28,13 +28,17 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("PROModel", "FK_Project_Contractor", "Contractor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Contractor), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_DocumentType_DocumentCategory", "DocumentCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DocumentCategory), "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_DocumentInfo_DocumentType", "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DocumentType), "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), true)]
+[assembly: EdmRelationshipAttribute("PROModel", "FK_Inspection_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_LGA_State", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.State), "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.LGA), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_Project_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "MembershipUser", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "Memberships", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Memberships), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_Payment_PaymentType", "PaymentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.PaymentType), "Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Payment), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_Payment_Project", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Payment), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "UserProfile", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "Profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Profiles), true)]
+[assembly: EdmRelationshipAttribute("PROModel", "FK_Inspection_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_Project_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
+[assembly: EdmRelationshipAttribute("PROModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "ProjectApplication1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.ProjectApplication), true)]
+[assembly: EdmRelationshipAttribute("PROModel", "FK_ProjectApplication_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Users), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_UserDetail_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "UserDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.UserDetail), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_WorkFlowActions_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "WorkFlowActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkFlowActions), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "FK_WorkflowSteps_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "WorkflowSteps", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowSteps), true)]
@@ -44,10 +48,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("PROModel", "ProjectDocumentInfo", "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication))]
 [assembly: EdmRelationshipAttribute("PROModel", "UsersInRoles", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Roles), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Users))]
 [assembly: EdmRelationshipAttribute("PROModel", "WorkflowDocument", "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType), "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Workflow))]
-[assembly: EdmRelationshipAttribute("PROModel", "FK_Inspection_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
-[assembly: EdmRelationshipAttribute("PROModel", "FK_Inspection_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
-[assembly: EdmRelationshipAttribute("PROModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "ProjectApplication1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.ProjectApplication), true)]
-[assembly: EdmRelationshipAttribute("PROModel", "FK_ProjectApplication_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Users), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
 [assembly: EdmRelationshipAttribute("PROModel", "InspectionDocumentInfo", "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection))]
 
 #endregion
@@ -3770,6 +3770,28 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_Inspection_LGA", "Inspection")]
+        public EntityCollection<Inspection> Inspection
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("PROModel.FK_Inspection_LGA", "Inspection");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("PROModel.FK_Inspection_LGA", "Inspection", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_LGA_State", "State")]
         public State State
         {
@@ -3820,28 +3842,6 @@ namespace Project.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("PROModel.FK_Project_LGA", "ProjectApplication", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_Inspection_LGA", "Inspection")]
-        public EntityCollection<Inspection> Inspection
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("PROModel.FK_Inspection_LGA", "Inspection");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("PROModel.FK_Inspection_LGA", "Inspection", value);
                 }
             }
         }
@@ -5549,6 +5549,30 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> InspectionUserId
+        {
+            get
+            {
+                return _InspectionUserId;
+            }
+            set
+            {
+                OnInspectionUserIdChanging(value);
+                ReportPropertyChanging("InspectionUserId");
+                _InspectionUserId = StructuralObject.SetValidValue(value, "InspectionUserId");
+                ReportPropertyChanged("InspectionUserId");
+                OnInspectionUserIdChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _InspectionUserId;
+        partial void OnInspectionUserIdChanging(Nullable<global::System.Guid> value);
+        partial void OnInspectionUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String ModifiedBy
@@ -5617,30 +5641,6 @@ namespace Project.DAL
         private global::System.Boolean _IsDeleted;
         partial void OnIsDeletedChanging(global::System.Boolean value);
         partial void OnIsDeletedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Guid> InspectionUserId
-        {
-            get
-            {
-                return _InspectionUserId;
-            }
-            set
-            {
-                OnInspectionUserIdChanging(value);
-                ReportPropertyChanging("InspectionUserId");
-                _InspectionUserId = StructuralObject.SetValidValue(value, "InspectionUserId");
-                ReportPropertyChanged("InspectionUserId");
-                OnInspectionUserIdChanged();
-            }
-        }
-        private Nullable<global::System.Guid> _InspectionUserId;
-        partial void OnInspectionUserIdChanging(Nullable<global::System.Guid> value);
-        partial void OnInspectionUserIdChanged();
 
         #endregion
 
@@ -5750,6 +5750,28 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_Inspection_ProjectApplication", "Inspection")]
+        public EntityCollection<Inspection> Inspection
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("PROModel.FK_Inspection_ProjectApplication", "Inspection");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("PROModel.FK_Inspection_ProjectApplication", "Inspection", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_Project_Workflow", "Workflow")]
         public Workflow Workflow
         {
@@ -5778,50 +5800,6 @@ namespace Project.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("PROModel.FK_Project_Workflow", "Workflow", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PROModel", "ProjectDocumentInfo", "DocumentInfo")]
-        public EntityCollection<DocumentInfo> DocumentInfo
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("PROModel.ProjectDocumentInfo", "DocumentInfo");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("PROModel.ProjectDocumentInfo", "DocumentInfo", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_Inspection_ProjectApplication", "Inspection")]
-        public EntityCollection<Inspection> Inspection
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("PROModel.FK_Inspection_ProjectApplication", "Inspection");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("PROModel.FK_Inspection_ProjectApplication", "Inspection", value);
                 }
             }
         }
@@ -5936,6 +5914,28 @@ namespace Project.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("PROModel.FK_ProjectApplication_Users", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PROModel", "ProjectDocumentInfo", "DocumentInfo")]
+        public EntityCollection<DocumentInfo> DocumentInfo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("PROModel.ProjectDocumentInfo", "DocumentInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("PROModel.ProjectDocumentInfo", "DocumentInfo", value);
                 }
             }
         }
@@ -7269,6 +7269,28 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_ProjectApplication_Users", "ProjectApplication")]
+        public EntityCollection<ProjectApplication> ProjectApplication
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("PROModel.FK_ProjectApplication_Users", "ProjectApplication");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("PROModel.FK_ProjectApplication_Users", "ProjectApplication", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_UserDetail_Users", "UserDetail")]
         public EntityCollection<UserDetail> UserDetail
         {
@@ -7303,28 +7325,6 @@ namespace Project.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Roles>("PROModel.UsersInRoles", "Roles", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PROModel", "FK_ProjectApplication_Users", "ProjectApplication")]
-        public EntityCollection<ProjectApplication> ProjectApplication
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("PROModel.FK_ProjectApplication_Users", "ProjectApplication");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("PROModel.FK_ProjectApplication_Users", "ProjectApplication", value);
                 }
             }
         }

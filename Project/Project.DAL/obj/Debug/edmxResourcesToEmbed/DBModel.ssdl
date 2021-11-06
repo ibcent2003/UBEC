@@ -203,6 +203,7 @@
     <Property Name="ProjectQuality" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="HasDefect" Type="bit" Nullable="false" />
     <Property Name="DescriptionOfDefect" Type="varchar(max)" />
+    <Property Name="InspectionUserId" Type="uniqueidentifier" />
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
@@ -346,6 +347,34 @@
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
   </EntityType>
+  <EntityType Name="Inspection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Coordinate" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="LgaId" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="StageOfCompletion" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DescriptionOfCompletion" Type="varchar(max)" Nullable="false" />
+    <Property Name="ProjectQuality" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HasDefect" Type="bit" Nullable="false" />
+    <Property Name="DescriptionOfDefect" Type="varchar(max)" />
+    <Property Name="InspectionDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="InspectionStatus" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InspectionDocumentInfo">
+    <Key>
+      <PropertyRef Name="InspectionId" />
+      <PropertyRef Name="DocumentInfoId" />
+    </Key>
+    <Property Name="InspectionId" Type="int" Nullable="false" />
+    <Property Name="DocumentInfoId" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_Alert_WorkFlow">
     <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
     <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
@@ -415,6 +444,54 @@
       </Principal>
       <Dependent Role="DocumentTypeFormat">
         <PropertyRef Name="DocumentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inspection_LGA">
+    <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LGA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="LgaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inspection_ProjectApplication">
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectApplication">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InspectionDocumentInfo_DocumentInfo">
+    <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="1" />
+    <End Role="InspectionDocumentInfo" Type="Self.InspectionDocumentInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InspectionDocumentInfo">
+        <PropertyRef Name="DocumentInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InspectionDocumentInfo_Inspection">
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+    <End Role="InspectionDocumentInfo" Type="Self.InspectionDocumentInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inspection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InspectionDocumentInfo">
+        <PropertyRef Name="InspectionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -490,6 +567,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProjectApplication_ProjectApplication">
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
+    <End Role="ProjectApplication1" Type="Self.ProjectApplication" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectApplication">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectApplication1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectApplication_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProjectApplication">
+        <PropertyRef Name="InspectionUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProjectDocumentInfo_DocumentInfo">
     <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="1" />
     <End Role="ProjectDocumentInfo" Type="Self.ProjectDocumentInfo" Multiplicity="*" />
@@ -502,7 +603,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProjectDocumentInfo_Project">
+  <Association Name="FK_ProjectDocumentInfo_ProjectApplication">
     <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
     <End Role="ProjectDocumentInfo" Type="Self.ProjectDocumentInfo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -725,6 +826,8 @@
     <EntitySet Name="WorkflowDocument" EntityType="Self.WorkflowDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkflowStepActions" EntityType="Self.WorkflowStepActions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkflowSteps" EntityType="Self.WorkflowSteps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="InspectionDocumentInfo" EntityType="Self.InspectionDocumentInfo" Schema="ubecdb" store:Type="Tables" />
     <AssociationSet Name="FK_Alert_WorkFlow" Association="Self.FK_Alert_WorkFlow">
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="Alert" EntitySet="Alert" />
@@ -748,6 +851,22 @@
     <AssociationSet Name="FK_DocumentTypeFormat_DocumentType" Association="Self.FK_DocumentTypeFormat_DocumentType">
       <End Role="DocumentType" EntitySet="DocumentType" />
       <End Role="DocumentTypeFormat" EntitySet="DocumentTypeFormat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inspection_LGA" Association="Self.FK_Inspection_LGA">
+      <End Role="LGA" EntitySet="LGA" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inspection_ProjectApplication" Association="Self.FK_Inspection_ProjectApplication">
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InspectionDocumentInfo_DocumentInfo" Association="Self.FK_InspectionDocumentInfo_DocumentInfo">
+      <End Role="DocumentInfo" EntitySet="DocumentInfo" />
+      <End Role="InspectionDocumentInfo" EntitySet="InspectionDocumentInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InspectionDocumentInfo_Inspection" Association="Self.FK_InspectionDocumentInfo_Inspection">
+      <End Role="Inspection" EntitySet="Inspection" />
+      <End Role="InspectionDocumentInfo" EntitySet="InspectionDocumentInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_LGA_State" Association="Self.FK_LGA_State">
       <End Role="State" EntitySet="State" />
@@ -773,11 +892,19 @@
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
+    <AssociationSet Name="FK_ProjectApplication_ProjectApplication" Association="Self.FK_ProjectApplication_ProjectApplication">
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+      <End Role="ProjectApplication1" EntitySet="ProjectApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectApplication_Users" Association="Self.FK_ProjectApplication_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProjectDocumentInfo_DocumentInfo" Association="Self.FK_ProjectDocumentInfo_DocumentInfo">
       <End Role="DocumentInfo" EntitySet="DocumentInfo" />
       <End Role="ProjectDocumentInfo" EntitySet="ProjectDocumentInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProjectDocumentInfo_Project" Association="Self.FK_ProjectDocumentInfo_Project">
+    <AssociationSet Name="FK_ProjectDocumentInfo_ProjectApplication" Association="Self.FK_ProjectDocumentInfo_ProjectApplication">
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="ProjectDocumentInfo" EntitySet="ProjectDocumentInfo" />
     </AssociationSet>

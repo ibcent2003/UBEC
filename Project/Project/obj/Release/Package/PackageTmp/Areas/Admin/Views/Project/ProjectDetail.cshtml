@@ -1,0 +1,236 @@
+﻿@model Project.Areas.Admin.Models.ProjectViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = Model.workflow.Name + " - Project Details";
+    ViewBag.IsGreetings = "true";
+
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li><i class="icon-home"></i><a href="@Url.Action("Index", "Index", new { area = "Organisations" })">Dashboard</a> </li>
+            <li class="current"><a title="" href="javascript: return void(0)">Project Details</a> </li>
+        </ul>
+    </div>
+}<style>
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("ProjectDetail", "Project", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(x => x.projectForm.workflowId)
+                @Html.AntiForgeryToken()
+                <div class="col-md-12">
+                    <div class="widget">
+                       
+                        <div class="widget-content">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Serial No:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.SerialNo, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.SerialNo, null, new { @style = "color:red" })
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Description:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.Description, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.Description, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Location:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.Location, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.Location, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Coordinate:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.Coordinate, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.Coordinate, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">State:</label>
+                                        <div class="col-md-8">
+
+                                            @Html.DropDownListFor(m => m.projectForm.StateId, new SelectList(Model.StateList, "Value", "Text"), "Please Select a State", new { @class = "form-control", onChange = "GetAllLGA(this)" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.StateId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">LGA:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.LGAId, new SelectList(Model.LgaList, "Value", "Text"), "Please Select a LGA", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.LGAId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Contractor:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.ContractorId, new SelectList(Model.ContractorList, "Value", "Text"), "Please Select a Contractor", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.ContractorId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Contract Sum:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.ContractSum, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.ContractSum, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Stage Of Completion:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.StageOfCompletion,
+         new List<SelectListItem> {
+              new SelectListItem { Value = "5%" , Text = "5%" },
+              new SelectListItem { Value = "10%" , Text = "10%" },
+              new SelectListItem { Value = "15%" , Text = "15%" },
+              new SelectListItem { Value = "20%" , Text = "20%" },
+              new SelectListItem { Value = "25%" , Text = "25%" },
+              new SelectListItem { Value = "30%" , Text = "30%" },
+              new SelectListItem { Value = "35%" , Text = "35%" },
+              new SelectListItem { Value = "40%" , Text = "40%" },
+              new SelectListItem { Value = "45%" , Text = "45%" },
+              new SelectListItem { Value = "50%" , Text = "50%" },
+
+              new SelectListItem { Value = "55%" , Text = "55%" },
+              new SelectListItem { Value = "60%" , Text = "60%" },
+              new SelectListItem { Value = "65%" , Text = "65%" },
+              new SelectListItem { Value = "70%" , Text = "70%" },
+              new SelectListItem { Value = "75%" , Text = "75%" },
+              new SelectListItem { Value = "80%" , Text = "80%" },
+              new SelectListItem { Value = "85%" , Text = "85%" },
+              new SelectListItem { Value = "90%" , Text = "90%" },
+              new SelectListItem { Value = "95%" , Text = "95%" },
+              new SelectListItem { Value = "100%" , Text = "100%" },
+           },
+         new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.StageOfCompletion, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Description Of Completion:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextAreaFor(m => m.projectForm.DescriptionOfCompletion, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.DescriptionOfCompletion, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Quality of Project:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.ProjectQuality,
+           new List<SelectListItem> {
+                new SelectListItem { Value = "Satisfactory" , Text = "Satisfactory" },
+                new SelectListItem { Value = "Unsatisfactory" , Text = "Unsatisfactory" },
+             },
+           new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Has Defect?:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.HasDefect,
+         new List<SelectListItem> {
+              new SelectListItem { Value = "Yes" , Text = "Yes" },
+              new SelectListItem { Value = "No" , Text = "No" },
+           },
+         new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Description Of Defect:</label>
+                                <div class="col-md-10">                                  
+                                    @Html.TextAreaFor(m => m.projectForm.DescriptionOfDefect, new { @class = "form-control", rows = "3", cols = "5" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-vertical no-margin">
+
+                    <div class="form-actions">
+                        <a href="@Url.Action("Index", "Project", new {Id=Model.projectForm.workflowId, area="Admin"})" class="btn btn-success btn-xs"><< Back to List </a>
+                        <input type="submit" value="Submit" class="btn btn-primary btn-xs pull-right"/>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    function DisableBackButton() {
+        window.history.forward()
+
+    }
+    DisableBackButton();
+    window.onload = DisableBackButton;
+    window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+    window.onunload = function () { void (0) }
+</script>
+
+<script type="text/javascript">
+        "use strict";
+        function getLga(e) {
+            var stateId = $(e).val();
+
+            var currentRequest = null;
+            var currentRequest = $.ajax({
+                url: '@Url.Action("GetLga", "Project")',
+                dataType: 'json',
+                type: 'POST',
+                data: { StateId: stateId },
+                beforeSend: function () {
+                    if (currentRequest != null) {
+                        currentRequest.abort();
+                    }
+                },
+                success: function (msg) {
+                    $("#projectForm_LGAId").html("");
+                    $.each(msg, function (index, element) {
+                        $("#projectForm_LGAId").append('<option  value="' + element.Value + '">' + element.Text + '</option>');
+                    });
+                },
+                error: function (errmsg) { }
+            });
+        }
+
+        function GetAllLGA(e) {
+            getLga(e);
+
+        }
+
+
+
+</script>

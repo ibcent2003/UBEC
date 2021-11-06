@@ -10,19 +10,34 @@ namespace Project.Areas.Admin.Models
 {
     public class ProjectViewModel
     {
+        public System.Web.Mvc.SelectList InspectionUser { get; set; }
+        public string username { get; set; }
+        public Users user { get; set; }
+        public bool HasAssigned { get; set; }
+        public List<UserDetail> userDetail { get; set; }
+        public List<Payment> paymentlist { get; set; }
         public List<ProjectApplication> projectList { get; set; }
         public Workflow workflow { get; set; }
+        public Inspection inspection { get; set; }
+        public bool AllPhotoUploaded { get; set; }
         public ProjectApplication project { get; set; }
         public List<PaymentType> AvailablePayment { get; set; }
         public List<Payment> ProjectPaymentList { get; set; }
         public List<IntegerSelectListItem> ContractorList { get; set; }
         public List<IntegerSelectListItem> StateList { get; set; }
-       // public int StateId { get; set; }
- 
+        public int StateId { get; set; }
         public List<IntegerSelectListItem> LgaList { get; set; }
         public List<IntegerSelectListItem> PaymentTypeList { get; set; }
+        public List<IntegerSelectListItem> DocumentTypeList { get; set; }
         public ProjectDetailForm projectForm { get; set; }
         public ProjectPaymentForm  projectPaymentForm { get; set; }
+
+        public List<DocumentType> AvailableDocument { get; set; }
+        public List<DocumentInfo> DocumentInfoList { get; set; }
+        public List<Inspection> InspectionList { get; set; }
+        public string FullPhotoPath { get; set; }
+        public DocumentForm documentForm { get; set; }
+        public InspectionForm inspectionForm { get; set; }
     }
 
     public class ProjectDetailForm
@@ -76,5 +91,42 @@ namespace Project.Areas.Admin.Models
         [Required(ErrorMessage = "Please select payment type")]
         public decimal ProjectSum { get; set; }
 
+    }
+
+    public class DocumentForm
+    {
+        public int Id { get; set; }
+        
+        [Required]       
+        public HttpPostedFileBase Photo { get; set; }
+       
+        [Required(ErrorMessage = "Please select Photo type")]
+        public int DocumentTypeId { get; set; }
+
+    }
+
+    public class InspectionForm
+    {
+        public int Id { get; set; }
+       
+        [Required(ErrorMessage = "Please enter the location")]
+        public string Location { get; set; }
+        [Required(ErrorMessage = "Please enter the coordinate")]
+        public string Coordinate { get; set; }
+    
+       
+        [Required(ErrorMessage = "Please select the local government")]
+        public int LGAId { get; set; }       
+        [Required(ErrorMessage = "Please enter the State Of Completion")]
+        public string StageOfCompletion { get; set; }
+        
+        public string DescriptionOfCompletion { get; set; }
+        
+        public string ProjectQuality { get; set; }
+       
+        public bool HasDefect { get; set; }
+        public string DescriptionOfDefect { get; set; }
+        public  int ProjectId { get; set; }
+ 
     }
 }

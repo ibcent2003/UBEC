@@ -1005,6 +1005,7 @@
           <EntitySet Name="WorkFlowActions" EntityType="PROModel.WorkFlowActions" />
           <EntitySet Name="WorkflowStepActions" EntityType="PROModel.WorkflowStepActions" />
           <EntitySet Name="WorkflowSteps" EntityType="PROModel.WorkflowSteps" />
+          <EntitySet Name="Inspection" EntityType="PROModel.Inspection" />
           <AssociationSet Name="FK_Alert_WorkFlow" Association="PROModel.FK_Alert_WorkFlow">
             <End Role="Workflow" EntitySet="Workflow" />
             <End Role="Alert" EntitySet="Alert" />
@@ -1041,6 +1042,10 @@
             <End Role="DocumentType" EntitySet="DocumentType" />
             <End Role="DocumentInfo" EntitySet="DocumentInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Inspection_LGA" Association="PROModel.FK_Inspection_LGA">
+            <End Role="LGA" EntitySet="LGA" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
           <AssociationSet Name="FK_LGA_State" Association="PROModel.FK_LGA_State">
             <End Role="State" EntitySet="State" />
             <End Role="LGA" EntitySet="LGA" />
@@ -1065,8 +1070,20 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Profiles" EntitySet="Profiles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Inspection_ProjectApplication" Association="PROModel.FK_Inspection_ProjectApplication">
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
           <AssociationSet Name="FK_Project_Workflow" Association="PROModel.FK_Project_Workflow">
             <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectApplication_ProjectApplication" Association="PROModel.FK_ProjectApplication_ProjectApplication">
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+            <End Role="ProjectApplication1" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectApplication_Users" Association="PROModel.FK_ProjectApplication_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="FK_UserDetail_Users" Association="PROModel.FK_UserDetail_Users">
@@ -1104,23 +1121,6 @@
           <AssociationSet Name="WorkflowDocument" Association="PROModel.WorkflowDocument">
             <End Role="DocumentType" EntitySet="DocumentType" />
             <End Role="Workflow" EntitySet="Workflow" />
-          </AssociationSet>
-          <EntitySet Name="Inspection" EntityType="PROModel.Inspection" />
-          <AssociationSet Name="FK_Inspection_LGA" Association="PROModel.FK_Inspection_LGA">
-            <End Role="LGA" EntitySet="LGA" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_ProjectApplication" Association="PROModel.FK_Inspection_ProjectApplication">
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectApplication_ProjectApplication" Association="PROModel.FK_ProjectApplication_ProjectApplication">
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-            <End Role="ProjectApplication1" EntitySet="ProjectApplication" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectApplication_Users" Association="PROModel.FK_ProjectApplication_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
           </AssociationSet>
           <AssociationSet Name="InspectionDocumentInfo" Association="PROModel.InspectionDocumentInfo">
             <End Role="DocumentInfo" EntitySet="DocumentInfo" />
@@ -1263,9 +1263,9 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="PROModel.FK_Inspection_LGA" FromRole="LGA" ToRole="Inspection" />
           <NavigationProperty Name="State" Relationship="PROModel.FK_LGA_State" FromRole="LGA" ToRole="State" />
           <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Project_LGA" FromRole="LGA" ToRole="ProjectApplication" />
-          <NavigationProperty Name="Inspection" Relationship="PROModel.FK_Inspection_LGA" FromRole="LGA" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Memberships">
           <Key>
@@ -1348,19 +1348,19 @@
           <Property Name="ProjectQuality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="HasDefect" Type="Boolean" Nullable="false" />
           <Property Name="DescriptionOfDefect" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InspectionUserId" Type="Guid" />
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Contractor" Relationship="PROModel.FK_Project_Contractor" FromRole="ProjectApplication" ToRole="Contractor" />
           <NavigationProperty Name="LGA" Relationship="PROModel.FK_Project_LGA" FromRole="ProjectApplication" ToRole="LGA" />
           <NavigationProperty Name="Payment" Relationship="PROModel.FK_Payment_Project" FromRole="ProjectApplication" ToRole="Payment" />
-          <NavigationProperty Name="Workflow" Relationship="PROModel.FK_Project_Workflow" FromRole="ProjectApplication" ToRole="Workflow" />
-          <NavigationProperty Name="DocumentInfo" Relationship="PROModel.ProjectDocumentInfo" FromRole="ProjectApplication" ToRole="DocumentInfo" />
-          <Property Name="InspectionUserId" Type="Guid" />
           <NavigationProperty Name="Inspection" Relationship="PROModel.FK_Inspection_ProjectApplication" FromRole="ProjectApplication" ToRole="Inspection" />
+          <NavigationProperty Name="Workflow" Relationship="PROModel.FK_Project_Workflow" FromRole="ProjectApplication" ToRole="Workflow" />
           <NavigationProperty Name="ProjectApplication1" Relationship="PROModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication" ToRole="ProjectApplication1" />
           <NavigationProperty Name="ProjectApplication2" Relationship="PROModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication1" ToRole="ProjectApplication" />
           <NavigationProperty Name="Users" Relationship="PROModel.FK_ProjectApplication_Users" FromRole="ProjectApplication" ToRole="Users" />
+          <NavigationProperty Name="DocumentInfo" Relationship="PROModel.ProjectDocumentInfo" FromRole="ProjectApplication" ToRole="DocumentInfo" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -1434,9 +1434,9 @@
           <NavigationProperty Name="Applications" Relationship="PROModel.UserApplication" FromRole="Users" ToRole="Applications" />
           <NavigationProperty Name="Memberships" Relationship="PROModel.MembershipUser" FromRole="Users" ToRole="Memberships" />
           <NavigationProperty Name="Profiles" Relationship="PROModel.UserProfile" FromRole="Users" ToRole="Profiles" />
+          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_ProjectApplication_Users" FromRole="Users" ToRole="ProjectApplication" />
           <NavigationProperty Name="UserDetail" Relationship="PROModel.FK_UserDetail_Users" FromRole="Users" ToRole="UserDetail" />
           <NavigationProperty Name="Roles" Relationship="PROModel.UsersInRoles" FromRole="Users" ToRole="Roles" />
-          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_ProjectApplication_Users" FromRole="Users" ToRole="ProjectApplication" />
         </EntityType>
         <EntityType Name="Workflow">
           <Key>
@@ -1498,6 +1498,29 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Workflow" Relationship="PROModel.FK_WorkflowSteps_Workflow" FromRole="WorkflowSteps" ToRole="Workflow" />
           <NavigationProperty Name="WorkflowStepActions" Relationship="PROModel.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowSteps" ToRole="WorkflowStepActions" />
+        </EntityType>
+        <EntityType Name="Inspection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionId" Type="Guid" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Coordinate" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LgaId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="StageOfCompletion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfCompletion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectQuality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HasDefect" Type="Boolean" Nullable="false" />
+          <Property Name="DescriptionOfDefect" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InspectionDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="InspectionStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LGA" Relationship="PROModel.FK_Inspection_LGA" FromRole="Inspection" ToRole="LGA" />
+          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Inspection_ProjectApplication" FromRole="Inspection" ToRole="ProjectApplication" />
+          <NavigationProperty Name="DocumentInfo" Relationship="PROModel.InspectionDocumentInfo" FromRole="Inspection" ToRole="DocumentInfo" />
         </EntityType>
         <Association Name="FK_Alert_WorkFlow">
           <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="1" />
@@ -1607,6 +1630,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Inspection_LGA">
+          <End Type="PROModel.LGA" Role="LGA" Multiplicity="1" />
+          <End Type="PROModel.Inspection" Role="Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LGA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="LgaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LGA_State">
           <End Type="PROModel.State" Role="State" Multiplicity="1" />
           <End Type="PROModel.LGA" Role="LGA" Multiplicity="*" />
@@ -1679,6 +1714,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Inspection_ProjectApplication">
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
+          <End Type="PROModel.Inspection" Role="Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Project_Workflow">
           <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="1" />
           <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
@@ -1688,6 +1735,30 @@
             </Principal>
             <Dependent Role="ProjectApplication">
               <PropertyRef Name="WorkFlowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectApplication_ProjectApplication">
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectApplication1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectApplication_Users">
+          <End Type="PROModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectApplication">
+              <PropertyRef Name="InspectionUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1766,77 +1837,6 @@
         <Association Name="WorkflowDocument">
           <End Type="PROModel.DocumentType" Role="DocumentType" Multiplicity="*" />
           <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Inspection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransactionId" Type="Guid" Nullable="false" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Coordinate" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="LgaId" Type="Int32" Nullable="false" />
-          <Property Name="ProjectId" Type="Int32" Nullable="false" />
-          <Property Name="StageOfCompletion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DescriptionOfCompletion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ProjectQuality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="HasDefect" Type="Boolean" Nullable="false" />
-          <Property Name="DescriptionOfDefect" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="InspectionDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="InspectionStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="LGA" Relationship="PROModel.FK_Inspection_LGA" FromRole="Inspection" ToRole="LGA" />
-          <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Inspection_ProjectApplication" FromRole="Inspection" ToRole="ProjectApplication" />
-          <NavigationProperty Name="DocumentInfo" Relationship="PROModel.InspectionDocumentInfo" FromRole="Inspection" ToRole="DocumentInfo" />
-        </EntityType>
-        <Association Name="FK_Inspection_LGA">
-          <End Type="PROModel.LGA" Role="LGA" Multiplicity="1" />
-          <End Type="PROModel.Inspection" Role="Inspection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LGA">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Inspection">
-              <PropertyRef Name="LgaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inspection_ProjectApplication">
-          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-          <End Type="PROModel.Inspection" Role="Inspection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProjectApplication">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Inspection">
-              <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProjectApplication_ProjectApplication">
-          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-          <End Type="PROModel.ProjectApplication" Role="ProjectApplication1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ProjectApplication">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProjectApplication1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProjectApplication_Users">
-          <End Type="PROModel.Users" Role="Users" Multiplicity="0..1" />
-          <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="ProjectApplication">
-              <PropertyRef Name="InspectionUserId" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <Association Name="InspectionDocumentInfo">
           <End Type="PROModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
@@ -2041,10 +2041,10 @@
           <EntitySetMapping Name="ProjectApplication">
             <EntityTypeMapping TypeName="PROModel.ProjectApplication">
               <MappingFragment StoreEntitySet="ProjectApplication">
-                <ScalarProperty Name="InspectionUserId" ColumnName="InspectionUserId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="InspectionUserId" ColumnName="InspectionUserId" />
                 <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
                 <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
                 <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
@@ -2188,6 +2188,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Inspection">
+            <EntityTypeMapping TypeName="PROModel.Inspection">
+              <MappingFragment StoreEntitySet="Inspection">
+                <ScalarProperty Name="InspectionStatus" ColumnName="InspectionStatus" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
+                <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
+                <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
+                <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
+                <ScalarProperty Name="DescriptionOfCompletion" ColumnName="DescriptionOfCompletion" />
+                <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="LgaId" ColumnName="LgaId" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="DocumentTypeFormat" TypeName="PROModel.DocumentTypeFormat" StoreEntitySet="DocumentTypeFormat">
             <EndProperty Name="DocumentType">
               <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
@@ -2220,27 +2241,6 @@
               <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Inspection">
-            <EntityTypeMapping TypeName="PROModel.Inspection">
-              <MappingFragment StoreEntitySet="Inspection">
-                <ScalarProperty Name="InspectionStatus" ColumnName="InspectionStatus" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
-                <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
-                <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
-                <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
-                <ScalarProperty Name="DescriptionOfCompletion" ColumnName="DescriptionOfCompletion" />
-                <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="LgaId" ColumnName="LgaId" />
-                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="InspectionDocumentInfo" TypeName="PROModel.InspectionDocumentInfo" StoreEntitySet="InspectionDocumentInfo">
             <EndProperty Name="Inspection">
               <ScalarProperty Name="Id" ColumnName="InspectionId" />

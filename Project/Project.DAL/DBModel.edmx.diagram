@@ -5,32 +5,33 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c78484f9840e4d6598415a10416c8607" Name="Diagram1">
-        <EntityTypeShape EntityType="PROModel.Alert" Width="1.5" PointX="7.5" PointY="8" />
-        <EntityTypeShape EntityType="PROModel.AlertNotification" Width="1.5" PointX="15" PointY="2.125" />
-        <EntityTypeShape EntityType="PROModel.AlertType" Width="1.5" PointX="12.75" PointY="3" />
-        <EntityTypeShape EntityType="PROModel.Applications" Width="1.5" PointX="12.75" PointY="17.25" />
-        <EntityTypeShape EntityType="PROModel.Contractor" Width="1.5" PointX="8.25" PointY="4.875" />
-        <EntityTypeShape EntityType="PROModel.DataGenerator" Width="1.5" PointX="0.75" PointY="2" />
-        <EntityTypeShape EntityType="PROModel.DocumentCategory" Width="1.5" PointX="0.75" PointY="10.25" />
-        <EntityTypeShape EntityType="PROModel.DocumentFormat" Width="1.5" PointX="0.75" PointY="6.125" />
-        <EntityTypeShape EntityType="PROModel.DocumentInfo" Width="1.5" PointX="5.25" PointY="4.125" />
-        <EntityTypeShape EntityType="PROModel.DocumentType" Width="1.5" PointX="3" PointY="9.875" />
-        <EntityTypeShape EntityType="PROModel.LGA" Width="1.5" PointX="8.25" PointY="0.75" />
-        <EntityTypeShape EntityType="PROModel.Memberships" Width="1.5" PointX="19.5" PointY="15.75" />
-        <EntityTypeShape EntityType="PROModel.Payment" Width="1.5" PointX="12.75" PointY="8.25" />
-        <EntityTypeShape EntityType="PROModel.PaymentType" Width="1.5" PointX="10.5" PointY="3.5" />
-        <EntityTypeShape EntityType="PROModel.Profiles" Width="1.5" PointX="19.5" PointY="12.5" />
-        <EntityTypeShape EntityType="PROModel.ProjectApplication" Width="1.5" PointX="10.5" PointY="6.75" />
-        <EntityTypeShape EntityType="PROModel.Resource" Width="1.5" PointX="0.75" PointY="14" />
-        <EntityTypeShape EntityType="PROModel.ResourcesInRole" Width="1.5" PointX="2.75" PointY="2" />
-        <EntityTypeShape EntityType="PROModel.Roles" Width="1.5" PointX="15" PointY="17.25" />
-        <EntityTypeShape EntityType="PROModel.State" Width="1.5" PointX="6" PointY="1" />
-        <EntityTypeShape EntityType="PROModel.UserDetail" Width="1.5" PointX="19.5" PointY="22.375" />
-        <EntityTypeShape EntityType="PROModel.Users" Width="1.5" PointX="17.25" PointY="16.875" />
-        <EntityTypeShape EntityType="PROModel.Workflow" Width="1.5" PointX="5.25" PointY="11.5" />
-        <EntityTypeShape EntityType="PROModel.WorkFlowActions" Width="1.5" PointX="7.5" PointY="15.75" />
-        <EntityTypeShape EntityType="PROModel.WorkflowStepActions" Width="1.5" PointX="9.75" PointY="13.875" />
-        <EntityTypeShape EntityType="PROModel.WorkflowSteps" Width="1.5" PointX="7.5" PointY="12.125" />
+        <EntityTypeShape EntityType="PROModel.Alert" Width="1.5" PointX="10.5" PointY="4" />
+        <EntityTypeShape EntityType="PROModel.AlertNotification" Width="1.5" PointX="15" PointY="1.25" />
+        <EntityTypeShape EntityType="PROModel.AlertType" Width="1.5" PointX="12.75" PointY="2" />
+        <EntityTypeShape EntityType="PROModel.Applications" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="PROModel.Contractor" Width="1.5" PointX="8.25" PointY="16.25" />
+        <EntityTypeShape EntityType="PROModel.DataGenerator" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="PROModel.DocumentCategory" Width="1.5" PointX="3.75" PointY="1.5" />
+        <EntityTypeShape EntityType="PROModel.DocumentFormat" Width="1.5" PointX="3.75" PointY="5.375" />
+        <EntityTypeShape EntityType="PROModel.DocumentInfo" Width="1.5" PointX="8.25" PointY="23.25" />
+        <EntityTypeShape EntityType="PROModel.DocumentType" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="PROModel.LGA" Width="1.5" PointX="8.25" PointY="27.25" />
+        <EntityTypeShape EntityType="PROModel.Memberships" Width="1.5" PointX="7.5" PointY="9.625" />
+        <EntityTypeShape EntityType="PROModel.Payment" Width="1.5" PointX="15.75" PointY="10.875" />
+        <EntityTypeShape EntityType="PROModel.PaymentType" Width="1.5" PointX="13.5" PointY="6" />
+        <EntityTypeShape EntityType="PROModel.Profiles" Width="1.5" PointX="7.5" PointY="6.25" />
+        <EntityTypeShape EntityType="PROModel.ProjectApplication" Width="1.5" PointX="10.5" PointY="8.875" />
+        <EntityTypeShape EntityType="PROModel.Resource" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="PROModel.ResourcesInRole" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="PROModel.Roles" Width="1.5" PointX="3" PointY="11" />
+        <EntityTypeShape EntityType="PROModel.State" Width="1.5" PointX="6" PointY="27.625" />
+        <EntityTypeShape EntityType="PROModel.UserDetail" Width="1.5" PointX="7.5" PointY="19.625" />
+        <EntityTypeShape EntityType="PROModel.Users" Width="1.5" PointX="5.25" PointY="10.625" />
+        <EntityTypeShape EntityType="PROModel.Workflow" Width="1.5" PointX="8.25" PointY="1.125" />
+        <EntityTypeShape EntityType="PROModel.WorkFlowActions" Width="1.5" PointX="10.5" PointY="17" />
+        <EntityTypeShape EntityType="PROModel.WorkflowStepActions" Width="1.5" PointX="12.75" PointY="15.375" />
+        <EntityTypeShape EntityType="PROModel.WorkflowSteps" Width="1.5" PointX="10.5" PointY="20.5" />
+        <EntityTypeShape EntityType="PROModel.Inspection" Width="1.5" PointX="12.75" PointY="9.875" />
         <AssociationConnector Association="PROModel.FK_Alert_WorkFlow" />
         <AssociationConnector Association="PROModel.FK_WorkflowStepActions_Alert" />
         <AssociationConnector Association="PROModel.FK_AlertNotification_AlertType" />
@@ -40,13 +41,17 @@
         <AssociationConnector Association="PROModel.FK_Project_Contractor" />
         <AssociationConnector Association="PROModel.FK_DocumentType_DocumentCategory" />
         <AssociationConnector Association="PROModel.FK_DocumentInfo_DocumentType" />
+        <AssociationConnector Association="PROModel.FK_Inspection_LGA" />
         <AssociationConnector Association="PROModel.FK_LGA_State" />
         <AssociationConnector Association="PROModel.FK_Project_LGA" />
         <AssociationConnector Association="PROModel.MembershipUser" />
         <AssociationConnector Association="PROModel.FK_Payment_PaymentType" />
         <AssociationConnector Association="PROModel.FK_Payment_Project" />
         <AssociationConnector Association="PROModel.UserProfile" />
+        <AssociationConnector Association="PROModel.FK_Inspection_ProjectApplication" />
         <AssociationConnector Association="PROModel.FK_Project_Workflow" />
+        <AssociationConnector Association="PROModel.FK_ProjectApplication_ProjectApplication" />
+        <AssociationConnector Association="PROModel.FK_ProjectApplication_Users" />
         <AssociationConnector Association="PROModel.FK_UserDetail_Users" />
         <AssociationConnector Association="PROModel.FK_WorkFlowActions_Workflow" />
         <AssociationConnector Association="PROModel.FK_WorkflowSteps_Workflow" />
@@ -56,11 +61,6 @@
         <AssociationConnector Association="PROModel.ProjectDocumentInfo" />
         <AssociationConnector Association="PROModel.UsersInRoles" />
         <AssociationConnector Association="PROModel.WorkflowDocument" />
-        <EntityTypeShape EntityType="PROModel.Inspection" Width="1.5" PointX="15.75" PointY="6.75" />
-        <AssociationConnector Association="PROModel.FK_Inspection_LGA" />
-        <AssociationConnector Association="PROModel.FK_Inspection_ProjectApplication" />
-        <AssociationConnector Association="PROModel.FK_ProjectApplication_ProjectApplication" />
-        <AssociationConnector Association="PROModel.FK_ProjectApplication_Users" />
         <AssociationConnector Association="PROModel.InspectionDocumentInfo" />
       </Diagram>
     </edmx:Diagrams>

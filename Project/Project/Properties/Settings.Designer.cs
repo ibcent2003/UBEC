@@ -80,10 +80,66 @@ namespace Project.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\SAKDocument\\Photo\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("G:\\HostingSpaces\\raukzdup\\ubec.fortressenterprise.com.ng\\wwwroot\\Content\\Backend\\" +
+            "Photo\\")]
         public string FullPhotoPath {
             get {
                 return ((string)(this["FullPhotoPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("G:\\HostingSpaces\\raukzdup\\ubec.fortressenterprise.com.ng\\wwwroot\\Content\\Backend\\" +
+            "Photo\\")]
+        public string ServerPath {
+            get {
+                return ((string)(this["ServerPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Inspection Officer")]
+        public string InspectionUser {
+            get {
+                return ((string)(this["InspectionUser"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\UBECDocument\\Photo\\")]
+        public string Keephere {
+            get {
+                return ((string)(this["Keephere"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int Construction {
+            get {
+                return ((int)(this["Construction"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int Renovation {
+            get {
+                return ((int)(this["Renovation"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int Supply {
+            get {
+                return ((int)(this["Supply"]));
             }
         }
     }

@@ -1,0 +1,61 @@
+﻿@model Project.Areas.Admin.Models.ProjectViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = Model.workflow.Name + " - Guidelines";
+    ViewBag.IsGreetings = "true";
+
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li><i class="icon-home"></i><a href="@Url.Action("Index", "Index", new { area = "Organisations" })">Dashboard</a> </li>
+            <li class="current"><a title="" href="javascript: return void(0)">Guidelines</a> </li>
+        </ul>
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tabbable tabbable-custom tabbable-full-width">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_overview" data-toggle="tab">Guidelines</a></li>
+                    <li><a href="#tab_confirmation" data-toggle="disable">Project Information</a></li>
+                    <li><a href="#tab_confirmation" data-toggle="disable">Payment</a></li>
+                    <li><a href="#tab_confirmation" data-toggle="disable">Photo</a></li>
+                    <li><a href="#tab_confirmation" data-toggle="disable">Cofirmation</a></li>
+                    <li><a href="#tab_feedback" data-toggle="disable">Feedback</a></li>
+                </ul>
+                <div class="tab-content row">
+                    <div class="tab-pane active" id="tab_overview">
+                        <form>
+                            @Html.Raw(@TempData["Guideline"])
+                            <div class="form-actions">
+                                @if (Model.project != null)
+                                {
+
+                                    @Html.ActionLink("Next", "StartApplication", new { Id = Model.workflow.Id, ProjectId = Model.project.Id }, new { @class = "btn btn-success pull-right" })
+                                }
+                                else
+                                {
+
+                                    @Html.ActionLink("Next", "ProjectDetail", new { Id = Model.workflow.Id}, new { @class = "btn btn-success pull-right" })
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    function DisableBackButton() {
+        window.history.forward()
+
+    }
+    DisableBackButton();
+    window.onload = DisableBackButton;
+    window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
+    window.onunload = function() { void (0) }
+</script>
