@@ -8,7 +8,7 @@
                     <ul class="menu-logo">
                         <li>
                             <a href="/">
-                                <img id="logo_img" src="~/Content/logo.png" alt="logo">
+                                <img id="logo_img" src="~/Content/logo1.png" alt="logo">
                             </a>
                         </li>
                     </ul>
@@ -42,24 +42,24 @@
 
                         </li>
                         <li>
-                            <a href="javascript:void(0)">About</a>
-
+                            <a href="@Url.Action("About", "Home", new {area=""})">About</a>
+                            
                         </li>
                         <li>
                             <a href="javascript:void(0)">Projects</a>
                             <!-- drop down multilevel  -->
                             <ul class="drop-down-multilevel">
-                                <li><a href="../qwilo-shop/shop-full-width.html">Construction</a></li>
-                                <li><a href="../qwilo-shop/cart.html">Renovation</a></li>
-                                <li><a href="../qwilo-shop/checkout.html">Supply</a></li>
+                                <li><a href="@Url.Action("ViewProject", "Home", new {Id=1, Area = ""})">Construction</a></li>
+                                <li><a href="@Url.Action("ViewProject", "Home", new {Id=2, Area = ""})">Renovation</a></li>
+                                <li><a href="@Url.Action("ViewProject", "Home", new {Id=3, Area = ""})">Supply</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="javascript:void(0)">News</a>
+                        <li>                            
+                            <a href="@Url.Action("MoreNews", "Home", new { Area = ""})">News</a>
 
                         </li>
                         <li>
-                            <a href="javascript:void(0)">Contact Us</a>
+                            <a href="@Url.Action("Contact", "Home", new { Area = ""})">Contact Us</a>
 
                         </li>
 

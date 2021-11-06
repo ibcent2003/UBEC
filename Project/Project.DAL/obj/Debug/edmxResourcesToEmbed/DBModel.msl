@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PROModelStoreContainer" CdmEntityContainer="PROEntities">
+  <EntityContainerMapping StorageEntityContainer="UBECModelStoreContainer" CdmEntityContainer="PROEntities">
     <EntitySetMapping Name="Alert">
-      <EntityTypeMapping TypeName="PROModel.Alert">
+      <EntityTypeMapping TypeName="UBECModel.Alert">
         <MappingFragment StoreEntitySet="Alert">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -18,7 +18,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AlertNotification">
-      <EntityTypeMapping TypeName="PROModel.AlertNotification">
+      <EntityTypeMapping TypeName="UBECModel.AlertNotification">
         <MappingFragment StoreEntitySet="AlertNotification">
           <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
           <ScalarProperty Name="ModifedBy" ColumnName="ModifedBy" />
@@ -34,7 +34,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AlertType">
-      <EntityTypeMapping TypeName="PROModel.AlertType">
+      <EntityTypeMapping TypeName="UBECModel.AlertType">
         <MappingFragment StoreEntitySet="AlertType">
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -42,7 +42,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Applications">
-      <EntityTypeMapping TypeName="PROModel.Applications">
+      <EntityTypeMapping TypeName="UBECModel.Applications">
         <MappingFragment StoreEntitySet="Applications">
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
@@ -51,7 +51,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Contractor">
-      <EntityTypeMapping TypeName="PROModel.Contractor">
+      <EntityTypeMapping TypeName="UBECModel.Contractor">
         <MappingFragment StoreEntitySet="Contractor">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -62,7 +62,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DataGenerator">
-      <EntityTypeMapping TypeName="PROModel.DataGenerator">
+      <EntityTypeMapping TypeName="UBECModel.DataGenerator">
         <MappingFragment StoreEntitySet="DataGenerator">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TableID" ColumnName="TableID" />
@@ -71,7 +71,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentCategory">
-      <EntityTypeMapping TypeName="PROModel.DocumentCategory">
+      <EntityTypeMapping TypeName="UBECModel.DocumentCategory">
         <MappingFragment StoreEntitySet="DocumentCategory">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -82,7 +82,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentFormat">
-      <EntityTypeMapping TypeName="PROModel.DocumentFormat">
+      <EntityTypeMapping TypeName="UBECModel.DocumentFormat">
         <MappingFragment StoreEntitySet="DocumentFormat">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -94,7 +94,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentInfo">
-      <EntityTypeMapping TypeName="PROModel.DocumentInfo">
+      <EntityTypeMapping TypeName="UBECModel.DocumentInfo">
         <MappingFragment StoreEntitySet="DocumentInfo">
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -109,7 +109,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentType">
-      <EntityTypeMapping TypeName="PROModel.DocumentType">
+      <EntityTypeMapping TypeName="UBECModel.DocumentType">
         <MappingFragment StoreEntitySet="DocumentType">
           <ScalarProperty Name="DocumentCategoryId" ColumnName="DocumentCategoryId" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
@@ -121,7 +121,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LGA">
-      <EntityTypeMapping TypeName="PROModel.LGA">
+      <EntityTypeMapping TypeName="UBECModel.LGA">
         <MappingFragment StoreEntitySet="LGA">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -133,7 +133,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Memberships">
-      <EntityTypeMapping TypeName="PROModel.Memberships">
+      <EntityTypeMapping TypeName="UBECModel.Memberships">
         <MappingFragment StoreEntitySet="Memberships">
           <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
@@ -157,8 +157,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="UBECModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="NoOfView" ColumnName="NoOfView" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="NewsContent" ColumnName="NewsContent" />
+          <ScalarProperty Name="NewsHeadline" ColumnName="NewsHeadline" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Payment">
-      <EntityTypeMapping TypeName="PROModel.Payment">
+      <EntityTypeMapping TypeName="UBECModel.Payment">
         <MappingFragment StoreEntitySet="Payment">
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -170,7 +187,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PaymentType">
-      <EntityTypeMapping TypeName="PROModel.PaymentType">
+      <EntityTypeMapping TypeName="UBECModel.PaymentType">
         <MappingFragment StoreEntitySet="PaymentType">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -181,7 +198,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Profiles">
-      <EntityTypeMapping TypeName="PROModel.Profiles">
+      <EntityTypeMapping TypeName="UBECModel.Profiles">
         <MappingFragment StoreEntitySet="Profiles">
           <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
           <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
@@ -192,8 +209,10 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProjectApplication">
-      <EntityTypeMapping TypeName="PROModel.ProjectApplication">
+      <EntityTypeMapping TypeName="UBECModel.ProjectApplication">
         <MappingFragment StoreEntitySet="ProjectApplication">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -218,7 +237,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Resource">
-      <EntityTypeMapping TypeName="PROModel.Resource">
+      <EntityTypeMapping TypeName="UBECModel.Resource">
         <MappingFragment StoreEntitySet="Resource">
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -235,7 +254,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ResourcesInRole">
-      <EntityTypeMapping TypeName="PROModel.ResourcesInRole">
+      <EntityTypeMapping TypeName="UBECModel.ResourcesInRole">
         <MappingFragment StoreEntitySet="ResourcesInRole">
           <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -243,7 +262,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Roles">
-      <EntityTypeMapping TypeName="PROModel.Roles">
+      <EntityTypeMapping TypeName="UBECModel.Roles">
         <MappingFragment StoreEntitySet="Roles">
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -253,7 +272,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="State">
-      <EntityTypeMapping TypeName="PROModel.State">
+      <EntityTypeMapping TypeName="UBECModel.State">
         <MappingFragment StoreEntitySet="State">
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -264,7 +283,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserDetail">
-      <EntityTypeMapping TypeName="PROModel.UserDetail">
+      <EntityTypeMapping TypeName="UBECModel.UserDetail">
         <MappingFragment StoreEntitySet="UserDetail">
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -278,7 +297,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="PROModel.Users">
+      <EntityTypeMapping TypeName="UBECModel.Users">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
           <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
@@ -289,7 +308,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Workflow">
-      <EntityTypeMapping TypeName="PROModel.Workflow">
+      <EntityTypeMapping TypeName="UBECModel.Workflow">
         <MappingFragment StoreEntitySet="Workflow">
           <ScalarProperty Name="feedback" ColumnName="feedback" />
           <ScalarProperty Name="guideline" ColumnName="guideline" />
@@ -303,7 +322,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WorkFlowActions">
-      <EntityTypeMapping TypeName="PROModel.WorkFlowActions">
+      <EntityTypeMapping TypeName="UBECModel.WorkFlowActions">
         <MappingFragment StoreEntitySet="WorkFlowActions">
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -316,7 +335,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WorkflowStepActions">
-      <EntityTypeMapping TypeName="PROModel.WorkflowStepActions">
+      <EntityTypeMapping TypeName="UBECModel.WorkflowStepActions">
         <MappingFragment StoreEntitySet="WorkflowStepActions">
           <ScalarProperty Name="PresetReason" ColumnName="PresetReason" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -328,7 +347,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WorkflowSteps">
-      <EntityTypeMapping TypeName="PROModel.WorkflowSteps">
+      <EntityTypeMapping TypeName="UBECModel.WorkflowSteps">
         <MappingFragment StoreEntitySet="WorkflowSteps">
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -342,7 +361,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Inspection">
-      <EntityTypeMapping TypeName="PROModel.Inspection">
+      <EntityTypeMapping TypeName="UBECModel.Inspection">
         <MappingFragment StoreEntitySet="Inspection">
           <ScalarProperty Name="InspectionStatus" ColumnName="InspectionStatus" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -362,7 +381,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="DocumentTypeFormat" TypeName="PROModel.DocumentTypeFormat" StoreEntitySet="DocumentTypeFormat">
+    <AssociationSetMapping Name="DocumentTypeFormat" TypeName="UBECModel.DocumentTypeFormat" StoreEntitySet="DocumentTypeFormat">
       <EndProperty Name="DocumentType">
         <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
       </EndProperty>
@@ -370,7 +389,7 @@
         <ScalarProperty Name="Id" ColumnName="DocumentTypeFormatId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="PROModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
+    <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="UBECModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
       <EndProperty Name="ProjectApplication">
         <ScalarProperty Name="Id" ColumnName="ProjectId" />
       </EndProperty>
@@ -378,7 +397,7 @@
         <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UsersInRoles" TypeName="PROModel.UsersInRoles" StoreEntitySet="UsersInRoles">
+    <AssociationSetMapping Name="UsersInRoles" TypeName="UBECModel.UsersInRoles" StoreEntitySet="UsersInRoles">
       <EndProperty Name="Users">
         <ScalarProperty Name="UserId" ColumnName="UserId" />
       </EndProperty>
@@ -386,7 +405,7 @@
         <ScalarProperty Name="RoleId" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="WorkflowDocument" TypeName="PROModel.WorkflowDocument" StoreEntitySet="WorkflowDocument">
+    <AssociationSetMapping Name="WorkflowDocument" TypeName="UBECModel.WorkflowDocument" StoreEntitySet="WorkflowDocument">
       <EndProperty Name="Workflow">
         <ScalarProperty Name="Id" ColumnName="WorkFlowId" />
       </EndProperty>
@@ -394,7 +413,7 @@
         <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="InspectionDocumentInfo" TypeName="PROModel.InspectionDocumentInfo" StoreEntitySet="InspectionDocumentInfo">
+    <AssociationSetMapping Name="InspectionDocumentInfo" TypeName="UBECModel.InspectionDocumentInfo" StoreEntitySet="InspectionDocumentInfo">
       <EndProperty Name="Inspection">
         <ScalarProperty Name="Id" ColumnName="InspectionId" />
       </EndProperty>

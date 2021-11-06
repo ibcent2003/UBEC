@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="PROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="UBECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Alert">
     <Key>
       <PropertyRef Name="Id" />
@@ -152,6 +152,22 @@
     <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
     <Property Name="Comment" Type="nvarchar" MaxLength="256" />
   </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NewsHeadline" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="NewsContent" Type="varchar(max)" Nullable="false" />
+    <Property Name="Photo" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="NoOfView" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Payment">
     <Key>
       <PropertyRef Name="Id" />
@@ -207,6 +223,8 @@
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
   </EntityType>
   <EntityType Name="ProjectDocumentInfo">
     <Key>
@@ -795,7 +813,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="PROModelStoreContainer">
+  <EntityContainer Name="UBECModelStoreContainer">
     <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlertNotification" EntityType="Self.AlertNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlertType" EntityType="Self.AlertType" Schema="dbo" store:Type="Tables" />
@@ -809,6 +827,7 @@
     <EntitySet Name="DocumentTypeFormat" EntityType="Self.DocumentTypeFormat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LGA" EntityType="Self.LGA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Memberships" EntityType="Self.Memberships" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />

@@ -235,11 +235,13 @@
     <Compile Include="Areas\Setup\Controllers\AlertManagementController.cs" />
     <Compile Include="Areas\Setup\Controllers\ContractorController.cs" />
     <Compile Include="Areas\Setup\Controllers\DocumentTypeController.cs" />
+    <Compile Include="Areas\Setup\Controllers\NewsManagementController.cs" />
     <Compile Include="Areas\Setup\Controllers\PaymentTypeController.cs" />
     <Compile Include="Areas\Setup\Controllers\WorkFlowController.cs" />
     <Compile Include="Areas\Setup\Models\AlertViewModel.cs" />
     <Compile Include="Areas\Setup\Models\ContractorViewModel.cs" />
     <Compile Include="Areas\Setup\Models\DocumentTypeViewModel.cs" />
+    <Compile Include="Areas\Setup\Models\NewsManagementViewModel.cs" />
     <Compile Include="Areas\Setup\Models\PaymentTypeViewModel.cs" />
     <Compile Include="Areas\Setup\Models\WorkflowViewModel.cs" />
     <Compile Include="Areas\Setup\SetupAreaRegistration.cs" />
@@ -258,6 +260,7 @@
     <Compile Include="Mailers\PasswordResetMailer.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CodeGenerator.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\IntegerSelectListItem.cs" />
     <Compile Include="Models\JsonModel.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
@@ -274,6 +277,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\1.JPG" />
+    <Content Include="Content\2.JPG" />
+    <Content Include="Content\3.JPG" />
+    <Content Include="Content\4.JPG" />
     <Content Include="Content\Backend\assets\css\fontawesome\font-awesome.min.css" />
     <Content Include="Content\Backend\assets\css\icons.css" />
     <Content Include="Content\Backend\assets\css\login.css" />
@@ -966,7 +973,9 @@
     <Content Include="Content\Backend\vendors\tinymce\tinymce.min.js" />
     <Content Include="Content\Backend\water.js" />
     <Content Include="Content\Backend\workflowdesigner.css" />
+    <Content Include="Content\banner1.jpg" />
     <Content Include="Content\bglogo.png" />
+    <Content Include="Content\fav.jpg" />
     <Content Include="Content\Frontend\css\animate.css" />
     <Content Include="Content\Frontend\css\bookblock.css" />
     <Content Include="Content\Frontend\css\bootstrap.min.css" />
@@ -1013,9 +1022,11 @@
     <Content Include="Content\Frontend\images\about-us\04.jpg" />
     <Content Include="Content\Frontend\images\about-us\05.jpg" />
     <Content Include="Content\Frontend\images\about-us\06.jpg" />
+    <Content Include="Content\Frontend\images\about-us\about.jpg" />
     <Content Include="Content\Frontend\images\about-us\half-img.png" />
     <Content Include="Content\Frontend\images\arrow\dashed-arrow1.png" />
     <Content Include="Content\Frontend\images\arrow\dashed-arrow2.png" />
+    <Content Include="Content\Frontend\images\bg\bg.jpg" />
     <Content Include="Content\Frontend\images\certificate\1.jpg" />
     <Content Include="Content\Frontend\images\certificate\2.jpg" />
     <Content Include="Content\Frontend\images\certificate\3.jpg" />
@@ -1085,6 +1096,7 @@
     <Content Include="Content\Frontend\images\download\appstore.png" />
     <Content Include="Content\Frontend\images\download\playstore.png" />
     <Content Include="Content\Frontend\images\favicon.ico" />
+    <Content Include="Content\Frontend\images\feature\cont.png" />
     <Content Include="Content\Frontend\images\loader.png" />
     <Content Include="Content\Frontend\images\logo-black.png" />
     <Content Include="Content\Frontend\images\logo-white.png" />
@@ -1232,6 +1244,12 @@
     <Content Include="Content\Frontend\revolution\assets\96afd-4.png" />
     <Content Include="Content\Frontend\revolution\assets\9ecee-08.png" />
     <Content Include="Content\Frontend\revolution\assets\a0fa7-6.png" />
+    <Content Include="Content\Frontend\revolution\assets\banner1.jpg" />
+    <Content Include="Content\Frontend\revolution\assets\banner1_100by50.jpg" />
+    <Content Include="Content\Frontend\revolution\assets\banner2.jpg" />
+    <Content Include="Content\Frontend\revolution\assets\banner2_100by50.jpg" />
+    <Content Include="Content\Frontend\revolution\assets\banner3.jpg" />
+    <Content Include="Content\Frontend\revolution\assets\banner3_100by50.jpg" />
     <Content Include="Content\Frontend\revolution\assets\bdd92-11.png" />
     <Content Include="Content\Frontend\revolution\assets\bf82d-03.png" />
     <Content Include="Content\Frontend\revolution\assets\c176d-04.png" />
@@ -1244,6 +1262,7 @@
     <Content Include="Content\Frontend\revolution\assets\ee269-11.png" />
     <Content Include="Content\Frontend\revolution\assets\json_slider.html" />
     <Content Include="Content\Frontend\revolution\assets\loader.gif" />
+    <Content Include="Content\Frontend\revolution\assets\logo_front.png" />
     <Content Include="Content\Frontend\revolution\assets\NOTICE.txt" />
     <Content Include="Content\Frontend\revolution\assets\slider.html" />
     <Content Include="Content\Frontend\revolution\assets\transparent.png" />
@@ -1446,6 +1465,9 @@
     <Content Include="Areas\Admin\Views\Project\InspectionList.cshtml" />
     <Content Include="Areas\Admin\Views\Project\NewInspection.cshtml" />
     <Content Include="Areas\Admin\Views\Project\UploadPhoto.cshtml" />
+    <Content Include="Areas\Setup\Views\NewsManagement\Index.cshtml" />
+    <Content Include="Areas\Setup\Views\NewsManagement\Create.cshtml" />
+    <Content Include="Areas\Setup\Views\NewsManagement\Edit.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="MvcInstaller\ajax-loader.gif" />
     <Content Include="MvcInstaller\jquery-1.6.1.min.js" />
@@ -1539,7 +1561,7 @@
     <Content Include="Views\Shared\NewPartial\_Footer.cshtml" />
     <Content Include="Views\Shared\NewPartial\_MainMenu.cshtml" />
     <Content Include="Views\Shared\NewPartial\_TopBar.cshtml" />
-    <Content Include="Views\Shared\_NewLayout.cshtml" />
+    <Content Include="Views\Shared\_PlainLayout.cshtml" />
     <Content Include="Views\Shared\NewPartial\_Slider.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Partial\_TopBar.cshtml" />
@@ -1547,6 +1569,11 @@
     <Content Include="Views\Shared\Partial\_Search.cshtml" />
     <Content Include="Views\Shared\Partial\_Slider.cshtml" />
     <Content Include="Views\Shared\Partial\_Footer.cshtml" />
+    <Content Include="Views\Home\MoreNews.cshtml" />
+    <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Home\ViewNews.cshtml" />
+    <Content Include="Views\Home\ViewProject.cshtml" />
+    <Content Include="Views\Home\ViewReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1592,7 +1619,6 @@
     <Folder Include="Content\Backend\datatables\media\images\" />
     <Folder Include="Content\Backend\datatables\media\js\" />
     <Folder Include="Content\Backend\themes\base\minified\images\" />
-    <Folder Include="Content\Frontend\images\bg\" />
     <Folder Include="Content\Frontend\images\blog\posts\" />
     <Folder Include="Content\Frontend\images\demo3\" />
     <Folder Include="Content\Frontend\images\device\" />

@@ -1,150 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="PROModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="PROEntities" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="Alert" EntityType="PROModel.Alert" />
-    <EntitySet Name="AlertNotification" EntityType="PROModel.AlertNotification" />
-    <EntitySet Name="AlertType" EntityType="PROModel.AlertType" />
-    <EntitySet Name="Applications" EntityType="PROModel.Applications" />
-    <EntitySet Name="Contractor" EntityType="PROModel.Contractor" />
-    <EntitySet Name="DataGenerator" EntityType="PROModel.DataGenerator" />
-    <EntitySet Name="DocumentCategory" EntityType="PROModel.DocumentCategory" />
-    <EntitySet Name="DocumentFormat" EntityType="PROModel.DocumentFormat" />
-    <EntitySet Name="DocumentInfo" EntityType="PROModel.DocumentInfo" />
-    <EntitySet Name="DocumentType" EntityType="PROModel.DocumentType" />
-    <EntitySet Name="LGA" EntityType="PROModel.LGA" />
-    <EntitySet Name="Memberships" EntityType="PROModel.Memberships" />
-    <EntitySet Name="Payment" EntityType="PROModel.Payment" />
-    <EntitySet Name="PaymentType" EntityType="PROModel.PaymentType" />
-    <EntitySet Name="Profiles" EntityType="PROModel.Profiles" />
-    <EntitySet Name="ProjectApplication" EntityType="PROModel.ProjectApplication" />
-    <EntitySet Name="Resource" EntityType="PROModel.Resource" />
-    <EntitySet Name="ResourcesInRole" EntityType="PROModel.ResourcesInRole" />
-    <EntitySet Name="Roles" EntityType="PROModel.Roles" />
-    <EntitySet Name="State" EntityType="PROModel.State" />
-    <EntitySet Name="UserDetail" EntityType="PROModel.UserDetail" />
-    <EntitySet Name="Users" EntityType="PROModel.Users" />
-    <EntitySet Name="Workflow" EntityType="PROModel.Workflow" />
-    <EntitySet Name="WorkFlowActions" EntityType="PROModel.WorkFlowActions" />
-    <EntitySet Name="WorkflowStepActions" EntityType="PROModel.WorkflowStepActions" />
-    <EntitySet Name="WorkflowSteps" EntityType="PROModel.WorkflowSteps" />
-    <EntitySet Name="Inspection" EntityType="PROModel.Inspection" />
-    <AssociationSet Name="FK_Alert_WorkFlow" Association="PROModel.FK_Alert_WorkFlow">
+<Schema Namespace="UBECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PROEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Alert" EntityType="UBECModel.Alert" />
+    <EntitySet Name="AlertNotification" EntityType="UBECModel.AlertNotification" />
+    <EntitySet Name="AlertType" EntityType="UBECModel.AlertType" />
+    <EntitySet Name="Applications" EntityType="UBECModel.Applications" />
+    <EntitySet Name="Contractor" EntityType="UBECModel.Contractor" />
+    <EntitySet Name="DataGenerator" EntityType="UBECModel.DataGenerator" />
+    <EntitySet Name="DocumentCategory" EntityType="UBECModel.DocumentCategory" />
+    <EntitySet Name="DocumentFormat" EntityType="UBECModel.DocumentFormat" />
+    <EntitySet Name="DocumentInfo" EntityType="UBECModel.DocumentInfo" />
+    <EntitySet Name="DocumentType" EntityType="UBECModel.DocumentType" />
+    <EntitySet Name="LGA" EntityType="UBECModel.LGA" />
+    <EntitySet Name="Memberships" EntityType="UBECModel.Memberships" />
+    <EntitySet Name="News" EntityType="UBECModel.News" />
+    <EntitySet Name="Payment" EntityType="UBECModel.Payment" />
+    <EntitySet Name="PaymentType" EntityType="UBECModel.PaymentType" />
+    <EntitySet Name="Profiles" EntityType="UBECModel.Profiles" />
+    <EntitySet Name="ProjectApplication" EntityType="UBECModel.ProjectApplication" />
+    <EntitySet Name="Resource" EntityType="UBECModel.Resource" />
+    <EntitySet Name="ResourcesInRole" EntityType="UBECModel.ResourcesInRole" />
+    <EntitySet Name="Roles" EntityType="UBECModel.Roles" />
+    <EntitySet Name="State" EntityType="UBECModel.State" />
+    <EntitySet Name="UserDetail" EntityType="UBECModel.UserDetail" />
+    <EntitySet Name="Users" EntityType="UBECModel.Users" />
+    <EntitySet Name="Workflow" EntityType="UBECModel.Workflow" />
+    <EntitySet Name="WorkFlowActions" EntityType="UBECModel.WorkFlowActions" />
+    <EntitySet Name="WorkflowStepActions" EntityType="UBECModel.WorkflowStepActions" />
+    <EntitySet Name="WorkflowSteps" EntityType="UBECModel.WorkflowSteps" />
+    <EntitySet Name="Inspection" EntityType="UBECModel.Inspection" />
+    <AssociationSet Name="FK_Alert_WorkFlow" Association="UBECModel.FK_Alert_WorkFlow">
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="Alert" EntitySet="Alert" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkflowStepActions_Alert" Association="PROModel.FK_WorkflowStepActions_Alert">
+    <AssociationSet Name="FK_WorkflowStepActions_Alert" Association="UBECModel.FK_WorkflowStepActions_Alert">
       <End Role="Alert" EntitySet="Alert" />
       <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
     </AssociationSet>
-    <AssociationSet Name="FK_AlertNotification_AlertType" Association="PROModel.FK_AlertNotification_AlertType">
+    <AssociationSet Name="FK_AlertNotification_AlertType" Association="UBECModel.FK_AlertNotification_AlertType">
       <End Role="AlertType" EntitySet="AlertType" />
       <End Role="AlertNotification" EntitySet="AlertNotification" />
     </AssociationSet>
-    <AssociationSet Name="MembershipApplication" Association="PROModel.MembershipApplication">
+    <AssociationSet Name="MembershipApplication" Association="UBECModel.MembershipApplication">
       <End Role="Applications" EntitySet="Applications" />
       <End Role="Memberships" EntitySet="Memberships" />
     </AssociationSet>
-    <AssociationSet Name="RoleApplication" Association="PROModel.RoleApplication">
+    <AssociationSet Name="RoleApplication" Association="UBECModel.RoleApplication">
       <End Role="Applications" EntitySet="Applications" />
       <End Role="Roles" EntitySet="Roles" />
     </AssociationSet>
-    <AssociationSet Name="UserApplication" Association="PROModel.UserApplication">
+    <AssociationSet Name="UserApplication" Association="UBECModel.UserApplication">
       <End Role="Applications" EntitySet="Applications" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
-    <AssociationSet Name="FK_Project_Contractor" Association="PROModel.FK_Project_Contractor">
+    <AssociationSet Name="FK_Project_Contractor" Association="UBECModel.FK_Project_Contractor">
       <End Role="Contractor" EntitySet="Contractor" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
-    <AssociationSet Name="FK_DocumentType_DocumentCategory" Association="PROModel.FK_DocumentType_DocumentCategory">
+    <AssociationSet Name="FK_DocumentType_DocumentCategory" Association="UBECModel.FK_DocumentType_DocumentCategory">
       <End Role="DocumentCategory" EntitySet="DocumentCategory" />
       <End Role="DocumentType" EntitySet="DocumentType" />
     </AssociationSet>
-    <AssociationSet Name="FK_DocumentInfo_DocumentType" Association="PROModel.FK_DocumentInfo_DocumentType">
+    <AssociationSet Name="FK_DocumentInfo_DocumentType" Association="UBECModel.FK_DocumentInfo_DocumentType">
       <End Role="DocumentType" EntitySet="DocumentType" />
       <End Role="DocumentInfo" EntitySet="DocumentInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK_Inspection_LGA" Association="PROModel.FK_Inspection_LGA">
+    <AssociationSet Name="FK_Inspection_LGA" Association="UBECModel.FK_Inspection_LGA">
       <End Role="LGA" EntitySet="LGA" />
       <End Role="Inspection" EntitySet="Inspection" />
     </AssociationSet>
-    <AssociationSet Name="FK_LGA_State" Association="PROModel.FK_LGA_State">
+    <AssociationSet Name="FK_LGA_State" Association="UBECModel.FK_LGA_State">
       <End Role="State" EntitySet="State" />
       <End Role="LGA" EntitySet="LGA" />
     </AssociationSet>
-    <AssociationSet Name="FK_Project_LGA" Association="PROModel.FK_Project_LGA">
+    <AssociationSet Name="FK_Project_LGA" Association="UBECModel.FK_Project_LGA">
       <End Role="LGA" EntitySet="LGA" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
-    <AssociationSet Name="MembershipUser" Association="PROModel.MembershipUser">
+    <AssociationSet Name="MembershipUser" Association="UBECModel.MembershipUser">
       <End Role="Users" EntitySet="Users" />
       <End Role="Memberships" EntitySet="Memberships" />
     </AssociationSet>
-    <AssociationSet Name="FK_Payment_PaymentType" Association="PROModel.FK_Payment_PaymentType">
+    <AssociationSet Name="FK_Payment_PaymentType" Association="UBECModel.FK_Payment_PaymentType">
       <End Role="PaymentType" EntitySet="PaymentType" />
       <End Role="Payment" EntitySet="Payment" />
     </AssociationSet>
-    <AssociationSet Name="FK_Payment_Project" Association="PROModel.FK_Payment_Project">
+    <AssociationSet Name="FK_Payment_Project" Association="UBECModel.FK_Payment_Project">
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="Payment" EntitySet="Payment" />
     </AssociationSet>
-    <AssociationSet Name="UserProfile" Association="PROModel.UserProfile">
+    <AssociationSet Name="UserProfile" Association="UBECModel.UserProfile">
       <End Role="Users" EntitySet="Users" />
       <End Role="Profiles" EntitySet="Profiles" />
     </AssociationSet>
-    <AssociationSet Name="FK_Inspection_ProjectApplication" Association="PROModel.FK_Inspection_ProjectApplication">
+    <AssociationSet Name="FK_Inspection_ProjectApplication" Association="UBECModel.FK_Inspection_ProjectApplication">
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="Inspection" EntitySet="Inspection" />
     </AssociationSet>
-    <AssociationSet Name="FK_Project_Workflow" Association="PROModel.FK_Project_Workflow">
+    <AssociationSet Name="FK_Project_Workflow" Association="UBECModel.FK_Project_Workflow">
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProjectApplication_ProjectApplication" Association="PROModel.FK_ProjectApplication_ProjectApplication">
+    <AssociationSet Name="FK_ProjectApplication_ProjectApplication" Association="UBECModel.FK_ProjectApplication_ProjectApplication">
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="ProjectApplication1" EntitySet="ProjectApplication" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProjectApplication_Users" Association="PROModel.FK_ProjectApplication_Users">
+    <AssociationSet Name="FK_ProjectApplication_Users" Association="UBECModel.FK_ProjectApplication_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserDetail_Users" Association="PROModel.FK_UserDetail_Users">
+    <AssociationSet Name="FK_UserDetail_Users" Association="UBECModel.FK_UserDetail_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserDetail" EntitySet="UserDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkFlowActions_Workflow" Association="PROModel.FK_WorkFlowActions_Workflow">
+    <AssociationSet Name="FK_WorkFlowActions_Workflow" Association="UBECModel.FK_WorkFlowActions_Workflow">
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="WorkFlowActions" EntitySet="WorkFlowActions" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkflowSteps_Workflow" Association="PROModel.FK_WorkflowSteps_Workflow">
+    <AssociationSet Name="FK_WorkflowSteps_Workflow" Association="UBECModel.FK_WorkflowSteps_Workflow">
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="WorkflowSteps" EntitySet="WorkflowSteps" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkflowStepActions_WorkFlowActions" Association="PROModel.FK_WorkflowStepActions_WorkFlowActions">
+    <AssociationSet Name="FK_WorkflowStepActions_WorkFlowActions" Association="UBECModel.FK_WorkflowStepActions_WorkFlowActions">
       <End Role="WorkFlowActions" EntitySet="WorkFlowActions" />
       <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkflowStepActions_WorkflowSteps" Association="PROModel.FK_WorkflowStepActions_WorkflowSteps">
+    <AssociationSet Name="FK_WorkflowStepActions_WorkflowSteps" Association="UBECModel.FK_WorkflowStepActions_WorkflowSteps">
       <End Role="WorkflowSteps" EntitySet="WorkflowSteps" />
       <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
     </AssociationSet>
-    <AssociationSet Name="DocumentTypeFormat" Association="PROModel.DocumentTypeFormat">
+    <AssociationSet Name="DocumentTypeFormat" Association="UBECModel.DocumentTypeFormat">
       <End Role="DocumentFormat" EntitySet="DocumentFormat" />
       <End Role="DocumentType" EntitySet="DocumentType" />
     </AssociationSet>
-    <AssociationSet Name="ProjectDocumentInfo" Association="PROModel.ProjectDocumentInfo">
+    <AssociationSet Name="ProjectDocumentInfo" Association="UBECModel.ProjectDocumentInfo">
       <End Role="DocumentInfo" EntitySet="DocumentInfo" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
-    <AssociationSet Name="UsersInRoles" Association="PROModel.UsersInRoles">
+    <AssociationSet Name="UsersInRoles" Association="UBECModel.UsersInRoles">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
-    <AssociationSet Name="WorkflowDocument" Association="PROModel.WorkflowDocument">
+    <AssociationSet Name="WorkflowDocument" Association="UBECModel.WorkflowDocument">
       <End Role="DocumentType" EntitySet="DocumentType" />
       <End Role="Workflow" EntitySet="Workflow" />
     </AssociationSet>
-    <AssociationSet Name="InspectionDocumentInfo" Association="PROModel.InspectionDocumentInfo">
+    <AssociationSet Name="InspectionDocumentInfo" Association="UBECModel.InspectionDocumentInfo">
       <End Role="DocumentInfo" EntitySet="DocumentInfo" />
       <End Role="Inspection" EntitySet="Inspection" />
     </AssociationSet>
@@ -163,8 +164,8 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Workflow" Relationship="PROModel.FK_Alert_WorkFlow" FromRole="Alert" ToRole="Workflow" />
-    <NavigationProperty Name="WorkflowStepActions" Relationship="PROModel.FK_WorkflowStepActions_Alert" FromRole="Alert" ToRole="WorkflowStepActions" />
+    <NavigationProperty Name="Workflow" Relationship="UBECModel.FK_Alert_WorkFlow" FromRole="Alert" ToRole="Workflow" />
+    <NavigationProperty Name="WorkflowStepActions" Relationship="UBECModel.FK_WorkflowStepActions_Alert" FromRole="Alert" ToRole="WorkflowStepActions" />
   </EntityType>
   <EntityType Name="AlertNotification">
     <Key>
@@ -180,7 +181,7 @@
     <Property Name="Status" Type="Int32" Nullable="false" />
     <Property Name="ModifedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifedDate" Type="DateTime" Nullable="false" Precision="7" />
-    <NavigationProperty Name="AlertType" Relationship="PROModel.FK_AlertNotification_AlertType" FromRole="AlertNotification" ToRole="AlertType" />
+    <NavigationProperty Name="AlertType" Relationship="UBECModel.FK_AlertNotification_AlertType" FromRole="AlertNotification" ToRole="AlertType" />
   </EntityType>
   <EntityType Name="AlertType">
     <Key>
@@ -188,7 +189,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="AlertNotification" Relationship="PROModel.FK_AlertNotification_AlertType" FromRole="AlertType" ToRole="AlertNotification" />
+    <NavigationProperty Name="AlertNotification" Relationship="UBECModel.FK_AlertNotification_AlertType" FromRole="AlertType" ToRole="AlertNotification" />
   </EntityType>
   <EntityType Name="Applications">
     <Key>
@@ -197,9 +198,9 @@
     <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="235" FixedLength="false" Unicode="true" />
     <Property Name="ApplicationId" Type="Guid" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Memberships" Relationship="PROModel.MembershipApplication" FromRole="Applications" ToRole="Memberships" />
-    <NavigationProperty Name="Roles" Relationship="PROModel.RoleApplication" FromRole="Applications" ToRole="Roles" />
-    <NavigationProperty Name="Users" Relationship="PROModel.UserApplication" FromRole="Applications" ToRole="Users" />
+    <NavigationProperty Name="Memberships" Relationship="UBECModel.MembershipApplication" FromRole="Applications" ToRole="Memberships" />
+    <NavigationProperty Name="Roles" Relationship="UBECModel.RoleApplication" FromRole="Applications" ToRole="Roles" />
+    <NavigationProperty Name="Users" Relationship="UBECModel.UserApplication" FromRole="Applications" ToRole="Users" />
   </EntityType>
   <EntityType Name="Contractor">
     <Key>
@@ -210,7 +211,7 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Project_Contractor" FromRole="Contractor" ToRole="ProjectApplication" />
+    <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Project_Contractor" FromRole="Contractor" ToRole="ProjectApplication" />
   </EntityType>
   <EntityType Name="DataGenerator">
     <Key>
@@ -229,7 +230,7 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="DocumentType" Relationship="PROModel.FK_DocumentType_DocumentCategory" FromRole="DocumentCategory" ToRole="DocumentType" />
+    <NavigationProperty Name="DocumentType" Relationship="UBECModel.FK_DocumentType_DocumentCategory" FromRole="DocumentCategory" ToRole="DocumentType" />
   </EntityType>
   <EntityType Name="DocumentFormat">
     <Key>
@@ -241,7 +242,7 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="DocumentType" Relationship="PROModel.DocumentTypeFormat" FromRole="DocumentFormat" ToRole="DocumentType" />
+    <NavigationProperty Name="DocumentType" Relationship="UBECModel.DocumentTypeFormat" FromRole="DocumentFormat" ToRole="DocumentType" />
   </EntityType>
   <EntityType Name="DocumentInfo">
     <Key>
@@ -256,9 +257,9 @@
     <Property Name="IssuedDate" Type="DateTime" Precision="0" />
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-    <NavigationProperty Name="DocumentType" Relationship="PROModel.FK_DocumentInfo_DocumentType" FromRole="DocumentInfo" ToRole="DocumentType" />
-    <NavigationProperty Name="ProjectApplication" Relationship="PROModel.ProjectDocumentInfo" FromRole="DocumentInfo" ToRole="ProjectApplication" />
-    <NavigationProperty Name="Inspection" Relationship="PROModel.InspectionDocumentInfo" FromRole="DocumentInfo" ToRole="Inspection" />
+    <NavigationProperty Name="DocumentType" Relationship="UBECModel.FK_DocumentInfo_DocumentType" FromRole="DocumentInfo" ToRole="DocumentType" />
+    <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.ProjectDocumentInfo" FromRole="DocumentInfo" ToRole="ProjectApplication" />
+    <NavigationProperty Name="Inspection" Relationship="UBECModel.InspectionDocumentInfo" FromRole="DocumentInfo" ToRole="Inspection" />
   </EntityType>
   <EntityType Name="DocumentType">
     <Key>
@@ -270,10 +271,10 @@
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="DocumentCategoryId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="DocumentCategory" Relationship="PROModel.FK_DocumentType_DocumentCategory" FromRole="DocumentType" ToRole="DocumentCategory" />
-    <NavigationProperty Name="DocumentInfo" Relationship="PROModel.FK_DocumentInfo_DocumentType" FromRole="DocumentType" ToRole="DocumentInfo" />
-    <NavigationProperty Name="DocumentFormat" Relationship="PROModel.DocumentTypeFormat" FromRole="DocumentType" ToRole="DocumentFormat" />
-    <NavigationProperty Name="Workflow" Relationship="PROModel.WorkflowDocument" FromRole="DocumentType" ToRole="Workflow" />
+    <NavigationProperty Name="DocumentCategory" Relationship="UBECModel.FK_DocumentType_DocumentCategory" FromRole="DocumentType" ToRole="DocumentCategory" />
+    <NavigationProperty Name="DocumentInfo" Relationship="UBECModel.FK_DocumentInfo_DocumentType" FromRole="DocumentType" ToRole="DocumentInfo" />
+    <NavigationProperty Name="DocumentFormat" Relationship="UBECModel.DocumentTypeFormat" FromRole="DocumentType" ToRole="DocumentFormat" />
+    <NavigationProperty Name="Workflow" Relationship="UBECModel.WorkflowDocument" FromRole="DocumentType" ToRole="Workflow" />
   </EntityType>
   <EntityType Name="LGA">
     <Key>
@@ -285,9 +286,9 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Inspection" Relationship="PROModel.FK_Inspection_LGA" FromRole="LGA" ToRole="Inspection" />
-    <NavigationProperty Name="State" Relationship="PROModel.FK_LGA_State" FromRole="LGA" ToRole="State" />
-    <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Project_LGA" FromRole="LGA" ToRole="ProjectApplication" />
+    <NavigationProperty Name="Inspection" Relationship="UBECModel.FK_Inspection_LGA" FromRole="LGA" ToRole="Inspection" />
+    <NavigationProperty Name="State" Relationship="UBECModel.FK_LGA_State" FromRole="LGA" ToRole="State" />
+    <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Project_LGA" FromRole="LGA" ToRole="ProjectApplication" />
   </EntityType>
   <EntityType Name="Memberships">
     <Key>
@@ -312,8 +313,24 @@
     <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
     <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Comment" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Applications" Relationship="PROModel.MembershipApplication" FromRole="Memberships" ToRole="Applications" />
-    <NavigationProperty Name="Users" Relationship="PROModel.MembershipUser" FromRole="Memberships" ToRole="Users" />
+    <NavigationProperty Name="Applications" Relationship="UBECModel.MembershipApplication" FromRole="Memberships" ToRole="Applications" />
+    <NavigationProperty Name="Users" Relationship="UBECModel.MembershipUser" FromRole="Memberships" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NewsHeadline" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NewsContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="NoOfView" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Payment">
     <Key>
@@ -325,8 +342,8 @@
     <Property Name="ContractSum" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-    <NavigationProperty Name="PaymentType" Relationship="PROModel.FK_Payment_PaymentType" FromRole="Payment" ToRole="PaymentType" />
-    <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Payment_Project" FromRole="Payment" ToRole="ProjectApplication" />
+    <NavigationProperty Name="PaymentType" Relationship="UBECModel.FK_Payment_PaymentType" FromRole="Payment" ToRole="PaymentType" />
+    <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Payment_Project" FromRole="Payment" ToRole="ProjectApplication" />
   </EntityType>
   <EntityType Name="PaymentType">
     <Key>
@@ -337,7 +354,7 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Payment" Relationship="PROModel.FK_Payment_PaymentType" FromRole="PaymentType" ToRole="Payment" />
+    <NavigationProperty Name="Payment" Relationship="UBECModel.FK_Payment_PaymentType" FromRole="PaymentType" ToRole="Payment" />
   </EntityType>
   <EntityType Name="Profiles">
     <Key>
@@ -348,7 +365,7 @@
     <Property Name="PropertyValueStrings" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Name="PropertyValueBinary" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
     <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Users" Relationship="PROModel.UserProfile" FromRole="Profiles" ToRole="Users" />
+    <NavigationProperty Name="Users" Relationship="UBECModel.UserProfile" FromRole="Profiles" ToRole="Users" />
   </EntityType>
   <EntityType Name="ProjectApplication">
     <Key>
@@ -374,15 +391,17 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Contractor" Relationship="PROModel.FK_Project_Contractor" FromRole="ProjectApplication" ToRole="Contractor" />
-    <NavigationProperty Name="LGA" Relationship="PROModel.FK_Project_LGA" FromRole="ProjectApplication" ToRole="LGA" />
-    <NavigationProperty Name="Payment" Relationship="PROModel.FK_Payment_Project" FromRole="ProjectApplication" ToRole="Payment" />
-    <NavigationProperty Name="Inspection" Relationship="PROModel.FK_Inspection_ProjectApplication" FromRole="ProjectApplication" ToRole="Inspection" />
-    <NavigationProperty Name="Workflow" Relationship="PROModel.FK_Project_Workflow" FromRole="ProjectApplication" ToRole="Workflow" />
-    <NavigationProperty Name="ProjectApplication1" Relationship="PROModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication" ToRole="ProjectApplication1" />
-    <NavigationProperty Name="ProjectApplication2" Relationship="PROModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication1" ToRole="ProjectApplication" />
-    <NavigationProperty Name="Users" Relationship="PROModel.FK_ProjectApplication_Users" FromRole="ProjectApplication" ToRole="Users" />
-    <NavigationProperty Name="DocumentInfo" Relationship="PROModel.ProjectDocumentInfo" FromRole="ProjectApplication" ToRole="DocumentInfo" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Contractor" Relationship="UBECModel.FK_Project_Contractor" FromRole="ProjectApplication" ToRole="Contractor" />
+    <NavigationProperty Name="LGA" Relationship="UBECModel.FK_Project_LGA" FromRole="ProjectApplication" ToRole="LGA" />
+    <NavigationProperty Name="Payment" Relationship="UBECModel.FK_Payment_Project" FromRole="ProjectApplication" ToRole="Payment" />
+    <NavigationProperty Name="Inspection" Relationship="UBECModel.FK_Inspection_ProjectApplication" FromRole="ProjectApplication" ToRole="Inspection" />
+    <NavigationProperty Name="Workflow" Relationship="UBECModel.FK_Project_Workflow" FromRole="ProjectApplication" ToRole="Workflow" />
+    <NavigationProperty Name="ProjectApplication1" Relationship="UBECModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication" ToRole="ProjectApplication1" />
+    <NavigationProperty Name="ProjectApplication2" Relationship="UBECModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication1" ToRole="ProjectApplication" />
+    <NavigationProperty Name="Users" Relationship="UBECModel.FK_ProjectApplication_Users" FromRole="ProjectApplication" ToRole="Users" />
+    <NavigationProperty Name="DocumentInfo" Relationship="UBECModel.ProjectDocumentInfo" FromRole="ProjectApplication" ToRole="DocumentInfo" />
   </EntityType>
   <EntityType Name="Resource">
     <Key>
@@ -416,8 +435,8 @@
     <Property Name="RoleId" Type="Guid" Nullable="false" />
     <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Applications" Relationship="PROModel.RoleApplication" FromRole="Roles" ToRole="Applications" />
-    <NavigationProperty Name="Users" Relationship="PROModel.UsersInRoles" FromRole="Roles" ToRole="Users" />
+    <NavigationProperty Name="Applications" Relationship="UBECModel.RoleApplication" FromRole="Roles" ToRole="Applications" />
+    <NavigationProperty Name="Users" Relationship="UBECModel.UsersInRoles" FromRole="Roles" ToRole="Users" />
   </EntityType>
   <EntityType Name="State">
     <Key>
@@ -428,7 +447,7 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="LGA" Relationship="PROModel.FK_LGA_State" FromRole="State" ToRole="LGA" />
+    <NavigationProperty Name="LGA" Relationship="UBECModel.FK_LGA_State" FromRole="State" ToRole="LGA" />
   </EntityType>
   <EntityType Name="UserDetail">
     <Key>
@@ -442,7 +461,7 @@
     <Property Name="UserId" Type="Guid" Nullable="false" />
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-    <NavigationProperty Name="Users" Relationship="PROModel.FK_UserDetail_Users" FromRole="UserDetail" ToRole="Users" />
+    <NavigationProperty Name="Users" Relationship="UBECModel.FK_UserDetail_Users" FromRole="UserDetail" ToRole="Users" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -453,12 +472,12 @@
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
     <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Applications" Relationship="PROModel.UserApplication" FromRole="Users" ToRole="Applications" />
-    <NavigationProperty Name="Memberships" Relationship="PROModel.MembershipUser" FromRole="Users" ToRole="Memberships" />
-    <NavigationProperty Name="Profiles" Relationship="PROModel.UserProfile" FromRole="Users" ToRole="Profiles" />
-    <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_ProjectApplication_Users" FromRole="Users" ToRole="ProjectApplication" />
-    <NavigationProperty Name="UserDetail" Relationship="PROModel.FK_UserDetail_Users" FromRole="Users" ToRole="UserDetail" />
-    <NavigationProperty Name="Roles" Relationship="PROModel.UsersInRoles" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="Applications" Relationship="UBECModel.UserApplication" FromRole="Users" ToRole="Applications" />
+    <NavigationProperty Name="Memberships" Relationship="UBECModel.MembershipUser" FromRole="Users" ToRole="Memberships" />
+    <NavigationProperty Name="Profiles" Relationship="UBECModel.UserProfile" FromRole="Users" ToRole="Profiles" />
+    <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_ProjectApplication_Users" FromRole="Users" ToRole="ProjectApplication" />
+    <NavigationProperty Name="UserDetail" Relationship="UBECModel.FK_UserDetail_Users" FromRole="Users" ToRole="UserDetail" />
+    <NavigationProperty Name="Roles" Relationship="UBECModel.UsersInRoles" FromRole="Users" ToRole="Roles" />
   </EntityType>
   <EntityType Name="Workflow">
     <Key>
@@ -472,11 +491,11 @@
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="guideline" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Alert" Relationship="PROModel.FK_Alert_WorkFlow" FromRole="Workflow" ToRole="Alert" />
-    <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Project_Workflow" FromRole="Workflow" ToRole="ProjectApplication" />
-    <NavigationProperty Name="WorkFlowActions" Relationship="PROModel.FK_WorkFlowActions_Workflow" FromRole="Workflow" ToRole="WorkFlowActions" />
-    <NavigationProperty Name="WorkflowSteps" Relationship="PROModel.FK_WorkflowSteps_Workflow" FromRole="Workflow" ToRole="WorkflowSteps" />
-    <NavigationProperty Name="DocumentType" Relationship="PROModel.WorkflowDocument" FromRole="Workflow" ToRole="DocumentType" />
+    <NavigationProperty Name="Alert" Relationship="UBECModel.FK_Alert_WorkFlow" FromRole="Workflow" ToRole="Alert" />
+    <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Project_Workflow" FromRole="Workflow" ToRole="ProjectApplication" />
+    <NavigationProperty Name="WorkFlowActions" Relationship="UBECModel.FK_WorkFlowActions_Workflow" FromRole="Workflow" ToRole="WorkFlowActions" />
+    <NavigationProperty Name="WorkflowSteps" Relationship="UBECModel.FK_WorkflowSteps_Workflow" FromRole="Workflow" ToRole="WorkflowSteps" />
+    <NavigationProperty Name="DocumentType" Relationship="UBECModel.WorkflowDocument" FromRole="Workflow" ToRole="DocumentType" />
   </EntityType>
   <EntityType Name="WorkFlowActions">
     <Key>
@@ -489,8 +508,8 @@
     <Property Name="Direction" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-    <NavigationProperty Name="Workflow" Relationship="PROModel.FK_WorkFlowActions_Workflow" FromRole="WorkFlowActions" ToRole="Workflow" />
-    <NavigationProperty Name="WorkflowStepActions" Relationship="PROModel.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkFlowActions" ToRole="WorkflowStepActions" />
+    <NavigationProperty Name="Workflow" Relationship="UBECModel.FK_WorkFlowActions_Workflow" FromRole="WorkFlowActions" ToRole="Workflow" />
+    <NavigationProperty Name="WorkflowStepActions" Relationship="UBECModel.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkFlowActions" ToRole="WorkflowStepActions" />
   </EntityType>
   <EntityType Name="WorkflowStepActions">
     <Key>
@@ -502,9 +521,9 @@
     <Property Name="AlertId" Type="Int32" Nullable="false" />
     <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="PresetReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Alert" Relationship="PROModel.FK_WorkflowStepActions_Alert" FromRole="WorkflowStepActions" ToRole="Alert" />
-    <NavigationProperty Name="WorkFlowActions" Relationship="PROModel.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkflowStepActions" ToRole="WorkFlowActions" />
-    <NavigationProperty Name="WorkflowSteps" Relationship="PROModel.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowStepActions" ToRole="WorkflowSteps" />
+    <NavigationProperty Name="Alert" Relationship="UBECModel.FK_WorkflowStepActions_Alert" FromRole="WorkflowStepActions" ToRole="Alert" />
+    <NavigationProperty Name="WorkFlowActions" Relationship="UBECModel.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkflowStepActions" ToRole="WorkFlowActions" />
+    <NavigationProperty Name="WorkflowSteps" Relationship="UBECModel.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowStepActions" ToRole="WorkflowSteps" />
   </EntityType>
   <EntityType Name="WorkflowSteps">
     <Key>
@@ -518,8 +537,8 @@
     <Property Name="Priority" Type="Int32" Nullable="false" />
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-    <NavigationProperty Name="Workflow" Relationship="PROModel.FK_WorkflowSteps_Workflow" FromRole="WorkflowSteps" ToRole="Workflow" />
-    <NavigationProperty Name="WorkflowStepActions" Relationship="PROModel.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowSteps" ToRole="WorkflowStepActions" />
+    <NavigationProperty Name="Workflow" Relationship="UBECModel.FK_WorkflowSteps_Workflow" FromRole="WorkflowSteps" ToRole="Workflow" />
+    <NavigationProperty Name="WorkflowStepActions" Relationship="UBECModel.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowSteps" ToRole="WorkflowStepActions" />
   </EntityType>
   <EntityType Name="Inspection">
     <Key>
@@ -540,13 +559,13 @@
     <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="InspectionStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="LGA" Relationship="PROModel.FK_Inspection_LGA" FromRole="Inspection" ToRole="LGA" />
-    <NavigationProperty Name="ProjectApplication" Relationship="PROModel.FK_Inspection_ProjectApplication" FromRole="Inspection" ToRole="ProjectApplication" />
-    <NavigationProperty Name="DocumentInfo" Relationship="PROModel.InspectionDocumentInfo" FromRole="Inspection" ToRole="DocumentInfo" />
+    <NavigationProperty Name="LGA" Relationship="UBECModel.FK_Inspection_LGA" FromRole="Inspection" ToRole="LGA" />
+    <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Inspection_ProjectApplication" FromRole="Inspection" ToRole="ProjectApplication" />
+    <NavigationProperty Name="DocumentInfo" Relationship="UBECModel.InspectionDocumentInfo" FromRole="Inspection" ToRole="DocumentInfo" />
   </EntityType>
   <Association Name="FK_Alert_WorkFlow">
-    <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="1" />
-    <End Type="PROModel.Alert" Role="Alert" Multiplicity="*" />
+    <End Type="UBECModel.Workflow" Role="Workflow" Multiplicity="1" />
+    <End Type="UBECModel.Alert" Role="Alert" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Workflow">
         <PropertyRef Name="Id" />
@@ -557,8 +576,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WorkflowStepActions_Alert">
-    <End Type="PROModel.Alert" Role="Alert" Multiplicity="1" />
-    <End Type="PROModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
+    <End Type="UBECModel.Alert" Role="Alert" Multiplicity="1" />
+    <End Type="UBECModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Alert">
         <PropertyRef Name="Id" />
@@ -569,8 +588,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_AlertNotification_AlertType">
-    <End Type="PROModel.AlertType" Role="AlertType" Multiplicity="1" />
-    <End Type="PROModel.AlertNotification" Role="AlertNotification" Multiplicity="*" />
+    <End Type="UBECModel.AlertType" Role="AlertType" Multiplicity="1" />
+    <End Type="UBECModel.AlertNotification" Role="AlertNotification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AlertType">
         <PropertyRef Name="Id" />
@@ -581,8 +600,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="MembershipApplication">
-    <End Type="PROModel.Applications" Role="Applications" Multiplicity="1" />
-    <End Type="PROModel.Memberships" Role="Memberships" Multiplicity="*" />
+    <End Type="UBECModel.Applications" Role="Applications" Multiplicity="1" />
+    <End Type="UBECModel.Memberships" Role="Memberships" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Applications">
         <PropertyRef Name="ApplicationId" />
@@ -593,8 +612,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="RoleApplication">
-    <End Type="PROModel.Applications" Role="Applications" Multiplicity="1" />
-    <End Type="PROModel.Roles" Role="Roles" Multiplicity="*" />
+    <End Type="UBECModel.Applications" Role="Applications" Multiplicity="1" />
+    <End Type="UBECModel.Roles" Role="Roles" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Applications">
         <PropertyRef Name="ApplicationId" />
@@ -605,8 +624,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="UserApplication">
-    <End Type="PROModel.Applications" Role="Applications" Multiplicity="1" />
-    <End Type="PROModel.Users" Role="Users" Multiplicity="*" />
+    <End Type="UBECModel.Applications" Role="Applications" Multiplicity="1" />
+    <End Type="UBECModel.Users" Role="Users" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Applications">
         <PropertyRef Name="ApplicationId" />
@@ -617,8 +636,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Project_Contractor">
-    <End Type="PROModel.Contractor" Role="Contractor" Multiplicity="1" />
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+    <End Type="UBECModel.Contractor" Role="Contractor" Multiplicity="1" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Contractor">
         <PropertyRef Name="Id" />
@@ -629,8 +648,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DocumentType_DocumentCategory">
-    <End Type="PROModel.DocumentCategory" Role="DocumentCategory" Multiplicity="1" />
-    <End Type="PROModel.DocumentType" Role="DocumentType" Multiplicity="*" />
+    <End Type="UBECModel.DocumentCategory" Role="DocumentCategory" Multiplicity="1" />
+    <End Type="UBECModel.DocumentType" Role="DocumentType" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DocumentCategory">
         <PropertyRef Name="Id" />
@@ -641,8 +660,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DocumentInfo_DocumentType">
-    <End Type="PROModel.DocumentType" Role="DocumentType" Multiplicity="1" />
-    <End Type="PROModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
+    <End Type="UBECModel.DocumentType" Role="DocumentType" Multiplicity="1" />
+    <End Type="UBECModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DocumentType">
         <PropertyRef Name="Id" />
@@ -653,8 +672,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Inspection_LGA">
-    <End Type="PROModel.LGA" Role="LGA" Multiplicity="1" />
-    <End Type="PROModel.Inspection" Role="Inspection" Multiplicity="*" />
+    <End Type="UBECModel.LGA" Role="LGA" Multiplicity="1" />
+    <End Type="UBECModel.Inspection" Role="Inspection" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="LGA">
         <PropertyRef Name="Id" />
@@ -665,8 +684,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_LGA_State">
-    <End Type="PROModel.State" Role="State" Multiplicity="1" />
-    <End Type="PROModel.LGA" Role="LGA" Multiplicity="*" />
+    <End Type="UBECModel.State" Role="State" Multiplicity="1" />
+    <End Type="UBECModel.LGA" Role="LGA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="State">
         <PropertyRef Name="Id" />
@@ -677,8 +696,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Project_LGA">
-    <End Type="PROModel.LGA" Role="LGA" Multiplicity="1" />
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+    <End Type="UBECModel.LGA" Role="LGA" Multiplicity="1" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="LGA">
         <PropertyRef Name="Id" />
@@ -689,8 +708,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="MembershipUser">
-    <End Type="PROModel.Users" Role="Users" Multiplicity="1" />
-    <End Type="PROModel.Memberships" Role="Memberships" Multiplicity="0..1" />
+    <End Type="UBECModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="UBECModel.Memberships" Role="Memberships" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserId" />
@@ -701,8 +720,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Payment_PaymentType">
-    <End Type="PROModel.PaymentType" Role="PaymentType" Multiplicity="1" />
-    <End Type="PROModel.Payment" Role="Payment" Multiplicity="*" />
+    <End Type="UBECModel.PaymentType" Role="PaymentType" Multiplicity="1" />
+    <End Type="UBECModel.Payment" Role="Payment" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PaymentType">
         <PropertyRef Name="Id" />
@@ -713,8 +732,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Payment_Project">
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-    <End Type="PROModel.Payment" Role="Payment" Multiplicity="*" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
+    <End Type="UBECModel.Payment" Role="Payment" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ProjectApplication">
         <PropertyRef Name="Id" />
@@ -725,8 +744,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="UserProfile">
-    <End Type="PROModel.Users" Role="Users" Multiplicity="1" />
-    <End Type="PROModel.Profiles" Role="Profiles" Multiplicity="0..1" />
+    <End Type="UBECModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="UBECModel.Profiles" Role="Profiles" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserId" />
@@ -737,8 +756,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Inspection_ProjectApplication">
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-    <End Type="PROModel.Inspection" Role="Inspection" Multiplicity="*" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
+    <End Type="UBECModel.Inspection" Role="Inspection" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ProjectApplication">
         <PropertyRef Name="Id" />
@@ -749,8 +768,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Project_Workflow">
-    <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="1" />
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+    <End Type="UBECModel.Workflow" Role="Workflow" Multiplicity="1" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Workflow">
         <PropertyRef Name="Id" />
@@ -761,8 +780,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectApplication_ProjectApplication">
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication1" Multiplicity="0..1" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication1" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="ProjectApplication">
         <PropertyRef Name="Id" />
@@ -773,8 +792,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectApplication_Users">
-    <End Type="PROModel.Users" Role="Users" Multiplicity="0..1" />
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+    <End Type="UBECModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserId" />
@@ -785,8 +804,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserDetail_Users">
-    <End Type="PROModel.Users" Role="Users" Multiplicity="1" />
-    <End Type="PROModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+    <End Type="UBECModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="UBECModel.UserDetail" Role="UserDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserId" />
@@ -797,8 +816,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WorkFlowActions_Workflow">
-    <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="1" />
-    <End Type="PROModel.WorkFlowActions" Role="WorkFlowActions" Multiplicity="*" />
+    <End Type="UBECModel.Workflow" Role="Workflow" Multiplicity="1" />
+    <End Type="UBECModel.WorkFlowActions" Role="WorkFlowActions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Workflow">
         <PropertyRef Name="Id" />
@@ -809,8 +828,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WorkflowSteps_Workflow">
-    <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="1" />
-    <End Type="PROModel.WorkflowSteps" Role="WorkflowSteps" Multiplicity="*" />
+    <End Type="UBECModel.Workflow" Role="Workflow" Multiplicity="1" />
+    <End Type="UBECModel.WorkflowSteps" Role="WorkflowSteps" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Workflow">
         <PropertyRef Name="Id" />
@@ -821,8 +840,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WorkflowStepActions_WorkFlowActions">
-    <End Type="PROModel.WorkFlowActions" Role="WorkFlowActions" Multiplicity="1" />
-    <End Type="PROModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
+    <End Type="UBECModel.WorkFlowActions" Role="WorkFlowActions" Multiplicity="1" />
+    <End Type="UBECModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkFlowActions">
         <PropertyRef Name="Id" />
@@ -833,8 +852,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WorkflowStepActions_WorkflowSteps">
-    <End Type="PROModel.WorkflowSteps" Role="WorkflowSteps" Multiplicity="1" />
-    <End Type="PROModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
+    <End Type="UBECModel.WorkflowSteps" Role="WorkflowSteps" Multiplicity="1" />
+    <End Type="UBECModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkflowSteps">
         <PropertyRef Name="Id" />
@@ -845,23 +864,23 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="DocumentTypeFormat">
-    <End Type="PROModel.DocumentFormat" Role="DocumentFormat" Multiplicity="*" />
-    <End Type="PROModel.DocumentType" Role="DocumentType" Multiplicity="*" />
+    <End Type="UBECModel.DocumentFormat" Role="DocumentFormat" Multiplicity="*" />
+    <End Type="UBECModel.DocumentType" Role="DocumentType" Multiplicity="*" />
   </Association>
   <Association Name="ProjectDocumentInfo">
-    <End Type="PROModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
-    <End Type="PROModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+    <End Type="UBECModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
+    <End Type="UBECModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
   </Association>
   <Association Name="UsersInRoles">
-    <End Type="PROModel.Roles" Role="Roles" Multiplicity="*" />
-    <End Type="PROModel.Users" Role="Users" Multiplicity="*" />
+    <End Type="UBECModel.Roles" Role="Roles" Multiplicity="*" />
+    <End Type="UBECModel.Users" Role="Users" Multiplicity="*" />
   </Association>
   <Association Name="WorkflowDocument">
-    <End Type="PROModel.DocumentType" Role="DocumentType" Multiplicity="*" />
-    <End Type="PROModel.Workflow" Role="Workflow" Multiplicity="*" />
+    <End Type="UBECModel.DocumentType" Role="DocumentType" Multiplicity="*" />
+    <End Type="UBECModel.Workflow" Role="Workflow" Multiplicity="*" />
   </Association>
   <Association Name="InspectionDocumentInfo">
-    <End Type="PROModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
-    <End Type="PROModel.Inspection" Role="Inspection" Multiplicity="*" />
+    <End Type="UBECModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
+    <End Type="UBECModel.Inspection" Role="Inspection" Multiplicity="*" />
   </Association>
 </Schema>

@@ -414,6 +414,7 @@ namespace Project.Areas.Admin.Controllers
                 var getdraftProject = db.ProjectApplication.Where(x => x.Id == getInspection.ProjectId).ToList();
                 model.projectList = getdraftProject;
 
+                //var getpath = getInspection.DocumentInfo.Where(x=>x.DocumentTypeId==model.documentForm.DocumentTypeId).FirstOrDefault();
 
                 if (ModelState.IsValid)
                 {
@@ -450,6 +451,8 @@ namespace Project.Areas.Admin.Controllers
                         return View(model);
                     }
                     #endregion
+
+                  
 
                     #region save Resume
                     int i = 0;
