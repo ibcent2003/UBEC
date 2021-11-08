@@ -9,5 +9,6 @@ namespace Project.ApiControllers.Contracts.V1.Responses
     {
         public List<string> Role { get; set; } = new List<string>();
         public string Username { get; set; } = string.Empty;
+        public Guid? UserId { get; set; }
     }
 }
