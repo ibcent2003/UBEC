@@ -56,8 +56,10 @@ namespace Project.ApiControllers
                 resp.IsSuccessful = result;
                 if (result)
                 {
-                    //var user = _membershipService.GetUser(request.username);
+                    //var user = _membershipService.GetUser(request.Username);
+                    var user = db.Users.FirstOrDefault(x => x.UserName.ToLower() == request.Username.ToLower());
                     resp.Username = request.Username;
+                    resp.UserId = user.UserId;
                     resp.Role = Roles.GetRolesForUser(request.Username).ToList();
                     resp.Message = "Login Successful";
                 }
@@ -129,7 +131,7 @@ namespace Project.ApiControllers
                         ProjectType = x.Workflow.Name,
                         Contractor = x.Contractor.Name,
                         Description = x.Description,
-                        OwnedBy = x.ModifiedBy
+                        OwnedBy = x.InspectionUserId
                     }).ToList();
                 if (rows != null)
                 {
@@ -260,7 +262,7 @@ namespace Project.ApiControllers
             {
                 //TODO:Log Error
                 resp.IsSuccessful = false;
-                resp.Message = "Server Error";
+                resp.Message = "Server Error:"+ex.Message;
             }
             return resp;
         }
