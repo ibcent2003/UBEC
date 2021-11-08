@@ -12,6 +12,6 @@ namespace Project.ApiControllers.Contracts.V1.Responses
         public string ProjectType { get; set; }
         public string Contractor { get; set; }
         public string Description { get; set; }
-        public string OwnedBy { get; set; }
+        public Guid? OwnedBy { get; set; }
     }
 }
