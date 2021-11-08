@@ -26,34 +26,40 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-12">
-                    <div class="iq-feature4 text-center iq-font-white iq-ptb-60 iq-pl-50 iq-pr-50 iq-over-black-80">
-                        <div class="content-blog">
-                            <i class="ion-ios-home-outline iq-font-white"></i>
-                            <h4 class="iq-font-green iq-tw-6 iq-mt-20 iq-mb-10">Construction Projects</h4>
-                            @*<p class="text-gray">Lorem Ipsum is simply dummy text ever sincehar the 1500s, when an unknownshil printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>*@
+                    <a href="@Url.Action("ViewProject", "Home", new {Id=1, Area = ""})">
+                        <div class="iq-feature4 text-center iq-font-white iq-ptb-60 iq-pl-50 iq-pr-50 iq-over-black-80">
+                            <div class="content-blog">
+                                <i class="ion-ios-home-outline iq-font-white"></i>
+                                <h4 class="iq-font-green iq-tw-6 iq-mt-20 iq-mb-10">Construction Projects</h4>
+                                @*<p class="text-gray">Lorem Ipsum is simply dummy text ever sincehar the 1500s, when an unknownshil printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>*@
+                            </div>
+                            <div class="feature-img" style="background-image: url('/Content/Frontend/images/feature/cont.png')"></div>
                         </div>
-                        <div class="feature-img" style="background-image: url('/Content/Frontend/images/feature/cont.png')"></div>
-                    </div>
+                        </a>
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="iq-feature4 text-center iq-font-white iq-ptb-60 iq-pl-50 iq-pr-50 iq-over-green-80">
-                        <div class="content-blog">
-                            <i class="ion-ios-compose-outline iq-font-white"></i>
-                            <h4 class="iq-font-white iq-tw-6 iq-mt-20 iq-mb-10">Renovation Projects</h4>
-                            @*<p class="text-gray">Lorem Ipsum is simply dummy text ever sincehar the 1500s, when an unknownshil printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>*@
+                    <a href="@Url.Action("ViewProject", "Home", new {Id=2, Area = ""})">
+                        <div class="iq-feature4 text-center iq-font-white iq-ptb-60 iq-pl-50 iq-pr-50 iq-over-green-80">
+                            <div class="content-blog">
+                                <i class="ion-ios-compose-outline iq-font-white"></i>
+                                <h4 class="iq-font-white iq-tw-6 iq-mt-20 iq-mb-10">Renovation Projects</h4>
+                                @*<p class="text-gray">Lorem Ipsum is simply dummy text ever sincehar the 1500s, when an unknownshil printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>*@
+                            </div>
+                            <div class="feature-img" style="background-image: url('/Content/Frontend/images/feature/renovation.jpg')"></div>
                         </div>
-                        <div class="feature-img" style="background-image: url('~/Content/Frontend/images/feature/cont.png')"></div>
-                    </div>
+                        </a>
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="iq-feature4 text-center iq-font-white iq-ptb-60 iq-pl-50 iq-pr-50 iq-over-black-80">
-                        <div class="content-blog">
-                            <i class="ion-ios-help-outline iq-font-white"></i>
-                            <h4 class="iq-font-green iq-tw-6 iq-mt-20 iq-mb-10">Supply Projects</h4>
-                            @*<p class="text-gray">Lorem Ipsum is simply dummy text ever sincehar the 1500s, when an unknownshil printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>*@
+                    <a href="@Url.Action("ViewProject", "Home", new {Id=3, Area = ""})">
+                        <div class="iq-feature4 text-center iq-font-white iq-ptb-60 iq-pl-50 iq-pr-50 iq-over-black-80">
+                            <div class="content-blog">
+                                <i class="ion-ios-help-outline iq-font-white"></i>
+                                <h4 class="iq-font-green iq-tw-6 iq-mt-20 iq-mb-10">Supply Projects</h4>
+                                @*<p class="text-gray">Lorem Ipsum is simply dummy text ever sincehar the 1500s, when an unknownshil printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>*@
+                            </div>
+                            <div class="feature-img" style="background-image: url('/Content/Frontend/images/feature/supply.jpg')"></div>
                         </div>
-                        <div class="feature-img" style="background-image: url('~/Content/Frontend/images/feature/cont.png')"></div>
-                    </div>
+                        </a>
                 </div>
             </div>
         </div>
@@ -118,12 +124,10 @@
                             {
                                 <div class="item">
                                     <div>
-                                        <a href="portfolio-single-1.html">
-                                            @*<img alt="" class="img-fluid wd-full" src="~/Content/4.jpg">*@
-                                            @*<img src="@Url.Action("DocumentsUploadedPath", new { Path = (Model.PicturePath) + p.Path }) " />*@
+                                        <a href="portfolio-single-1.html">                                          
                                             <img class="img-fluid wd-full itemImage" src="@Url.Action("DocumentsUploadedPath", new { Path = (Model.PicturePath) + p.Path }) " />
                                         </a>
-                                        <h6 class="iq-font-white iq-tw-5 iq-mt-15">@p.Name</h6>
+                                        <h6 class="iq-font-white iq-tw-5 iq-mt-15">@p.DocumentType.Name</h6>
 
                                     </div>
                                 </div>

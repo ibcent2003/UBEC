@@ -26,7 +26,7 @@
                 <div class="visual green"><i class="icon-building"></i></div>
                 <div class="title">Total Construction</div>
                 <div class="value">@Model.TotalConstruction</div>
-                <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
+                <a class="more" href="@Url.Action("Index", "Project", new {Id=1, area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
                 <div class="visual green"><i class="icon-road"></i></div>
                 <div class="title">Renovation</div>
                 <div class="value">@Model.TotalRenovation</div>
-                <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
+                <a class="more" href="@Url.Action("Index", "Project", new {Id=2, area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
                 <div class="visual yellow"><i class="icon-dollar"></i></div>
                 <div class="title">Supply</div>
                 <div class="value">@Model.TotalSupply</div>
-                <a class="more" href="javascript:void(0);">View More <i class="pull-right icon-angle-right"></i></a>
+                <a class="more" href="@Url.Action("Index", "Project", new {Id=3, area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>
     </div>

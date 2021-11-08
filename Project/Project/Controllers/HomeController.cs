@@ -101,6 +101,11 @@ namespace Project.Controllers
             return View();
         }
 
+        public ActionResult DownloadApk()
+        {
+            return View();
+        }
+
         public ActionResult ViewNews(int Id)
         {
             try
@@ -159,11 +164,31 @@ namespace Project.Controllers
             {
                 IndexViewModel model = new IndexViewModel();
                 var getproject = db.ProjectApplication.Where(x => x.TransactionId == Id).FirstOrDefault();
-                var getInspection = db.Inspection.Where(x => x.ProjectId == getproject.Id).ToList();
+                var getInspection = db.Inspection.Where(x => x.ProjectId == getproject.Id && x.InspectionStatus=="Submitted").ToList();
                 model.inspectionlist = getInspection;
                 model.project = getproject;
                 model.PicturePath = Properties.Settings.Default.FullPhotoPath;
                 return View(model);
+            }
+            catch(Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+        }
+
+
+        public ActionResult ProjectType()
+        {
+            try
+            {
+                IndexViewModel model = new IndexViewModel();
+                var getProject = db.Workflow.Where(x => x.IsDeleted == false).ToList();
+                model.ProjectTypes = getProject;
+                return View(model);
+
             }
             catch(Exception ex)
             {

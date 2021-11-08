@@ -1,6 +1,6 @@
 ﻿@model Project.Models.IndexViewModel
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = Model.project.SerialNo;
     Layout = "~/Views/Shared/_PlainLayout.cshtml";
     var db = new Project.DAL.PROEntities();
 }
@@ -24,14 +24,14 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-sm-12">
                 <div class="iq-mb-0">
-                    <h2 class="iq-font-white iq-tw-6">About Us</h2>
+                    <h2 class="iq-font-white iq-tw-6"> @Model.project.SerialNo</h2>
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
                 <nav aria-label="breadcrumb" class="text-right">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/"><i class="ion-android-home"></i> Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                        <li class="breadcrumb-item active" aria-current="page"> @Model.project.SerialNo</li>
                     </ol>
                 </nav>
             </div>
@@ -128,7 +128,7 @@
                                                             LGA
                                                         </th>
                                                         <th>
-                                                            Stage of Completion
+                                                            Stage
                                                         </th>
                                         
                                                         <th>

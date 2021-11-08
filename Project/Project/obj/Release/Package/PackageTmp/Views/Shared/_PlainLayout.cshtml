@@ -1,0 +1,160 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <title>UBEC - Constituency Monitoring System</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/fav.jpg" type="image/x-icon" />
+    <!-- bootstrap -->
+
+    <link href="~/Content/Frontend/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link href="~/Content/Frontend/revolution/css/settings.css" rel="stylesheet" type="text/css">
+    <!-- ADD-ONS CSS FILES -->
+    <link href="~/Content/Frontend/revolution/css/revolution.addon.particles.css" rel="stylesheet" type="text/css">
+    <!-- main style -->
+    <link href="~/Content/Frontend/css/style.css" rel="stylesheet" type="text/css" />
+    <!-- responsive -->
+    <link href="~/Content/Frontend/css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- custom -->
+    <link href="~/Content/Frontend/css/custom.css" rel="stylesheet" type="text/css" />
+
+
+
+</head>
+
+
+
+
+<body>
+    <!-- loading -->
+    <div id="loading">
+        <div id="loading-center">
+            <img src="~/Content/Frontend/images/loader.png" alt="loder">
+        </div>
+    </div>
+    <!-- loading End -->
+    <!-- HEADER  -->
+    <header class="header-01 white re-none">
+        @Html.Partial("Partial/_TopBar")
+        <!-- menu start -->
+        <nav id="menu-1" class="mega-menu">
+            <!-- menu list items container -->
+            <section class="menu-list-items">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- menu logo -->
+                            <ul class="menu-logo">
+                                <li>
+                                    <a href="/">
+                                        <img id="logo_dark" src="~/Content/logo11.png" alt="logo">
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="menu-sidebar pull-right">
+
+                                <li class="iq-share">
+                                    <div class="slideouticons">
+                                        <input type="checkbox" id="togglebox" />
+                                        <label for="togglebox" class="mainlabel"><i class="fa fa-share-alt"></i></label>
+                                        <div class="iconswrapper">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-facebook" title="Facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-google-plus" title="Google Plus"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-pinterest-p" title="Pinterest"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- menu links -->
+                            <ul class="menu-links">
+                                <!-- active class -->
+                                <li class="active">
+                                    <a href="/">Home</a>
+
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("About", "Home", new {area=""})">About</a>
+
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Projects</a>
+                                    <!-- drop down multilevel  -->
+                                    <ul class="drop-down-multilevel">
+                                        <li><a href="@Url.Action("ViewProject", "Home", new {Id=1, Area = ""})">Construction</a></li>
+                                        <li><a href="@Url.Action("ViewProject", "Home", new {Id=2, Area = ""})">Renovation</a></li>
+                                        <li><a href="@Url.Action("ViewProject", "Home", new {Id=3, Area = ""})">Supply</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("MoreNews", "Home", new { Area = ""})">News</a>
+
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Contact", "Home", new { Area = ""})">Contact Us</a>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </nav>
+    </header>
+   
+   
+    
+    <div class="main-content">
+      
+        @RenderBody()
+       
+    </div>
+    <!--=================================
+    Main Content -->
+    <!--=================================
+    Footer -->
+    @Html.Partial("Partial/_Footer")
+    <!--=================================
+    Footer -->
+    <!-- back-to-top -->
+    <div id="back-to-top">
+        <a class="top" id="top" href="#top"> <i class="ion-ios-upload-outline"></i> </a>
+    </div>
+    <!-- back-to-top End -->
+    <!--================ Jquery =================-->
+    <!-- Jquery  -->
+    <script src="~/Content/Frontend/js/jquery.min.js"></script>
+    <!-- popper  -->
+    <script src="~/Content/Frontend/js/popper.min.js"></script>
+    <!--  bootstrap -->
+    <script src="~/Content/Frontend/js/bootstrap.min.js"></script>
+    <!-- Google captcha code Js -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <!-- Mega Menu -->
+    <script src="~/Content/Frontend/js/mega-menu/mega_menu.js"></script>
+    <!-- Main -->
+    <script src="~/Content/Frontend/js/main.js"></script>
+
+
+    <!-- price_range_script -->
+    <script src="~/Content/Frontend/js/price_range_script.js"></script>
+    <!-- modernizr.custom -->
+    <script src="~/Content/Frontend/js/modernizr.custom.js"></script>
+    <!-- jquerypp.custom -->
+    <script src="~/Content/Frontend/js/jquerypp.custom.js"></script>
+    <!-- bookblock -->
+    <script src="~/Content/Frontend/js/jquery.bookblock.js"></script>
+
+    <!-- Custom -->
+    <script src="~/Content/Frontend/js/custom.js"></script>
+</body>
+
+</html>

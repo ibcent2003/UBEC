@@ -25,10 +25,9 @@
                                 <label for="togglebox" class="mainlabel"><i class="fa fa-share-alt"></i></label>
                                 <div class="iconswrapper">
                                     <ul>
-                                        <li><a href="#"><i class="fa fa-facebook" title="Facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus" title="Google Plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p" title="Pinterest"></i></a></li>
+                                        <li><a href="https://web.facebook.com/ubecabuja.ubec.5" target="_blank"><i class="fa fa-facebook" title="Facebook"></i></a></li>
+                                        <li><a href="https://twitter.com/UBECnigeria" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>                                        
+                                        <li><a href="https://www.instagram.com/ubec.nigeria/" target="_blank"><i class="fa fa-instagram" title="Pinterest"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -46,7 +45,7 @@
                             
                         </li>
                         <li>
-                            <a href="javascript:void(0)">Projects</a>
+                            <a href="@Url.Action("ProjectType", "Home", new { Area = ""})">Projects</a>
                             <!-- drop down multilevel  -->
                             <ul class="drop-down-multilevel">
                                 <li><a href="@Url.Action("ViewProject", "Home", new {Id=1, Area = ""})">Construction</a></li>

@@ -118,8 +118,9 @@
                                         <div class="col-md-8">
                                             @Html.DropDownListFor(m => m.inspectionForm.ProjectQuality,
            new List<SelectListItem> {
-                new SelectListItem { Value = "Satisfactory" , Text = "Satisfactory" },
-                new SelectListItem { Value = "Unsatisfactory" , Text = "Unsatisfactory" },
+                new SelectListItem { Value = "Good" , Text = "Good" },
+                new SelectListItem { Value = "Fair" , Text = "Fair" },
+                new SelectListItem { Value = "Poor" , Text = "Poor" },
              },
            new { @class = "form-control" })
                                         </div>

@@ -6,7 +6,7 @@
                 <h2 class="iq-font-white iq-fw-4 iq-pb-10">Need help? <strong class="iq-font-black"></strong></h2>
                 
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 text-right"><a href="#" class="button white grey iq-re-4-mt30 iq-mr-0">Contact Us</a> </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 text-right"><a href="@Url.Action("Contact", "Home", new { Area = ""})" class="button white grey iq-re-4-mt30 iq-mr-0">Contact Us</a> </div>
         </div>
     </div>
 </div>
@@ -17,7 +17,7 @@
         <div class="row overview-block-ptb2">
             <div class="col-lg-3 col-md-6 col-sm-6 iq-mtb-20">
                 <div class="logo">
-                    <img id="footer_logo_img" class="img-fluid" src="~/Content/logo.png" alt="#">
+                    <img id="footer_logo_img" class="img-fluid" src="~/Content/logo1.png" alt="#">
                     <div class="iq-font-white iq-mt-15">The UBE Programme is a nine (9) year basic educational programme, which was launched and executed by the government and people of the Federal Republic of Nigeria...<a href="#" style="color:white">read more</a></div>
                 </div>
             </div>
@@ -56,11 +56,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <ul class="menu">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">News</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="@Url.Action("About", "Home", new {area=""})">About Us</a></li>
+                            <li><a href="@Url.Action("ProjectType", "Home", new { Area = ""})">Projects</a></li>
+                            <li><a href="@Url.Action("MoreNews", "Home", new { Area = ""})">News</a></li>
+                            <li><a href="@Url.Action("Contact", "Home", new { Area = ""})">Contact Us</a></li>
                         </ul>
                     </div>
                   
@@ -79,7 +79,7 @@
                 <div class="iq-copyright">
                     Copyright
                     <span id="copyright">
-                        <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>2021
+                        <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
                     </span>
                     <a href="#">UBEC</a> All Rights Reserved
                 </div>

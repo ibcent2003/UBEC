@@ -1,0 +1,61 @@
+﻿@model Project.Models.IndexViewModel
+@{
+    ViewBag.Title = Model.news.NewsHeadline;
+    Layout = "~/Views/Shared/_PlainLayout.cshtml";
+}
+
+<section class="overview-block-ptb iq-over-black-70 jarallax iq-breadcrumb3 text-left iq-font-white" style="background-image: url('/Content/Frontend/revolution/assets/s1.jpg'); background-position: center center; background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-sm-12">
+                <div class="iq-mb-0">
+                    <h2 class="iq-font-white iq-tw-6">News</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <nav aria-label="breadcrumb" class="text-right">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="ion-android-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">News</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="iq-blog overview-block-ptb">
+    <div class="container">
+        <div class="row">
+         
+            <div class="col-lg-8 col-sm-12 iq-mtb-15">
+                <div class="iq-blog-entry iq-audio white-bg">
+                    <div class="iq-entry-image clearfix">
+                        <img class="img-fluid" src="@Url.Action("DocumentsUploadedPath", new { Path = (Model.PicturePath) + Model.news.Photo }) " />
+                    </div>
+                   
+                    <div class="iq-pos-r">
+                        <div class="iq-blog-detail">
+                            <span class="tag"><i class="ion-image"></i> Photos</span>
+                            <span class="date">12-Aug</span>
+                            <ul class="iq-entry-meta iq-mt-10">
+                                
+                                <li><i class="fa fa-eye" aria-hidden="true"></i> @Model.news.NoOfView</li>
+                                
+                            </ul>
+                            <div class="iq-entry-title iq-mb-10 iq-mt-10">
+                                
+                                    <h6 class="iq-tw-6">@Model.news.NewsHeadline</h6>
+                                
+                            </div>
+                            <div class="iq-entry-content">
+                                <p>@Html.Raw(Model.news.NewsContent)</p>                                                               
+                            </div>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    </div>
+</section>

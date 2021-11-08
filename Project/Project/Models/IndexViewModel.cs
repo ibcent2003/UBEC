@@ -15,6 +15,7 @@ namespace Project.Models
         public List<ProjectApplication> projectList { get; set; }
         public List<Inspection> inspectionlist { get; set; }
         public Workflow workflow { get; set; }
-   
+        public List<Workflow> ProjectTypes { get; set; }
+
     }
 }
