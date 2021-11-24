@@ -96,7 +96,18 @@
                                                                         @pro.Location
                                                                     </td>
                                                                 </tr>
-
+                                                                <tr>
+                                                                    <td><b>State</b></td>
+                                                                    <td>
+                                                                        @pro.LGA.State.Name
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>LGA</b></td>
+                                                                    <td>
+                                                                        @pro.LGA.Name
+                                                                    </td>
+                                                                </tr>
                                                                 <tr>
                                                                     <td><b>Description</b></td>
                                                                     <td>@pro.Description</td>
@@ -112,6 +123,32 @@
                                                                 <tr>
                                                                     <td><b>Contract Sum</b></td>
                                                                     <td>@pro.ContractSum</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Project Type</b></td>
+                                                                    <td>@pro.ProjectType.Name</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Start Date</b></td>
+                                                                    <td>@pro.StartDate</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>End Date</b></td>
+                                                                    <td>@pro.EndDate</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Show Contract Sum</b></td>
+                                                                    <td>
+                                                                        @if (pro.EnableSum == true)
+                                                                        {
+                                                                            <span class="label label-success">Yes</span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span class="label label-danger">No</span>
+                                                                        }
+
+                                                                    </td>
                                                                 </tr>
 
                                                             </table>
@@ -152,7 +189,7 @@
             <div class="widget-header">
                 <h4>
                     <i class="icon-reorder"></i>
-                    Inspection List
+                    Monitoring Report List
                 </h4>
 
 
@@ -169,6 +206,8 @@
                             <th>State of Completion</th>
                             <th>Has Defect</th>
                             <th>Status</th>
+                            <th>Modified By</th>
+                            <th>Modified Date</th>
                             <th>Action</th>
 
 
@@ -204,17 +243,22 @@
                                 }
                             </td>
                             <td>
-                                @if (item.InspectionStatus == "Not Submitted")
+                                @if (item.InspectionStatus == "Approved")
                                 {
-                                <span class="label label-danger">draft</span>
+
+                                    <span class="label label-success">@item.InspectionStatus</span>
+
                                 }
                                 else
                                 {
-                                <span class="label label-success">@item.InspectionStatus</span>
+                                    <span class="label label-danger">@item.InspectionStatus</span>
+
                                 }
 
 
                             </td>
+                            <td>@item.ModifiedBy</td>
+                            <td>@item.ModifiedDate</td>
                             <td>
                                 <div class="dropdown">
                                     <span class="btn dropdown-toggle btn-xs btn-success" type="button" id="dropdownMenu1" data-toggle="dropdown">Action List <i class="icon-angle-down"></i></span>
@@ -224,6 +268,25 @@
                                             <li role="presentation">
                                                 @Html.ActionLink("Details", "Detail", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
                                             </li>
+                                            @*if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+                                            {
+                                                <li role="presentation">
+                                                    @Html.ActionLink("Approve Report", "EditInspection", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                                </li>
+                                            }*@
+
+                                        }
+                                        else if (item.InspectionStatus == "Approved")
+                                        {
+                                            <li role="presentation">
+                                                @Html.ActionLink("Details", "Detail", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                            </li>
+                                            @*if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+                                            {
+                                                <li role="presentation">
+                                                    @Html.ActionLink("Dis-Approved Report", "EditInspection", new { Id = item.Id }, new { role = "menuitem", tabindex = "-1" })
+                                                </li>
+                                            }*@
                                         }
                                         else
                                         {

@@ -16,6 +16,7 @@ namespace Project.Models
         public List<Inspection> inspectionlist { get; set; }
         public Workflow workflow { get; set; }
         public List<Workflow> ProjectTypes { get; set; }
+        public bool EnableSum { get; set; }
 
     }
 }

@@ -14,13 +14,24 @@ namespace Project.Controllers
     {
         private PROEntities db = new PROEntities();
         public ActionResult Index(IndexViewModel model)
-        {          
-            var news = db.News.Where(x => x.IsPublished == true && x.IsDeleted == false).ToList();
-            model.NewsList = news;            
-            var getinspectionlist = db.Inspection.ToList();
-            model.inspectionlist = getinspectionlist;
-            model.PicturePath = Properties.Settings.Default.FullPhotoPath;
-            return View(model);
+        {
+            try
+            {
+                var news = db.News.Where(x => x.IsPublished == true && x.IsDeleted == false).ToList();
+                model.NewsList = news;
+                var getinspectionlist = db.Inspection.Where(x => x.InspectionStatus == "Approved").ToList();
+                model.inspectionlist = getinspectionlist;
+                model.PicturePath = Properties.Settings.Default.FullPhotoPath;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+           
         }
 
         public ActionResult About()
@@ -45,8 +56,6 @@ namespace Project.Controllers
                 return RedirectToAction("Error404");
             }
         }
-
-
        
         public ActionResult DocumentsUploadedPath(string path)
         {
@@ -164,10 +173,18 @@ namespace Project.Controllers
             {
                 IndexViewModel model = new IndexViewModel();
                 var getproject = db.ProjectApplication.Where(x => x.TransactionId == Id).FirstOrDefault();
-                var getInspection = db.Inspection.Where(x => x.ProjectId == getproject.Id && x.InspectionStatus=="Submitted").ToList();
+                var getInspection = db.Inspection.Where(x => x.ProjectId == getproject.Id && x.InspectionStatus=="Approved").ToList();
                 model.inspectionlist = getInspection;
                 model.project = getproject;
                 model.PicturePath = Properties.Settings.Default.FullPhotoPath;
+                //if(getproject.EnableSum==true)
+                //{
+                //    model.EnableSum = true;
+                //}
+                //else
+                //{
+                //    model.EnableSum = false;
+                //}
                 return View(model);
             }
             catch(Exception ex)

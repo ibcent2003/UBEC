@@ -1,7 +1,7 @@
 ﻿@model Project.Areas.Admin.Models.ProjectViewModel
 @using Project.HtmlHelpers
 @{
-    ViewBag.Title = "Assign Inspection Officer to " + Model.project.SerialNo + "";
+    ViewBag.Title = "Assign Monitoring Officer to " + Model.project.SerialNo + "";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.IsGreetings = "true";
     var db = new Project.DAL.PROEntities();
@@ -11,7 +11,7 @@
 
         <ul class="breadcrumb" id="breadcrumbs">
             <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
-            <li class="current"> <a title="" href="javascript: return void(0)"></a>Assign Inspection Officer</li>
+            <li class="current"> <a title="" href="javascript: return void(0)"></a>Assign Monitoring Officer</li>
         </ul>
     </div>
 }
@@ -32,7 +32,6 @@
 <a href="@Url.Action("Index", "Project", new {Id=Model.project.WorkFlowId, area="Admin"})" class="btn btn-xs btn-warning">Back</a>
 
 <br /><br />
-
 
 <div class="row">
     <div class="col-md-12">
@@ -101,7 +100,18 @@
                                                                         @pro.Location
                                                                     </td>
                                                                 </tr>
-
+                                                                <tr>
+                                                                    <td><b>State</b></td>
+                                                                    <td>
+                                                                        @pro.LGA.State.Name
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>LGA</b></td>
+                                                                    <td>
+                                                                        @pro.LGA.Name
+                                                                    </td>
+                                                                </tr>
                                                                 <tr>
                                                                     <td><b>Description</b></td>
                                                                     <td>@pro.Description</td>
@@ -117,6 +127,32 @@
                                                                 <tr>
                                                                     <td><b>Contract Sum</b></td>
                                                                     <td>@pro.ContractSum</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Project Type</b></td>
+                                                                    <td>@pro.ProjectType.Name</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Start Date</b></td>
+                                                                    <td>@pro.StartDate</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>End Date</b></td>
+                                                                    <td>@pro.EndDate</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Show Contract Sum</b></td>
+                                                                    <td>
+                                                                        @if (pro.EnableSum == true)
+                                                                        {
+                                                                            <span class="label label-success">Yes</span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span class="label label-danger">No</span>
+                                                                        }
+
+                                                                    </td>
                                                                 </tr>
 
                                                             </table>
@@ -159,7 +195,7 @@
             <div class="col-md-12">
                 <div class="widget box">
                     <div class="widget-header">
-                        <h4><i class="icon-reorder"></i>Select inspection officer</h4>
+                        <h4><i class="icon-reorder"></i>Select Monitoring officer</h4>
                     </div>
                     <div class="widget-content">
 
@@ -192,7 +228,7 @@ else
             <div class="widget-header">
                 <h4>
                     <i class="icon-reorder"></i>
-                    Assinged Offier
+                    Assinged Monitoring Offier
                 </h4>
             </div>
             <div class="widget-content">
@@ -261,7 +297,7 @@ else
         "use strict";
 
         function DeleteConfirm() {
-            if (confirm("Are you sure want to remove this user?"))
+            if (confirm("Are you sure want to remove this Monitoring Officer?"))
                 return true;
             else
                 return false;

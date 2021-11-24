@@ -34,17 +34,35 @@
     <div class="col-md-12">
         <h5 class="">
             <a href="@Url.Action("InspectionList", "Project", new {Id=Model.project.Id, area="Admin"})" class="btn btn-lg btn-warning">Back</a>
-            @if (Model.inspection.InspectionStatus == "Submitted")
+            @if (Model.ReportOwner == true)
             {
+                if (Model.inspection.InspectionStatus == "Submitted")
+                {
 
+                }
+                else if (Model.inspection.InspectionStatus == "Approved")
+                {
+
+                }
+                else
+                {
+                    @Html.ActionLink("Submit Project", "SubmitInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                }
             }
-            else
+
+            @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
             {
-                @Html.ActionLink("Submit Project", "SubmitInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                if (Model.inspection.InspectionStatus == "Submitted")
+                {
+                    @Html.ActionLink("Approved Report", "ApproveInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                }
+                else if (Model.inspection.InspectionStatus == "Approved")
+                {
+                    @Html.ActionLink("Disapprove Report", "DisapproveInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-danger", onclick = "return ConfirmSubmit()" })
+                }
             }
+            @*<input type="submit" class="btn btn-lg btn-inverse pull-right" id="btnSubmit" value="Download as PDF" />*@ <input type="button" value="Print" class="btn btn-lg btn-success pull-right" onclick="javascript: printDiv('PrintThisArea')" />
 
-
-            <input type="button" value="Print" class="btn btn-lg btn-success pull-right" onclick="javascript: printDiv('PrintThisArea')" />
         </h5>
 
     </div>
@@ -120,7 +138,18 @@
                                                                             @pro.Location
                                                                         </td>
                                                                     </tr>
-
+                                                                    <tr>
+                                                                        <td><b>State</b></td>
+                                                                        <td>
+                                                                            @pro.LGA.State.Name
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>LGA</b></td>
+                                                                        <td>
+                                                                            @pro.LGA.Name
+                                                                        </td>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td><b>Description</b></td>
                                                                         <td>@pro.Description</td>
@@ -136,6 +165,32 @@
                                                                     <tr>
                                                                         <td><b>Contract Sum</b></td>
                                                                         <td>@pro.ContractSum</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Project Type</b></td>
+                                                                        <td>@pro.ProjectType.Name</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Start Date</b></td>
+                                                                        <td>@pro.StartDate</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>End Date</b></td>
+                                                                        <td>@pro.EndDate</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Show Contract Sum</b></td>
+                                                                        <td>
+                                                                            @if (pro.EnableSum == true)
+                                                                            {
+                                                                                <span class="label label-success">Yes</span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span class="label label-danger">No</span>
+                                                                            }
+
+                                                                        </td>
                                                                     </tr>
 
                                                                 </table>
@@ -229,7 +284,7 @@
                 <div class="widget-header">
                     <h4>
                         <i class="icon-reorder"></i>
-                        Inspction Officer
+                        Monitoring Officer
                     </h4>
                 </div>
                 <div class="widget-content">
@@ -283,7 +338,7 @@
                 <div class="widget-header">
                     <h4>
                         <i class="icon-reorder"></i>
-                        Inspection Information
+                        Monitoring Information
                     </h4>
 
 
@@ -336,13 +391,16 @@
                                         </td>
                                         <td>
 
-                                            @if (item.InspectionStatus == "Not Submitted")
+                                            @if (item.InspectionStatus == "Approved")
                                             {
-                                                <span class="label label-danger">draft</span>
+
+                                                <span class="label label-success">@item.InspectionStatus</span>
+
                                             }
                                             else
                                             {
-                                                <span class="label label-success">@item.InspectionStatus</span>
+                                        <span class="label label-danger">@item.InspectionStatus</span>
+
                                             }
 
 
@@ -446,7 +504,7 @@
     </div>
 
     <div class="row">
-        @foreach (var item in Model.DocumentInfoList)
+        @foreach (var item in Model.DocumentInfoList.OrderBy(x=>x.DocumentTypeId))
         {
             <div class="col-md-6">
                 <div class="widget box">
@@ -465,42 +523,50 @@
 
 
     </div>
-    </div>
+</div>
 
 
-    @section Scripts{
-        @Scripts.Render("~/Content/Backend/plugins/datatables/jquery.dataTables.min.js")
-        @Scripts.Render("~/Content/Backend/plugins/datatables/tabletools/TableTools.min.js")
-        @Scripts.Render("~/Content/Backend/plugins/datatables/colvis/ColVis.min.js")
-        @Scripts.Render("~/Content/Backend/plugins/datatables/DT_bootstrap.js")
-        <script>
-            "use strict";
+@section Scripts{
+    @Scripts.Render("~/Content/Backend/plugins/datatables/jquery.dataTables.min.js")
+    @Scripts.Render("~/Content/Backend/plugins/datatables/tabletools/TableTools.min.js")
+    @Scripts.Render("~/Content/Backend/plugins/datatables/colvis/ColVis.min.js")
+    @Scripts.Render("~/Content/Backend/plugins/datatables/DT_bootstrap.js")
+    <script>
+        "use strict";
 
-            function ConfirmSubmit() {
-                if (confirm("By submitting this report, i confirm that the information given in this form is true, complete and accurate. Please note you will not be able to modify after submission."))
-                    return true;
-                else
-                    return false;
-            }
+        function ConfirmSubmit() {
+            if (confirm("By submitting this report, i confirm that the information given in this form is true, complete and accurate. Please note you will not be able to modify after submission."))
+                return true;
+            else
+                return false;
+        }
 
-            function printDiv(divID) {
-                //Get the HTML of div
-                var divElements = document.getElementById(divID).innerHTML;
-                //Get the HTML of whole page
-                var oldPage = document.body.innerHTML;
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
 
-                //Reset the page's HTML with div's HTML only
-                document.body.innerHTML =
-                    "<html><head><title></title></head><body>" +
-                    divElements + "</body>";
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+                "<html><head><title></title></head><body>" +
+                divElements + "</body>";
 
-                //Print Page
-                window.print();
+            //Print Page
+            window.print();
 
-                //Restore orignal HTML
-                document.body.innerHTML = oldPage;
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
 
 
-            }
-        </script>
-    }
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#PrintThisArea").html());
+            });
+        });
+    </script>
+    
+}

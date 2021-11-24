@@ -69,6 +69,18 @@
                     <div class="iq-font-white">
                         @Model.project.Location
                     </div>
+                    @if (Model.project.EnableSum == true)
+                    {
+                        <div class="iq-font-white">
+                            <b> Contract Sum:</b>
+                        </div>
+                        <div class="iq-font-white">
+                         
+                            ₦@String.Format("{0:n0}", Model.project.ContractSum)
+                        </div>
+                    }
+                    else
+                    { }
                     <div class="iq-font-white">
                         <b> State:</b>
                     </div>

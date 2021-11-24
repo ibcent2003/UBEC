@@ -10,8 +10,21 @@ namespace Project.Areas.Admin.Models
 {
     public class ProjectViewModel
     {
+        public List<IntegerSelectListItem> StageOfCompletionList { get; set; }
+        public int StageOfCompletionId { get; set; }
+        public bool ReportOwner { get; set; }
+        public List<DeliverableFormat> AvailableFormat { get; set; }
+        public List<IntegerSelectListItem> deliverableTypeList { get; set; }
+        public int DeliverableTypeId { get; set; }
+        public List<IntegerSelectListItem> deliverableFormatList { get; set; }
         public System.Web.Mvc.SelectList InspectionUser { get; set; }
         public string username { get; set; }
+        public List<DeliverableType> deliverableType { get; set; }
+
+        public DeliverableType deliverable { get; set; }
+
+        public List<ProjectDeliverable> ProjectDeliverableList { get; set; }
+
         public Users user { get; set; }
         public bool HasAssigned { get; set; }
         public List<UserDetail> userDetail { get; set; }
@@ -25,6 +38,8 @@ namespace Project.Areas.Admin.Models
         public List<Payment> ProjectPaymentList { get; set; }
         public List<IntegerSelectListItem> ContractorList { get; set; }
         public List<IntegerSelectListItem> StateList { get; set; }
+        public List<IntegerSelectListItem> ProjectTypeList { get; set; }
+        public List<IntegerSelectListItem> StageOfCompletion { get; set; }
         public int StateId { get; set; }
         public List<IntegerSelectListItem> LgaList { get; set; }
         public List<IntegerSelectListItem> PaymentTypeList { get; set; }
@@ -38,12 +53,12 @@ namespace Project.Areas.Admin.Models
         public string FullPhotoPath { get; set; }
         public DocumentForm documentForm { get; set; }
         public InspectionForm inspectionForm { get; set; }
+        public ProjectDeliverableForm projectDeliverableForm { get; set; }
     }
 
     public class ProjectDetailForm
     {
-        public int Id { get; set; }
-
+        public int Id { get; set; }       
         [Required(ErrorMessage = "Please enter the serial No")]
         public string SerialNo { get; set; }
         [Required(ErrorMessage = "Please enter the description")]
@@ -65,27 +80,24 @@ namespace Project.Areas.Admin.Models
         [Required(ErrorMessage = "Please enter the Contract Sum")]
         public decimal ContractSum { get; set; }
 
-        [Required(ErrorMessage = "Please enter the State Of Completion")]
-        public string StageOfCompletion { get; set; }
+        [Required(ErrorMessage = "Please select the Project Type")]
+        public int ProjectTypeId { get; set; }
 
-        [Required(ErrorMessage = "Please enter the Description Of Completion")]
-        public string DescriptionOfCompletion { get; set; }
-
-        [Required(ErrorMessage = "Please enter the Project Quality")]
-        public string ProjectQuality { get; set; }
-        [Required(ErrorMessage = "Project has defect? please indicate")]
-        public bool HasDefect { get; set; }
         public string TransactionId { get; set; }
         public string Status { get; set; }
         public int workflowId { get; set; }
         public string DescriptionOfDefect { get; set; }
         public bool IsDeleted { get; set; }
+        public bool ShowCost { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
     public class ProjectPaymentForm
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Please select payment type")]
+
         public int PaymentTypeId { get; set; }
 
         [Required(ErrorMessage = "Please select payment type")]
@@ -118,9 +130,9 @@ namespace Project.Areas.Admin.Models
         [Required(ErrorMessage = "Please select the local government")]
         public int LGAId { get; set; }       
         [Required(ErrorMessage = "Please enter the State Of Completion")]
-        public string StageOfCompletion { get; set; }
+        public int StageOfCompletionId { get; set; }
         
-        public string DescriptionOfCompletion { get; set; }
+        //public string DescriptionOfCompletion { get; set; }
         
         public string ProjectQuality { get; set; }
        
@@ -128,5 +140,26 @@ namespace Project.Areas.Admin.Models
         public string DescriptionOfDefect { get; set; }
         public  int ProjectId { get; set; }
  
+    }
+
+    public class ProjectDeliverableForm
+    {
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Please select deliverable type")]
+        [Display(Name = "Deliverable Type")]
+        public int DeliverableId { get; set; }
+
+        [Required(ErrorMessage = "Please select payment type")]
+        [Display(Name = "Deliverable Name")]
+        public int DeliverableFormatId { get; set; }
+
+        [Required(ErrorMessage = "Please enter deliverable unit ")]
+        [Display(Name = "Deliverable Unit")]
+        public int DeliverableUnit { get; set; }
+
+        [Required(ErrorMessage = "Please enter Remarks ")]
+        [Display(Name = "Remarks")]
+        public string Remarks { get; set; }
+
     }
 }
