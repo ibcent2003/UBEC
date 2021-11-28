@@ -54,3 +54,4 @@ C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.csp
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.csproj.CopyComplete
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.pdb
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Debug\Project.DAL.csprojAssemblyReference.cache
