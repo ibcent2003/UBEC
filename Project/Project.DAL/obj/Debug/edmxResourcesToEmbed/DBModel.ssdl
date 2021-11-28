@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="UBECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Alert">
     <Key>
       <PropertyRef Name="Id" />
@@ -212,19 +212,17 @@
     <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Coordinate" Type="varchar(max)" Nullable="false" />
     <Property Name="LGAId" Type="int" Nullable="false" />
+    <Property Name="StageOfCompletion" Type="varchar" MaxLength="50" />
     <Property Name="ContractorId" Type="int" Nullable="false" />
     <Property Name="ContractSum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="StageOfCompletion" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="DescriptionOfCompletion" Type="varchar(max)" Nullable="false" />
-    <Property Name="ProjectQuality" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="HasDefect" Type="bit" Nullable="false" />
-    <Property Name="DescriptionOfDefect" Type="varchar(max)" />
     <Property Name="InspectionUserId" Type="uniqueidentifier" />
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="EnableSum" Type="bit" Nullable="false" />
+    <Property Name="ProjectTypeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProjectDocumentInfo">
     <Key>
@@ -365,6 +363,34 @@
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
   </EntityType>
+  <EntityType Name="DeliverableFormat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeliverableType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeliverableTypeFormat">
+    <Key>
+      <PropertyRef Name="DeliverableTypeId" />
+      <PropertyRef Name="DeveliverableFormatId" />
+    </Key>
+    <Property Name="DeliverableTypeId" Type="int" Nullable="false" />
+    <Property Name="DeveliverableFormatId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Inspection">
     <Key>
       <PropertyRef Name="Id" />
@@ -374,6 +400,7 @@
     <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Coordinate" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="LgaId" Type="int" Nullable="false" />
+    <Property Name="StageOfCompletionId" Type="int" Nullable="false" />
     <Property Name="ProjectId" Type="int" Nullable="false" />
     <Property Name="StageOfCompletion" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="DescriptionOfCompletion" Type="varchar(max)" Nullable="false" />
@@ -392,6 +419,100 @@
     </Key>
     <Property Name="InspectionId" Type="int" Nullable="false" />
     <Property Name="DocumentInfoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectDeliverable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="DeliverableId" Type="int" Nullable="false" />
+    <Property Name="DeliverableFormatId" Type="int" Nullable="false" />
+    <Property Name="DeliverableUnit" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="StageOfCompletion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectTypeId" Type="int" Nullable="false" />
+    <Property Name="Percentage" Type="nvarchar" MaxLength="20" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supplies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SerialNo" Type="varchar" MaxLength="50" />
+    <Property Name="TransactionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WorkflowId" Type="int" Nullable="false" />
+    <Property Name="LGAId" Type="int" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ContractorId" Type="int" Nullable="false" />
+    <Property Name="VerificationDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="VerificationOfficer" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Representative" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="RepresentativeDesignation" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="RepresentativePhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Modified" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Coordinate" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupplyDeliverable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplyId" Type="int" Nullable="false" />
+    <Property Name="DeliverableId" Type="int" Nullable="false" />
+    <Property Name="DeliverableFormatId" Type="int" Nullable="false" />
+    <Property Name="DeliverableUnit" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupplyDocumentInfo">
+    <Key>
+      <PropertyRef Name="SupplyId" />
+      <PropertyRef Name="DocumentInfoId" />
+    </Key>
+    <Property Name="SupplyId" Type="int" Nullable="false" />
+    <Property Name="DocumentInfoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupplyItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplyId" Type="int" Nullable="false" />
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="QuantityOrdered" Type="int" />
+    <Property Name="QuantityDelivered" Type="int" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="1024" />
+    <Property Name="Modified" Type="datetime2" Precision="7" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="WorkFlowDeliverable">
+    <Key>
+      <PropertyRef Name="WorkflowId" />
+      <PropertyRef Name="DeliverableTypeId" />
+    </Key>
+    <Property Name="WorkflowId" Type="int" Nullable="false" />
+    <Property Name="DeliverableTypeId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_Alert_WorkFlow">
     <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
@@ -414,6 +535,30 @@
       </Principal>
       <Dependent Role="AlertNotification">
         <PropertyRef Name="AlertTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeliverableTypeFormat_DeliverableFormat">
+    <End Role="DeliverableFormat" Type="Self.DeliverableFormat" Multiplicity="1" />
+    <End Role="DeliverableTypeFormat" Type="Self.DeliverableTypeFormat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableFormat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeliverableTypeFormat">
+        <PropertyRef Name="DeveliverableFormatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeliverableTypeFormat_DeliverableType">
+    <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="1" />
+    <End Role="DeliverableTypeFormat" Type="Self.DeliverableTypeFormat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeliverableTypeFormat">
+        <PropertyRef Name="DeliverableTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -486,6 +631,18 @@
       </Principal>
       <Dependent Role="Inspection">
         <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inspection_StageOfCompletion">
+    <End Role="StageOfCompletion" Type="Self.StageOfCompletion" Multiplicity="1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StageOfCompletion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="StageOfCompletionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -597,15 +754,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProjectApplication_Users">
-    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+  <Association Name="FK_ProjectApplication_ProjectType">
+    <End Role="ProjectType" Type="Self.ProjectType" Multiplicity="1" />
     <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserId" />
+      <Principal Role="ProjectType">
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ProjectApplication">
-        <PropertyRef Name="InspectionUserId" />
+        <PropertyRef Name="ProjectTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDeliverable_DeliverableFormat">
+    <End Role="DeliverableFormat" Type="Self.DeliverableFormat" Multiplicity="1" />
+    <End Role="ProjectDeliverable" Type="Self.ProjectDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableFormat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectDeliverable">
+        <PropertyRef Name="DeliverableFormatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDeliverable_DeliverableType">
+    <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="1" />
+    <End Role="ProjectDeliverable" Type="Self.ProjectDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectDeliverable">
+        <PropertyRef Name="DeliverableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDeliverable_ProjectApplication">
+    <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
+    <End Role="ProjectDeliverable" Type="Self.ProjectDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectApplication">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectDeliverable">
+        <PropertyRef Name="ProjectId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -633,6 +826,126 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StageOfCompletion_ProjectType">
+    <End Role="ProjectType" Type="Self.ProjectType" Multiplicity="1" />
+    <End Role="StageOfCompletion" Type="Self.StageOfCompletion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StageOfCompletion">
+        <PropertyRef Name="ProjectTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplies_Contractor">
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplies_LGA">
+    <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LGA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="LGAId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplies_Workflow">
+    <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Workflow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="WorkflowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_DeliverableFormat">
+    <End Role="DeliverableFormat" Type="Self.DeliverableFormat" Multiplicity="1" />
+    <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableFormat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="DeliverableFormatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_DeliverableType">
+    <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="1" />
+    <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="DeliverableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_SupplyDeliverable">
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="1" />
+    <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="SupplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDocumentInfo_DocumentInfo">
+    <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="1" />
+    <End Role="SupplyDocumentInfo" Type="Self.SupplyDocumentInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDocumentInfo">
+        <PropertyRef Name="DocumentInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDocumentInfo_Supplies">
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="1" />
+    <End Role="SupplyDocumentInfo" Type="Self.SupplyDocumentInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDocumentInfo">
+        <PropertyRef Name="SupplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyItems_Supplies">
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="1" />
+    <End Role="SupplyItems" Type="Self.SupplyItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyItems">
+        <PropertyRef Name="SupplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserDetail_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
@@ -654,6 +967,30 @@
       </Principal>
       <Dependent Role="WorkFlowActions">
         <PropertyRef Name="WorkFlowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkFlowDeliverable_DeliverableType">
+    <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="1" />
+    <End Role="WorkFlowDeliverable" Type="Self.WorkFlowDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkFlowDeliverable">
+        <PropertyRef Name="DeliverableTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkFlowDeliverable_WorkFlowDeliverable">
+    <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+    <End Role="WorkFlowDeliverable" Type="Self.WorkFlowDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Workflow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkFlowDeliverable">
+        <PropertyRef Name="WorkflowId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -813,7 +1150,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="UBECModelStoreContainer">
+  <EntityContainer Name="DBModelStoreContainer">
     <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlertNotification" EntityType="Self.AlertNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlertType" EntityType="Self.AlertType" Schema="dbo" store:Type="Tables" />
@@ -845,8 +1182,19 @@
     <EntitySet Name="WorkflowDocument" EntityType="Self.WorkflowDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkflowStepActions" EntityType="Self.WorkflowStepActions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkflowSteps" EntityType="Self.WorkflowSteps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliverableFormat" EntityType="Self.DeliverableFormat" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="DeliverableType" EntityType="Self.DeliverableType" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="DeliverableTypeFormat" EntityType="Self.DeliverableTypeFormat" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="InspectionDocumentInfo" EntityType="Self.InspectionDocumentInfo" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="ProjectDeliverable" EntityType="Self.ProjectDeliverable" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="ProjectType" EntityType="Self.ProjectType" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="StageOfCompletion" EntityType="Self.StageOfCompletion" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="Supplies" EntityType="Self.Supplies" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="SupplyDeliverable" EntityType="Self.SupplyDeliverable" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="SupplyDocumentInfo" EntityType="Self.SupplyDocumentInfo" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="SupplyItems" EntityType="Self.SupplyItems" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="WorkFlowDeliverable" EntityType="Self.WorkFlowDeliverable" Schema="ubecdb" store:Type="Tables" />
     <AssociationSet Name="FK_Alert_WorkFlow" Association="Self.FK_Alert_WorkFlow">
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="Alert" EntitySet="Alert" />
@@ -854,6 +1202,14 @@
     <AssociationSet Name="FK_AlertNotification_AlertType" Association="Self.FK_AlertNotification_AlertType">
       <End Role="AlertType" EntitySet="AlertType" />
       <End Role="AlertNotification" EntitySet="AlertNotification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeliverableTypeFormat_DeliverableFormat" Association="Self.FK_DeliverableTypeFormat_DeliverableFormat">
+      <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+      <End Role="DeliverableTypeFormat" EntitySet="DeliverableTypeFormat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeliverableTypeFormat_DeliverableType" Association="Self.FK_DeliverableTypeFormat_DeliverableType">
+      <End Role="DeliverableType" EntitySet="DeliverableType" />
+      <End Role="DeliverableTypeFormat" EntitySet="DeliverableTypeFormat" />
     </AssociationSet>
     <AssociationSet Name="FK_DocumentInfo_DocumentType" Association="Self.FK_DocumentInfo_DocumentType">
       <End Role="DocumentType" EntitySet="DocumentType" />
@@ -877,6 +1233,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Inspection_ProjectApplication" Association="Self.FK_Inspection_ProjectApplication">
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inspection_StageOfCompletion" Association="Self.FK_Inspection_StageOfCompletion">
+      <End Role="StageOfCompletion" EntitySet="StageOfCompletion" />
       <End Role="Inspection" EntitySet="Inspection" />
     </AssociationSet>
     <AssociationSet Name="FK_InspectionDocumentInfo_DocumentInfo" Association="Self.FK_InspectionDocumentInfo_DocumentInfo">
@@ -915,9 +1275,21 @@
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="ProjectApplication1" EntitySet="ProjectApplication" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProjectApplication_Users" Association="Self.FK_ProjectApplication_Users">
-      <End Role="Users" EntitySet="Users" />
+    <AssociationSet Name="FK_ProjectApplication_ProjectType" Association="Self.FK_ProjectApplication_ProjectType">
+      <End Role="ProjectType" EntitySet="ProjectType" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDeliverable_DeliverableFormat" Association="Self.FK_ProjectDeliverable_DeliverableFormat">
+      <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+      <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDeliverable_DeliverableType" Association="Self.FK_ProjectDeliverable_DeliverableType">
+      <End Role="DeliverableType" EntitySet="DeliverableType" />
+      <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDeliverable_ProjectApplication" Association="Self.FK_ProjectDeliverable_ProjectApplication">
+      <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+      <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
     </AssociationSet>
     <AssociationSet Name="FK_ProjectDocumentInfo_DocumentInfo" Association="Self.FK_ProjectDocumentInfo_DocumentInfo">
       <End Role="DocumentInfo" EntitySet="DocumentInfo" />
@@ -927,6 +1299,46 @@
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
       <End Role="ProjectDocumentInfo" EntitySet="ProjectDocumentInfo" />
     </AssociationSet>
+    <AssociationSet Name="FK_StageOfCompletion_ProjectType" Association="Self.FK_StageOfCompletion_ProjectType">
+      <End Role="ProjectType" EntitySet="ProjectType" />
+      <End Role="StageOfCompletion" EntitySet="StageOfCompletion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_Contractor" Association="Self.FK_Supplies_Contractor">
+      <End Role="Contractor" EntitySet="Contractor" />
+      <End Role="Supplies" EntitySet="Supplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_LGA" Association="Self.FK_Supplies_LGA">
+      <End Role="LGA" EntitySet="LGA" />
+      <End Role="Supplies" EntitySet="Supplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_Workflow" Association="Self.FK_Supplies_Workflow">
+      <End Role="Workflow" EntitySet="Workflow" />
+      <End Role="Supplies" EntitySet="Supplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_DeliverableFormat" Association="Self.FK_SupplyDeliverable_DeliverableFormat">
+      <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_DeliverableType" Association="Self.FK_SupplyDeliverable_DeliverableType">
+      <End Role="DeliverableType" EntitySet="DeliverableType" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_SupplyDeliverable" Association="Self.FK_SupplyDeliverable_SupplyDeliverable">
+      <End Role="Supplies" EntitySet="Supplies" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDocumentInfo_DocumentInfo" Association="Self.FK_SupplyDocumentInfo_DocumentInfo">
+      <End Role="DocumentInfo" EntitySet="DocumentInfo" />
+      <End Role="SupplyDocumentInfo" EntitySet="SupplyDocumentInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDocumentInfo_Supplies" Association="Self.FK_SupplyDocumentInfo_Supplies">
+      <End Role="Supplies" EntitySet="Supplies" />
+      <End Role="SupplyDocumentInfo" EntitySet="SupplyDocumentInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyItems_Supplies" Association="Self.FK_SupplyItems_Supplies">
+      <End Role="Supplies" EntitySet="Supplies" />
+      <End Role="SupplyItems" EntitySet="SupplyItems" />
+    </AssociationSet>
     <AssociationSet Name="FK_UserDetail_Users" Association="Self.FK_UserDetail_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserDetail" EntitySet="UserDetail" />
@@ -934,6 +1346,14 @@
     <AssociationSet Name="FK_WorkFlowActions_Workflow" Association="Self.FK_WorkFlowActions_Workflow">
       <End Role="Workflow" EntitySet="Workflow" />
       <End Role="WorkFlowActions" EntitySet="WorkFlowActions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkFlowDeliverable_DeliverableType" Association="Self.FK_WorkFlowDeliverable_DeliverableType">
+      <End Role="DeliverableType" EntitySet="DeliverableType" />
+      <End Role="WorkFlowDeliverable" EntitySet="WorkFlowDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkFlowDeliverable_WorkFlowDeliverable" Association="Self.FK_WorkFlowDeliverable_WorkFlowDeliverable">
+      <End Role="Workflow" EntitySet="Workflow" />
+      <End Role="WorkFlowDeliverable" EntitySet="WorkFlowDeliverable" />
     </AssociationSet>
     <AssociationSet Name="FK_WorkflowDocument_DocumentType" Association="Self.FK_WorkflowDocument_DocumentType">
       <End Role="DocumentType" EntitySet="DocumentType" />

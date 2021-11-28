@@ -18,5 +18,10 @@ namespace Project.Models
         public List<Workflow> ProjectTypes { get; set; }
         public bool EnableSum { get; set; }
 
+        public List<Supplies> SupplyList { get; set; }
+
+        public List<SupplyItems> supplyItems { get; set; }
+        public Supplies Supply { get; set; }
+
     }
 }

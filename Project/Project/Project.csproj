@@ -68,7 +68,7 @@
     </Reference>
     <Reference Include="Project.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Project.DAL\bin\Release\Project.DAL.dll</HintPath>
+      <HintPath>..\Project.DAL\bin\Debug\Project.DAL.dll</HintPath>
     </Reference>
     <Reference Include="SecurityGuard, Version=1.0.53.580, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SecurityGuard.MVC4.1.0.14\lib\net40\SecurityGuard.dll</HintPath>
@@ -216,12 +216,14 @@
     <Compile Include="Areas\Admin\Controllers\InspDashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResourceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SupplyManagementController.cs" />
     <Compile Include="Areas\Admin\Models\DashboardViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GrantResourceToRoleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InspDashboardViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProjectViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ResourceEditModel.cs" />
     <Compile Include="Areas\Admin\Models\ResourceViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\SupplyViewModel.cs" />
     <Compile Include="Areas\SecurityGuard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\SecurityGuard\Controllers\MembershipController.cs" />
     <Compile Include="Areas\SecurityGuard\Controllers\RoleController.cs" />
@@ -1504,6 +1506,16 @@
     <Content Include="Areas\Setup\Views\WorkFlow\WorkflowDeliverable.cshtml" />
     <Content Include="Areas\Admin\Views\Project\ManageDeliverable.cshtml" />
     <Content Include="Areas\Admin\Views\Project\AddDeliverable.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\NewSupply.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\EditSupply.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\UploadPhoto.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\ItemList.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\NewItems.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\EditItem.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\SupplyDeliverableList.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\AddSupplyDeliverable.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\Detail.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="MvcInstaller\ajax-loader.gif" />
     <Content Include="MvcInstaller\jquery-1.6.1.min.js" />
@@ -1612,6 +1624,8 @@
     <Content Include="Views\Home\ProjectType.cshtml" />
     <Content Include="Views\Home\Error404.cshtml" />
     <Content Include="Views\Home\DownloadApk.cshtml" />
+    <Content Include="Views\Home\SupplyList.cshtml" />
+    <Content Include="Views\Home\ViewSupply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

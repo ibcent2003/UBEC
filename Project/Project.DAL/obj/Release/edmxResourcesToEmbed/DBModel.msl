@@ -437,6 +437,7 @@
     <EntitySetMapping Name="Supplies">
       <EntityTypeMapping TypeName="UBECModel.Supplies">
         <MappingFragment StoreEntitySet="Supplies">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -445,11 +446,12 @@
           <ScalarProperty Name="Representative" ColumnName="Representative" />
           <ScalarProperty Name="VerificationOfficer" ColumnName="VerificationOfficer" />
           <ScalarProperty Name="VerificationDate" ColumnName="VerificationDate" />
-          <ScalarProperty Name="Contractor" ColumnName="Contractor" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="LGAId" ColumnName="LGAId" />
           <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -533,5 +535,19 @@
         <ScalarProperty Name="Id" ColumnName="DeliverableTypeId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="SupplyDeliverable">
+      <EntityTypeMapping TypeName="UBECModel.SupplyDeliverable">
+        <MappingFragment StoreEntitySet="SupplyDeliverable">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="DeliverableUnit" ColumnName="DeliverableUnit" />
+          <ScalarProperty Name="DeliverableFormatId" ColumnName="DeliverableFormatId" />
+          <ScalarProperty Name="DeliverableId" ColumnName="DeliverableId" />
+          <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

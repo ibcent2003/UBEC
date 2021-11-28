@@ -64,6 +64,10 @@
       <End Role="Contractor" EntitySet="Contractor" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
     </AssociationSet>
+    <AssociationSet Name="FK_Supplies_Contractor" Association="UBECModel.FK_Supplies_Contractor">
+      <End Role="Contractor" EntitySet="Contractor" />
+      <End Role="Supplies" EntitySet="Supplies" />
+    </AssociationSet>
     <AssociationSet Name="FK_DocumentType_DocumentCategory" Association="UBECModel.FK_DocumentType_DocumentCategory">
       <End Role="DocumentCategory" EntitySet="DocumentCategory" />
       <End Role="DocumentType" EntitySet="DocumentType" />
@@ -83,6 +87,10 @@
     <AssociationSet Name="FK_Project_LGA" Association="UBECModel.FK_Project_LGA">
       <End Role="LGA" EntitySet="LGA" />
       <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_LGA" Association="UBECModel.FK_Supplies_LGA">
+      <End Role="LGA" EntitySet="LGA" />
+      <End Role="Supplies" EntitySet="Supplies" />
     </AssociationSet>
     <AssociationSet Name="MembershipUser" Association="UBECModel.MembershipUser">
       <End Role="Users" EntitySet="Users" />
@@ -123,6 +131,10 @@
     <AssociationSet Name="FK_UserDetail_Users" Association="UBECModel.FK_UserDetail_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserDetail" EntitySet="UserDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_Workflow" Association="UBECModel.FK_Supplies_Workflow">
+      <End Role="Workflow" EntitySet="Workflow" />
+      <End Role="Supplies" EntitySet="Supplies" />
     </AssociationSet>
     <AssociationSet Name="FK_WorkFlowActions_Workflow" Association="UBECModel.FK_WorkFlowActions_Workflow">
       <End Role="Workflow" EntitySet="Workflow" />
@@ -192,6 +204,19 @@
       <End Role="DeliverableType" EntitySet="DeliverableType" />
       <End Role="Workflow" EntitySet="Workflow" />
     </AssociationSet>
+    <EntitySet Name="SupplyDeliverable" EntityType="UBECModel.SupplyDeliverable" />
+    <AssociationSet Name="FK_SupplyDeliverable_DeliverableFormat" Association="UBECModel.FK_SupplyDeliverable_DeliverableFormat">
+      <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_DeliverableType" Association="UBECModel.FK_SupplyDeliverable_DeliverableType">
+      <End Role="DeliverableType" EntitySet="DeliverableType" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_SupplyDeliverable" Association="UBECModel.FK_SupplyDeliverable_SupplyDeliverable">
+      <End Role="Supplies" EntitySet="Supplies" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Alert">
     <Key>
@@ -255,6 +280,7 @@
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Project_Contractor" FromRole="Contractor" ToRole="ProjectApplication" />
+    <NavigationProperty Name="Supplies" Relationship="UBECModel.FK_Supplies_Contractor" FromRole="Contractor" ToRole="Supplies" />
   </EntityType>
   <EntityType Name="DataGenerator">
     <Key>
@@ -333,6 +359,7 @@
     <NavigationProperty Name="Inspection" Relationship="UBECModel.FK_Inspection_LGA" FromRole="LGA" ToRole="Inspection" />
     <NavigationProperty Name="State" Relationship="UBECModel.FK_LGA_State" FromRole="LGA" ToRole="State" />
     <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Project_LGA" FromRole="LGA" ToRole="ProjectApplication" />
+    <NavigationProperty Name="Supplies" Relationship="UBECModel.FK_Supplies_LGA" FromRole="LGA" ToRole="Supplies" />
   </EntityType>
   <EntityType Name="Memberships">
     <Key>
@@ -534,6 +561,7 @@
     <Property Name="feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Alert" Relationship="UBECModel.FK_Alert_WorkFlow" FromRole="Workflow" ToRole="Alert" />
     <NavigationProperty Name="ProjectApplication" Relationship="UBECModel.FK_Project_Workflow" FromRole="Workflow" ToRole="ProjectApplication" />
+    <NavigationProperty Name="Supplies" Relationship="UBECModel.FK_Supplies_Workflow" FromRole="Workflow" ToRole="Supplies" />
     <NavigationProperty Name="WorkFlowActions" Relationship="UBECModel.FK_WorkFlowActions_Workflow" FromRole="Workflow" ToRole="WorkFlowActions" />
     <NavigationProperty Name="WorkflowSteps" Relationship="UBECModel.FK_WorkflowSteps_Workflow" FromRole="Workflow" ToRole="WorkflowSteps" />
     <NavigationProperty Name="DocumentType" Relationship="UBECModel.WorkflowDocument" FromRole="Workflow" ToRole="DocumentType" />
@@ -593,6 +621,7 @@
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ProjectDeliverable" Relationship="UBECModel.FK_ProjectDeliverable_DeliverableFormat" FromRole="DeliverableFormat" ToRole="ProjectDeliverable" />
     <NavigationProperty Name="DeliverableType" Relationship="UBECModel.DeliverableTypeFormat" FromRole="DeliverableFormat" ToRole="DeliverableType" />
+    <NavigationProperty Name="SupplyDeliverable" Relationship="UBECModel.FK_SupplyDeliverable_DeliverableFormat" FromRole="DeliverableFormat" ToRole="SupplyDeliverable" />
   </EntityType>
   <EntityType Name="DeliverableType">
     <Key>
@@ -606,6 +635,7 @@
     <NavigationProperty Name="ProjectDeliverable" Relationship="UBECModel.FK_ProjectDeliverable_DeliverableType" FromRole="DeliverableType" ToRole="ProjectDeliverable" />
     <NavigationProperty Name="DeliverableFormat" Relationship="UBECModel.DeliverableTypeFormat" FromRole="DeliverableType" ToRole="DeliverableFormat" />
     <NavigationProperty Name="Workflow" Relationship="UBECModel.WorkFlowDeliverable" FromRole="DeliverableType" ToRole="Workflow" />
+    <NavigationProperty Name="SupplyDeliverable" Relationship="UBECModel.FK_SupplyDeliverable_DeliverableType" FromRole="DeliverableType" ToRole="SupplyDeliverable" />
   </EntityType>
   <EntityType Name="Inspection">
     <Key>
@@ -674,21 +704,27 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="TransactionId" Type="Guid" Nullable="false" />
     <Property Name="WorkflowId" Type="Int32" Nullable="false" />
     <Property Name="LGAId" Type="Int32" Nullable="false" />
-    <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Contractor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="VerificationDate" Type="DateTime" Precision="7" />
-    <Property Name="VerificationOfficer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Representative" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="RepresentativeDesignation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="RepresentativePhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Modified" Type="DateTime" Precision="7" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ContractorId" Type="Int32" Nullable="false" />
+    <Property Name="VerificationDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="VerificationOfficer" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Representative" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="RepresentativeDesignation" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="RepresentativePhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Modified" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="Coordinate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Contractor" Relationship="UBECModel.FK_Supplies_Contractor" FromRole="Supplies" ToRole="Contractor" />
+    <NavigationProperty Name="LGA" Relationship="UBECModel.FK_Supplies_LGA" FromRole="Supplies" ToRole="LGA" />
+    <NavigationProperty Name="Workflow" Relationship="UBECModel.FK_Supplies_Workflow" FromRole="Supplies" ToRole="Workflow" />
     <NavigationProperty Name="SupplyItems" Relationship="UBECModel.FK_SupplyItems_Supplies" FromRole="Supplies" ToRole="SupplyItems" />
     <NavigationProperty Name="DocumentInfo" Relationship="UBECModel.SupplyDocumentInfo" FromRole="Supplies" ToRole="DocumentInfo" />
+    <NavigationProperty Name="SupplyDeliverable" Relationship="UBECModel.FK_SupplyDeliverable_SupplyDeliverable" FromRole="Supplies" ToRole="SupplyDeliverable" />
   </EntityType>
   <EntityType Name="SupplyItems">
     <Key>
@@ -698,8 +734,8 @@
     <Property Name="SupplyId" Type="Int32" Nullable="false" />
     <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="QuantityOrdered" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="QuantityDelivered" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityOrdered" Type="Int32" />
+    <Property Name="QuantityDelivered" Type="Int32" />
     <Property Name="Remarks" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
     <Property Name="Modified" Type="DateTime" Precision="7" />
     <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -789,6 +825,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Supplies_Contractor">
+    <End Type="UBECModel.Contractor" Role="Contractor" Multiplicity="1" />
+    <End Type="UBECModel.Supplies" Role="Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DocumentType_DocumentCategory">
     <End Type="UBECModel.DocumentCategory" Role="DocumentCategory" Multiplicity="1" />
     <End Type="UBECModel.DocumentType" Role="DocumentType" Multiplicity="*" />
@@ -845,6 +893,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ProjectApplication">
+        <PropertyRef Name="LGAId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplies_LGA">
+    <End Type="UBECModel.LGA" Role="LGA" Multiplicity="1" />
+    <End Type="UBECModel.Supplies" Role="Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LGA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
         <PropertyRef Name="LGAId" />
       </Dependent>
     </ReferentialConstraint>
@@ -966,6 +1026,18 @@
       </Principal>
       <Dependent Role="UserDetail">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplies_Workflow">
+    <End Type="UBECModel.Workflow" Role="Workflow" Multiplicity="1" />
+    <End Type="UBECModel.Supplies" Role="Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Workflow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="WorkflowId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1108,5 +1180,57 @@
   <Association Name="WorkFlowDeliverable">
     <End Type="UBECModel.DeliverableType" Role="DeliverableType" Multiplicity="*" />
     <End Type="UBECModel.Workflow" Role="Workflow" Multiplicity="*" />
+  </Association>
+  <EntityType Name="SupplyDeliverable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupplyId" Type="Int32" Nullable="false" />
+    <Property Name="DeliverableId" Type="Int32" Nullable="false" />
+    <Property Name="DeliverableFormatId" Type="Int32" Nullable="false" />
+    <Property Name="DeliverableUnit" Type="Int32" Nullable="false" />
+    <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="DeliverableFormat" Relationship="UBECModel.FK_SupplyDeliverable_DeliverableFormat" FromRole="SupplyDeliverable" ToRole="DeliverableFormat" />
+    <NavigationProperty Name="DeliverableType" Relationship="UBECModel.FK_SupplyDeliverable_DeliverableType" FromRole="SupplyDeliverable" ToRole="DeliverableType" />
+    <NavigationProperty Name="Supplies" Relationship="UBECModel.FK_SupplyDeliverable_SupplyDeliverable" FromRole="SupplyDeliverable" ToRole="Supplies" />
+  </EntityType>
+  <Association Name="FK_SupplyDeliverable_DeliverableFormat">
+    <End Type="UBECModel.DeliverableFormat" Role="DeliverableFormat" Multiplicity="1" />
+    <End Type="UBECModel.SupplyDeliverable" Role="SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableFormat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="DeliverableFormatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_DeliverableType">
+    <End Type="UBECModel.DeliverableType" Role="DeliverableType" Multiplicity="1" />
+    <End Type="UBECModel.SupplyDeliverable" Role="SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="DeliverableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_SupplyDeliverable">
+    <End Type="UBECModel.Supplies" Role="Supplies" Multiplicity="1" />
+    <End Type="UBECModel.SupplyDeliverable" Role="SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="SupplyId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

@@ -38,10 +38,8 @@
                         <tr>
                             <th>
                                 S/N
-                            </th>                           
-                            <th>
-                                Description
                             </th>
+
                             <th>
                                 Location
                             </th>
@@ -49,31 +47,40 @@
                                 State
                             </th>
                             <th>
-                                Stage of Completion
+                                LGA
                             </th>
-
+                            <th>
+                                Contractor
+                            </th>
+                            <th>
+                                Coordinate
+                            </th>
+                            <th>
+                                Ver. Officer
+                            </th>
+                            <th>
+                                Ver. Date
+                            </th>
 
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.projectList.Count != 0)
+                        @if (Model.SupplyList.Count != 0)
                         {
                             int i = 0;
-                            foreach (var item in Model.projectList.Where(x=>x.StageOfCompletion=="100%"))
+                            foreach (var item in Model.SupplyList.Where(x => x.Status == "Approved"))
                             {
 
-                              // var getInspection = item.Inspection.OrderByDescending(x=>x.StageOfCompletion).FirstOrDefault();
+                                // var getInspection = item.Inspection.OrderByDescending(x=>x.StageOfCompletion).FirstOrDefault();
 
                                 ++i;
 
                         <tr>
                             <td>
                                 @i
-                            </td>                           
-                            <td>
-                                @item.Description
                             </td>
+
                             <td>
                                 @item.Location
                             </td>
@@ -81,10 +88,22 @@
                                 @item.LGA.State.Name
                             </td>
                             <td>
-                          @item.StageOfCompletion  
+                                @item.LGA.Name
                             </td>
-                            <td>                               
-                                <a href="@Url.Action("ViewReport", "Home", new { Id = item.TransactionId, area = "" })" class="btn btn-xs btn-success">View Report</a>
+                            <td>
+                                @item.Contractor.Name
+                            </td>
+                            <td>
+                                @item.Coordinate
+                            </td>
+                            <td>
+                                @item.VerificationOfficer
+                            </td>
+                            <td>
+                                @item.VerificationDate
+                            </td>
+                            <td>
+                                <a href="@Url.Action("ViewSupply", "Home", new { Id = item.TransactionId, area = "" })" class="btn btn-xs btn-success">View Report</a>
                             </td>
                         </tr>
 
@@ -98,7 +117,7 @@
 
 
         </div>
-       
+
 
     </div>
 </div>

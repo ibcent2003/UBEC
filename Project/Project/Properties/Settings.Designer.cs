@@ -80,7 +80,7 @@ namespace Project.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\UBECDocument\\Photo\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("G:\\HostingSpaces\\raukzdup\\ubeccms.com\\wwwroot\\Content\\Backend\\Photo\\")]
         public string FullPhotoPath {
             get {
                 return ((string)(this["FullPhotoPath"]));

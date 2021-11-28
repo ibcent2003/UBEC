@@ -454,19 +454,34 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SerialNo" Type="varchar" MaxLength="50" />
     <Property Name="TransactionId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="WorkflowId" Type="int" Nullable="false" />
     <Property Name="LGAId" Type="int" Nullable="false" />
-    <Property Name="Location" Type="nvarchar" MaxLength="500" />
-    <Property Name="Contractor" Type="nvarchar" MaxLength="500" />
-    <Property Name="VerificationDate" Type="datetime2" Precision="7" />
-    <Property Name="VerificationOfficer" Type="nvarchar" MaxLength="500" />
-    <Property Name="Representative" Type="nvarchar" MaxLength="500" />
-    <Property Name="RepresentativeDesignation" Type="nvarchar" MaxLength="500" />
-    <Property Name="RepresentativePhoneNumber" Type="nvarchar" MaxLength="50" />
-    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-    <Property Name="Modified" Type="datetime2" Precision="7" />
+    <Property Name="Location" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ContractorId" Type="int" Nullable="false" />
+    <Property Name="VerificationDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="VerificationOfficer" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Representative" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="RepresentativeDesignation" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="RepresentativePhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Modified" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Coordinate" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupplyDeliverable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplyId" Type="int" Nullable="false" />
+    <Property Name="DeliverableId" Type="int" Nullable="false" />
+    <Property Name="DeliverableFormatId" Type="int" Nullable="false" />
+    <Property Name="DeliverableUnit" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
   </EntityType>
   <EntityType Name="SupplyDocumentInfo">
     <Key>
@@ -484,8 +499,8 @@
     <Property Name="SupplyId" Type="int" Nullable="false" />
     <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
     <Property Name="Description" Type="nvarchar" MaxLength="500" />
-    <Property Name="QuantityOrdered" Type="nvarchar" MaxLength="50" />
-    <Property Name="QuantityDelivered" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuantityOrdered" Type="int" />
+    <Property Name="QuantityDelivered" Type="int" />
     <Property Name="Remarks" Type="nvarchar" MaxLength="1024" />
     <Property Name="Modified" Type="datetime2" Precision="7" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -822,6 +837,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Supplies_Contractor">
+    <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contractor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="ContractorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplies_LGA">
+    <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LGA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="LGAId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplies_Workflow">
+    <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Workflow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplies">
+        <PropertyRef Name="WorkflowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_DeliverableFormat">
+    <End Role="DeliverableFormat" Type="Self.DeliverableFormat" Multiplicity="1" />
+    <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableFormat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="DeliverableFormatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_DeliverableType">
+    <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="1" />
+    <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliverableType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="DeliverableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyDeliverable_SupplyDeliverable">
+    <End Role="Supplies" Type="Self.Supplies" Multiplicity="1" />
+    <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupplyDeliverable">
+        <PropertyRef Name="SupplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SupplyDocumentInfo_DocumentInfo">
     <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="1" />
     <End Role="SupplyDocumentInfo" Type="Self.SupplyDocumentInfo" Multiplicity="*" />
@@ -1103,6 +1190,7 @@
     <EntitySet Name="ProjectType" EntityType="Self.ProjectType" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="StageOfCompletion" EntityType="Self.StageOfCompletion" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="Supplies" EntityType="Self.Supplies" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="SupplyDeliverable" EntityType="Self.SupplyDeliverable" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="SupplyDocumentInfo" EntityType="Self.SupplyDocumentInfo" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="SupplyItems" EntityType="Self.SupplyItems" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="WorkFlowDeliverable" EntityType="Self.WorkFlowDeliverable" Schema="ubecdb" store:Type="Tables" />
@@ -1213,6 +1301,30 @@
     <AssociationSet Name="FK_StageOfCompletion_ProjectType" Association="Self.FK_StageOfCompletion_ProjectType">
       <End Role="ProjectType" EntitySet="ProjectType" />
       <End Role="StageOfCompletion" EntitySet="StageOfCompletion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_Contractor" Association="Self.FK_Supplies_Contractor">
+      <End Role="Contractor" EntitySet="Contractor" />
+      <End Role="Supplies" EntitySet="Supplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_LGA" Association="Self.FK_Supplies_LGA">
+      <End Role="LGA" EntitySet="LGA" />
+      <End Role="Supplies" EntitySet="Supplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplies_Workflow" Association="Self.FK_Supplies_Workflow">
+      <End Role="Workflow" EntitySet="Workflow" />
+      <End Role="Supplies" EntitySet="Supplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_DeliverableFormat" Association="Self.FK_SupplyDeliverable_DeliverableFormat">
+      <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_DeliverableType" Association="Self.FK_SupplyDeliverable_DeliverableType">
+      <End Role="DeliverableType" EntitySet="DeliverableType" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyDeliverable_SupplyDeliverable" Association="Self.FK_SupplyDeliverable_SupplyDeliverable">
+      <End Role="Supplies" EntitySet="Supplies" />
+      <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
     </AssociationSet>
     <AssociationSet Name="FK_SupplyDocumentInfo_DocumentInfo" Association="Self.FK_SupplyDocumentInfo_DocumentInfo">
       <End Role="DocumentInfo" EntitySet="DocumentInfo" />

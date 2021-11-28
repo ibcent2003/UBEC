@@ -72,6 +72,7 @@ namespace Project.Areas.Admin.Controllers
                 }
                 ProjectViewModel model = new ProjectViewModel();
                 getInspection.InspectionStatus = "Approved";
+                getproject.StageOfCompletion = getInspection.StageOfCompletion;
                 db.SaveChanges();
                 TempData["message"] = "Report has been approved successfully.";
                 return RedirectToAction("Detail", "Project", new {Id= getInspection.Id, area = "Admin" });
@@ -106,6 +107,7 @@ namespace Project.Areas.Admin.Controllers
                 }
                 ProjectViewModel model = new ProjectViewModel();
                 getInspection.InspectionStatus = "Not Submitted";
+                getproject.StageOfCompletion = getInspection.StageOfCompletion;
                 db.SaveChanges();
                 TempData["message"] = "Report has been Disapproved successfully.";
                 return RedirectToAction("Detail", "Project", new { Id = getInspection.Id, area = "Admin" });
@@ -189,26 +191,27 @@ namespace Project.Areas.Admin.Controllers
                         model.workflow = workflow;
                         return View(model);
                     }
-               
-                    ProjectApplication addnew = new ProjectApplication
-                    {
-                        TransactionId = Guid.NewGuid(),
-                        SerialNo = model.projectForm.SerialNo,
-                        Status = "draft",
-                        WorkFlowId = model.projectForm.workflowId,
-                        Description = model.projectForm.Description,
-                        Location = model.projectForm.Location,
-                        Coordinate = model.projectForm.Coordinate,
-                        LGAId = model.projectForm.LGAId,
-                        ContractorId = model.projectForm.ContractorId,
-                        ContractSum = model.projectForm.ContractSum,
-                        ProjectTypeId = model.projectForm.ProjectTypeId,
-                        StartDate = model.projectForm.StartDate,
-                        EndDate = model.projectForm.EndDate,
-                        ModifiedBy = User.Identity.Name,
-                        ModifiedDate = DateTime.Now,
-                        IsDeleted = false,  
-                        EnableSum = model.projectForm.ShowCost,
+
+                ProjectApplication addnew = new ProjectApplication
+                {
+                    TransactionId = Guid.NewGuid(),
+                    SerialNo = model.projectForm.SerialNo,
+                    Status = "draft",
+                    WorkFlowId = model.projectForm.workflowId,
+                    Description = model.projectForm.Description,
+                    Location = model.projectForm.Location,
+                    Coordinate = model.projectForm.Coordinate,
+                    LGAId = model.projectForm.LGAId,
+                    ContractorId = model.projectForm.ContractorId,
+                    ContractSum = model.projectForm.ContractSum,
+                    ProjectTypeId = model.projectForm.ProjectTypeId,
+                    StartDate = model.projectForm.StartDate,
+                    EndDate = model.projectForm.EndDate,
+                    ModifiedBy = User.Identity.Name,
+                    ModifiedDate = DateTime.Now,
+                    IsDeleted = false,
+                    EnableSum = model.projectForm.ShowCost,                    
+                    StageOfCompletion = "0%"
                         // =                  
                     };
                     db.ProjectApplication.AddObject(addnew);
@@ -1324,8 +1327,9 @@ namespace Project.Areas.Admin.Controllers
             try
             {
                 ProjectViewModel model = new ProjectViewModel();
-                var getproject = (from d in db.ProjectApplication where d.Id == Id select d).FirstOrDefault();
-                var deliverable = (from x in db.ProjectDeliverable where x.ProjectId == getproject.Id && x.DeliverableId== DId select x).FirstOrDefault();
+                
+                var deliverable = (from x in db.ProjectDeliverable where x.Id == Id && x.DeliverableId== DId select x).FirstOrDefault();
+                var getproject = (from d in db.ProjectApplication where d.Id == deliverable.ProjectId select d).FirstOrDefault();
                 ProjectDeliverable remove = new ProjectDeliverable
                 {
                 };

@@ -146,6 +146,7 @@ namespace Project.Controllers
                 {
                     var getproject = db.ProjectApplication.Where(x => x.WorkFlowId == Id && x.IsDeleted==false).ToList();
                     model.projectList = getproject;
+
                     model.workflow = getworkflow;
                     return View(model);
                 }
@@ -173,18 +174,18 @@ namespace Project.Controllers
             {
                 IndexViewModel model = new IndexViewModel();
                 var getproject = db.ProjectApplication.Where(x => x.TransactionId == Id).FirstOrDefault();
-                var getInspection = db.Inspection.Where(x => x.ProjectId == getproject.Id && x.InspectionStatus=="Approved").ToList();
+                var getInspection = db.Inspection.Where(x => x.ProjectId == getproject.Id && x.InspectionStatus == "Approved").ToList();
                 model.inspectionlist = getInspection;
                 model.project = getproject;
                 model.PicturePath = Properties.Settings.Default.FullPhotoPath;
-                //if(getproject.EnableSum==true)
-                //{
-                //    model.EnableSum = true;
-                //}
-                //else
-                //{
-                //    model.EnableSum = false;
-                //}
+                if (getproject.EnableSum == true)
+                {
+                    model.EnableSum = true;
+                }
+                else
+                {
+                    model.EnableSum = false;
+                }
                 return View(model);
             }
             catch(Exception ex)
@@ -206,6 +207,58 @@ namespace Project.Controllers
                 model.ProjectTypes = getProject;
                 return View(model);
 
+            }
+            catch(Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+        }
+
+        public ActionResult SupplyList()
+        {
+            try
+            {
+                IndexViewModel model = new IndexViewModel();
+                var getworkflow = db.Workflow.Where(x => x.Id == Properties.Settings.Default.Supply).FirstOrDefault();
+                if (getworkflow != null)
+                {
+                    var getsupply = db.Supplies.Where(x => x.WorkflowId == Properties.Settings.Default.Supply && x.Status == "Approved").ToList();
+                    model.SupplyList = getsupply;
+
+                    model.workflow = getworkflow;
+                    return View(model);
+                }
+                else
+                {
+                    TempData["messageType"] = "alert-danger";
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                   
+                    return RedirectToAction("Error404");
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+        }
+
+        public ActionResult ViewSupply(Guid Id)
+        {
+            try
+            {
+                IndexViewModel model = new IndexViewModel();
+                var getsupply = db.Supplies.Where(x => x.TransactionId == Id).FirstOrDefault();
+                var getItem = getsupply.SupplyItems.ToList();
+                model.supplyItems = getItem;
+                model.Supply = getsupply;
+                model.PicturePath = Properties.Settings.Default.FullPhotoPath;
+                return View(model);
             }
             catch(Exception ex)
             {

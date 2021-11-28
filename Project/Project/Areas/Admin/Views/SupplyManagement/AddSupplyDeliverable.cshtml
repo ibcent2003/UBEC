@@ -1,4 +1,4 @@
-﻿@model Project.Areas.Admin.Models.ProjectViewModel
+﻿@model Project.Areas.Admin.Models.SupplyViewModel
 @using Project.HtmlHelpers
 @{
     ViewBag.Title = "Add Deliverable for " + Model.deliverable.Name;
@@ -16,7 +16,7 @@
     </div>
 }
 
-<a href="@Url.Action("ManageDeliverable", "Project", new {Id=Model.project.TransactionId, area="Admin"})" class="btn btn-warning btn-xs">Back</a>
+<a href="@Url.Action("SupplyDeliverableList", "Supply", new {Id=Model.Supply.TransactionId, area="Admin"})" class="btn btn-warning btn-xs">Back</a>
 <br />
 <br />
 <div class="row">
@@ -25,119 +25,170 @@
             <div class="widget-header">
                 <h4>
                     <i class="icon-reorder"></i>
-                    Project Information
+                    Supply Information
                 </h4>
 
 
             </div>
             <div class="widget-content">
-                <table class="table table-striped table-bordered table-hover">
+                <table class="table table-striped table-bordered table-hover table-checkable datatable dataTable">
                     <thead>
-                        <tr style="font-size: 12px;">
-                            <th>S/N</th>
-                            <th>Project No</th>
-                            <th>Description</th>
-                            <th>Location</th>
-                            <th>State</th>
-                            <th>LGA</th>
+                        <tr>
+
+                            <th>SN</th>
+                            <th>
+                                Location
+                            </th>
+                            <th>
+                                State
+                            </th>
+                            <th>
+                                LGA
+                            </th>
+                            <th>
+                                Contractor
+                            </th>
+                            <th>
+                                Verification Date
+                            </th>
+                            <th>
+                                Verification Officer
+                            </th>
+                            <th>
+                                Coordinate
+                            </th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.projectList.Count != 0)
+
+                        @if (Model.Supply != null)
                         {
-                            int i = 0;
-                            foreach (var pro in Model.projectList)
+
+
                             {
-                                ++i;
-                                <tr style="font-size: 12px;">
+
+                                <tr>
                                     <td>
-                                        @i
+                                        1
                                     </td>
                                     <td>
-                                        @pro.SerialNo
+                                        @Model.Supply.Location
+                                    </td>
+                                    <td>
+                                        @Model.Supply.LGA.State.Name
+
                                     </td>
 
-                                    <td>@pro.Description</td>
-                                    <td>@pro.Location</td>
-                                    <td>@pro.LGA.State.Name</td>
-                                    <td>@pro.LGA.Name</td>
                                     <td>
-                                        <a data-toggle="modal" title="Project Information" href="#@pro.TransactionId"><i class="icon-eye-open"></i></a>
+                                        @Model.Supply.LGA.Name
+                                    </td>
+                                    <td>
+                                        @Model.Supply.Contractor.Name
+                                    </td>
+                                    <td>
+                                        @Model.Supply.VerificationDate
+                                    </td>
+                                    <td>
+                                        @Model.Supply.VerificationOfficer
+                                    </td>
+                                    <td>
+                                        @Model.Supply.Coordinate
+                                    </td>
+
+
+                                    <td>
+                                        <a data-toggle="modal" title="Supply Information" href="#@Model.Supply.Id"><i class="icon-eye-open"></i></a>
+
                                         <div class="row">
-                                            <div class="modal fade" id="@pro.TransactionId">
+
+
+
+                                            <div class="modal fade" id="@Model.Supply.Id">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            <h4 class="modal-title">Project Information</h4>
+                                                            <h4 class="modal-title">Supply Information</h4>
 
                                                         </div>
                                                         <div class="modal-body">
 
                                                             <table class="my-acct">
                                                                 <tr>
-                                                                    <td><b>Serial No:</b> </td>
-                                                                    <td>@pro.SerialNo</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>Location</b></td>
+                                                                    <td>Location: </td>
                                                                     <td>
-                                                                        @pro.Location
+                                                                        @Model.Supply.Location
+
+
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><b>State</b></td>
+                                                                    <td>State</td>
                                                                     <td>
-                                                                        @pro.LGA.State.Name
+                                                                        @Model.Supply.LGA.Name
+
                                                                     </td>
                                                                 </tr>
+
                                                                 <tr>
-                                                                    <td><b>LGA</b></td>
+                                                                    <td>Contractor</td>
                                                                     <td>
-                                                                        @pro.LGA.Name
+
+                                                                        @Model.Supply.Contractor.Name
+
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td><b>Description</b></td>
-                                                                    <td>@pro.Description</td>
-                                                                </tr>
-
 
 
                                                                 <tr>
-                                                                    <td><b>Contractor</b></td>
-                                                                    <td>@pro.Contractor.Name</td>
+                                                                    <td>Verification Date</td>
+                                                                    <td>@Model.Supply.VerificationDate</td>
                                                                 </tr>
 
                                                                 <tr>
-                                                                    <td><b>Contract Sum</b></td>
-                                                                    <td>@pro.ContractSum</td>
+                                                                    <td>Verification Officer</td>
+                                                                    <td>@Model.Supply.VerificationOfficer</td>
                                                                 </tr>
+
                                                                 <tr>
-                                                                    <td><b>Project Type</b></td>
-                                                                    <td>@pro.ProjectType.Name</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>Start Date</b></td>
-                                                                    <td>@pro.StartDate</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>End Date</b></td>
-                                                                    <td>@pro.EndDate</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>Show Contract Sum</b></td>
+                                                                    <td>Representative</td>
                                                                     <td>
-                                                                        @if (pro.EnableSum == true)
-                                                                        {
-                                                                            <span class="label label-success">Yes</span>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <span class="label label-danger">No</span>
-                                                                        }
 
+                                                                        @Model.Supply.Representative
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Representative Desgination</td>
+                                                                    <td>
+
+
+                                                                        @Model.Supply.RepresentativeDesignation
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Representation Mobile Number</td>
+                                                                    <td>
+
+                                                                        @Model.Supply.RepresentativePhoneNumber
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Modified By</td>
+                                                                    <td>
+
+                                                                        @Model.Supply.ModifiedBy
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Modified Date</td>
+                                                                    <td>
+
+                                                                        @Model.Supply.Modified
                                                                     </td>
                                                                 </tr>
 
@@ -150,17 +201,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
+
+
                                     </td>
                                 </tr>
+
                             }
+
+
                         }
-                        else
-                        {
-                            <tr>
-                                <td colspan="8">No Records Found!...</td>
-                            </tr>
-                        }
+
                     </tbody>
                 </table>
             </div>
@@ -171,15 +223,15 @@
 </div>
 
 <br />
-@using (Html.BeginForm("AddDeliverable", "Project", new { Id = Model.project.TransactionId }, FormMethod.Post, new { @enctype = "multipart/form-data", area = "Admin" }))
+@using (Html.BeginForm("AddSupplyDeliverable", "SupplyManagement", new { Id = Model.Supply.TransactionId }, FormMethod.Post, new { @enctype = "multipart/form-data", area = "Admin" }))
 {
-    @Html.HiddenFor(x => x.project.TransactionId)
+    @Html.HiddenFor(x => x.Supply.TransactionId)
     @Html.HiddenFor(x => x.deliverable.Id)
     <div class="row">
         <div class="col-md-12">
             <div class="widget box">
                 <div class="widget-header">
-                    <h4><i class="icon-reorder"></i>Add Project Deliverable</h4>
+                    <h4><i class="icon-reorder"></i>Add Supply Deliverable</h4>
                 </div>
                 <div class="widget-content">
 
@@ -222,7 +274,7 @@
                 <h4><i class="icon-reorder"></i> Deliverable for @Model.deliverable.Name</h4>
 
             </div>
-
+            @Html.HiddenFor(x => x.Supply.TransactionId)
             <div class="widget-content align-center">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
@@ -238,10 +290,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.ProjectDeliverableList.Count != 0)
+                        @if (Model.SupplyDeliverableList.Count != 0)
                         {
                             int i = 0;
-                            foreach (var item in Model.ProjectDeliverableList)
+                            foreach (var item in Model.SupplyDeliverableList)
                             {
                                 ++i;
                                 <tr style="font-size: 12px;">
@@ -256,7 +308,7 @@
                                     <td>@item.Remarks</td>
                                     <td>@item.CreatedBy</td>
                                     <td>@item.CreatedDate</td>
-                                    <td>                                        
+                                    <td>
                                         @Html.ActionLink("Remove", "RemoveDeliverable", new { Id = item.Id, DId = item.DeliverableId }, new { @class = "btn btn-warning btn-xs", onclick = "return DeleteConfirm()" })
                                     </td>
 
@@ -279,15 +331,12 @@
 
 </div>
 @section Scripts{
-    @Scripts.Render("~/Content/Backend/plugins/datatables/jquery.dataTables.min.js")
-    @Scripts.Render("~/Content/Backend/plugins/datatables/tabletools/TableTools.min.js")
-    @Scripts.Render("~/Content/Backend/plugins/datatables/colvis/ColVis.min.js")
-    @Scripts.Render("~/Content/Backend/plugins/datatables/DT_bootstrap.js")
+   
     <script>
         "use strict";
 
         function DeleteConfirm() {
-            if (confirm("Are you sure want to remove this Deliverable from this project?"))
+            if (confirm("Are you sure want to remove this Deliverable from this Supplied?"))
                 return true;
             else
                 return false;
