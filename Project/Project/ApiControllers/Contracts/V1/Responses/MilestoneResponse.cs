@@ -5,14 +5,15 @@ using System.Web;
 
 namespace Project.ApiControllers.Contracts.V1.Responses
 {
-    public class ProjectRecord
+    public class MilestoneResponse: StatusMessage
     {
-        public int ProjectId { get; set; }
-        public string SerialNo { get; set; }
-        public string Workflow { get; set; }
+        public List<Milestone> Records { get; set; }
+    }
+
+    public class Milestone
+    {
         public int? ProjectType { get; set; }
-        public string Contractor { get; set; }
+        public string Percentage { get; set; }
         public string Description { get; set; }
-        public Guid? OwnedBy { get; set; }
     }
 }
