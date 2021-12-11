@@ -37,6 +37,7 @@
             {
                 @Html.ActionLink("Submit Project", "RemovePayment", new { Id = Model.project.TransactionId}, new { @class = "btn btn-lg btn-primary"})
             }*@
+
             <br /><br />
         </div>
         <div class="widget-content">
@@ -118,7 +119,18 @@
                                                             @item.Location
                                                         </td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td><b>State</b></td>
+                                                        <td>
+                                                            @item.LGA.State.Name
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>LGA</b></td>
+                                                        <td>
+                                                            @item.LGA.Name
+                                                        </td>
+                                                    </tr>
                                                     <tr>
                                                         <td><b>Description</b></td>
                                                         <td>@item.Description</td>
@@ -134,6 +146,32 @@
                                                     <tr>
                                                         <td><b>Contract Sum</b></td>
                                                         <td>@item.ContractSum</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Project Type</b></td>
+                                                        <td>@item.ProjectType.Name</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Start Date</b></td>
+                                                        <td>@item.StartDate</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>End Date</b></td>
+                                                        <td>@item.EndDate</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Show Contract Sum</b></td>
+                                                        <td>
+                                                            @if (item.EnableSum == true)
+                                                            {
+                                                                <span class="label label-success">Yes</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="label label-danger">No</span>
+                                                            }
+
+                                                        </td>
                                                     </tr>
 
                                                 </table>
@@ -171,7 +209,7 @@
             <div class="widget-header">
                 <h4>
                     <i class="icon-reorder"></i>
-                    Inspection Information
+                    Monitoring Information
                 </h4>
 
 
@@ -242,7 +280,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4 class="modal-title">Inspection Information</h4>
+                                                    <h4 class="modal-title">Monitoring Report</h4>
 
                                                 </div>
                                                 <div class="modal-body">
@@ -376,7 +414,7 @@ else
 
 
 <div class="row">
-    @foreach (var item in Model.DocumentInfoList)
+    @foreach (var item in Model.DocumentInfoList.OrderBy(x=>x.DocumentTypeId))
     {
         <div class="col-md-6">
             <div class="widget box">

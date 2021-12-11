@@ -51,6 +51,7 @@
                                 <td>
                                     <a href="@Url.Action("Details", "Workflow", new { Id = item.Id, @area="Setup" })" class="btn btn-xs btn-success">Details</a>
                                     <a href="@Url.Action("WorkflowDocument", "Workflow", new { Id = item.Id, @area="Setup" })" class="btn btn-xs btn-warning">Documents</a>
+                                    <a href="@Url.Action("WorkflowDeliverable", "Workflow", new { Id = item.Id, @area="Setup" })" class="btn btn-xs btn-danger">Deliverable</a>
                                 </td>
                             </tr>
                         }

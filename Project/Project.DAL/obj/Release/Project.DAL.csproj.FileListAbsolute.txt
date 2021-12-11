@@ -1,0 +1,10 @@
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Release\Project.DAL.dll.config
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Release\Project.DAL.dll
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Release\Project.DAL.pdb
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Release\EntityFramework.dll
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\bin\Release\EntityFramework.xml
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Release\Project.DAL.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Release\Project.DAL.csproj.CopyComplete
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Release\Project.DAL.dll
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Release\Project.DAL.pdb
+C:\Users\USER\source\repos\UBECApp\Project\Project.DAL\obj\Release\Project.DAL.csprojAssemblyReference.cache

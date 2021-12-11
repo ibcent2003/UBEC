@@ -9,11 +9,17 @@ using SecurityGuard.Interfaces;
 using SecurityGuard.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Roles = System.Web.Security.Roles;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using iTextSharp.text.html.simpleparser;
+
 
 namespace Project.Areas.Admin.Controllers
 {
@@ -21,7 +27,7 @@ namespace Project.Areas.Admin.Controllers
     {
         private PROEntities db = new PROEntities();
         private ProcessUtility util;
-
+        GetProject services = new GetProject();
         public ProjectController()
         {
             this.util = new ProcessUtility();
@@ -35,7 +41,7 @@ namespace Project.Areas.Admin.Controllers
             {
                 TempData["message"] = Settings.Default.GenericExceptionMessage;
                 TempData["messageType"] = "danger";
-                return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
             }
             var getuser = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
             model.user = getuser;
@@ -45,12 +51,92 @@ namespace Project.Areas.Admin.Controllers
             return View(model);
         }        
 
+        public ActionResult ApproveInspection(int Id)
+        {
+            try
+            {
+                var getInspection = db.Inspection.Where(x => x.Id == Id).FirstOrDefault();
+                if (getInspection == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                }
+
+                var getproject = db.ProjectApplication.Where(x => x.Id == getInspection.ProjectId).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                }
+                ProjectViewModel model = new ProjectViewModel();
+                getInspection.InspectionStatus = "Approved";
+                getproject.StageOfCompletion = getInspection.StageOfCompletion;
+                db.SaveChanges();
+                TempData["message"] = "Report has been approved successfully.";
+                return RedirectToAction("Detail", "Project", new {Id= getInspection.Id, area = "Admin" });
+            }
+            catch(Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        public ActionResult DisapproveInspection(int Id)
+        {
+            try
+            {
+                var getInspection = db.Inspection.Where(x => x.Id == Id).FirstOrDefault();
+                if (getInspection == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                }
+
+                var getproject = db.ProjectApplication.Where(x => x.Id == getInspection.ProjectId).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                }
+                ProjectViewModel model = new ProjectViewModel();
+                getInspection.InspectionStatus = "Not Submitted";
+                getproject.StageOfCompletion = getInspection.StageOfCompletion;
+                db.SaveChanges();
+                TempData["message"] = "Report has been Disapproved successfully.";
+                return RedirectToAction("Detail", "Project", new { Id = getInspection.Id, area = "Admin" });
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
         [HttpPost]
         public ActionResult GetLga(int stateId)
         {
             List<IntegerSelectListItem> ListLga = (from d in db.LGA where d.StateId == stateId && d.IsDeleted==false orderby d.Name select new IntegerSelectListItem { Text = d.Name, Value = d.Id }).ToList();
             return Json(ListLga);
         }
+
+        [HttpPost]
+        public ActionResult GetDescription(int stageId)
+        {
+            // var getDes = (from d in db.StageOfCompletion where d.Id == stageId && d.IsDeleted == false  select d.Description).FirstOrDefault();
+            List<IntegerSelectListItem> getDes = (from d in db.StageOfCompletion where d.Id == stageId && d.IsDeleted == false select new IntegerSelectListItem { Text = d.Description, Value = d.Id }).ToList();
+            return Json(getDes);
+        }
+
+
         public ActionResult ProjectDetail(int Id)
         {
             try
@@ -69,6 +155,8 @@ namespace Project.Areas.Admin.Controllers
                 model.StateList = (from s in db.State where s.IsDeleted==false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
                 model.LgaList = (from d in db.LGA select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
                 model.ContractorList = (from d in db.Contractor select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+
+                model.ProjectTypeList = (from d in db.ProjectType  select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
                 return View(model);
             }
             catch(Exception ex)
@@ -89,9 +177,10 @@ namespace Project.Areas.Admin.Controllers
                 model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
                 model.LgaList = (from d in db.LGA select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
                 model.ContractorList = (from d in db.Contractor select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                model.ProjectTypeList = (from d in db.ProjectType select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
                 //if (ModelState.IsValid)
                 //{
-                    var workflow = db.Workflow.Where(x => x.Id == model.projectForm.workflowId).FirstOrDefault();
+                var workflow = db.Workflow.Where(x => x.Id == model.projectForm.workflowId).FirstOrDefault();
                     model.workflow = workflow;
                     var getproject = db.ProjectApplication.Where(x => x.SerialNo == model.projectForm.SerialNo).ToList();
                     if (getproject.Any())
@@ -102,26 +191,28 @@ namespace Project.Areas.Admin.Controllers
                         model.workflow = workflow;
                         return View(model);
                     }
-                    ProjectApplication addnew = new ProjectApplication
-                    {
-                        TransactionId = Guid.NewGuid(),
-                        SerialNo = model.projectForm.SerialNo,
-                        Status = "draft",
-                        WorkFlowId = model.projectForm.workflowId,
-                        Description = model.projectForm.Description,
-                        Location = model.projectForm.Location,
-                        Coordinate = model.projectForm.Coordinate,
-                        LGAId = model.projectForm.LGAId,
-                        ContractorId = model.projectForm.ContractorId,
-                        ContractSum = model.projectForm.ContractSum,
-                        StageOfCompletion = model.projectForm.StageOfCompletion,
-                        DescriptionOfCompletion = model.projectForm.DescriptionOfCompletion,
-                        ProjectQuality = model.projectForm.ProjectQuality,
-                        HasDefect = model.projectForm.HasDefect,
-                        DescriptionOfDefect = model.projectForm.DescriptionOfDefect,
-                        ModifiedBy = User.Identity.Name,
-                        ModifiedDate = DateTime.Now,
-                        IsDeleted = false
+
+                ProjectApplication addnew = new ProjectApplication
+                {
+                    TransactionId = Guid.NewGuid(),
+                    SerialNo = model.projectForm.SerialNo,
+                    Status = "draft",
+                    WorkFlowId = model.projectForm.workflowId,
+                    Description = model.projectForm.Description,
+                    Location = model.projectForm.Location,
+                    Coordinate = model.projectForm.Coordinate,
+                    LGAId = model.projectForm.LGAId,
+                    ContractorId = model.projectForm.ContractorId,
+                    ContractSum = model.projectForm.ContractSum,
+                    ProjectTypeId = model.projectForm.ProjectTypeId,
+                    StartDate = model.projectForm.StartDate,
+                    EndDate = model.projectForm.EndDate,
+                    ModifiedBy = User.Identity.Name,
+                    ModifiedDate = DateTime.Now,
+                    IsDeleted = false,
+                    EnableSum = model.projectForm.ShowCost,                    
+                    StageOfCompletion = "0%"
+                        // =                  
                     };
                     db.ProjectApplication.AddObject(addnew);
                     db.SaveChanges();
@@ -156,13 +247,14 @@ namespace Project.Areas.Admin.Controllers
                 {
                     TempData["message"] = Settings.Default.GenericExceptionMessage;
                     TempData["messageType"] = "danger";
-                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
                 model.projectForm = new ProjectDetailForm();
                
                 model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
                 model.LgaList = (from d in db.LGA select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
                 model.ContractorList = (from d in db.Contractor select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                model.ProjectTypeList = (from d in db.ProjectType select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
                 model.projectForm.workflowId = getproject.WorkFlowId;
                 model.projectForm.SerialNo = getproject.SerialNo;
                 model.projectForm.Description = getproject.Description;
@@ -172,8 +264,56 @@ namespace Project.Areas.Admin.Controllers
                 model.projectForm.ContractSum = getproject.ContractSum;
                 model.projectForm.IsDeleted = getproject.IsDeleted;
                 model.StateId = getproject.LGA.StateId;
+                model.projectForm.ProjectTypeId = getproject.ProjectTypeId;
                 model.project = getproject;
+                model.projectForm.Coordinate = getproject.Coordinate;
+                model.projectForm.StartDate = getproject.StartDate;
+                model.projectForm.EndDate = getproject.EndDate;
+                model.projectForm.ShowCost = getproject.EnableSum;
                 return View(model);
+            }
+            catch(Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditProject(ProjectViewModel model)
+        {
+            try
+            {
+                model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
+                model.LgaList = (from d in db.LGA select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                model.ContractorList = (from d in db.Contractor select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                model.ProjectTypeList = (from d in db.ProjectType select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                var workflow = db.Workflow.Where(x => x.Id == model.project.WorkFlowId).FirstOrDefault();
+                model.workflow = workflow;
+                var getproject = db.ProjectApplication.Where(x => x.TransactionId == model.project.TransactionId).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = "Ops! There is an error while updating project. Please try again or contact the system administrator";
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "Project", new { Id = model.project.WorkFlowId, area = "Admin" });
+                }
+                getproject.SerialNo = model.projectForm.SerialNo;
+                getproject.Description = model.projectForm.Description;
+                getproject.ContractorId = model.projectForm.ContractorId;
+                getproject.ContractSum = model.projectForm.ContractSum;
+                getproject.LGAId = model.projectForm.LGAId;
+                getproject.EnableSum = model.projectForm.ShowCost;
+                getproject.Location = model.projectForm.Location;
+                getproject.ProjectTypeId = model.projectForm.ProjectTypeId;
+                getproject.StartDate = model.projectForm.StartDate;
+                getproject.EndDate = model.projectForm.EndDate;
+                getproject.ModifiedBy = User.Identity.Name;
+                getproject.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                TempData["message"] = "The project <b> "+model.projectForm.SerialNo+ "</b> has been update successfully.";
+                return RedirectToAction("Index", "Project", new { Id = getproject.WorkFlowId, area = "Admin" });
             }
             catch(Exception ex)
             {
@@ -223,7 +363,7 @@ namespace Project.Areas.Admin.Controllers
                 {
                     TempData["message"] = Settings.Default.GenericExceptionMessage;
                     TempData["messageType"] = "danger";
-                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
                 model.project = getproject;
                 List<int> list = (from x in getproject.Payment select x.Id).ToList<int>();
@@ -298,9 +438,7 @@ namespace Project.Areas.Admin.Controllers
             }
             return action;
         }
-
-
-        [Authorize]
+      
         public ActionResult DocumentsUploadedPath(string path)
         {
             try
@@ -353,9 +491,9 @@ namespace Project.Areas.Admin.Controllers
                     TempData["messageType"] = "danger";
                     return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
                 }
-               
+                var getworkflow = db.Workflow.Where(x => x.Id == getproject.WorkFlowId).FirstOrDefault();
                 List<int> list = (from x in getInspection.DocumentInfo select x.DocumentTypeId).ToList<int>();
-                model.AvailableDocument = (from d in this.db.DocumentType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DocumentType>();
+                model.AvailableDocument = (from d in getworkflow.DocumentType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DocumentType>();
                 if(model.AvailableDocument.Count==0)
                 {
                     model.AllPhotoUploaded = true;
@@ -405,9 +543,9 @@ namespace Project.Areas.Admin.Controllers
                     TempData["messageType"] = "danger";
                     return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
                 }
-
+                var getworkflow = db.Workflow.Where(x => x.Id == getproject.WorkFlowId).FirstOrDefault();
                 List<int> list = (from x in getInspection.DocumentInfo select x.Id).ToList<int>();
-                model.AvailableDocument = (from d in this.db.DocumentType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DocumentType>();
+                model.AvailableDocument = (from d in getworkflow.DocumentType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DocumentType>();
                 model.DocumentInfoList = getInspection.DocumentInfo.ToList<DocumentInfo>();
                 model.FullPhotoPath = Properties.Settings.Default.FullPhotoPath;
                 model.project = getproject;
@@ -517,9 +655,9 @@ namespace Project.Areas.Admin.Controllers
                     TempData["messageType"] = "danger";
                     return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
                 }
-
+                var getworkflow = db.Workflow.Where(x => x.Id == getproject.WorkFlowId).FirstOrDefault();
                 List<int> list = (from x in getInspection.DocumentInfo select x.Id).ToList<int>();
-                model.AvailableDocument = (from d in this.db.DocumentType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DocumentType>();
+                model.AvailableDocument = (from d in getworkflow.DocumentType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DocumentType>();
                 model.DocumentInfoList = getInspection.DocumentInfo.ToList<DocumentInfo>();
                 model.FullPhotoPath = Properties.Settings.Default.FullPhotoPath;
                 model.project = getproject;
@@ -574,6 +712,15 @@ namespace Project.Areas.Admin.Controllers
                     TempData["messageType"] = "danger";
                     return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
                 }
+                var getuser = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+                if(getproject.InspectionUserId == getuser.UserId )
+                {
+                    model.ReportOwner = true;
+                }
+                else
+                {
+                    model.ReportOwner = false;
+                }
                 model.project = getproject;
                 var getdraftProject = db.ProjectApplication.Where(x => x.TransactionId == getproject.TransactionId).ToList();
                 model.projectList = getdraftProject;
@@ -600,6 +747,41 @@ namespace Project.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Detail(string GridHtml)
+        {
+            ProjectViewModel model = new ProjectViewModel();
+            var getdraftProject = db.ProjectApplication.Where(x => x.TransactionId == model.project.TransactionId).ToList();
+            var getInspection = db.Inspection.Where(x => x.Id == model.inspection.Id).FirstOrDefault();
+            model.projectList = getdraftProject;
+            model.inspection = getInspection;
+            model.FullPhotoPath = Properties.Settings.Default.FullPhotoPath;
+            model.DocumentInfoList = getInspection.DocumentInfo.ToList<DocumentInfo>();
+            var inspection = db.Inspection.Where(x => x.Id == getInspection.Id).ToList();
+            model.InspectionList = inspection;
+            var getpayment = model.project.Payment.ToList();
+            model.paymentlist = getpayment;
+            var inspectionofficer = db.UserDetail.Where(x => x.UserId == model.project.InspectionUserId).ToList();
+            if (inspectionofficer.Any())
+            {
+                model.userDetail = inspectionofficer;
+            }
+
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+               
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Add(new Paragraph("Here"));
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "detail.pdf");
+            }
+        }
+  
         public ActionResult AssignOfficer(Guid Id)
         {
             try
@@ -682,7 +864,7 @@ namespace Project.Areas.Admin.Controllers
 
                 getproject.InspectionUserId = getUser.UserId;
                 db.SaveChanges();
-                TempData["message"] = "The inspection officer has been assign successfully to the project above";           
+                TempData["message"] = "The Monitoring officer has been assign successfully to the project above";           
                 return RedirectToAction("AssignOfficer", "Project", new {Id=getproject.TransactionId, area = "Admin" });
             }
             catch(Exception ex)
@@ -727,7 +909,7 @@ namespace Project.Areas.Admin.Controllers
 
                 getproject.InspectionUserId = null;
                 db.SaveChanges();
-                TempData["message"] = "The inspection officer has been removed successfully to the project above";
+                TempData["message"] = "The Monitoring officer has been removed successfully to the project above";
                 return RedirectToAction("AssignOfficer", "Project", new { Id = getproject.TransactionId, area = "Admin" });
             }
             catch (Exception ex)
@@ -784,11 +966,12 @@ namespace Project.Areas.Admin.Controllers
                 model.projectList = getdraftProject;
                 model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
                 model.LgaList = (from d in db.LGA where d.IsDeleted == false select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                model.StageOfCompletion = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId==getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Percentage, Value = s.Id }).ToList();
+                model.StageOfCompletionList = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId == getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Description, Value = s.Id }).ToList();
                 model.inspectionForm = new InspectionForm();
                 model.inspectionForm.Location = getproject.Location;
                 model.inspectionForm.LGAId = getproject.LGAId;
-                model.inspectionForm.ProjectId = Id;
-                
+                model.inspectionForm.ProjectId = Id;                
                 model.StateId = getproject.LGA.StateId;
                 return View(model);
             }
@@ -818,33 +1001,37 @@ namespace Project.Areas.Admin.Controllers
                 model.projectList = getdraftProject;
                 model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
                 model.LgaList = (from d in db.LGA select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
-                if (ModelState.IsValid)
-                {
+                model.StageOfCompletion = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId == getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Percentage, Value = s.Id }).ToList();
+                model.StageOfCompletionList = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId == getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Description, Value = s.Id }).ToList();
+                //if (ModelState.IsValid)
+                //{
+                    var getstage = db.StageOfCompletion.Where(x => x.Id == model.inspectionForm.StageOfCompletionId).FirstOrDefault();
                     Inspection addnew = new Inspection
                     {
-                        TransactionId = Guid.NewGuid(),                       
-                        InspectionStatus = "Not Submitted",                       
+                        TransactionId = Guid.NewGuid(),
+                        InspectionStatus = "Not Submitted",
                         Location = model.inspectionForm.Location,
                         Coordinate = model.inspectionForm.Coordinate,
-                        LgaId = model.inspectionForm.LGAId,                      
-                        StageOfCompletion = model.inspectionForm.StageOfCompletion,
-                        DescriptionOfCompletion = model.inspectionForm.DescriptionOfCompletion,
+                        LgaId = model.inspectionForm.LGAId,
+                        StageOfCompletion = getstage.Percentage,
+                        DescriptionOfCompletion = getstage.Description,
+                        StageOfCompletionId = model.inspectionForm.StageOfCompletionId,
                         ProjectQuality = model.inspectionForm.ProjectQuality,
                         HasDefect = model.inspectionForm.HasDefect,
                         DescriptionOfDefect = model.inspectionForm.DescriptionOfDefect,
                         ModifiedBy = User.Identity.Name,
                         ModifiedDate = DateTime.Now, 
                         InspectionDate = DateTime.Now,
-                        ProjectId = model.project.Id
+                        ProjectId = model.inspectionForm.ProjectId
                     };
                     db.Inspection.AddObject(addnew);
                     db.SaveChanges();
-                    TempData["message"] = "The Inspection report has been added successfully. Kindly upload photo of the project.";
+                    TempData["message"] = "The report has been added successfully. Kindly upload photo of the project.";
                     return RedirectToAction("InspectionList", "Project", new { Id = model.project.Id, area = "Admin" });
-                }
-                TempData["message"] = "ERROR: Please enter all fields with the * sign";
-                TempData["messageType"] = "danger";
-                return View(model);
+                //}
+                //TempData["message"] = "ERROR: Please enter all fields with the * sign";
+                //TempData["messageType"] = "danger";
+                //return View(model);
             }
             catch (Exception ex)
             {
@@ -880,14 +1067,16 @@ namespace Project.Areas.Admin.Controllers
                 model.projectList = getdraftProject;
                 model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
                 model.LgaList = (from d in db.LGA where d.IsDeleted == false select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                model.StageOfCompletion = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId == getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Percentage, Value = s.Id }).ToList();
+                model.StageOfCompletionList = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId == getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Description, Value = s.Id }).ToList();
                 model.inspectionForm = new InspectionForm();
                 model.inspectionForm.Location = getInspection.Location;
                 model.inspectionForm.Coordinate = getInspection.Coordinate;
                 model.inspectionForm.LGAId = getInspection.LgaId;
                 model.StateId = getInspection.LGA.StateId;
                 model.inspectionForm.ProjectId = getInspection.ProjectId;
-                model.inspectionForm.StageOfCompletion = getInspection.StageOfCompletion;
-                model.inspectionForm.DescriptionOfCompletion = getInspection.DescriptionOfCompletion;
+                model.inspectionForm.StageOfCompletionId = getInspection.StageOfCompletionId;
+                model.StageOfCompletionId = getInspection.StageOfCompletionId;
                 model.inspectionForm.ProjectQuality = getInspection.ProjectQuality;
                 model.inspectionForm.HasDefect = getInspection.HasDefect;
                 model.inspectionForm.DescriptionOfDefect = getInspection.DescriptionOfDefect;
@@ -926,20 +1115,24 @@ namespace Project.Areas.Admin.Controllers
                 model.projectList = getdraftProject;
                 model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
                 model.LgaList = (from d in db.LGA select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                model.StageOfCompletion = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId == getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Percentage, Value = s.Id }).ToList();
+                model.StageOfCompletionList = (from s in db.StageOfCompletion where s.IsDeleted == false && s.ProjectTypeId == getproject.ProjectTypeId select new IntegerSelectListItem { Text = s.Description, Value = s.Id }).ToList();
                 //if (ModelState.IsValid)
                 //{
+                var getstage = db.StageOfCompletion.Where(x => x.Id == model.inspectionForm.StageOfCompletionId).FirstOrDefault();
                     getInspection.Location = model.inspectionForm.Location;
                     getInspection.Coordinate = model.inspectionForm.Coordinate;
                     getInspection.LgaId = model.inspectionForm.LGAId;
-                    getInspection.StageOfCompletion = model.inspectionForm.StageOfCompletion;
-                    getInspection.DescriptionOfCompletion = model.inspectionForm.DescriptionOfCompletion;
+                    getInspection.StageOfCompletion = getstage.Percentage;
+                    getInspection.StageOfCompletionId = model.inspectionForm.StageOfCompletionId;
+                    getInspection.DescriptionOfCompletion = getstage.Description; //model.inspectionForm.DescriptionOfCompletion;
                     getInspection.ProjectQuality = model.inspectionForm.ProjectQuality;
                     getInspection.HasDefect = model.inspectionForm.HasDefect;
                     getInspection.DescriptionOfDefect = model.inspectionForm.DescriptionOfDefect;
                     getInspection.ModifiedBy = User.Identity.Name;
                     getInspection.ModifiedDate = DateTime.Now;
                     db.SaveChanges();
-                    TempData["message"] = "The Inspection report has been update successfully.";
+                    TempData["message"] = "The report has been update successfully.";
                     return RedirectToAction("InspectionList", "Project", new { Id = getInspection.ProjectId, area = "Admin" });
                 //}
                 //TempData["message"] = "ERROR: Please enter all fields with the * sign";
@@ -977,7 +1170,7 @@ namespace Project.Areas.Admin.Controllers
                 }
                 getInspection.InspectionStatus = "Submitted";
                 db.SaveChanges();
-                TempData["message"] = "The Inspection report has been submitted successfully.";
+                TempData["message"] = "The report has been submitted successfully.";
                 return RedirectToAction("InspectionList", "Project", new { Id = getInspection.ProjectId, area = "Admin" });
             }
             catch(Exception ex)
@@ -988,6 +1181,175 @@ namespace Project.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
             }
         }
+
+        public ActionResult ManageDeliverable(Guid Id)
+        {
+            try
+            {
+                ProjectViewModel model = new ProjectViewModel();
+                var getproject = db.ProjectApplication.Where(x => x.TransactionId == Id).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+                model.project = getproject;
+                var getdraftProject = db.ProjectApplication.Where(x => x.TransactionId == Id).ToList();
+                var getworkflow = db.Workflow.Where(x => x.Id == getproject.WorkFlowId).FirstOrDefault();
+                var getdeliverable = getworkflow.DeliverableType.ToList();
+                model.deliverableType = getdeliverable;
+                model.projectList = getdraftProject;
+
+                List<int> list = (from x in getworkflow.DeliverableType select x.Id).ToList<int>();
+              
+
+                model.deliverableTypeList = (from s in db.DeliverableType where list.Contains(s.Id) select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
+                //model.deliverableFormatList = (from d in db.DeliverableFormat where list.Contains(d.DeliverableTypeId) select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddDeliverable(ProjectViewModel model)
+        {
+            try
+            {
+                var getproject = db.ProjectApplication.Where(x => x.TransactionId == model.project.TransactionId).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+
+                var deliverable = db.DeliverableType.Where(x => x.Id == model.deliverable.Id).FirstOrDefault();
+                if (deliverable == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+                model.deliverable = deliverable;
+                model.project = getproject;
+                var getdraftProject = db.ProjectApplication.Where(x => x.TransactionId == model.project.TransactionId).ToList();
+                var getworkflow = db.Workflow.Where(x => x.Id == getproject.WorkFlowId).FirstOrDefault();
+                var getdeliverable = getworkflow.DeliverableType.ToList();
+                model.deliverableType = getdeliverable;
+                model.projectList = getdraftProject;
+
+                List<int> list = (from x in db.ProjectDeliverable where x.ProjectId == getproject.Id && x.DeliverableId == model.deliverable.Id select x.DeliverableFormatId).ToList<int>();
+                model.deliverableFormatList = (from d in deliverable.DeliverableFormat where !list.Contains(d.Id) select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                if (ModelState.IsValid)
+                {
+                    ProjectDeliverable addnew = new ProjectDeliverable
+                    {
+                        ProjectId = model.project.Id,
+                        DeliverableId = model.deliverable.Id,
+                        DeliverableFormatId = model.projectDeliverableForm.DeliverableFormatId,
+                        DeliverableUnit = model.projectDeliverableForm.DeliverableUnit,
+                        Remarks = model.projectDeliverableForm.Remarks,
+                        CreatedBy = User.Identity.Name,
+                        CreatedDate = DateTime.Now
+                    };
+                    db.ProjectDeliverable.AddObject(addnew);
+                    db.SaveChanges();
+
+                    base.TempData["message"] = "The Deliverable has been added successfully.";
+                    return RedirectToAction("AddDeliverable", "Project", new { Id = model.project.TransactionId, DId = model.deliverable.Id, area = "Admin" });
+                }
+                TempData["message"] ="ERROR: Please select the deliverable type and enter unit and a remarks.";
+                TempData["messageType"] = "danger";
+                return RedirectToAction("AddDeliverable", "Project", new {Id=getproject.TransactionId,DId=deliverable.Id, area = "Admin" });
+
+            }
+            catch(Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        public ActionResult AddDeliverable(Guid Id,int DId)
+        {
+            try
+            {
+                ProjectViewModel model = new ProjectViewModel();
+                var getproject = db.ProjectApplication.Where(x => x.TransactionId == Id).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+                var deliverable = db.DeliverableType.Where(x => x.Id == DId).FirstOrDefault();
+                if (deliverable == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+                model.deliverable = deliverable;
+                model.project = getproject;
+                var getdraftProject = db.ProjectApplication.Where(x => x.TransactionId == Id).ToList();
+                var getworkflow = db.Workflow.Where(x => x.Id == getproject.WorkFlowId).FirstOrDefault();
+                var getdeliverable = getworkflow.DeliverableType.ToList();
+                model.deliverableType = getdeliverable;
+                model.projectList = getdraftProject;
+                model.ProjectDeliverableList = getproject.ProjectDeliverable.Where(x => x.DeliverableId == DId).ToList();
+
+                List<int> list = (from x in db.ProjectDeliverable where x.ProjectId==getproject.Id && x.DeliverableId==DId select x.DeliverableFormatId).ToList<int>();
+                model.deliverableFormatList = (from d in deliverable.DeliverableFormat where !list.Contains(d.Id) select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        public ActionResult RemoveDeliverable(int Id, int DId)
+        {
+            ActionResult action;
+            try
+            {
+                ProjectViewModel model = new ProjectViewModel();
+                
+                var deliverable = (from x in db.ProjectDeliverable where x.Id == Id && x.DeliverableId== DId select x).FirstOrDefault();
+                var getproject = (from d in db.ProjectApplication where d.Id == deliverable.ProjectId select d).FirstOrDefault();
+                ProjectDeliverable remove = new ProjectDeliverable
+                {
+                };
+                db.ProjectDeliverable.DeleteObject(deliverable);
+                db.SaveChanges();
+                TempData["message"] = "The Deliverable has been deleted successfully.";
+                action = base.RedirectToAction("AddDeliverable", "Project", new { Id = getproject.TransactionId,DId=DId, area = "Admin" });
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                base.TempData["messageType"] = "danger";
+                base.TempData["message"] = "There is an error in the application. Please try again or contact the system administrator";
+                Elmah.ErrorSignal.FromCurrentContext().Raise(exception);
+                action = base.RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+            return action;
+        }
+
+
     }
 
 }

@@ -1,7 +1,7 @@
 ﻿@model Project.Areas.Admin.Models.ProjectViewModel
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Title = "New Inspection for "+Model.project.SerialNo+"";
+    ViewBag.Title = "New Report for "+Model.project.SerialNo+"";
     ViewBag.IsGreetings = "true";
 
 }
@@ -10,7 +10,7 @@
 
         <ul class="breadcrumb" id="breadcrumbs">
             <li><i class="icon-home"></i><a href="@Url.Action("Index", "Index", new { area = "Organisations" })">Dashboard</a> </li>
-            <li class="current"><a title="" href="javascript: return void(0)">New Inspection</a> </li>
+            <li class="current"><a title="" href="javascript: return void(0)">New Report</a> </li>
         </ul>
     </div>
 }
@@ -76,45 +76,22 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label required">Stage Of Completion:</label>
                                         <div class="col-md-8">
-                                            @Html.DropDownListFor(m => m.inspectionForm.StageOfCompletion,
-         new List<SelectListItem> {
-              new SelectListItem { Value = "5%" , Text = "5%" },
-              new SelectListItem { Value = "10%" , Text = "10%" },
-              new SelectListItem { Value = "15%" , Text = "15%" },
-              new SelectListItem { Value = "20%" , Text = "20%" },
-              new SelectListItem { Value = "25%" , Text = "25%" },
-              new SelectListItem { Value = "30%" , Text = "30%" },
-              new SelectListItem { Value = "35%" , Text = "35%" },
-              new SelectListItem { Value = "40%" , Text = "40%" },
-              new SelectListItem { Value = "45%" , Text = "45%" },
-              new SelectListItem { Value = "50%" , Text = "50%" },
 
-              new SelectListItem { Value = "55%" , Text = "55%" },
-              new SelectListItem { Value = "60%" , Text = "60%" },
-              new SelectListItem { Value = "65%" , Text = "65%" },
-              new SelectListItem { Value = "70%" , Text = "70%" },
-              new SelectListItem { Value = "75%" , Text = "75%" },
-              new SelectListItem { Value = "80%" , Text = "80%" },
-              new SelectListItem { Value = "85%" , Text = "85%" },
-              new SelectListItem { Value = "90%" , Text = "90%" },
-              new SelectListItem { Value = "95%" , Text = "95%" },
-              new SelectListItem { Value = "100%" , Text = "100%" },
-           },
-         new { @class = "form-control" })
-
+                                            @Html.DropDownListFor(m => m.inspectionForm.StageOfCompletionId, new SelectList(Model.StageOfCompletion, "Value", "Text"), "Select One", new { @class = "form-control", onChange = "GetAllDes(this)" })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label required">Description Of Completion:</label>
                                         <div class="col-md-8">
-                                            @Html.TextAreaFor(m => m.inspectionForm.DescriptionOfCompletion, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(m => m.inspectionForm.DescriptionOfCompletion, null, new { @style = "color:red" })
+                                            @Html.DropDownListFor(m => m.StageOfCompletionId, new SelectList(Model.StageOfCompletionList, "Value", "Text"),  new { @class = "form-control" })
+                                            @*@Html.TextAreaFor(m => m.inspectionForm.DescriptionOfCompletion, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.inspectionForm.DescriptionOfCompletion, null, new { @style = "color:red" })*@
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label required">Quality of Project:</label>
+                                        <label class="col-md-4 control-label required">Project Quality:</label>
                                         <div class="col-md-8">
                                             @Html.DropDownListFor(m => m.inspectionForm.ProjectQuality,
            new List<SelectListItem> {
@@ -152,7 +129,7 @@
                 <div class="col-md-12 form-vertical no-margin">
 
                     <div class="form-actions">
-                        <a href="@Url.Action("Index", "Project", new {Id=Model.project.Id, area="Admin"})" class="btn btn-success btn-xs"><< Back to List </a>
+                        <a href="@Url.Action("InspectionList", "Project", new {Id=Model.project.Id, area="Admin"})" class="btn btn-success btn-xs"><< Back to List </a>
                         <input type="submit" value="Submit" class="btn btn-primary btn-xs pull-right" />
                     </div>
                 </div>
@@ -160,16 +137,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" language="javascript">
-    function DisableBackButton() {
-        window.history.forward()
-
-    }
-    DisableBackButton();
-    window.onload = DisableBackButton;
-    window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
-    window.onunload = function () { void (0) }
-</script>
 
 <script type="text/javascript">
         "use strict";
@@ -199,6 +166,41 @@
 
         function GetAllLGA(e) {
             getLga(e);
+
+        }
+
+
+
+</script>
+
+<script type="text/javascript">
+        "use strict";
+        function getDes(e) {
+            var stageId = $(e).val();
+
+            var currentRequest = null;
+            var currentRequest = $.ajax({
+                url: '@Url.Action("GetDescription", "Project")',
+                dataType: 'json',
+                type: 'POST',
+                data: { StageId: stageId },
+                beforeSend: function () {
+                    if (currentRequest != null) {
+                        currentRequest.abort();
+                    }
+                },
+                success: function (msg) {
+                    $("#StageOfCompletionId").html("");
+                    $.each(msg, function (index, element) {
+                        $("#StageOfCompletionId").append('<option  value="' + element.Value + '">' + element.Text + '</option>');
+                    });
+                },
+                error: function (errmsg) { }
+            });
+        }
+
+    function GetAllDes(e) {
+            getDes(e);
 
         }
 

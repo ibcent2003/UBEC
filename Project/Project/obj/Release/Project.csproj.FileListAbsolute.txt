@@ -1,3 +1,4 @@
+C:\Users\USER\source\repos\UBECApp\Project\Project\obj\Release\Project.csproj.CoreCompileInputs.cache
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Project.dll.config
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Project.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Project.pdb
@@ -32,8 +33,6 @@ C:\Users\USER\source\repos\UBECApp\Project\Project\bin\System.Web.WebPages.Razor
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\WebGrease.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\WebMatrix.Data.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\WebMatrix.WebData.dll
-C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Project.DAL.pdb
-C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Project.DAL.dll.config
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\EntityFramework.xml
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Newtonsoft.Json.xml
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\System.Net.Http.Formatting.xml
@@ -54,8 +53,13 @@ C:\Users\USER\source\repos\UBECApp\Project\Project\bin\DotNetOpenAuth.OAuth.Cons
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\DotNetOpenAuth.OAuth.xml
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\DotNetOpenAuth.OpenId.xml
 C:\Users\USER\source\repos\UBECApp\Project\Project\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\USER\source\repos\UBECApp\Project\Project\obj\Release\Project.csprojAssemblyReference.cache
-C:\Users\USER\source\repos\UBECApp\Project\Project\obj\Release\Project.csproj.CoreCompileInputs.cache
 C:\Users\USER\source\repos\UBECApp\Project\Project\obj\Release\Project.csproj.CopyComplete
 C:\Users\USER\source\repos\UBECApp\Project\Project\obj\Release\Project.dll
 C:\Users\USER\source\repos\UBECApp\Project\Project\obj\Release\Project.pdb
+C:\Users\USER\source\repos\UBECApp\Project\Project\bin\BouncyCastle.Crypto.dll
+C:\Users\USER\source\repos\UBECApp\Project\Project\bin\itextsharp.dll
+C:\Users\USER\source\repos\UBECApp\Project\Project\bin\itextsharp.xmlworker.dll
+C:\Users\USER\source\repos\UBECApp\Project\Project\bin\itextsharp.xml
+C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Project.DAL.pdb
+C:\Users\USER\source\repos\UBECApp\Project\Project\bin\Project.DAL.dll.config
+C:\Users\USER\source\repos\UBECApp\Project\Project\obj\Release\Project.csprojAssemblyReference.cache

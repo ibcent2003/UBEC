@@ -19,36 +19,51 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Alert_WorkFlow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "Alert", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Alert), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_WorkflowStepActions_Alert", "Alert", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Alert), "WorkflowStepActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowStepActions), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_AlertNotification_AlertType", "AlertType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.AlertType), "AlertNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.AlertNotification), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "MembershipApplication", "Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Applications), "Memberships", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Memberships), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "RoleApplication", "Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Applications), "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Roles), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "UserApplication", "Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Applications), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Users), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Project_Contractor", "Contractor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Contractor), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_DocumentType_DocumentCategory", "DocumentCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DocumentCategory), "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_DocumentInfo_DocumentType", "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DocumentType), "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Inspection_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_LGA_State", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.State), "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.LGA), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Project_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "MembershipUser", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "Memberships", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Memberships), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Payment_PaymentType", "PaymentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.PaymentType), "Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Payment), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Payment_Project", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Payment), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "UserProfile", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "Profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Profiles), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Inspection_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_Project_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "ProjectApplication1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.ProjectApplication), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_ProjectApplication_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Users), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_UserDetail_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "UserDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.UserDetail), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_WorkFlowActions_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "WorkFlowActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkFlowActions), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_WorkflowSteps_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "WorkflowSteps", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowSteps), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.WorkFlowActions), "WorkflowStepActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowStepActions), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.WorkflowSteps), "WorkflowStepActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowStepActions), true)]
-[assembly: EdmRelationshipAttribute("UBECModel", "DocumentTypeFormat", "DocumentFormat", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentFormat), "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType))]
-[assembly: EdmRelationshipAttribute("UBECModel", "ProjectDocumentInfo", "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication))]
-[assembly: EdmRelationshipAttribute("UBECModel", "UsersInRoles", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Roles), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Users))]
-[assembly: EdmRelationshipAttribute("UBECModel", "WorkflowDocument", "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType), "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Workflow))]
-[assembly: EdmRelationshipAttribute("UBECModel", "InspectionDocumentInfo", "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection))]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Alert_WorkFlow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "Alert", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Alert), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_WorkflowStepActions_Alert", "Alert", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Alert), "WorkflowStepActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowStepActions), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_AlertNotification_AlertType", "AlertType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.AlertType), "AlertNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.AlertNotification), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "MembershipApplication", "Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Applications), "Memberships", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Memberships), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "RoleApplication", "Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Applications), "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Roles), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "UserApplication", "Applications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Applications), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Users), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Project_Contractor", "Contractor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Contractor), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Supplies_Contractor", "Contractor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Contractor), "Supplies", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Supplies), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_DocumentType_DocumentCategory", "DocumentCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DocumentCategory), "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_DocumentInfo_DocumentType", "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DocumentType), "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Inspection_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_LGA_State", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.State), "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.LGA), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Project_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Supplies_LGA", "LGA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.LGA), "Supplies", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Supplies), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "MembershipUser", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "Memberships", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Memberships), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Payment_PaymentType", "PaymentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.PaymentType), "Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Payment), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Payment_Project", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Payment), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "UserProfile", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "Profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.Profiles), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Inspection_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Project_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "ProjectApplication1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Project.DAL.ProjectApplication), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_ProjectApplication_ProjectType", "ProjectType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectType), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_ProjectDeliverable_ProjectApplication", "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectApplication), "ProjectDeliverable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectDeliverable), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_UserDetail_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Users), "UserDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.UserDetail), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Supplies_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "Supplies", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Supplies), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_WorkFlowActions_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "WorkFlowActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkFlowActions), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_WorkflowSteps_Workflow", "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Workflow), "WorkflowSteps", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowSteps), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.WorkFlowActions), "WorkflowStepActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowStepActions), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.WorkflowSteps), "WorkflowStepActions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.WorkflowStepActions), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_ProjectDeliverable_DeliverableFormat", "DeliverableFormat", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DeliverableFormat), "ProjectDeliverable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectDeliverable), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_SupplyDeliverable_DeliverableFormat", "DeliverableFormat", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DeliverableFormat), "SupplyDeliverable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.SupplyDeliverable), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_ProjectDeliverable_DeliverableType", "DeliverableType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DeliverableType), "ProjectDeliverable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectDeliverable), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_SupplyDeliverable_DeliverableType", "DeliverableType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.DeliverableType), "SupplyDeliverable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.SupplyDeliverable), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_Inspection_StageOfCompletion", "StageOfCompletion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.StageOfCompletion), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_StageOfCompletion_ProjectType", "ProjectType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.ProjectType), "StageOfCompletion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.StageOfCompletion), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_SupplyDeliverable_SupplyDeliverable", "Supplies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Supplies), "SupplyDeliverable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.SupplyDeliverable), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "FK_SupplyItems_Supplies", "Supplies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Project.DAL.Supplies), "SupplyItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.SupplyItems), true)]
+[assembly: EdmRelationshipAttribute("DBModel", "DocumentTypeFormat", "DocumentFormat", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentFormat), "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType))]
+[assembly: EdmRelationshipAttribute("DBModel", "ProjectDocumentInfo", "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), "ProjectApplication", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.ProjectApplication))]
+[assembly: EdmRelationshipAttribute("DBModel", "UsersInRoles", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Roles), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Users))]
+[assembly: EdmRelationshipAttribute("DBModel", "WorkflowDocument", "DocumentType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentType), "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Workflow))]
+[assembly: EdmRelationshipAttribute("DBModel", "DeliverableTypeFormat", "DeliverableFormat", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DeliverableFormat), "DeliverableType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DeliverableType))]
+[assembly: EdmRelationshipAttribute("DBModel", "InspectionDocumentInfo", "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), "Inspection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Inspection))]
+[assembly: EdmRelationshipAttribute("DBModel", "SupplyDocumentInfo", "DocumentInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DocumentInfo), "Supplies", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Supplies))]
+[assembly: EdmRelationshipAttribute("DBModel", "WorkFlowDeliverable", "DeliverableType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.DeliverableType), "Workflow", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Project.DAL.Workflow))]
 
 #endregion
 
@@ -535,6 +550,38 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<DeliverableFormat> DeliverableFormat
+        {
+            get
+            {
+                if ((_DeliverableFormat == null))
+                {
+                    _DeliverableFormat = base.CreateObjectSet<DeliverableFormat>("DeliverableFormat");
+                }
+                return _DeliverableFormat;
+            }
+        }
+        private ObjectSet<DeliverableFormat> _DeliverableFormat;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DeliverableType> DeliverableType
+        {
+            get
+            {
+                if ((_DeliverableType == null))
+                {
+                    _DeliverableType = base.CreateObjectSet<DeliverableType>("DeliverableType");
+                }
+                return _DeliverableType;
+            }
+        }
+        private ObjectSet<DeliverableType> _DeliverableType;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Inspection> Inspection
         {
             get
@@ -547,6 +594,102 @@ namespace Project.DAL
             }
         }
         private ObjectSet<Inspection> _Inspection;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProjectDeliverable> ProjectDeliverable
+        {
+            get
+            {
+                if ((_ProjectDeliverable == null))
+                {
+                    _ProjectDeliverable = base.CreateObjectSet<ProjectDeliverable>("ProjectDeliverable");
+                }
+                return _ProjectDeliverable;
+            }
+        }
+        private ObjectSet<ProjectDeliverable> _ProjectDeliverable;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProjectType> ProjectType
+        {
+            get
+            {
+                if ((_ProjectType == null))
+                {
+                    _ProjectType = base.CreateObjectSet<ProjectType>("ProjectType");
+                }
+                return _ProjectType;
+            }
+        }
+        private ObjectSet<ProjectType> _ProjectType;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<StageOfCompletion> StageOfCompletion
+        {
+            get
+            {
+                if ((_StageOfCompletion == null))
+                {
+                    _StageOfCompletion = base.CreateObjectSet<StageOfCompletion>("StageOfCompletion");
+                }
+                return _StageOfCompletion;
+            }
+        }
+        private ObjectSet<StageOfCompletion> _StageOfCompletion;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Supplies> Supplies
+        {
+            get
+            {
+                if ((_Supplies == null))
+                {
+                    _Supplies = base.CreateObjectSet<Supplies>("Supplies");
+                }
+                return _Supplies;
+            }
+        }
+        private ObjectSet<Supplies> _Supplies;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SupplyDeliverable> SupplyDeliverable
+        {
+            get
+            {
+                if ((_SupplyDeliverable == null))
+                {
+                    _SupplyDeliverable = base.CreateObjectSet<SupplyDeliverable>("SupplyDeliverable");
+                }
+                return _SupplyDeliverable;
+            }
+        }
+        private ObjectSet<SupplyDeliverable> _SupplyDeliverable;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SupplyItems> SupplyItems
+        {
+            get
+            {
+                if ((_SupplyItems == null))
+                {
+                    _SupplyItems = base.CreateObjectSet<SupplyItems>("SupplyItems");
+                }
+                return _SupplyItems;
+            }
+        }
+        private ObjectSet<SupplyItems> _SupplyItems;
 
         #endregion
 
@@ -769,11 +912,75 @@ namespace Project.DAL
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the DeliverableFormat EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDeliverableFormat(DeliverableFormat deliverableFormat)
+        {
+            base.AddObject("DeliverableFormat", deliverableFormat);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DeliverableType EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDeliverableType(DeliverableType deliverableType)
+        {
+            base.AddObject("DeliverableType", deliverableType);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Inspection EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToInspection(Inspection inspection)
         {
             base.AddObject("Inspection", inspection);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProjectDeliverable EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProjectDeliverable(ProjectDeliverable projectDeliverable)
+        {
+            base.AddObject("ProjectDeliverable", projectDeliverable);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProjectType EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProjectType(ProjectType projectType)
+        {
+            base.AddObject("ProjectType", projectType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the StageOfCompletion EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStageOfCompletion(StageOfCompletion stageOfCompletion)
+        {
+            base.AddObject("StageOfCompletion", stageOfCompletion);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Supplies EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSupplies(Supplies supplies)
+        {
+            base.AddObject("Supplies", supplies);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SupplyDeliverable EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSupplyDeliverable(SupplyDeliverable supplyDeliverable)
+        {
+            base.AddObject("SupplyDeliverable", supplyDeliverable);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SupplyItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSupplyItems(SupplyItems supplyItems)
+        {
+            base.AddObject("SupplyItems", supplyItems);
         }
 
         #endregion
@@ -787,7 +994,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Alert")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Alert")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Alert : EntityObject
@@ -1080,16 +1287,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Alert_WorkFlow", "Workflow")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Alert_WorkFlow", "Workflow")]
         public Workflow Workflow
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_Alert_WorkFlow", "Workflow").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Alert_WorkFlow", "Workflow").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_Alert_WorkFlow", "Workflow").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Alert_WorkFlow", "Workflow").Value = value;
             }
         }
         /// <summary>
@@ -1101,13 +1308,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_Alert_WorkFlow", "Workflow");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Alert_WorkFlow", "Workflow");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("UBECModel.FK_Alert_WorkFlow", "Workflow", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("DBModel.FK_Alert_WorkFlow", "Workflow", value);
                 }
             }
         }
@@ -1118,18 +1325,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowStepActions_Alert", "WorkflowStepActions")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowStepActions_Alert", "WorkflowStepActions")]
         public EntityCollection<WorkflowStepActions> WorkflowStepActions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowStepActions>("UBECModel.FK_WorkflowStepActions_Alert", "WorkflowStepActions");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowStepActions>("DBModel.FK_WorkflowStepActions_Alert", "WorkflowStepActions");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowStepActions>("UBECModel.FK_WorkflowStepActions_Alert", "WorkflowStepActions", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowStepActions>("DBModel.FK_WorkflowStepActions_Alert", "WorkflowStepActions", value);
                 }
             }
         }
@@ -1141,7 +1348,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="AlertNotification")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="AlertNotification")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class AlertNotification : EntityObject
@@ -1434,16 +1641,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_AlertNotification_AlertType", "AlertType")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_AlertNotification_AlertType", "AlertType")]
         public AlertType AlertType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AlertType>("UBECModel.FK_AlertNotification_AlertType", "AlertType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AlertType>("DBModel.FK_AlertNotification_AlertType", "AlertType").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AlertType>("UBECModel.FK_AlertNotification_AlertType", "AlertType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AlertType>("DBModel.FK_AlertNotification_AlertType", "AlertType").Value = value;
             }
         }
         /// <summary>
@@ -1455,13 +1662,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AlertType>("UBECModel.FK_AlertNotification_AlertType", "AlertType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AlertType>("DBModel.FK_AlertNotification_AlertType", "AlertType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AlertType>("UBECModel.FK_AlertNotification_AlertType", "AlertType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AlertType>("DBModel.FK_AlertNotification_AlertType", "AlertType", value);
                 }
             }
         }
@@ -1473,7 +1680,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="AlertType")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="AlertType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class AlertType : EntityObject
@@ -1558,18 +1765,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_AlertNotification_AlertType", "AlertNotification")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_AlertNotification_AlertType", "AlertNotification")]
         public EntityCollection<AlertNotification> AlertNotification
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AlertNotification>("UBECModel.FK_AlertNotification_AlertType", "AlertNotification");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AlertNotification>("DBModel.FK_AlertNotification_AlertType", "AlertNotification");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AlertNotification>("UBECModel.FK_AlertNotification_AlertType", "AlertNotification", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AlertNotification>("DBModel.FK_AlertNotification_AlertType", "AlertNotification", value);
                 }
             }
         }
@@ -1581,7 +1788,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Applications")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Applications")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Applications : EntityObject
@@ -1690,18 +1897,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "MembershipApplication", "Memberships")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "MembershipApplication", "Memberships")]
         public EntityCollection<Memberships> Memberships
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Memberships>("UBECModel.MembershipApplication", "Memberships");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Memberships>("DBModel.MembershipApplication", "Memberships");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Memberships>("UBECModel.MembershipApplication", "Memberships", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Memberships>("DBModel.MembershipApplication", "Memberships", value);
                 }
             }
         }
@@ -1712,18 +1919,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "RoleApplication", "Roles")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "RoleApplication", "Roles")]
         public EntityCollection<Roles> Roles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Roles>("UBECModel.RoleApplication", "Roles");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Roles>("DBModel.RoleApplication", "Roles");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Roles>("UBECModel.RoleApplication", "Roles", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Roles>("DBModel.RoleApplication", "Roles", value);
                 }
             }
         }
@@ -1734,18 +1941,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "UserApplication", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "UserApplication", "Users")]
         public EntityCollection<Users> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Users>("UBECModel.UserApplication", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Users>("DBModel.UserApplication", "Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Users>("UBECModel.UserApplication", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Users>("DBModel.UserApplication", "Users", value);
                 }
             }
         }
@@ -1757,7 +1964,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Contractor")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Contractor")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Contractor : EntityObject
@@ -1920,18 +2127,40 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Project_Contractor", "ProjectApplication")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Project_Contractor", "ProjectApplication")]
         public EntityCollection<ProjectApplication> ProjectApplication
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("UBECModel.FK_Project_Contractor", "ProjectApplication");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("DBModel.FK_Project_Contractor", "ProjectApplication");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("UBECModel.FK_Project_Contractor", "ProjectApplication", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("DBModel.FK_Project_Contractor", "ProjectApplication", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Supplies_Contractor", "Supplies")]
+        public EntityCollection<Supplies> Supplies
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Supplies>("DBModel.FK_Supplies_Contractor", "Supplies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Supplies>("DBModel.FK_Supplies_Contractor", "Supplies", value);
                 }
             }
         }
@@ -1943,7 +2172,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="DataGenerator")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="DataGenerator")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class DataGenerator : EntityObject
@@ -2051,7 +2280,489 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="DocumentCategory")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="DeliverableFormat")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DeliverableFormat : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DeliverableFormat object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static DeliverableFormat CreateDeliverableFormat(global::System.Int32 id, global::System.String name, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.Boolean isDeleted)
+        {
+            DeliverableFormat deliverableFormat = new DeliverableFormat();
+            deliverableFormat.Id = id;
+            deliverableFormat.Name = name;
+            deliverableFormat.ModifiedBy = modifiedBy;
+            deliverableFormat.ModifiedDate = modifiedDate;
+            deliverableFormat.IsDeleted = isDeleted;
+            return deliverableFormat;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ModifiedBy
+        {
+            get
+            {
+                return _ModifiedBy;
+            }
+            set
+            {
+                OnModifiedByChanging(value);
+                ReportPropertyChanging("ModifiedBy");
+                _ModifiedBy = StructuralObject.SetValidValue(value, false, "ModifiedBy");
+                ReportPropertyChanged("ModifiedBy");
+                OnModifiedByChanged();
+            }
+        }
+        private global::System.String _ModifiedBy;
+        partial void OnModifiedByChanging(global::System.String value);
+        partial void OnModifiedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value, "ModifiedDate");
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedDate;
+        partial void OnModifiedDateChanging(global::System.DateTime value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value, "IsDeleted");
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectDeliverable_DeliverableFormat", "ProjectDeliverable")]
+        public EntityCollection<ProjectDeliverable> ProjectDeliverable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectDeliverable>("DBModel.FK_ProjectDeliverable_DeliverableFormat", "ProjectDeliverable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectDeliverable>("DBModel.FK_ProjectDeliverable_DeliverableFormat", "ProjectDeliverable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyDeliverable_DeliverableFormat", "SupplyDeliverable")]
+        public EntityCollection<SupplyDeliverable> SupplyDeliverable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SupplyDeliverable>("DBModel.FK_SupplyDeliverable_DeliverableFormat", "SupplyDeliverable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SupplyDeliverable>("DBModel.FK_SupplyDeliverable_DeliverableFormat", "SupplyDeliverable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "DeliverableTypeFormat", "DeliverableType")]
+        public EntityCollection<DeliverableType> DeliverableType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DeliverableType>("DBModel.DeliverableTypeFormat", "DeliverableType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DeliverableType>("DBModel.DeliverableTypeFormat", "DeliverableType", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="DeliverableType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DeliverableType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DeliverableType object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static DeliverableType CreateDeliverableType(global::System.Int32 id, global::System.String name, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.Boolean isDeleted)
+        {
+            DeliverableType deliverableType = new DeliverableType();
+            deliverableType.Id = id;
+            deliverableType.Name = name;
+            deliverableType.ModifiedBy = modifiedBy;
+            deliverableType.ModifiedDate = modifiedDate;
+            deliverableType.IsDeleted = isDeleted;
+            return deliverableType;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ModifiedBy
+        {
+            get
+            {
+                return _ModifiedBy;
+            }
+            set
+            {
+                OnModifiedByChanging(value);
+                ReportPropertyChanging("ModifiedBy");
+                _ModifiedBy = StructuralObject.SetValidValue(value, false, "ModifiedBy");
+                ReportPropertyChanged("ModifiedBy");
+                OnModifiedByChanged();
+            }
+        }
+        private global::System.String _ModifiedBy;
+        partial void OnModifiedByChanging(global::System.String value);
+        partial void OnModifiedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value, "ModifiedDate");
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedDate;
+        partial void OnModifiedDateChanging(global::System.DateTime value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value, "IsDeleted");
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectDeliverable_DeliverableType", "ProjectDeliverable")]
+        public EntityCollection<ProjectDeliverable> ProjectDeliverable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectDeliverable>("DBModel.FK_ProjectDeliverable_DeliverableType", "ProjectDeliverable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectDeliverable>("DBModel.FK_ProjectDeliverable_DeliverableType", "ProjectDeliverable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyDeliverable_DeliverableType", "SupplyDeliverable")]
+        public EntityCollection<SupplyDeliverable> SupplyDeliverable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SupplyDeliverable>("DBModel.FK_SupplyDeliverable_DeliverableType", "SupplyDeliverable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SupplyDeliverable>("DBModel.FK_SupplyDeliverable_DeliverableType", "SupplyDeliverable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "DeliverableTypeFormat", "DeliverableFormat")]
+        public EntityCollection<DeliverableFormat> DeliverableFormat
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DeliverableFormat>("DBModel.DeliverableTypeFormat", "DeliverableFormat");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DeliverableFormat>("DBModel.DeliverableTypeFormat", "DeliverableFormat", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "WorkFlowDeliverable", "Workflow")]
+        public EntityCollection<Workflow> Workflow
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Workflow>("DBModel.WorkFlowDeliverable", "Workflow");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Workflow>("DBModel.WorkFlowDeliverable", "Workflow", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="DocumentCategory")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class DocumentCategory : EntityObject
@@ -2214,18 +2925,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_DocumentType_DocumentCategory", "DocumentType")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_DocumentType_DocumentCategory", "DocumentType")]
         public EntityCollection<DocumentType> DocumentType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentType>("UBECModel.FK_DocumentType_DocumentCategory", "DocumentType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentType>("DBModel.FK_DocumentType_DocumentCategory", "DocumentType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentType>("UBECModel.FK_DocumentType_DocumentCategory", "DocumentType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentType>("DBModel.FK_DocumentType_DocumentCategory", "DocumentType", value);
                 }
             }
         }
@@ -2237,7 +2948,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="DocumentFormat")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="DocumentFormat")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class DocumentFormat : EntityObject
@@ -2426,18 +3137,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "DocumentTypeFormat", "DocumentType")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "DocumentTypeFormat", "DocumentType")]
         public EntityCollection<DocumentType> DocumentType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentType>("UBECModel.DocumentTypeFormat", "DocumentType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentType>("DBModel.DocumentTypeFormat", "DocumentType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentType>("UBECModel.DocumentTypeFormat", "DocumentType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentType>("DBModel.DocumentTypeFormat", "DocumentType", value);
                 }
             }
         }
@@ -2449,7 +3160,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="DocumentInfo")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="DocumentInfo")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class DocumentInfo : EntityObject
@@ -2708,16 +3419,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_DocumentInfo_DocumentType", "DocumentType")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_DocumentInfo_DocumentType", "DocumentType")]
         public DocumentType DocumentType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentType>("UBECModel.FK_DocumentInfo_DocumentType", "DocumentType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentType>("DBModel.FK_DocumentInfo_DocumentType", "DocumentType").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentType>("UBECModel.FK_DocumentInfo_DocumentType", "DocumentType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentType>("DBModel.FK_DocumentInfo_DocumentType", "DocumentType").Value = value;
             }
         }
         /// <summary>
@@ -2729,13 +3440,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentType>("UBECModel.FK_DocumentInfo_DocumentType", "DocumentType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentType>("DBModel.FK_DocumentInfo_DocumentType", "DocumentType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DocumentType>("UBECModel.FK_DocumentInfo_DocumentType", "DocumentType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DocumentType>("DBModel.FK_DocumentInfo_DocumentType", "DocumentType", value);
                 }
             }
         }
@@ -2746,18 +3457,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "ProjectDocumentInfo", "ProjectApplication")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "ProjectDocumentInfo", "ProjectApplication")]
         public EntityCollection<ProjectApplication> ProjectApplication
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("UBECModel.ProjectDocumentInfo", "ProjectApplication");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("DBModel.ProjectDocumentInfo", "ProjectApplication");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("UBECModel.ProjectDocumentInfo", "ProjectApplication", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("DBModel.ProjectDocumentInfo", "ProjectApplication", value);
                 }
             }
         }
@@ -2768,18 +3479,40 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "InspectionDocumentInfo", "Inspection")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "InspectionDocumentInfo", "Inspection")]
         public EntityCollection<Inspection> Inspection
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("UBECModel.InspectionDocumentInfo", "Inspection");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("DBModel.InspectionDocumentInfo", "Inspection");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("UBECModel.InspectionDocumentInfo", "Inspection", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("DBModel.InspectionDocumentInfo", "Inspection", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "SupplyDocumentInfo", "Supplies")]
+        public EntityCollection<Supplies> Supplies
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Supplies>("DBModel.SupplyDocumentInfo", "Supplies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Supplies>("DBModel.SupplyDocumentInfo", "Supplies", value);
                 }
             }
         }
@@ -2791,7 +3524,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="DocumentType")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="DocumentType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class DocumentType : EntityObject
@@ -2980,16 +3713,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_DocumentType_DocumentCategory", "DocumentCategory")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_DocumentType_DocumentCategory", "DocumentCategory")]
         public DocumentCategory DocumentCategory
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentCategory>("UBECModel.FK_DocumentType_DocumentCategory", "DocumentCategory").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentCategory>("DBModel.FK_DocumentType_DocumentCategory", "DocumentCategory").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentCategory>("UBECModel.FK_DocumentType_DocumentCategory", "DocumentCategory").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentCategory>("DBModel.FK_DocumentType_DocumentCategory", "DocumentCategory").Value = value;
             }
         }
         /// <summary>
@@ -3001,13 +3734,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentCategory>("UBECModel.FK_DocumentType_DocumentCategory", "DocumentCategory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DocumentCategory>("DBModel.FK_DocumentType_DocumentCategory", "DocumentCategory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DocumentCategory>("UBECModel.FK_DocumentType_DocumentCategory", "DocumentCategory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DocumentCategory>("DBModel.FK_DocumentType_DocumentCategory", "DocumentCategory", value);
                 }
             }
         }
@@ -3018,18 +3751,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_DocumentInfo_DocumentType", "DocumentInfo")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_DocumentInfo_DocumentType", "DocumentInfo")]
         public EntityCollection<DocumentInfo> DocumentInfo
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("UBECModel.FK_DocumentInfo_DocumentType", "DocumentInfo");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("DBModel.FK_DocumentInfo_DocumentType", "DocumentInfo");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("UBECModel.FK_DocumentInfo_DocumentType", "DocumentInfo", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("DBModel.FK_DocumentInfo_DocumentType", "DocumentInfo", value);
                 }
             }
         }
@@ -3040,18 +3773,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "DocumentTypeFormat", "DocumentFormat")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "DocumentTypeFormat", "DocumentFormat")]
         public EntityCollection<DocumentFormat> DocumentFormat
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentFormat>("UBECModel.DocumentTypeFormat", "DocumentFormat");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentFormat>("DBModel.DocumentTypeFormat", "DocumentFormat");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentFormat>("UBECModel.DocumentTypeFormat", "DocumentFormat", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentFormat>("DBModel.DocumentTypeFormat", "DocumentFormat", value);
                 }
             }
         }
@@ -3062,18 +3795,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "WorkflowDocument", "Workflow")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "WorkflowDocument", "Workflow")]
         public EntityCollection<Workflow> Workflow
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Workflow>("UBECModel.WorkflowDocument", "Workflow");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Workflow>("DBModel.WorkflowDocument", "Workflow");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Workflow>("UBECModel.WorkflowDocument", "Workflow", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Workflow>("DBModel.WorkflowDocument", "Workflow", value);
                 }
             }
         }
@@ -3085,7 +3818,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Inspection")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Inspection")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Inspection : EntityObject
@@ -3100,6 +3833,7 @@ namespace Project.DAL
         /// <param name="location">Initial value of the Location property.</param>
         /// <param name="coordinate">Initial value of the Coordinate property.</param>
         /// <param name="lgaId">Initial value of the LgaId property.</param>
+        /// <param name="stageOfCompletionId">Initial value of the StageOfCompletionId property.</param>
         /// <param name="projectId">Initial value of the ProjectId property.</param>
         /// <param name="stageOfCompletion">Initial value of the StageOfCompletion property.</param>
         /// <param name="descriptionOfCompletion">Initial value of the DescriptionOfCompletion property.</param>
@@ -3109,7 +3843,7 @@ namespace Project.DAL
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
         /// <param name="inspectionStatus">Initial value of the InspectionStatus property.</param>
-        public static Inspection CreateInspection(global::System.Int32 id, global::System.Guid transactionId, global::System.String location, global::System.String coordinate, global::System.Int32 lgaId, global::System.Int32 projectId, global::System.String stageOfCompletion, global::System.String descriptionOfCompletion, global::System.String projectQuality, global::System.Boolean hasDefect, global::System.DateTime inspectionDate, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.String inspectionStatus)
+        public static Inspection CreateInspection(global::System.Int32 id, global::System.Guid transactionId, global::System.String location, global::System.String coordinate, global::System.Int32 lgaId, global::System.Int32 stageOfCompletionId, global::System.Int32 projectId, global::System.String stageOfCompletion, global::System.String descriptionOfCompletion, global::System.String projectQuality, global::System.Boolean hasDefect, global::System.DateTime inspectionDate, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.String inspectionStatus)
         {
             Inspection inspection = new Inspection();
             inspection.Id = id;
@@ -3117,6 +3851,7 @@ namespace Project.DAL
             inspection.Location = location;
             inspection.Coordinate = coordinate;
             inspection.LgaId = lgaId;
+            inspection.StageOfCompletionId = stageOfCompletionId;
             inspection.ProjectId = projectId;
             inspection.StageOfCompletion = stageOfCompletion;
             inspection.DescriptionOfCompletion = descriptionOfCompletion;
@@ -3255,6 +3990,30 @@ namespace Project.DAL
         private global::System.Int32 _LgaId;
         partial void OnLgaIdChanging(global::System.Int32 value);
         partial void OnLgaIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StageOfCompletionId
+        {
+            get
+            {
+                return _StageOfCompletionId;
+            }
+            set
+            {
+                OnStageOfCompletionIdChanging(value);
+                ReportPropertyChanging("StageOfCompletionId");
+                _StageOfCompletionId = StructuralObject.SetValidValue(value, "StageOfCompletionId");
+                ReportPropertyChanged("StageOfCompletionId");
+                OnStageOfCompletionIdChanged();
+            }
+        }
+        private global::System.Int32 _StageOfCompletionId;
+        partial void OnStageOfCompletionIdChanging(global::System.Int32 value);
+        partial void OnStageOfCompletionIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3506,16 +4265,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Inspection_LGA", "LGA")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Inspection_LGA", "LGA")]
         public LGA LGA
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("UBECModel.FK_Inspection_LGA", "LGA").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Inspection_LGA", "LGA").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("UBECModel.FK_Inspection_LGA", "LGA").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Inspection_LGA", "LGA").Value = value;
             }
         }
         /// <summary>
@@ -3527,13 +4286,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("UBECModel.FK_Inspection_LGA", "LGA");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Inspection_LGA", "LGA");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LGA>("UBECModel.FK_Inspection_LGA", "LGA", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LGA>("DBModel.FK_Inspection_LGA", "LGA", value);
                 }
             }
         }
@@ -3544,16 +4303,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Inspection_ProjectApplication", "ProjectApplication")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Inspection_ProjectApplication", "ProjectApplication")]
         public ProjectApplication ProjectApplication
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_Inspection_ProjectApplication", "ProjectApplication").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_Inspection_ProjectApplication", "ProjectApplication").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_Inspection_ProjectApplication", "ProjectApplication").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_Inspection_ProjectApplication", "ProjectApplication").Value = value;
             }
         }
         /// <summary>
@@ -3565,13 +4324,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_Inspection_ProjectApplication", "ProjectApplication");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_Inspection_ProjectApplication", "ProjectApplication");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("UBECModel.FK_Inspection_ProjectApplication", "ProjectApplication", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("DBModel.FK_Inspection_ProjectApplication", "ProjectApplication", value);
                 }
             }
         }
@@ -3582,18 +4341,56 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "InspectionDocumentInfo", "DocumentInfo")]
-        public EntityCollection<DocumentInfo> DocumentInfo
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Inspection_StageOfCompletion", "StageOfCompletion")]
+        public StageOfCompletion StageOfCompletion1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("UBECModel.InspectionDocumentInfo", "DocumentInfo");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StageOfCompletion>("DBModel.FK_Inspection_StageOfCompletion", "StageOfCompletion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StageOfCompletion>("DBModel.FK_Inspection_StageOfCompletion", "StageOfCompletion").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<StageOfCompletion> StageOfCompletion1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StageOfCompletion>("DBModel.FK_Inspection_StageOfCompletion", "StageOfCompletion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("UBECModel.InspectionDocumentInfo", "DocumentInfo", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StageOfCompletion>("DBModel.FK_Inspection_StageOfCompletion", "StageOfCompletion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "InspectionDocumentInfo", "DocumentInfo")]
+        public EntityCollection<DocumentInfo> DocumentInfo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("DBModel.InspectionDocumentInfo", "DocumentInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("DBModel.InspectionDocumentInfo", "DocumentInfo", value);
                 }
             }
         }
@@ -3605,7 +4402,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="LGA")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="LGA")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class LGA : EntityObject
@@ -3794,18 +4591,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Inspection_LGA", "Inspection")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Inspection_LGA", "Inspection")]
         public EntityCollection<Inspection> Inspection
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("UBECModel.FK_Inspection_LGA", "Inspection");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("DBModel.FK_Inspection_LGA", "Inspection");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("UBECModel.FK_Inspection_LGA", "Inspection", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("DBModel.FK_Inspection_LGA", "Inspection", value);
                 }
             }
         }
@@ -3816,16 +4613,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_LGA_State", "State")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_LGA_State", "State")]
         public State State
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("UBECModel.FK_LGA_State", "State").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("DBModel.FK_LGA_State", "State").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("UBECModel.FK_LGA_State", "State").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("DBModel.FK_LGA_State", "State").Value = value;
             }
         }
         /// <summary>
@@ -3837,13 +4634,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("UBECModel.FK_LGA_State", "State");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("DBModel.FK_LGA_State", "State");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<State>("UBECModel.FK_LGA_State", "State", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<State>("DBModel.FK_LGA_State", "State", value);
                 }
             }
         }
@@ -3854,18 +4651,40 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Project_LGA", "ProjectApplication")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Project_LGA", "ProjectApplication")]
         public EntityCollection<ProjectApplication> ProjectApplication
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("UBECModel.FK_Project_LGA", "ProjectApplication");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("DBModel.FK_Project_LGA", "ProjectApplication");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("UBECModel.FK_Project_LGA", "ProjectApplication", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("DBModel.FK_Project_LGA", "ProjectApplication", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Supplies_LGA", "Supplies")]
+        public EntityCollection<Supplies> Supplies
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Supplies>("DBModel.FK_Supplies_LGA", "Supplies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Supplies>("DBModel.FK_Supplies_LGA", "Supplies", value);
                 }
             }
         }
@@ -3877,7 +4696,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Memberships")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Memberships")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Memberships : EntityObject
@@ -4396,16 +5215,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "MembershipApplication", "Applications")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "MembershipApplication", "Applications")]
         public Applications Applications
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.MembershipApplication", "Applications").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.MembershipApplication", "Applications").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.MembershipApplication", "Applications").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.MembershipApplication", "Applications").Value = value;
             }
         }
         /// <summary>
@@ -4417,13 +5236,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.MembershipApplication", "Applications");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.MembershipApplication", "Applications");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Applications>("UBECModel.MembershipApplication", "Applications", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Applications>("DBModel.MembershipApplication", "Applications", value);
                 }
             }
         }
@@ -4434,16 +5253,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "MembershipUser", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "MembershipUser", "Users")]
         public Users Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.MembershipUser", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.MembershipUser", "Users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.MembershipUser", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.MembershipUser", "Users").Value = value;
             }
         }
         /// <summary>
@@ -4455,13 +5274,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.MembershipUser", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.MembershipUser", "Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("UBECModel.MembershipUser", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("DBModel.MembershipUser", "Users", value);
                 }
             }
         }
@@ -4473,7 +5292,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="News")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="News")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class News : EntityObject
@@ -4789,7 +5608,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Payment")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Payment")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Payment : EntityObject
@@ -4978,16 +5797,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Payment_PaymentType", "PaymentType")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Payment_PaymentType", "PaymentType")]
         public PaymentType PaymentType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("UBECModel.FK_Payment_PaymentType", "PaymentType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("DBModel.FK_Payment_PaymentType", "PaymentType").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("UBECModel.FK_Payment_PaymentType", "PaymentType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("DBModel.FK_Payment_PaymentType", "PaymentType").Value = value;
             }
         }
         /// <summary>
@@ -4999,13 +5818,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("UBECModel.FK_Payment_PaymentType", "PaymentType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("DBModel.FK_Payment_PaymentType", "PaymentType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PaymentType>("UBECModel.FK_Payment_PaymentType", "PaymentType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PaymentType>("DBModel.FK_Payment_PaymentType", "PaymentType", value);
                 }
             }
         }
@@ -5016,16 +5835,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Payment_Project", "ProjectApplication")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Payment_Project", "ProjectApplication")]
         public ProjectApplication ProjectApplication
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_Payment_Project", "ProjectApplication").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_Payment_Project", "ProjectApplication").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_Payment_Project", "ProjectApplication").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_Payment_Project", "ProjectApplication").Value = value;
             }
         }
         /// <summary>
@@ -5037,13 +5856,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_Payment_Project", "ProjectApplication");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_Payment_Project", "ProjectApplication");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("UBECModel.FK_Payment_Project", "ProjectApplication", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("DBModel.FK_Payment_Project", "ProjectApplication", value);
                 }
             }
         }
@@ -5055,7 +5874,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="PaymentType")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="PaymentType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class PaymentType : EntityObject
@@ -5218,18 +6037,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Payment_PaymentType", "Payment")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Payment_PaymentType", "Payment")]
         public EntityCollection<Payment> Payment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Payment>("UBECModel.FK_Payment_PaymentType", "Payment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Payment>("DBModel.FK_Payment_PaymentType", "Payment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Payment>("UBECModel.FK_Payment_PaymentType", "Payment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Payment>("DBModel.FK_Payment_PaymentType", "Payment", value);
                 }
             }
         }
@@ -5241,7 +6060,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Profiles")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Profiles")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Profiles : EntityObject
@@ -5404,16 +6223,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "UserProfile", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "UserProfile", "Users")]
         public Users Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.UserProfile", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.UserProfile", "Users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.UserProfile", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.UserProfile", "Users").Value = value;
             }
         }
         /// <summary>
@@ -5425,13 +6244,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.UserProfile", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.UserProfile", "Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("UBECModel.UserProfile", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("DBModel.UserProfile", "Users", value);
                 }
             }
         }
@@ -5443,7 +6262,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="ProjectApplication")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="ProjectApplication")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class ProjectApplication : EntityObject
@@ -5464,16 +6283,14 @@ namespace Project.DAL
         /// <param name="lGAId">Initial value of the LGAId property.</param>
         /// <param name="contractorId">Initial value of the ContractorId property.</param>
         /// <param name="contractSum">Initial value of the ContractSum property.</param>
-        /// <param name="stageOfCompletion">Initial value of the StageOfCompletion property.</param>
-        /// <param name="descriptionOfCompletion">Initial value of the DescriptionOfCompletion property.</param>
-        /// <param name="projectQuality">Initial value of the ProjectQuality property.</param>
-        /// <param name="hasDefect">Initial value of the HasDefect property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
         /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
         /// <param name="startDate">Initial value of the StartDate property.</param>
         /// <param name="endDate">Initial value of the EndDate property.</param>
-        public static ProjectApplication CreateProjectApplication(global::System.Int32 id, global::System.Guid transactionId, global::System.String serialNo, global::System.String status, global::System.Int32 workFlowId, global::System.String description, global::System.String location, global::System.String coordinate, global::System.Int32 lGAId, global::System.Int32 contractorId, global::System.Decimal contractSum, global::System.String stageOfCompletion, global::System.String descriptionOfCompletion, global::System.String projectQuality, global::System.Boolean hasDefect, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.Boolean isDeleted, global::System.DateTime startDate, global::System.DateTime endDate)
+        /// <param name="enableSum">Initial value of the EnableSum property.</param>
+        /// <param name="projectTypeId">Initial value of the ProjectTypeId property.</param>
+        public static ProjectApplication CreateProjectApplication(global::System.Int32 id, global::System.Guid transactionId, global::System.String serialNo, global::System.String status, global::System.Int32 workFlowId, global::System.String description, global::System.String location, global::System.String coordinate, global::System.Int32 lGAId, global::System.Int32 contractorId, global::System.Decimal contractSum, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.Boolean isDeleted, global::System.DateTime startDate, global::System.DateTime endDate, global::System.Boolean enableSum, global::System.Int32 projectTypeId)
         {
             ProjectApplication projectApplication = new ProjectApplication();
             projectApplication.Id = id;
@@ -5487,15 +6304,13 @@ namespace Project.DAL
             projectApplication.LGAId = lGAId;
             projectApplication.ContractorId = contractorId;
             projectApplication.ContractSum = contractSum;
-            projectApplication.StageOfCompletion = stageOfCompletion;
-            projectApplication.DescriptionOfCompletion = descriptionOfCompletion;
-            projectApplication.ProjectQuality = projectQuality;
-            projectApplication.HasDefect = hasDefect;
             projectApplication.ModifiedBy = modifiedBy;
             projectApplication.ModifiedDate = modifiedDate;
             projectApplication.IsDeleted = isDeleted;
             projectApplication.StartDate = startDate;
             projectApplication.EndDate = endDate;
+            projectApplication.EnableSum = enableSum;
+            projectApplication.ProjectTypeId = projectTypeId;
             return projectApplication;
         }
 
@@ -5725,6 +6540,30 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String StageOfCompletion
+        {
+            get
+            {
+                return _StageOfCompletion;
+            }
+            set
+            {
+                OnStageOfCompletionChanging(value);
+                ReportPropertyChanging("StageOfCompletion");
+                _StageOfCompletion = StructuralObject.SetValidValue(value, true, "StageOfCompletion");
+                ReportPropertyChanged("StageOfCompletion");
+                OnStageOfCompletionChanged();
+            }
+        }
+        private global::System.String _StageOfCompletion;
+        partial void OnStageOfCompletionChanging(global::System.String value);
+        partial void OnStageOfCompletionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 ContractorId
@@ -5769,126 +6608,6 @@ namespace Project.DAL
         private global::System.Decimal _ContractSum;
         partial void OnContractSumChanging(global::System.Decimal value);
         partial void OnContractSumChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String StageOfCompletion
-        {
-            get
-            {
-                return _StageOfCompletion;
-            }
-            set
-            {
-                OnStageOfCompletionChanging(value);
-                ReportPropertyChanging("StageOfCompletion");
-                _StageOfCompletion = StructuralObject.SetValidValue(value, false, "StageOfCompletion");
-                ReportPropertyChanged("StageOfCompletion");
-                OnStageOfCompletionChanged();
-            }
-        }
-        private global::System.String _StageOfCompletion;
-        partial void OnStageOfCompletionChanging(global::System.String value);
-        partial void OnStageOfCompletionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String DescriptionOfCompletion
-        {
-            get
-            {
-                return _DescriptionOfCompletion;
-            }
-            set
-            {
-                OnDescriptionOfCompletionChanging(value);
-                ReportPropertyChanging("DescriptionOfCompletion");
-                _DescriptionOfCompletion = StructuralObject.SetValidValue(value, false, "DescriptionOfCompletion");
-                ReportPropertyChanged("DescriptionOfCompletion");
-                OnDescriptionOfCompletionChanged();
-            }
-        }
-        private global::System.String _DescriptionOfCompletion;
-        partial void OnDescriptionOfCompletionChanging(global::System.String value);
-        partial void OnDescriptionOfCompletionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ProjectQuality
-        {
-            get
-            {
-                return _ProjectQuality;
-            }
-            set
-            {
-                OnProjectQualityChanging(value);
-                ReportPropertyChanging("ProjectQuality");
-                _ProjectQuality = StructuralObject.SetValidValue(value, false, "ProjectQuality");
-                ReportPropertyChanged("ProjectQuality");
-                OnProjectQualityChanged();
-            }
-        }
-        private global::System.String _ProjectQuality;
-        partial void OnProjectQualityChanging(global::System.String value);
-        partial void OnProjectQualityChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean HasDefect
-        {
-            get
-            {
-                return _HasDefect;
-            }
-            set
-            {
-                OnHasDefectChanging(value);
-                ReportPropertyChanging("HasDefect");
-                _HasDefect = StructuralObject.SetValidValue(value, "HasDefect");
-                ReportPropertyChanged("HasDefect");
-                OnHasDefectChanged();
-            }
-        }
-        private global::System.Boolean _HasDefect;
-        partial void OnHasDefectChanging(global::System.Boolean value);
-        partial void OnHasDefectChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String DescriptionOfDefect
-        {
-            get
-            {
-                return _DescriptionOfDefect;
-            }
-            set
-            {
-                OnDescriptionOfDefectChanging(value);
-                ReportPropertyChanging("DescriptionOfDefect");
-                _DescriptionOfDefect = StructuralObject.SetValidValue(value, true, "DescriptionOfDefect");
-                ReportPropertyChanged("DescriptionOfDefect");
-                OnDescriptionOfDefectChanged();
-            }
-        }
-        private global::System.String _DescriptionOfDefect;
-        partial void OnDescriptionOfDefectChanging(global::System.String value);
-        partial void OnDescriptionOfDefectChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6033,6 +6752,54 @@ namespace Project.DAL
         private global::System.DateTime _EndDate;
         partial void OnEndDateChanging(global::System.DateTime value);
         partial void OnEndDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean EnableSum
+        {
+            get
+            {
+                return _EnableSum;
+            }
+            set
+            {
+                OnEnableSumChanging(value);
+                ReportPropertyChanging("EnableSum");
+                _EnableSum = StructuralObject.SetValidValue(value, "EnableSum");
+                ReportPropertyChanged("EnableSum");
+                OnEnableSumChanged();
+            }
+        }
+        private global::System.Boolean _EnableSum;
+        partial void OnEnableSumChanging(global::System.Boolean value);
+        partial void OnEnableSumChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectTypeId
+        {
+            get
+            {
+                return _ProjectTypeId;
+            }
+            set
+            {
+                OnProjectTypeIdChanging(value);
+                ReportPropertyChanging("ProjectTypeId");
+                _ProjectTypeId = StructuralObject.SetValidValue(value, "ProjectTypeId");
+                ReportPropertyChanged("ProjectTypeId");
+                OnProjectTypeIdChanged();
+            }
+        }
+        private global::System.Int32 _ProjectTypeId;
+        partial void OnProjectTypeIdChanging(global::System.Int32 value);
+        partial void OnProjectTypeIdChanged();
 
         #endregion
 
@@ -6044,16 +6811,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Project_Contractor", "Contractor")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Project_Contractor", "Contractor")]
         public Contractor Contractor
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("UBECModel.FK_Project_Contractor", "Contractor").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("DBModel.FK_Project_Contractor", "Contractor").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("UBECModel.FK_Project_Contractor", "Contractor").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("DBModel.FK_Project_Contractor", "Contractor").Value = value;
             }
         }
         /// <summary>
@@ -6065,13 +6832,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("UBECModel.FK_Project_Contractor", "Contractor");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("DBModel.FK_Project_Contractor", "Contractor");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contractor>("UBECModel.FK_Project_Contractor", "Contractor", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contractor>("DBModel.FK_Project_Contractor", "Contractor", value);
                 }
             }
         }
@@ -6082,16 +6849,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Project_LGA", "LGA")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Project_LGA", "LGA")]
         public LGA LGA
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("UBECModel.FK_Project_LGA", "LGA").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Project_LGA", "LGA").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("UBECModel.FK_Project_LGA", "LGA").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Project_LGA", "LGA").Value = value;
             }
         }
         /// <summary>
@@ -6103,13 +6870,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("UBECModel.FK_Project_LGA", "LGA");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Project_LGA", "LGA");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LGA>("UBECModel.FK_Project_LGA", "LGA", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LGA>("DBModel.FK_Project_LGA", "LGA", value);
                 }
             }
         }
@@ -6120,18 +6887,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Payment_Project", "Payment")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Payment_Project", "Payment")]
         public EntityCollection<Payment> Payment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Payment>("UBECModel.FK_Payment_Project", "Payment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Payment>("DBModel.FK_Payment_Project", "Payment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Payment>("UBECModel.FK_Payment_Project", "Payment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Payment>("DBModel.FK_Payment_Project", "Payment", value);
                 }
             }
         }
@@ -6142,18 +6909,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Inspection_ProjectApplication", "Inspection")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Inspection_ProjectApplication", "Inspection")]
         public EntityCollection<Inspection> Inspection
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("UBECModel.FK_Inspection_ProjectApplication", "Inspection");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("DBModel.FK_Inspection_ProjectApplication", "Inspection");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("UBECModel.FK_Inspection_ProjectApplication", "Inspection", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("DBModel.FK_Inspection_ProjectApplication", "Inspection", value);
                 }
             }
         }
@@ -6164,16 +6931,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Project_Workflow", "Workflow")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Project_Workflow", "Workflow")]
         public Workflow Workflow
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_Project_Workflow", "Workflow").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Project_Workflow", "Workflow").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_Project_Workflow", "Workflow").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Project_Workflow", "Workflow").Value = value;
             }
         }
         /// <summary>
@@ -6185,13 +6952,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_Project_Workflow", "Workflow");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Project_Workflow", "Workflow");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("UBECModel.FK_Project_Workflow", "Workflow", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("DBModel.FK_Project_Workflow", "Workflow", value);
                 }
             }
         }
@@ -6202,16 +6969,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication1")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication1")]
         public ProjectApplication ProjectApplication1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1").Value = value;
             }
         }
         /// <summary>
@@ -6223,13 +6990,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication1", value);
                 }
             }
         }
@@ -6240,16 +7007,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectApplication_ProjectApplication", "ProjectApplication")]
         public ProjectApplication ProjectApplication2
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication").Value = value;
             }
         }
         /// <summary>
@@ -6261,13 +7028,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("UBECModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectApplication", "ProjectApplication", value);
                 }
             }
         }
@@ -6278,16 +7045,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_ProjectApplication_Users", "Users")]
-        public Users Users
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectApplication_ProjectType", "ProjectType")]
+        public ProjectType ProjectType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.FK_ProjectApplication_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectType>("DBModel.FK_ProjectApplication_ProjectType", "ProjectType").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.FK_ProjectApplication_Users", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectType>("DBModel.FK_ProjectApplication_ProjectType", "ProjectType").Value = value;
             }
         }
         /// <summary>
@@ -6295,17 +7062,17 @@ namespace Project.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Users> UsersReference
+        public EntityReference<ProjectType> ProjectTypeReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.FK_ProjectApplication_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectType>("DBModel.FK_ProjectApplication_ProjectType", "ProjectType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("UBECModel.FK_ProjectApplication_Users", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectType>("DBModel.FK_ProjectApplication_ProjectType", "ProjectType", value);
                 }
             }
         }
@@ -6316,18 +7083,40 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "ProjectDocumentInfo", "DocumentInfo")]
-        public EntityCollection<DocumentInfo> DocumentInfo
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectDeliverable_ProjectApplication", "ProjectDeliverable")]
+        public EntityCollection<ProjectDeliverable> ProjectDeliverable
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("UBECModel.ProjectDocumentInfo", "DocumentInfo");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectDeliverable>("DBModel.FK_ProjectDeliverable_ProjectApplication", "ProjectDeliverable");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("UBECModel.ProjectDocumentInfo", "DocumentInfo", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectDeliverable>("DBModel.FK_ProjectDeliverable_ProjectApplication", "ProjectDeliverable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "ProjectDocumentInfo", "DocumentInfo")]
+        public EntityCollection<DocumentInfo> DocumentInfo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("DBModel.ProjectDocumentInfo", "DocumentInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("DBModel.ProjectDocumentInfo", "DocumentInfo", value);
                 }
             }
         }
@@ -6339,7 +7128,491 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Resource")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="ProjectDeliverable")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ProjectDeliverable : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ProjectDeliverable object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="projectId">Initial value of the ProjectId property.</param>
+        /// <param name="deliverableId">Initial value of the DeliverableId property.</param>
+        /// <param name="deliverableFormatId">Initial value of the DeliverableFormatId property.</param>
+        /// <param name="deliverableUnit">Initial value of the DeliverableUnit property.</param>
+        /// <param name="remarks">Initial value of the Remarks property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static ProjectDeliverable CreateProjectDeliverable(global::System.Int32 id, global::System.Int32 projectId, global::System.Int32 deliverableId, global::System.Int32 deliverableFormatId, global::System.Int32 deliverableUnit, global::System.String remarks, global::System.String createdBy, global::System.DateTime createdDate)
+        {
+            ProjectDeliverable projectDeliverable = new ProjectDeliverable();
+            projectDeliverable.Id = id;
+            projectDeliverable.ProjectId = projectId;
+            projectDeliverable.DeliverableId = deliverableId;
+            projectDeliverable.DeliverableFormatId = deliverableFormatId;
+            projectDeliverable.DeliverableUnit = deliverableUnit;
+            projectDeliverable.Remarks = remarks;
+            projectDeliverable.CreatedBy = createdBy;
+            projectDeliverable.CreatedDate = createdDate;
+            return projectDeliverable;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectId
+        {
+            get
+            {
+                return _ProjectId;
+            }
+            set
+            {
+                OnProjectIdChanging(value);
+                ReportPropertyChanging("ProjectId");
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
+                ReportPropertyChanged("ProjectId");
+                OnProjectIdChanged();
+            }
+        }
+        private global::System.Int32 _ProjectId;
+        partial void OnProjectIdChanging(global::System.Int32 value);
+        partial void OnProjectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DeliverableId
+        {
+            get
+            {
+                return _DeliverableId;
+            }
+            set
+            {
+                OnDeliverableIdChanging(value);
+                ReportPropertyChanging("DeliverableId");
+                _DeliverableId = StructuralObject.SetValidValue(value, "DeliverableId");
+                ReportPropertyChanged("DeliverableId");
+                OnDeliverableIdChanged();
+            }
+        }
+        private global::System.Int32 _DeliverableId;
+        partial void OnDeliverableIdChanging(global::System.Int32 value);
+        partial void OnDeliverableIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DeliverableFormatId
+        {
+            get
+            {
+                return _DeliverableFormatId;
+            }
+            set
+            {
+                OnDeliverableFormatIdChanging(value);
+                ReportPropertyChanging("DeliverableFormatId");
+                _DeliverableFormatId = StructuralObject.SetValidValue(value, "DeliverableFormatId");
+                ReportPropertyChanged("DeliverableFormatId");
+                OnDeliverableFormatIdChanged();
+            }
+        }
+        private global::System.Int32 _DeliverableFormatId;
+        partial void OnDeliverableFormatIdChanging(global::System.Int32 value);
+        partial void OnDeliverableFormatIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DeliverableUnit
+        {
+            get
+            {
+                return _DeliverableUnit;
+            }
+            set
+            {
+                OnDeliverableUnitChanging(value);
+                ReportPropertyChanging("DeliverableUnit");
+                _DeliverableUnit = StructuralObject.SetValidValue(value, "DeliverableUnit");
+                ReportPropertyChanged("DeliverableUnit");
+                OnDeliverableUnitChanged();
+            }
+        }
+        private global::System.Int32 _DeliverableUnit;
+        partial void OnDeliverableUnitChanging(global::System.Int32 value);
+        partial void OnDeliverableUnitChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, false, "Remarks");
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value, false, "CreatedBy");
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.String _CreatedBy;
+        partial void OnCreatedByChanging(global::System.String value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectDeliverable_ProjectApplication", "ProjectApplication")]
+        public ProjectApplication ProjectApplication
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectDeliverable_ProjectApplication", "ProjectApplication").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectDeliverable_ProjectApplication", "ProjectApplication").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ProjectApplication> ProjectApplicationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectApplication>("DBModel.FK_ProjectDeliverable_ProjectApplication", "ProjectApplication");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectApplication>("DBModel.FK_ProjectDeliverable_ProjectApplication", "ProjectApplication", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectDeliverable_DeliverableFormat", "DeliverableFormat")]
+        public DeliverableFormat DeliverableFormat
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableFormat>("DBModel.FK_ProjectDeliverable_DeliverableFormat", "DeliverableFormat").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableFormat>("DBModel.FK_ProjectDeliverable_DeliverableFormat", "DeliverableFormat").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DeliverableFormat> DeliverableFormatReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableFormat>("DBModel.FK_ProjectDeliverable_DeliverableFormat", "DeliverableFormat");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DeliverableFormat>("DBModel.FK_ProjectDeliverable_DeliverableFormat", "DeliverableFormat", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectDeliverable_DeliverableType", "DeliverableType")]
+        public DeliverableType DeliverableType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableType>("DBModel.FK_ProjectDeliverable_DeliverableType", "DeliverableType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableType>("DBModel.FK_ProjectDeliverable_DeliverableType", "DeliverableType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DeliverableType> DeliverableTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableType>("DBModel.FK_ProjectDeliverable_DeliverableType", "DeliverableType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DeliverableType>("DBModel.FK_ProjectDeliverable_DeliverableType", "DeliverableType", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="ProjectType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ProjectType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ProjectType object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static ProjectType CreateProjectType(global::System.Int32 id)
+        {
+            ProjectType projectType = new ProjectType();
+            projectType.Id = id;
+            return projectType;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_ProjectApplication_ProjectType", "ProjectApplication")]
+        public EntityCollection<ProjectApplication> ProjectApplication
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectType", "ProjectApplication");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("DBModel.FK_ProjectApplication_ProjectType", "ProjectApplication", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_StageOfCompletion_ProjectType", "StageOfCompletion")]
+        public EntityCollection<StageOfCompletion> StageOfCompletion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StageOfCompletion>("DBModel.FK_StageOfCompletion_ProjectType", "StageOfCompletion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StageOfCompletion>("DBModel.FK_StageOfCompletion_ProjectType", "StageOfCompletion", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Resource")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Resource : EntityObject
@@ -6637,7 +7910,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="ResourcesInRole")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="ResourcesInRole")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class ResourcesInRole : EntityObject
@@ -6722,7 +7995,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Roles")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Roles")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Roles : EntityObject
@@ -6857,16 +8130,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "RoleApplication", "Applications")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "RoleApplication", "Applications")]
         public Applications Applications
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.RoleApplication", "Applications").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.RoleApplication", "Applications").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.RoleApplication", "Applications").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.RoleApplication", "Applications").Value = value;
             }
         }
         /// <summary>
@@ -6878,13 +8151,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.RoleApplication", "Applications");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.RoleApplication", "Applications");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Applications>("UBECModel.RoleApplication", "Applications", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Applications>("DBModel.RoleApplication", "Applications", value);
                 }
             }
         }
@@ -6895,18 +8168,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "UsersInRoles", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "UsersInRoles", "Users")]
         public EntityCollection<Users> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Users>("UBECModel.UsersInRoles", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Users>("DBModel.UsersInRoles", "Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Users>("UBECModel.UsersInRoles", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Users>("DBModel.UsersInRoles", "Users", value);
                 }
             }
         }
@@ -6918,7 +8191,227 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="State")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="StageOfCompletion")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class StageOfCompletion : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new StageOfCompletion object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="projectTypeId">Initial value of the ProjectTypeId property.</param>
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static StageOfCompletion CreateStageOfCompletion(global::System.Int32 id, global::System.Int32 projectTypeId, global::System.Boolean isDeleted)
+        {
+            StageOfCompletion stageOfCompletion = new StageOfCompletion();
+            stageOfCompletion.Id = id;
+            stageOfCompletion.ProjectTypeId = projectTypeId;
+            stageOfCompletion.IsDeleted = isDeleted;
+            return stageOfCompletion;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectTypeId
+        {
+            get
+            {
+                return _ProjectTypeId;
+            }
+            set
+            {
+                OnProjectTypeIdChanging(value);
+                ReportPropertyChanging("ProjectTypeId");
+                _ProjectTypeId = StructuralObject.SetValidValue(value, "ProjectTypeId");
+                ReportPropertyChanged("ProjectTypeId");
+                OnProjectTypeIdChanged();
+            }
+        }
+        private global::System.Int32 _ProjectTypeId;
+        partial void OnProjectTypeIdChanging(global::System.Int32 value);
+        partial void OnProjectTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Percentage
+        {
+            get
+            {
+                return _Percentage;
+            }
+            set
+            {
+                OnPercentageChanging(value);
+                ReportPropertyChanging("Percentage");
+                _Percentage = StructuralObject.SetValidValue(value, true, "Percentage");
+                ReportPropertyChanged("Percentage");
+                OnPercentageChanged();
+            }
+        }
+        private global::System.String _Percentage;
+        partial void OnPercentageChanging(global::System.String value);
+        partial void OnPercentageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value, "IsDeleted");
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Inspection_StageOfCompletion", "Inspection")]
+        public EntityCollection<Inspection> Inspection
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Inspection>("DBModel.FK_Inspection_StageOfCompletion", "Inspection");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Inspection>("DBModel.FK_Inspection_StageOfCompletion", "Inspection", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_StageOfCompletion_ProjectType", "ProjectType")]
+        public ProjectType ProjectType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectType>("DBModel.FK_StageOfCompletion_ProjectType", "ProjectType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectType>("DBModel.FK_StageOfCompletion_ProjectType", "ProjectType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ProjectType> ProjectTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProjectType>("DBModel.FK_StageOfCompletion_ProjectType", "ProjectType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProjectType>("DBModel.FK_StageOfCompletion_ProjectType", "ProjectType", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="State")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class State : EntityObject
@@ -7081,18 +8574,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_LGA_State", "LGA")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_LGA_State", "LGA")]
         public EntityCollection<LGA> LGA
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LGA>("UBECModel.FK_LGA_State", "LGA");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LGA>("DBModel.FK_LGA_State", "LGA");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LGA>("UBECModel.FK_LGA_State", "LGA", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LGA>("DBModel.FK_LGA_State", "LGA", value);
                 }
             }
         }
@@ -7104,7 +8597,1281 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="UserDetail")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Supplies")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Supplies : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Supplies object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="transactionId">Initial value of the TransactionId property.</param>
+        /// <param name="workflowId">Initial value of the WorkflowId property.</param>
+        /// <param name="lGAId">Initial value of the LGAId property.</param>
+        /// <param name="location">Initial value of the Location property.</param>
+        /// <param name="contractorId">Initial value of the ContractorId property.</param>
+        /// <param name="verificationDate">Initial value of the VerificationDate property.</param>
+        /// <param name="verificationOfficer">Initial value of the VerificationOfficer property.</param>
+        /// <param name="representative">Initial value of the Representative property.</param>
+        /// <param name="representativeDesignation">Initial value of the RepresentativeDesignation property.</param>
+        /// <param name="representativePhoneNumber">Initial value of the RepresentativePhoneNumber property.</param>
+        /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
+        /// <param name="modified">Initial value of the Modified property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
+        public static Supplies CreateSupplies(global::System.Int32 id, global::System.Guid transactionId, global::System.Int32 workflowId, global::System.Int32 lGAId, global::System.String location, global::System.Int32 contractorId, global::System.DateTime verificationDate, global::System.String verificationOfficer, global::System.String representative, global::System.String representativeDesignation, global::System.String representativePhoneNumber, global::System.String modifiedBy, global::System.DateTime modified, global::System.String status)
+        {
+            Supplies supplies = new Supplies();
+            supplies.Id = id;
+            supplies.TransactionId = transactionId;
+            supplies.WorkflowId = workflowId;
+            supplies.LGAId = lGAId;
+            supplies.Location = location;
+            supplies.ContractorId = contractorId;
+            supplies.VerificationDate = verificationDate;
+            supplies.VerificationOfficer = verificationOfficer;
+            supplies.Representative = representative;
+            supplies.RepresentativeDesignation = representativeDesignation;
+            supplies.RepresentativePhoneNumber = representativePhoneNumber;
+            supplies.ModifiedBy = modifiedBy;
+            supplies.Modified = modified;
+            supplies.Status = status;
+            return supplies;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SerialNo
+        {
+            get
+            {
+                return _SerialNo;
+            }
+            set
+            {
+                OnSerialNoChanging(value);
+                ReportPropertyChanging("SerialNo");
+                _SerialNo = StructuralObject.SetValidValue(value, true, "SerialNo");
+                ReportPropertyChanged("SerialNo");
+                OnSerialNoChanged();
+            }
+        }
+        private global::System.String _SerialNo;
+        partial void OnSerialNoChanging(global::System.String value);
+        partial void OnSerialNoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid TransactionId
+        {
+            get
+            {
+                return _TransactionId;
+            }
+            set
+            {
+                OnTransactionIdChanging(value);
+                ReportPropertyChanging("TransactionId");
+                _TransactionId = StructuralObject.SetValidValue(value, "TransactionId");
+                ReportPropertyChanged("TransactionId");
+                OnTransactionIdChanged();
+            }
+        }
+        private global::System.Guid _TransactionId;
+        partial void OnTransactionIdChanging(global::System.Guid value);
+        partial void OnTransactionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WorkflowId
+        {
+            get
+            {
+                return _WorkflowId;
+            }
+            set
+            {
+                OnWorkflowIdChanging(value);
+                ReportPropertyChanging("WorkflowId");
+                _WorkflowId = StructuralObject.SetValidValue(value, "WorkflowId");
+                ReportPropertyChanged("WorkflowId");
+                OnWorkflowIdChanged();
+            }
+        }
+        private global::System.Int32 _WorkflowId;
+        partial void OnWorkflowIdChanging(global::System.Int32 value);
+        partial void OnWorkflowIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LGAId
+        {
+            get
+            {
+                return _LGAId;
+            }
+            set
+            {
+                OnLGAIdChanging(value);
+                ReportPropertyChanging("LGAId");
+                _LGAId = StructuralObject.SetValidValue(value, "LGAId");
+                ReportPropertyChanged("LGAId");
+                OnLGAIdChanged();
+            }
+        }
+        private global::System.Int32 _LGAId;
+        partial void OnLGAIdChanging(global::System.Int32 value);
+        partial void OnLGAIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Location
+        {
+            get
+            {
+                return _Location;
+            }
+            set
+            {
+                OnLocationChanging(value);
+                ReportPropertyChanging("Location");
+                _Location = StructuralObject.SetValidValue(value, false, "Location");
+                ReportPropertyChanged("Location");
+                OnLocationChanged();
+            }
+        }
+        private global::System.String _Location;
+        partial void OnLocationChanging(global::System.String value);
+        partial void OnLocationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ContractorId
+        {
+            get
+            {
+                return _ContractorId;
+            }
+            set
+            {
+                OnContractorIdChanging(value);
+                ReportPropertyChanging("ContractorId");
+                _ContractorId = StructuralObject.SetValidValue(value, "ContractorId");
+                ReportPropertyChanged("ContractorId");
+                OnContractorIdChanged();
+            }
+        }
+        private global::System.Int32 _ContractorId;
+        partial void OnContractorIdChanging(global::System.Int32 value);
+        partial void OnContractorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime VerificationDate
+        {
+            get
+            {
+                return _VerificationDate;
+            }
+            set
+            {
+                OnVerificationDateChanging(value);
+                ReportPropertyChanging("VerificationDate");
+                _VerificationDate = StructuralObject.SetValidValue(value, "VerificationDate");
+                ReportPropertyChanged("VerificationDate");
+                OnVerificationDateChanged();
+            }
+        }
+        private global::System.DateTime _VerificationDate;
+        partial void OnVerificationDateChanging(global::System.DateTime value);
+        partial void OnVerificationDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String VerificationOfficer
+        {
+            get
+            {
+                return _VerificationOfficer;
+            }
+            set
+            {
+                OnVerificationOfficerChanging(value);
+                ReportPropertyChanging("VerificationOfficer");
+                _VerificationOfficer = StructuralObject.SetValidValue(value, false, "VerificationOfficer");
+                ReportPropertyChanged("VerificationOfficer");
+                OnVerificationOfficerChanged();
+            }
+        }
+        private global::System.String _VerificationOfficer;
+        partial void OnVerificationOfficerChanging(global::System.String value);
+        partial void OnVerificationOfficerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Representative
+        {
+            get
+            {
+                return _Representative;
+            }
+            set
+            {
+                OnRepresentativeChanging(value);
+                ReportPropertyChanging("Representative");
+                _Representative = StructuralObject.SetValidValue(value, false, "Representative");
+                ReportPropertyChanged("Representative");
+                OnRepresentativeChanged();
+            }
+        }
+        private global::System.String _Representative;
+        partial void OnRepresentativeChanging(global::System.String value);
+        partial void OnRepresentativeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RepresentativeDesignation
+        {
+            get
+            {
+                return _RepresentativeDesignation;
+            }
+            set
+            {
+                OnRepresentativeDesignationChanging(value);
+                ReportPropertyChanging("RepresentativeDesignation");
+                _RepresentativeDesignation = StructuralObject.SetValidValue(value, false, "RepresentativeDesignation");
+                ReportPropertyChanged("RepresentativeDesignation");
+                OnRepresentativeDesignationChanged();
+            }
+        }
+        private global::System.String _RepresentativeDesignation;
+        partial void OnRepresentativeDesignationChanging(global::System.String value);
+        partial void OnRepresentativeDesignationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RepresentativePhoneNumber
+        {
+            get
+            {
+                return _RepresentativePhoneNumber;
+            }
+            set
+            {
+                OnRepresentativePhoneNumberChanging(value);
+                ReportPropertyChanging("RepresentativePhoneNumber");
+                _RepresentativePhoneNumber = StructuralObject.SetValidValue(value, false, "RepresentativePhoneNumber");
+                ReportPropertyChanged("RepresentativePhoneNumber");
+                OnRepresentativePhoneNumberChanged();
+            }
+        }
+        private global::System.String _RepresentativePhoneNumber;
+        partial void OnRepresentativePhoneNumberChanging(global::System.String value);
+        partial void OnRepresentativePhoneNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ModifiedBy
+        {
+            get
+            {
+                return _ModifiedBy;
+            }
+            set
+            {
+                OnModifiedByChanging(value);
+                ReportPropertyChanging("ModifiedBy");
+                _ModifiedBy = StructuralObject.SetValidValue(value, false, "ModifiedBy");
+                ReportPropertyChanged("ModifiedBy");
+                OnModifiedByChanged();
+            }
+        }
+        private global::System.String _ModifiedBy;
+        partial void OnModifiedByChanging(global::System.String value);
+        partial void OnModifiedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Modified
+        {
+            get
+            {
+                return _Modified;
+            }
+            set
+            {
+                OnModifiedChanging(value);
+                ReportPropertyChanging("Modified");
+                _Modified = StructuralObject.SetValidValue(value, "Modified");
+                ReportPropertyChanged("Modified");
+                OnModifiedChanged();
+            }
+        }
+        private global::System.DateTime _Modified;
+        partial void OnModifiedChanging(global::System.DateTime value);
+        partial void OnModifiedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Coordinate
+        {
+            get
+            {
+                return _Coordinate;
+            }
+            set
+            {
+                OnCoordinateChanging(value);
+                ReportPropertyChanging("Coordinate");
+                _Coordinate = StructuralObject.SetValidValue(value, true, "Coordinate");
+                ReportPropertyChanged("Coordinate");
+                OnCoordinateChanged();
+            }
+        }
+        private global::System.String _Coordinate;
+        partial void OnCoordinateChanging(global::System.String value);
+        partial void OnCoordinateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, false, "Status");
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Supplies_Contractor", "Contractor")]
+        public Contractor Contractor
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("DBModel.FK_Supplies_Contractor", "Contractor").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("DBModel.FK_Supplies_Contractor", "Contractor").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Contractor> ContractorReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contractor>("DBModel.FK_Supplies_Contractor", "Contractor");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contractor>("DBModel.FK_Supplies_Contractor", "Contractor", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Supplies_LGA", "LGA")]
+        public LGA LGA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Supplies_LGA", "LGA").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Supplies_LGA", "LGA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LGA> LGAReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LGA>("DBModel.FK_Supplies_LGA", "LGA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LGA>("DBModel.FK_Supplies_LGA", "LGA", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Supplies_Workflow", "Workflow")]
+        public Workflow Workflow
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Supplies_Workflow", "Workflow").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Supplies_Workflow", "Workflow").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Workflow> WorkflowReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_Supplies_Workflow", "Workflow");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("DBModel.FK_Supplies_Workflow", "Workflow", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyDeliverable_SupplyDeliverable", "SupplyDeliverable")]
+        public EntityCollection<SupplyDeliverable> SupplyDeliverable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SupplyDeliverable>("DBModel.FK_SupplyDeliverable_SupplyDeliverable", "SupplyDeliverable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SupplyDeliverable>("DBModel.FK_SupplyDeliverable_SupplyDeliverable", "SupplyDeliverable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyItems_Supplies", "SupplyItems")]
+        public EntityCollection<SupplyItems> SupplyItems
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SupplyItems>("DBModel.FK_SupplyItems_Supplies", "SupplyItems");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SupplyItems>("DBModel.FK_SupplyItems_Supplies", "SupplyItems", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "SupplyDocumentInfo", "DocumentInfo")]
+        public EntityCollection<DocumentInfo> DocumentInfo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentInfo>("DBModel.SupplyDocumentInfo", "DocumentInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentInfo>("DBModel.SupplyDocumentInfo", "DocumentInfo", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="SupplyDeliverable")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SupplyDeliverable : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SupplyDeliverable object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="supplyId">Initial value of the SupplyId property.</param>
+        /// <param name="deliverableId">Initial value of the DeliverableId property.</param>
+        /// <param name="deliverableFormatId">Initial value of the DeliverableFormatId property.</param>
+        /// <param name="deliverableUnit">Initial value of the DeliverableUnit property.</param>
+        /// <param name="remarks">Initial value of the Remarks property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static SupplyDeliverable CreateSupplyDeliverable(global::System.Int32 id, global::System.Int32 supplyId, global::System.Int32 deliverableId, global::System.Int32 deliverableFormatId, global::System.Int32 deliverableUnit, global::System.String remarks, global::System.String createdBy, global::System.DateTime createdDate)
+        {
+            SupplyDeliverable supplyDeliverable = new SupplyDeliverable();
+            supplyDeliverable.Id = id;
+            supplyDeliverable.SupplyId = supplyId;
+            supplyDeliverable.DeliverableId = deliverableId;
+            supplyDeliverable.DeliverableFormatId = deliverableFormatId;
+            supplyDeliverable.DeliverableUnit = deliverableUnit;
+            supplyDeliverable.Remarks = remarks;
+            supplyDeliverable.CreatedBy = createdBy;
+            supplyDeliverable.CreatedDate = createdDate;
+            return supplyDeliverable;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SupplyId
+        {
+            get
+            {
+                return _SupplyId;
+            }
+            set
+            {
+                OnSupplyIdChanging(value);
+                ReportPropertyChanging("SupplyId");
+                _SupplyId = StructuralObject.SetValidValue(value, "SupplyId");
+                ReportPropertyChanged("SupplyId");
+                OnSupplyIdChanged();
+            }
+        }
+        private global::System.Int32 _SupplyId;
+        partial void OnSupplyIdChanging(global::System.Int32 value);
+        partial void OnSupplyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DeliverableId
+        {
+            get
+            {
+                return _DeliverableId;
+            }
+            set
+            {
+                OnDeliverableIdChanging(value);
+                ReportPropertyChanging("DeliverableId");
+                _DeliverableId = StructuralObject.SetValidValue(value, "DeliverableId");
+                ReportPropertyChanged("DeliverableId");
+                OnDeliverableIdChanged();
+            }
+        }
+        private global::System.Int32 _DeliverableId;
+        partial void OnDeliverableIdChanging(global::System.Int32 value);
+        partial void OnDeliverableIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DeliverableFormatId
+        {
+            get
+            {
+                return _DeliverableFormatId;
+            }
+            set
+            {
+                OnDeliverableFormatIdChanging(value);
+                ReportPropertyChanging("DeliverableFormatId");
+                _DeliverableFormatId = StructuralObject.SetValidValue(value, "DeliverableFormatId");
+                ReportPropertyChanged("DeliverableFormatId");
+                OnDeliverableFormatIdChanged();
+            }
+        }
+        private global::System.Int32 _DeliverableFormatId;
+        partial void OnDeliverableFormatIdChanging(global::System.Int32 value);
+        partial void OnDeliverableFormatIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DeliverableUnit
+        {
+            get
+            {
+                return _DeliverableUnit;
+            }
+            set
+            {
+                OnDeliverableUnitChanging(value);
+                ReportPropertyChanging("DeliverableUnit");
+                _DeliverableUnit = StructuralObject.SetValidValue(value, "DeliverableUnit");
+                ReportPropertyChanged("DeliverableUnit");
+                OnDeliverableUnitChanged();
+            }
+        }
+        private global::System.Int32 _DeliverableUnit;
+        partial void OnDeliverableUnitChanging(global::System.Int32 value);
+        partial void OnDeliverableUnitChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, false, "Remarks");
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value, false, "CreatedBy");
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.String _CreatedBy;
+        partial void OnCreatedByChanging(global::System.String value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyDeliverable_DeliverableFormat", "DeliverableFormat")]
+        public DeliverableFormat DeliverableFormat
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableFormat>("DBModel.FK_SupplyDeliverable_DeliverableFormat", "DeliverableFormat").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableFormat>("DBModel.FK_SupplyDeliverable_DeliverableFormat", "DeliverableFormat").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DeliverableFormat> DeliverableFormatReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableFormat>("DBModel.FK_SupplyDeliverable_DeliverableFormat", "DeliverableFormat");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DeliverableFormat>("DBModel.FK_SupplyDeliverable_DeliverableFormat", "DeliverableFormat", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyDeliverable_DeliverableType", "DeliverableType")]
+        public DeliverableType DeliverableType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableType>("DBModel.FK_SupplyDeliverable_DeliverableType", "DeliverableType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableType>("DBModel.FK_SupplyDeliverable_DeliverableType", "DeliverableType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DeliverableType> DeliverableTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeliverableType>("DBModel.FK_SupplyDeliverable_DeliverableType", "DeliverableType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DeliverableType>("DBModel.FK_SupplyDeliverable_DeliverableType", "DeliverableType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyDeliverable_SupplyDeliverable", "Supplies")]
+        public Supplies Supplies
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplies>("DBModel.FK_SupplyDeliverable_SupplyDeliverable", "Supplies").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplies>("DBModel.FK_SupplyDeliverable_SupplyDeliverable", "Supplies").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Supplies> SuppliesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplies>("DBModel.FK_SupplyDeliverable_SupplyDeliverable", "Supplies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Supplies>("DBModel.FK_SupplyDeliverable_SupplyDeliverable", "Supplies", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="SupplyItems")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SupplyItems : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SupplyItems object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="supplyId">Initial value of the SupplyId property.</param>
+        public static SupplyItems CreateSupplyItems(global::System.Int32 id, global::System.Int32 supplyId)
+        {
+            SupplyItems supplyItems = new SupplyItems();
+            supplyItems.Id = id;
+            supplyItems.SupplyId = supplyId;
+            return supplyItems;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SupplyId
+        {
+            get
+            {
+                return _SupplyId;
+            }
+            set
+            {
+                OnSupplyIdChanging(value);
+                ReportPropertyChanging("SupplyId");
+                _SupplyId = StructuralObject.SetValidValue(value, "SupplyId");
+                ReportPropertyChanged("SupplyId");
+                OnSupplyIdChanged();
+            }
+        }
+        private global::System.Int32 _SupplyId;
+        partial void OnSupplyIdChanging(global::System.Int32 value);
+        partial void OnSupplyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SerialNumber
+        {
+            get
+            {
+                return _SerialNumber;
+            }
+            set
+            {
+                OnSerialNumberChanging(value);
+                ReportPropertyChanging("SerialNumber");
+                _SerialNumber = StructuralObject.SetValidValue(value, true, "SerialNumber");
+                ReportPropertyChanged("SerialNumber");
+                OnSerialNumberChanged();
+            }
+        }
+        private global::System.String _SerialNumber;
+        partial void OnSerialNumberChanging(global::System.String value);
+        partial void OnSerialNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> QuantityOrdered
+        {
+            get
+            {
+                return _QuantityOrdered;
+            }
+            set
+            {
+                OnQuantityOrderedChanging(value);
+                ReportPropertyChanging("QuantityOrdered");
+                _QuantityOrdered = StructuralObject.SetValidValue(value, "QuantityOrdered");
+                ReportPropertyChanged("QuantityOrdered");
+                OnQuantityOrderedChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _QuantityOrdered;
+        partial void OnQuantityOrderedChanging(Nullable<global::System.Int32> value);
+        partial void OnQuantityOrderedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> QuantityDelivered
+        {
+            get
+            {
+                return _QuantityDelivered;
+            }
+            set
+            {
+                OnQuantityDeliveredChanging(value);
+                ReportPropertyChanging("QuantityDelivered");
+                _QuantityDelivered = StructuralObject.SetValidValue(value, "QuantityDelivered");
+                ReportPropertyChanged("QuantityDelivered");
+                OnQuantityDeliveredChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _QuantityDelivered;
+        partial void OnQuantityDeliveredChanging(Nullable<global::System.Int32> value);
+        partial void OnQuantityDeliveredChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, true, "Remarks");
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Modified
+        {
+            get
+            {
+                return _Modified;
+            }
+            set
+            {
+                OnModifiedChanging(value);
+                ReportPropertyChanging("Modified");
+                _Modified = StructuralObject.SetValidValue(value, "Modified");
+                ReportPropertyChanged("Modified");
+                OnModifiedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Modified;
+        partial void OnModifiedChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ModifiedBy
+        {
+            get
+            {
+                return _ModifiedBy;
+            }
+            set
+            {
+                OnModifiedByChanging(value);
+                ReportPropertyChanging("ModifiedBy");
+                _ModifiedBy = StructuralObject.SetValidValue(value, true, "ModifiedBy");
+                ReportPropertyChanged("ModifiedBy");
+                OnModifiedByChanged();
+            }
+        }
+        private global::System.String _ModifiedBy;
+        partial void OnModifiedByChanging(global::System.String value);
+        partial void OnModifiedByChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_SupplyItems_Supplies", "Supplies")]
+        public Supplies Supplies
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplies>("DBModel.FK_SupplyItems_Supplies", "Supplies").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplies>("DBModel.FK_SupplyItems_Supplies", "Supplies").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Supplies> SuppliesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplies>("DBModel.FK_SupplyItems_Supplies", "Supplies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Supplies>("DBModel.FK_SupplyItems_Supplies", "Supplies", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="UserDetail")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class UserDetail : EntityObject
@@ -7345,16 +10112,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_UserDetail_Users", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_UserDetail_Users", "Users")]
         public Users Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.FK_UserDetail_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.FK_UserDetail_Users", "Users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.FK_UserDetail_Users", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.FK_UserDetail_Users", "Users").Value = value;
             }
         }
         /// <summary>
@@ -7366,13 +10133,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("UBECModel.FK_UserDetail_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Users>("DBModel.FK_UserDetail_Users", "Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("UBECModel.FK_UserDetail_Users", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Users>("DBModel.FK_UserDetail_Users", "Users", value);
                 }
             }
         }
@@ -7384,7 +10151,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Users")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Users")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Users : EntityObject
@@ -7547,16 +10314,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "UserApplication", "Applications")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "UserApplication", "Applications")]
         public Applications Applications
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.UserApplication", "Applications").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.UserApplication", "Applications").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.UserApplication", "Applications").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.UserApplication", "Applications").Value = value;
             }
         }
         /// <summary>
@@ -7568,13 +10335,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("UBECModel.UserApplication", "Applications");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Applications>("DBModel.UserApplication", "Applications");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Applications>("UBECModel.UserApplication", "Applications", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Applications>("DBModel.UserApplication", "Applications", value);
                 }
             }
         }
@@ -7585,16 +10352,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "MembershipUser", "Memberships")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "MembershipUser", "Memberships")]
         public Memberships Memberships
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Memberships>("UBECModel.MembershipUser", "Memberships").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Memberships>("DBModel.MembershipUser", "Memberships").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Memberships>("UBECModel.MembershipUser", "Memberships").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Memberships>("DBModel.MembershipUser", "Memberships").Value = value;
             }
         }
         /// <summary>
@@ -7606,13 +10373,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Memberships>("UBECModel.MembershipUser", "Memberships");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Memberships>("DBModel.MembershipUser", "Memberships");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Memberships>("UBECModel.MembershipUser", "Memberships", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Memberships>("DBModel.MembershipUser", "Memberships", value);
                 }
             }
         }
@@ -7623,16 +10390,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "UserProfile", "Profiles")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "UserProfile", "Profiles")]
         public Profiles Profiles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Profiles>("UBECModel.UserProfile", "Profiles").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Profiles>("DBModel.UserProfile", "Profiles").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Profiles>("UBECModel.UserProfile", "Profiles").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Profiles>("DBModel.UserProfile", "Profiles").Value = value;
             }
         }
         /// <summary>
@@ -7644,13 +10411,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Profiles>("UBECModel.UserProfile", "Profiles");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Profiles>("DBModel.UserProfile", "Profiles");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Profiles>("UBECModel.UserProfile", "Profiles", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Profiles>("DBModel.UserProfile", "Profiles", value);
                 }
             }
         }
@@ -7661,40 +10428,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_ProjectApplication_Users", "ProjectApplication")]
-        public EntityCollection<ProjectApplication> ProjectApplication
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("UBECModel.FK_ProjectApplication_Users", "ProjectApplication");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("UBECModel.FK_ProjectApplication_Users", "ProjectApplication", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_UserDetail_Users", "UserDetail")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_UserDetail_Users", "UserDetail")]
         public EntityCollection<UserDetail> UserDetail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserDetail>("UBECModel.FK_UserDetail_Users", "UserDetail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserDetail>("DBModel.FK_UserDetail_Users", "UserDetail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserDetail>("UBECModel.FK_UserDetail_Users", "UserDetail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserDetail>("DBModel.FK_UserDetail_Users", "UserDetail", value);
                 }
             }
         }
@@ -7705,18 +10450,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "UsersInRoles", "Roles")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "UsersInRoles", "Roles")]
         public EntityCollection<Roles> Roles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Roles>("UBECModel.UsersInRoles", "Roles");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Roles>("DBModel.UsersInRoles", "Roles");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Roles>("UBECModel.UsersInRoles", "Roles", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Roles>("DBModel.UsersInRoles", "Roles", value);
                 }
             }
         }
@@ -7728,7 +10473,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="Workflow")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Workflow")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Workflow : EntityObject
@@ -7965,18 +10710,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Alert_WorkFlow", "Alert")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Alert_WorkFlow", "Alert")]
         public EntityCollection<Alert> Alert
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Alert>("UBECModel.FK_Alert_WorkFlow", "Alert");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Alert>("DBModel.FK_Alert_WorkFlow", "Alert");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Alert>("UBECModel.FK_Alert_WorkFlow", "Alert", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Alert>("DBModel.FK_Alert_WorkFlow", "Alert", value);
                 }
             }
         }
@@ -7987,18 +10732,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_Project_Workflow", "ProjectApplication")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Project_Workflow", "ProjectApplication")]
         public EntityCollection<ProjectApplication> ProjectApplication
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("UBECModel.FK_Project_Workflow", "ProjectApplication");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProjectApplication>("DBModel.FK_Project_Workflow", "ProjectApplication");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("UBECModel.FK_Project_Workflow", "ProjectApplication", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProjectApplication>("DBModel.FK_Project_Workflow", "ProjectApplication", value);
                 }
             }
         }
@@ -8009,18 +10754,40 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkFlowActions_Workflow", "WorkFlowActions")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_Supplies_Workflow", "Supplies")]
+        public EntityCollection<Supplies> Supplies
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Supplies>("DBModel.FK_Supplies_Workflow", "Supplies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Supplies>("DBModel.FK_Supplies_Workflow", "Supplies", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkFlowActions_Workflow", "WorkFlowActions")]
         public EntityCollection<WorkFlowActions> WorkFlowActions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkFlowActions>("UBECModel.FK_WorkFlowActions_Workflow", "WorkFlowActions");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkFlowActions>("DBModel.FK_WorkFlowActions_Workflow", "WorkFlowActions");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkFlowActions>("UBECModel.FK_WorkFlowActions_Workflow", "WorkFlowActions", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkFlowActions>("DBModel.FK_WorkFlowActions_Workflow", "WorkFlowActions", value);
                 }
             }
         }
@@ -8031,18 +10798,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowSteps_Workflow", "WorkflowSteps")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowSteps_Workflow", "WorkflowSteps")]
         public EntityCollection<WorkflowSteps> WorkflowSteps
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowSteps>("UBECModel.FK_WorkflowSteps_Workflow", "WorkflowSteps");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowSteps>("DBModel.FK_WorkflowSteps_Workflow", "WorkflowSteps");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowSteps>("UBECModel.FK_WorkflowSteps_Workflow", "WorkflowSteps", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowSteps>("DBModel.FK_WorkflowSteps_Workflow", "WorkflowSteps", value);
                 }
             }
         }
@@ -8053,18 +10820,40 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "WorkflowDocument", "DocumentType")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "WorkflowDocument", "DocumentType")]
         public EntityCollection<DocumentType> DocumentType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentType>("UBECModel.WorkflowDocument", "DocumentType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DocumentType>("DBModel.WorkflowDocument", "DocumentType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentType>("UBECModel.WorkflowDocument", "DocumentType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocumentType>("DBModel.WorkflowDocument", "DocumentType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "WorkFlowDeliverable", "DeliverableType")]
+        public EntityCollection<DeliverableType> DeliverableType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DeliverableType>("DBModel.WorkFlowDeliverable", "DeliverableType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DeliverableType>("DBModel.WorkFlowDeliverable", "DeliverableType", value);
                 }
             }
         }
@@ -8076,7 +10865,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="WorkFlowActions")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="WorkFlowActions")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class WorkFlowActions : EntityObject
@@ -8291,16 +11080,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkFlowActions_Workflow", "Workflow")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkFlowActions_Workflow", "Workflow")]
         public Workflow Workflow
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_WorkFlowActions_Workflow", "Workflow").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_WorkFlowActions_Workflow", "Workflow").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_WorkFlowActions_Workflow", "Workflow").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_WorkFlowActions_Workflow", "Workflow").Value = value;
             }
         }
         /// <summary>
@@ -8312,13 +11101,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_WorkFlowActions_Workflow", "Workflow");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_WorkFlowActions_Workflow", "Workflow");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("UBECModel.FK_WorkFlowActions_Workflow", "Workflow", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("DBModel.FK_WorkFlowActions_Workflow", "Workflow", value);
                 }
             }
         }
@@ -8329,18 +11118,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowStepActions_WorkFlowActions", "WorkflowStepActions")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowStepActions_WorkFlowActions", "WorkflowStepActions")]
         public EntityCollection<WorkflowStepActions> WorkflowStepActions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowStepActions>("UBECModel.FK_WorkflowStepActions_WorkFlowActions", "WorkflowStepActions");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowStepActions>("DBModel.FK_WorkflowStepActions_WorkFlowActions", "WorkflowStepActions");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowStepActions>("UBECModel.FK_WorkflowStepActions_WorkFlowActions", "WorkflowStepActions", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowStepActions>("DBModel.FK_WorkflowStepActions_WorkFlowActions", "WorkflowStepActions", value);
                 }
             }
         }
@@ -8352,7 +11141,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="WorkflowStepActions")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="WorkflowStepActions")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class WorkflowStepActions : EntityObject
@@ -8537,16 +11326,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowStepActions_Alert", "Alert")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowStepActions_Alert", "Alert")]
         public Alert Alert
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Alert>("UBECModel.FK_WorkflowStepActions_Alert", "Alert").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Alert>("DBModel.FK_WorkflowStepActions_Alert", "Alert").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Alert>("UBECModel.FK_WorkflowStepActions_Alert", "Alert").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Alert>("DBModel.FK_WorkflowStepActions_Alert", "Alert").Value = value;
             }
         }
         /// <summary>
@@ -8558,13 +11347,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Alert>("UBECModel.FK_WorkflowStepActions_Alert", "Alert");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Alert>("DBModel.FK_WorkflowStepActions_Alert", "Alert");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Alert>("UBECModel.FK_WorkflowStepActions_Alert", "Alert", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Alert>("DBModel.FK_WorkflowStepActions_Alert", "Alert", value);
                 }
             }
         }
@@ -8575,16 +11364,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions")]
         public WorkFlowActions WorkFlowActions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkFlowActions>("UBECModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkFlowActions>("DBModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkFlowActions>("UBECModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkFlowActions>("DBModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions").Value = value;
             }
         }
         /// <summary>
@@ -8596,13 +11385,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkFlowActions>("UBECModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkFlowActions>("DBModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkFlowActions>("UBECModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkFlowActions>("DBModel.FK_WorkflowStepActions_WorkFlowActions", "WorkFlowActions", value);
                 }
             }
         }
@@ -8613,16 +11402,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps")]
         public WorkflowSteps WorkflowSteps
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkflowSteps>("UBECModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkflowSteps>("DBModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkflowSteps>("UBECModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkflowSteps>("DBModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps").Value = value;
             }
         }
         /// <summary>
@@ -8634,13 +11423,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkflowSteps>("UBECModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkflowSteps>("DBModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkflowSteps>("UBECModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkflowSteps>("DBModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowSteps", value);
                 }
             }
         }
@@ -8652,7 +11441,7 @@ namespace Project.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UBECModel", Name="WorkflowSteps")]
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="WorkflowSteps")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class WorkflowSteps : EntityObject
@@ -8891,16 +11680,16 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowSteps_Workflow", "Workflow")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowSteps_Workflow", "Workflow")]
         public Workflow Workflow
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_WorkflowSteps_Workflow", "Workflow").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_WorkflowSteps_Workflow", "Workflow").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_WorkflowSteps_Workflow", "Workflow").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_WorkflowSteps_Workflow", "Workflow").Value = value;
             }
         }
         /// <summary>
@@ -8912,13 +11701,13 @@ namespace Project.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("UBECModel.FK_WorkflowSteps_Workflow", "Workflow");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Workflow>("DBModel.FK_WorkflowSteps_Workflow", "Workflow");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("UBECModel.FK_WorkflowSteps_Workflow", "Workflow", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Workflow>("DBModel.FK_WorkflowSteps_Workflow", "Workflow", value);
                 }
             }
         }
@@ -8929,18 +11718,18 @@ namespace Project.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UBECModel", "FK_WorkflowStepActions_WorkflowSteps", "WorkflowStepActions")]
+        [EdmRelationshipNavigationPropertyAttribute("DBModel", "FK_WorkflowStepActions_WorkflowSteps", "WorkflowStepActions")]
         public EntityCollection<WorkflowStepActions> WorkflowStepActions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowStepActions>("UBECModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowStepActions");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkflowStepActions>("DBModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowStepActions");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowStepActions>("UBECModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowStepActions", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkflowStepActions>("DBModel.FK_WorkflowStepActions_WorkflowSteps", "WorkflowStepActions", value);
                 }
             }
         }

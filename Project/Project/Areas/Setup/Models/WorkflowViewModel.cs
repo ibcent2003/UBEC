@@ -16,7 +16,9 @@ namespace Project.Areas.Setup.Models
             get;
             set;
         }
-
+        public int DeliverableTypeId { get; set; }
+        public List<DeliverableType> AvailableDeliverable { get; set; }
+        public List<DeliverableType> DeliverableTypeList { get; set; }
         public List<DocumentType> AvailableDocument { get; set; }
         public List<DocumentType> DocumentTypeList { get; set; }
 

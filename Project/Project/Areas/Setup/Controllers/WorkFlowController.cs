@@ -618,6 +618,112 @@ namespace Project.Areas.Setup.Controllers
             return action;
         }
 
+        public ActionResult WorkflowDeliverable(int Id)
+        {
+            try
+            {
+                WorkflowViewModel model = new WorkflowViewModel();
+                var workflow = db.Workflow.Where(x => x.Id == Id).FirstOrDefault();
+                if (null == workflow)
+                {
+                    base.TempData["messageType"] = "danger";
+                    base.TempData["message"] = "";
+                    return RedirectToAction("Index");
+                }
 
+                model.workflow = workflow;
+                List<int> list = (from x in workflow.DeliverableType select x.Id).ToList<int>();
+                model.AvailableDeliverable = (from d in this.db.DeliverableType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DeliverableType>();
+                model.DeliverableTypeList = workflow.DeliverableType.ToList();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Exception exception = ex;
+                base.TempData["messageType"] = "danger";
+                base.TempData["message"] = "There is an error in the application. Please try again or contact the system administrator";
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult WorkflowDeliverable(WorkflowViewModel model)
+        {
+            try
+            {
+                var workflow = db.Workflow.Where(x => x.Id == model.workflow.Id).FirstOrDefault();
+                if (null == workflow)
+                {
+                    base.TempData["messageType"] = "danger";
+                    base.TempData["message"] = "";
+                    return RedirectToAction("Index");
+                }
+                model.workflow = workflow;
+                List<int> list = (from x in workflow.DeliverableType select x.Id).ToList<int>();
+                model.AvailableDeliverable = (from d in this.db.DeliverableType where !list.Contains(d.Id) && d.IsDeleted == false select d).ToList<DeliverableType>();
+                model.DeliverableTypeList = workflow.DeliverableType.ToList();
+                if (model.DeliverableTypeId == 0)
+                {
+                    TempData["messageType"] = "danger";
+                    TempData["message"] = "Please select a Deliverable type from the dropdownlist and click on the Add button";
+                    return RedirectToAction("WorkflowDeliverable", "WorkFlow", new { Id = model.workflow.Id, area = "Setup" });
+                }
+                if (!(from x in workflow.DeliverableType where x.Id == model.DeliverableTypeId select x).ToList<DeliverableType>().Any<DeliverableType>())
+                {
+                    var getdoc = db.DeliverableType.Where(x => x.Id == model.DeliverableTypeId).FirstOrDefault();
+
+                    workflow.DeliverableType.FirstOrDefault<DeliverableType>();
+                    workflow.DeliverableType.Add(getdoc);
+                    this.db.SaveChanges();
+
+                    base.TempData["message"] = "The Deliverable has been added successfully.";
+                    RedirectToAction("WorkflowDeliverable", "WorkFlow", new { Id = model.workflow.Id, area = "Setup" });
+
+                    List<int> listed = (from x in workflow.DeliverableType select x.Id).ToList<int>();
+                    model.AvailableDeliverable = (from d in this.db.DeliverableType where !listed.Contains(d.Id) && d.IsDeleted == false select d).ToList<DeliverableType>();
+                    model.DeliverableTypeList = workflow.DeliverableType.ToList();
+                }
+                else
+                {
+                    base.TempData["messageType"] = "danger";
+                    base.TempData["message"] = "The Selected Deliverable already exist. Please select another Deliverable";
+                    return View(model);
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Exception exception = ex;
+                base.TempData["messageType"] = "danger";
+                base.TempData["message"] = "There is an error in the application. Please try again or contact the system administrator";
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        public ActionResult RemoveWorkflowDeliverable(int Id, int DeliverableTypeId)
+        {
+            ActionResult action;
+            try
+            {
+                WorkflowViewModel model = new WorkflowViewModel();
+                var workflowId = (from d in this.db.Workflow where d.Id == Id select d).FirstOrDefault();
+                var docId = (from x in this.db.DeliverableType where x.Id == DeliverableTypeId select x).FirstOrDefault();
+                workflowId.DeliverableType.Remove(docId);
+                this.db.SaveChanges();
+                base.TempData["message"] = "The Deliverable has been deleted successfully.";
+                action = base.RedirectToAction("WorkflowDeliverable", "WorkFlow", new { Id = Id, area = "Setup" });
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                base.TempData["messageType"] = "danger";
+                base.TempData["message"] = "There is an error in the application. Please try again or contact the system administrator";
+                Elmah.ErrorSignal.FromCurrentContext().Raise(exception);
+                action = base.RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+            return action;
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace Project.Areas.Admin.Controllers
                     var CountRenovation = db.ProjectApplication.Where(x => x.WorkFlowId == Properties.Settings.Default.Renovation).Count();
                     model.TotalRenovation = CountRenovation;
 
-                    var CountSupply = db.ProjectApplication.Where(x => x.WorkFlowId == Properties.Settings.Default.Supply).Count();
+                    var CountSupply = db.Supplies.Where(x => x.WorkflowId == Properties.Settings.Default.Supply).Count();
                     model.TotalSupply = CountSupply;
 
                     model.TotalProject = CountConstruction + CountRenovation + CountSupply;

@@ -1,424 +1,553 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="UBECModelStoreContainer" CdmEntityContainer="PROEntities">
+  <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="PROEntities">
     <EntitySetMapping Name="Alert">
-      <EntityTypeMapping TypeName="UBECModel.Alert">
+      <EntityTypeMapping TypeName="DBModel.Alert">
         <MappingFragment StoreEntitySet="Alert">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Sms" ColumnName="Sms" />
-          <ScalarProperty Name="SubjectEmail" ColumnName="SubjectEmail" />
-          <ScalarProperty Name="SubjectSms" ColumnName="SubjectSms" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SubjectSms" ColumnName="SubjectSms" />
+          <ScalarProperty Name="SubjectEmail" ColumnName="SubjectEmail" />
+          <ScalarProperty Name="Sms" ColumnName="Sms" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AlertNotification">
-      <EntityTypeMapping TypeName="UBECModel.AlertNotification">
+      <EntityTypeMapping TypeName="DBModel.AlertNotification">
         <MappingFragment StoreEntitySet="AlertNotification">
-          <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
-          <ScalarProperty Name="ModifedBy" ColumnName="ModifedBy" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="AlertTypeId" ColumnName="AlertTypeId" />
-          <ScalarProperty Name="SentDate" ColumnName="SentDate" />
-          <ScalarProperty Name="Message" ColumnName="Message" />
-          <ScalarProperty Name="Subject" ColumnName="Subject" />
-          <ScalarProperty Name="Receiver" ColumnName="Receiver" />
-          <ScalarProperty Name="Sender" ColumnName="Sender" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+          <ScalarProperty Name="AlertTypeId" ColumnName="AlertTypeId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ModifedBy" ColumnName="ModifedBy" />
+          <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AlertType">
-      <EntityTypeMapping TypeName="UBECModel.AlertType">
+      <EntityTypeMapping TypeName="DBModel.AlertType">
         <MappingFragment StoreEntitySet="AlertType">
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Applications">
-      <EntityTypeMapping TypeName="UBECModel.Applications">
+      <EntityTypeMapping TypeName="DBModel.Applications">
         <MappingFragment StoreEntitySet="Applications">
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
           <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Contractor">
-      <EntityTypeMapping TypeName="UBECModel.Contractor">
+      <EntityTypeMapping TypeName="DBModel.Contractor">
         <MappingFragment StoreEntitySet="Contractor">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DataGenerator">
-      <EntityTypeMapping TypeName="UBECModel.DataGenerator">
+      <EntityTypeMapping TypeName="DBModel.DataGenerator">
         <MappingFragment StoreEntitySet="DataGenerator">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="TableID" ColumnName="TableID" />
           <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="TableID" ColumnName="TableID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentCategory">
-      <EntityTypeMapping TypeName="UBECModel.DocumentCategory">
+      <EntityTypeMapping TypeName="DBModel.DocumentCategory">
         <MappingFragment StoreEntitySet="DocumentCategory">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentFormat">
-      <EntityTypeMapping TypeName="UBECModel.DocumentFormat">
+      <EntityTypeMapping TypeName="DBModel.DocumentFormat">
         <MappingFragment StoreEntitySet="DocumentFormat">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Extension" ColumnName="Extension" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentInfo">
-      <EntityTypeMapping TypeName="UBECModel.DocumentInfo">
+      <EntityTypeMapping TypeName="DBModel.DocumentInfo">
         <MappingFragment StoreEntitySet="DocumentInfo">
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
-          <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
-          <ScalarProperty Name="Extension" ColumnName="Extension" />
-          <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="Path" ColumnName="Path" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentType">
-      <EntityTypeMapping TypeName="UBECModel.DocumentType">
+      <EntityTypeMapping TypeName="DBModel.DocumentType">
         <MappingFragment StoreEntitySet="DocumentType">
-          <ScalarProperty Name="DocumentCategoryId" ColumnName="DocumentCategoryId" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="DocumentCategoryId" ColumnName="DocumentCategoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LGA">
-      <EntityTypeMapping TypeName="UBECModel.LGA">
+      <EntityTypeMapping TypeName="DBModel.LGA">
         <MappingFragment StoreEntitySet="LGA">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="StateId" ColumnName="StateId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Memberships">
-      <EntityTypeMapping TypeName="UBECModel.Memberships">
+      <EntityTypeMapping TypeName="DBModel.Memberships">
         <MappingFragment StoreEntitySet="Memberships">
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
-          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
-          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
-          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
-          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
-          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
-          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
-          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
-          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="News">
-      <EntityTypeMapping TypeName="UBECModel.News">
+      <EntityTypeMapping TypeName="DBModel.News">
         <MappingFragment StoreEntitySet="News">
-          <ScalarProperty Name="NoOfView" ColumnName="NoOfView" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="NewsContent" ColumnName="NewsContent" />
-          <ScalarProperty Name="NewsHeadline" ColumnName="NewsHeadline" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NewsHeadline" ColumnName="NewsHeadline" />
+          <ScalarProperty Name="NewsContent" ColumnName="NewsContent" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="NoOfView" ColumnName="NoOfView" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Payment">
-      <EntityTypeMapping TypeName="UBECModel.Payment">
+      <EntityTypeMapping TypeName="DBModel.Payment">
         <MappingFragment StoreEntitySet="Payment">
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PaymentType">
-      <EntityTypeMapping TypeName="UBECModel.PaymentType">
+      <EntityTypeMapping TypeName="DBModel.PaymentType">
         <MappingFragment StoreEntitySet="PaymentType">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Profiles">
-      <EntityTypeMapping TypeName="UBECModel.Profiles">
+      <EntityTypeMapping TypeName="DBModel.Profiles">
         <MappingFragment StoreEntitySet="Profiles">
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
-          <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
-          <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+          <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
+          <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProjectApplication">
-      <EntityTypeMapping TypeName="UBECModel.ProjectApplication">
+      <EntityTypeMapping TypeName="DBModel.ProjectApplication">
         <MappingFragment StoreEntitySet="ProjectApplication">
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="InspectionUserId" ColumnName="InspectionUserId" />
-          <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
-          <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
-          <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
-          <ScalarProperty Name="DescriptionOfCompletion" ColumnName="DescriptionOfCompletion" />
-          <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
-          <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
-          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
-          <ScalarProperty Name="LGAId" ColumnName="LGAId" />
-          <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+          <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+          <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
+          <ScalarProperty Name="InspectionUserId" ColumnName="InspectionUserId" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="EnableSum" ColumnName="EnableSum" />
+          <ScalarProperty Name="ProjectTypeId" ColumnName="ProjectTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Resource">
-      <EntityTypeMapping TypeName="UBECModel.Resource">
+      <EntityTypeMapping TypeName="DBModel.Resource">
         <MappingFragment StoreEntitySet="Resource">
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Order" ColumnName="Order" />
-          <ScalarProperty Name="Areas" ColumnName="Areas" />
-          <ScalarProperty Name="Controller" ColumnName="Controller" />
-          <ScalarProperty Name="Action" ColumnName="Action" />
-          <ScalarProperty Name="Icon" ColumnName="Icon" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Areas" ColumnName="Areas" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ResourcesInRole">
-      <EntityTypeMapping TypeName="UBECModel.ResourcesInRole">
+      <EntityTypeMapping TypeName="DBModel.ResourcesInRole">
         <MappingFragment StoreEntitySet="ResourcesInRole">
-          <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Roles">
-      <EntityTypeMapping TypeName="UBECModel.Roles">
+      <EntityTypeMapping TypeName="DBModel.Roles">
         <MappingFragment StoreEntitySet="Roles">
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="State">
-      <EntityTypeMapping TypeName="UBECModel.State">
+      <EntityTypeMapping TypeName="DBModel.State">
         <MappingFragment StoreEntitySet="State">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserDetail">
-      <EntityTypeMapping TypeName="UBECModel.UserDetail">
+      <EntityTypeMapping TypeName="DBModel.UserDetail">
         <MappingFragment StoreEntitySet="UserDetail">
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-          <ScalarProperty Name="EmailAddres" ColumnName="EmailAddres" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmailAddres" ColumnName="EmailAddres" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="UBECModel.Users">
+      <EntityTypeMapping TypeName="DBModel.Users">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
-          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Workflow">
-      <EntityTypeMapping TypeName="UBECModel.Workflow">
+      <EntityTypeMapping TypeName="DBModel.Workflow">
         <MappingFragment StoreEntitySet="Workflow">
-          <ScalarProperty Name="feedback" ColumnName="feedback" />
-          <ScalarProperty Name="guideline" ColumnName="guideline" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="guideline" ColumnName="guideline" />
+          <ScalarProperty Name="feedback" ColumnName="feedback" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WorkFlowActions">
-      <EntityTypeMapping TypeName="UBECModel.WorkFlowActions">
+      <EntityTypeMapping TypeName="DBModel.WorkFlowActions">
         <MappingFragment StoreEntitySet="WorkFlowActions">
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Direction" ColumnName="Direction" />
-          <ScalarProperty Name="IsMovable" ColumnName="IsMovable" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsMovable" ColumnName="IsMovable" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WorkflowStepActions">
-      <EntityTypeMapping TypeName="UBECModel.WorkflowStepActions">
+      <EntityTypeMapping TypeName="DBModel.WorkflowStepActions">
         <MappingFragment StoreEntitySet="WorkflowStepActions">
-          <ScalarProperty Name="PresetReason" ColumnName="PresetReason" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="AlertId" ColumnName="AlertId" />
-          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
-          <ScalarProperty Name="StepId" ColumnName="StepId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StepId" ColumnName="StepId" />
+          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+          <ScalarProperty Name="AlertId" ColumnName="AlertId" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="PresetReason" ColumnName="PresetReason" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WorkflowSteps">
-      <EntityTypeMapping TypeName="UBECModel.WorkflowSteps">
+      <EntityTypeMapping TypeName="DBModel.WorkflowSteps">
         <MappingFragment StoreEntitySet="WorkflowSteps">
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Priority" ColumnName="Priority" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableFormat">
+      <EntityTypeMapping TypeName="DBModel.DeliverableFormat">
+        <MappingFragment StoreEntitySet="DeliverableFormat">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverableType">
+      <EntityTypeMapping TypeName="DBModel.DeliverableType">
+        <MappingFragment StoreEntitySet="DeliverableType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Inspection">
-      <EntityTypeMapping TypeName="UBECModel.Inspection">
+      <EntityTypeMapping TypeName="DBModel.Inspection">
         <MappingFragment StoreEntitySet="Inspection">
-          <ScalarProperty Name="InspectionStatus" ColumnName="InspectionStatus" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
-          <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
-          <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
-          <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
-          <ScalarProperty Name="DescriptionOfCompletion" ColumnName="DescriptionOfCompletion" />
-          <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="LgaId" ColumnName="LgaId" />
-          <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+          <ScalarProperty Name="LgaId" ColumnName="LgaId" />
+          <ScalarProperty Name="StageOfCompletionId" ColumnName="StageOfCompletionId" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
+          <ScalarProperty Name="DescriptionOfCompletion" ColumnName="DescriptionOfCompletion" />
+          <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
+          <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
+          <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
+          <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="InspectionStatus" ColumnName="InspectionStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="DocumentTypeFormat" TypeName="UBECModel.DocumentTypeFormat" StoreEntitySet="DocumentTypeFormat">
-      <EndProperty Name="DocumentType">
-        <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
-      </EndProperty>
+    <EntitySetMapping Name="ProjectDeliverable">
+      <EntityTypeMapping TypeName="DBModel.ProjectDeliverable">
+        <MappingFragment StoreEntitySet="ProjectDeliverable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="DeliverableId" ColumnName="DeliverableId" />
+          <ScalarProperty Name="DeliverableFormatId" ColumnName="DeliverableFormatId" />
+          <ScalarProperty Name="DeliverableUnit" ColumnName="DeliverableUnit" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectType">
+      <EntityTypeMapping TypeName="DBModel.ProjectType">
+        <MappingFragment StoreEntitySet="ProjectType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StageOfCompletion">
+      <EntityTypeMapping TypeName="DBModel.StageOfCompletion">
+        <MappingFragment StoreEntitySet="StageOfCompletion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectTypeId" ColumnName="ProjectTypeId" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Supplies">
+      <EntityTypeMapping TypeName="DBModel.Supplies">
+        <MappingFragment StoreEntitySet="Supplies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+          <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+          <ScalarProperty Name="VerificationDate" ColumnName="VerificationDate" />
+          <ScalarProperty Name="VerificationOfficer" ColumnName="VerificationOfficer" />
+          <ScalarProperty Name="Representative" ColumnName="Representative" />
+          <ScalarProperty Name="RepresentativeDesignation" ColumnName="RepresentativeDesignation" />
+          <ScalarProperty Name="RepresentativePhoneNumber" ColumnName="RepresentativePhoneNumber" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplyDeliverable">
+      <EntityTypeMapping TypeName="DBModel.SupplyDeliverable">
+        <MappingFragment StoreEntitySet="SupplyDeliverable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
+          <ScalarProperty Name="DeliverableId" ColumnName="DeliverableId" />
+          <ScalarProperty Name="DeliverableFormatId" ColumnName="DeliverableFormatId" />
+          <ScalarProperty Name="DeliverableUnit" ColumnName="DeliverableUnit" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplyItems">
+      <EntityTypeMapping TypeName="DBModel.SupplyItems">
+        <MappingFragment StoreEntitySet="SupplyItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="QuantityOrdered" ColumnName="QuantityOrdered" />
+          <ScalarProperty Name="QuantityDelivered" ColumnName="QuantityDelivered" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DocumentTypeFormat" TypeName="DBModel.DocumentTypeFormat" StoreEntitySet="DocumentTypeFormat">
       <EndProperty Name="DocumentFormat">
         <ScalarProperty Name="Id" ColumnName="DocumentTypeFormatId" />
       </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="UBECModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
-      <EndProperty Name="ProjectApplication">
-        <ScalarProperty Name="Id" ColumnName="ProjectId" />
-      </EndProperty>
-      <EndProperty Name="DocumentInfo">
-        <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="UsersInRoles" TypeName="UBECModel.UsersInRoles" StoreEntitySet="UsersInRoles">
-      <EndProperty Name="Users">
-        <ScalarProperty Name="UserId" ColumnName="UserId" />
-      </EndProperty>
-      <EndProperty Name="Roles">
-        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="WorkflowDocument" TypeName="UBECModel.WorkflowDocument" StoreEntitySet="WorkflowDocument">
-      <EndProperty Name="Workflow">
-        <ScalarProperty Name="Id" ColumnName="WorkFlowId" />
-      </EndProperty>
       <EndProperty Name="DocumentType">
         <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="InspectionDocumentInfo" TypeName="UBECModel.InspectionDocumentInfo" StoreEntitySet="InspectionDocumentInfo">
+    <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="DBModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
+      <EndProperty Name="DocumentInfo">
+        <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
+      </EndProperty>
+      <EndProperty Name="ProjectApplication">
+        <ScalarProperty Name="Id" ColumnName="ProjectId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsersInRoles" TypeName="DBModel.UsersInRoles" StoreEntitySet="UsersInRoles">
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="WorkflowDocument" TypeName="DBModel.WorkflowDocument" StoreEntitySet="WorkflowDocument">
+      <EndProperty Name="DocumentType">
+        <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
+      </EndProperty>
+      <EndProperty Name="Workflow">
+        <ScalarProperty Name="Id" ColumnName="WorkFlowId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DeliverableTypeFormat" TypeName="DBModel.DeliverableTypeFormat" StoreEntitySet="DeliverableTypeFormat">
+      <EndProperty Name="DeliverableFormat">
+        <ScalarProperty Name="Id" ColumnName="DeveliverableFormatId" />
+      </EndProperty>
+      <EndProperty Name="DeliverableType">
+        <ScalarProperty Name="Id" ColumnName="DeliverableTypeId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="InspectionDocumentInfo" TypeName="DBModel.InspectionDocumentInfo" StoreEntitySet="InspectionDocumentInfo">
+      <EndProperty Name="DocumentInfo">
+        <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
+      </EndProperty>
       <EndProperty Name="Inspection">
         <ScalarProperty Name="Id" ColumnName="InspectionId" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SupplyDocumentInfo" TypeName="DBModel.SupplyDocumentInfo" StoreEntitySet="SupplyDocumentInfo">
       <EndProperty Name="DocumentInfo">
         <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
+      </EndProperty>
+      <EndProperty Name="Supplies">
+        <ScalarProperty Name="Id" ColumnName="SupplyId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="WorkFlowDeliverable" TypeName="DBModel.WorkFlowDeliverable" StoreEntitySet="WorkFlowDeliverable">
+      <EndProperty Name="DeliverableType">
+        <ScalarProperty Name="Id" ColumnName="DeliverableTypeId" />
+      </EndProperty>
+      <EndProperty Name="Workflow">
+        <ScalarProperty Name="Id" ColumnName="WorkflowId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

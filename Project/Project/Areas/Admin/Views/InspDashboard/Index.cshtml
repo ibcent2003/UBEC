@@ -15,7 +15,7 @@
 }
 <a href="@Url.Action("Index", "Project", new {Id=1, area="Admin"})" class="btn btn-success btn-xs">Construction </a>
 <a href="@Url.Action("Index", "Project", new {Id=2, area="Admin"})" class="btn btn-danger btn-xs">Renovation  </a>
-<a href="@Url.Action("Index", "Project", new {Id=3, area="Admin"})" class="btn btn-warning btn-xs">Supply </a>
+<a href="@Url.Action("Index", "SupplyManagement", new {area="Admin"})" class="btn btn-warning btn-xs">Supply </a>
 <br />
 <br />
 <div class="row row-bg">
@@ -45,7 +45,7 @@
                 <div class="visual yellow"><i class="icon-dollar"></i></div>
                 <div class="title">Supply</div>
                 <div class="value">@Model.TotalSupply</div>
-                <a class="more" href="@Url.Action("Index", "Project", new {Id=3, area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
+                <a class="more" href="@Url.Action("Index", "SupplyManagement", new {area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
             </div>
         </div>
     </div>

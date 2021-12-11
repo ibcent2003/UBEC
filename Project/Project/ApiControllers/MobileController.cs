@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Security.Cryptography;
 
+
 namespace Project.ApiControllers
 {
     public class MobileController : ApiController
@@ -412,7 +413,6 @@ namespace Project.ApiControllers
             var now = DateTime.Now;
             try
             {
-
                 var request = HttpContext.Current.Request.Params;
                 var appSettings = ConfigurationManager.AppSettings;
 
@@ -526,7 +526,6 @@ namespace Project.ApiControllers
             }
             return result.ToString();
         }
-
 
     }
 }

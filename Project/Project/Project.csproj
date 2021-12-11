@@ -33,19 +33,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="Elmah.Mvc">
       <HintPath>..\packages\Elmah.MVC.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itextsharp.xmlworker.5.5.13.2\lib\itextsharp.xmlworker.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mvc.Mailer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -187,7 +197,9 @@
   <ItemGroup>
     <Compile Include="ApiControllers\Contracts\V1\Requests\LoginRequest.cs" />
     <Compile Include="ApiControllers\Contracts\V1\Requests\ReportRequest.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Requests\SupplyRequest.cs" />
     <Compile Include="ApiControllers\Contracts\V1\Responses\CodeList.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\MilestoneResponse.cs" />
     <Compile Include="ApiControllers\Contracts\V1\Responses\ProjectRecord.cs" />
     <Compile Include="ApiControllers\Contracts\V1\Responses\ProjectResponse.cs" />
     <Compile Include="ApiControllers\Contracts\V1\Responses\ProjectsResponse.cs" />
@@ -195,6 +207,8 @@
     <Compile Include="ApiControllers\Contracts\V1\Responses\ContractorsResponse.cs" />
     <Compile Include="ApiControllers\Contracts\V1\Responses\LoginResponse.cs" />
     <Compile Include="ApiControllers\Contracts\V1\Responses\StatusMessage.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\SupplyItem.cs" />
+    <Compile Include="ApiControllers\Contracts\V1\Responses\SupplyResponse.cs" />
     <Compile Include="ApiControllers\MobileController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -206,12 +220,14 @@
     <Compile Include="Areas\Admin\Controllers\InspDashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResourceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SupplyManagementController.cs" />
     <Compile Include="Areas\Admin\Models\DashboardViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GrantResourceToRoleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InspDashboardViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProjectViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ResourceEditModel.cs" />
     <Compile Include="Areas\Admin\Models\ResourceViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\SupplyViewModel.cs" />
     <Compile Include="Areas\SecurityGuard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\SecurityGuard\Controllers\MembershipController.cs" />
     <Compile Include="Areas\SecurityGuard\Controllers\RoleController.cs" />
@@ -234,12 +250,14 @@
     <Compile Include="Areas\SecurityGuard\SecurityGuardAreaRegistration.cs" />
     <Compile Include="Areas\Setup\Controllers\AlertManagementController.cs" />
     <Compile Include="Areas\Setup\Controllers\ContractorController.cs" />
+    <Compile Include="Areas\Setup\Controllers\DeliverableTypeController.cs" />
     <Compile Include="Areas\Setup\Controllers\DocumentTypeController.cs" />
     <Compile Include="Areas\Setup\Controllers\NewsManagementController.cs" />
     <Compile Include="Areas\Setup\Controllers\PaymentTypeController.cs" />
     <Compile Include="Areas\Setup\Controllers\WorkFlowController.cs" />
     <Compile Include="Areas\Setup\Models\AlertViewModel.cs" />
     <Compile Include="Areas\Setup\Models\ContractorViewModel.cs" />
+    <Compile Include="Areas\Setup\Models\DeliverableTypeViewModel.cs" />
     <Compile Include="Areas\Setup\Models\DocumentTypeViewModel.cs" />
     <Compile Include="Areas\Setup\Models\NewsManagementViewModel.cs" />
     <Compile Include="Areas\Setup\Models\PaymentTypeViewModel.cs" />
@@ -260,6 +278,7 @@
     <Compile Include="Mailers\PasswordResetMailer.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CodeGenerator.cs" />
+    <Compile Include="Models\GetProject.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\IntegerSelectListItem.cs" />
     <Compile Include="Models\JsonModel.cs" />
@@ -1481,6 +1500,26 @@
     <Content Include="Areas\Setup\Views\NewsManagement\Index.cshtml" />
     <Content Include="Areas\Setup\Views\NewsManagement\Create.cshtml" />
     <Content Include="Areas\Setup\Views\NewsManagement\Edit.cshtml" />
+    <Content Include="Areas\Setup\Views\DeliverableType\Index.cshtml" />
+    <Content Include="Areas\Setup\Views\DeliverableType\DeliverableFormatList.cshtml" />
+    <Content Include="Areas\Setup\Views\DeliverableType\NewDeliverableType.cshtml" />
+    <Content Include="Areas\Setup\Views\DeliverableType\EditDeliverableType.cshtml" />
+    <Content Include="Areas\Setup\Views\DeliverableType\NewDeliverableFormat.cshtml" />
+    <Content Include="Areas\Setup\Views\DeliverableType\EditDeliverableFormat.cshtml" />
+    <Content Include="Areas\Setup\Views\DeliverableType\DeliverableTypeFormat.cshtml" />
+    <Content Include="Areas\Setup\Views\WorkFlow\WorkflowDeliverable.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\ManageDeliverable.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\AddDeliverable.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\NewSupply.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\EditSupply.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\UploadPhoto.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\ItemList.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\NewItems.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\EditItem.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\SupplyDeliverableList.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\AddSupplyDeliverable.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplyManagement\Detail.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="MvcInstaller\ajax-loader.gif" />
     <Content Include="MvcInstaller\jquery-1.6.1.min.js" />
@@ -1589,6 +1628,8 @@
     <Content Include="Views\Home\ProjectType.cshtml" />
     <Content Include="Views\Home\Error404.cshtml" />
     <Content Include="Views\Home\DownloadApk.cshtml" />
+    <Content Include="Views\Home\SupplyList.cshtml" />
+    <Content Include="Views\Home\ViewSupply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

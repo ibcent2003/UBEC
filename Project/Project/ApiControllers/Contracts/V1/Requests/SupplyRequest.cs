@@ -16,15 +16,17 @@ namespace Project.ApiControllers.Contracts.V1.Requests
         public string Location { get; set; }
         public string LGAId { get; set; }
         public string ModifiedBy { get; set; }
-        //public List<SupplyItem> SupplyItems { get; set; }
+
+        public List<SupplyItem> SupplyItems { get; set; }
     }
 
-    //public class SupplyItem
-    //{
-    //    public string SerialNumber { get; set; }
-    //    public string Description { get; set; }
-    //    public string QuantityOrdered { get; set; }
-    //    public string QuantityDelivered { get; set; }
-    //    public string Remarks { get; set; }
-    //}
+    public class SupplyItem
+    {
+        public string SerialNumber { get; set; }
+        public string Description { get; set; }
+        public string QuantityOrdered { get; set; }
+        public string QuantityDelivered { get; set; }
+        public string Remarks { get; set; }
+    }
+
 }
