@@ -17,6 +17,9 @@ using Roles = System.Web.Security.Roles;
 using System.Web;
 using System.IO;
 using System.Configuration;
+using Newtonsoft.Json;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Project.ApiControllers
 {
@@ -38,6 +41,7 @@ namespace Project.ApiControllers
         //[Route("api/student/names")]
         public LoginResponse Login(LoginRequest request) {
             var resp = new LoginResponse();
+            var appSettings = ConfigurationManager.AppSettings;
             try {
                 if (request == null)
                 {
@@ -56,12 +60,23 @@ namespace Project.ApiControllers
                 resp.IsSuccessful = result;
                 if (result)
                 {
+
                     //var user = _membershipService.GetUser(request.Username);
                     var user = db.Users.FirstOrDefault(x => x.UserName.ToLower() == request.Username.ToLower());
+
+                    var apiKey = appSettings["License"];
+                    resp.License = string.Empty;
+                    var data = Encoding.UTF8.GetBytes(user.UserId + apiKey);
+                    using (SHA512 shaM = new SHA512Managed())
+                    {
+                        var hash = shaM.ComputeHash(data);
+                        resp.License = GetStringFromHash(hash);
+                    }
                     resp.Username = request.Username;
                     resp.UserId = user.UserId;
                     resp.Role = Roles.GetRolesForUser(request.Username).ToList();
                     resp.Message = "Login Successful";
+
                 }
                 else { resp.Message = "Login Failed"; }
             } catch (Exception ex)
@@ -95,6 +110,7 @@ namespace Project.ApiControllers
             return resp;
 
         }
+
         [HttpGet]
         public LGAsResponse GetLGAs()
         {
@@ -125,10 +141,12 @@ namespace Project.ApiControllers
             try
             {
                 var rows = db.ProjectApplication.Where(x => x.IsDeleted == false)
-                    .Select(x => new ProjectRecord { 
-                        ProjectId = x.Id, 
+                    .Select(x => new ProjectRecord
+                    {
+                        ProjectId = x.Id,
                         SerialNo = x.SerialNo,
-                        ProjectType = x.Workflow.Name,
+                        Workflow = x.Workflow.Name,
+                        ProjectType = x.ProjectTypeId,
                         Contractor = x.Contractor.Name,
                         Description = x.Description,
                         OwnedBy = x.InspectionUserId
@@ -139,8 +157,44 @@ namespace Project.ApiControllers
                     resp.Message = "Success";
                     resp.IsSuccessful = true;
                 }
-                else {
+                else
+                {
                     resp.Records = new List<ProjectRecord>();
+                    resp.Message = "No Recores Found";
+                    resp.IsSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO:Log Error
+                resp.IsSuccessful = false;
+                resp.Message = "Server Error";
+            }
+            return resp;
+
+        }
+        [HttpGet]
+        public MilestoneResponse GetMilestone()
+        {
+            var resp = new MilestoneResponse();
+            try
+            {
+                var rows = db.StageOfCompletion.Where(x => x.IsDeleted == false)
+                    .Select(x => new Milestone
+                    {
+                        ProjectType = x.ProjectTypeId,
+                        Percentage = x.Percentage,
+                        Description = x.Description
+                    }).ToList();
+                if (rows != null)
+                {
+                    resp.Records = rows;
+                    resp.Message = "Success";
+                    resp.IsSuccessful = true;
+                }
+                else
+                {
+                    resp.Records = new List<Milestone>();
                     resp.Message = "No Recores Found";
                     resp.IsSuccessful = true;
                 }
@@ -204,7 +258,31 @@ namespace Project.ApiControllers
             var now = DateTime.Now;
             try
             {
+
+                var request = HttpContext.Current.Request.Params;
                 var appSettings = ConfigurationManager.AppSettings;
+
+                //check authentication
+                var username = request["Modifiedby"];
+                var licence = request["License"];
+                var user = db.Users.FirstOrDefault(x => x.UserName.ToLower() == username.ToLower());
+
+                var apiKey = appSettings["License"];
+                var apiHash = string.Empty;
+                var data = Encoding.UTF8.GetBytes(user.UserId + apiKey);
+                using (SHA512 shaM = new SHA512Managed())
+                {
+                    var hash = shaM.ComputeHash(data);
+                    apiHash = GetStringFromHash(hash);
+                }
+                if (licence != apiHash) {
+                    resp.IsSuccessful = false;
+                    resp.Message = "Unauthorised Access";
+                    return resp;
+                }
+
+
+
                 var files = SaveFiles;
                 if (files == null) {
                     resp.IsSuccessful = false;
@@ -212,7 +290,6 @@ namespace Project.ApiControllers
                     return resp;
                 }
                
-                var request = HttpContext.Current.Request.Params;
                 //checked for redundancy
                 var guidTId = Guid.Parse(request["TransactionId"]);//Guid.Parse(request.TransactionId);
                 var existRow = db.Inspection.FirstOrDefault(x => x.TransactionId == guidTId);
@@ -228,6 +305,7 @@ namespace Project.ApiControllers
                 entity.Location = request["Location"];
                 entity.Coordinate = request["Coordinate"];
                 entity.LgaId = int.Parse(request["LGAId"]);
+                entity.StageOfCompletionId = int.Parse(request["StageOfCompletionId"]);
                 entity.StageOfCompletion = request["StageOfCompletion"];
                 entity.DescriptionOfCompletion = request["DescriptionOfCompletion"];
                 entity.ProjectQuality = request["ProjectQuality"];
@@ -324,31 +402,131 @@ namespace Project.ApiControllers
             }).FirstOrDefault();
         }
 
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+
+        ////Supplies Verification 
+
+        [HttpPost]
+        public SupplyResponse ReportSupplyStatusMultipart()
         {
-            return new string[] { "value1", "value2" };
+            var resp = new SupplyResponse();
+            var now = DateTime.Now;
+            try
+            {
+
+                var request = HttpContext.Current.Request.Params;
+                var appSettings = ConfigurationManager.AppSettings;
+
+                //check authentication
+                var username = request["Modifiedby"];
+                var licence = request["License"];
+                var user = db.Users.FirstOrDefault(x => x.UserName.ToLower() == username.ToLower());
+
+                var apiKey = appSettings["License"];
+                var apiHash = string.Empty;
+                var data = Encoding.UTF8.GetBytes(user.UserId + apiKey);
+                using (SHA512 shaM = new SHA512Managed())
+                {
+                    var hash = shaM.ComputeHash(data);
+                    apiHash = GetStringFromHash(hash);
+                }
+                if (licence != apiHash)
+                {
+                    resp.IsSuccessful = false;
+                    resp.Message = "Unauthorised Access";
+                    return resp;
+                }
+
+                var files = SaveFiles;
+                if (files == null)
+                {
+                    resp.IsSuccessful = false;
+                    resp.Message = "Please Upload Images";
+                    return resp;
+                }
+
+                List<Contracts.V1.Responses.SupplyItem> items = JsonConvert.DeserializeObject<List<Contracts.V1.Responses.SupplyItem>>(request["itemList"]);
+
+                //checked for redundancy
+                var guidTId = Guid.Parse(request["TransactionId"]);//Guid.Parse(request.TransactionId);
+                var existRow = db.Supplies.FirstOrDefault(x => x.TransactionId == guidTId);
+                if (existRow != null)
+                {
+                    resp.IsSuccessful = true;
+                    resp.Message = "Records Has Been Added Already";
+                    return resp;
+                }
+                var entity = new Supplies();
+                entity.TransactionId = guidTId;
+                entity.Representative = request["Representative"];
+                entity.RepresentativePhoneNumber = request["RepresentativePhone"];
+                entity.RepresentativeDesignation = request["RepresentativeDesg"];
+                entity.Coordinate = request["Coordinate"];
+                entity.LGAId = int.Parse(request["LGAId"]);
+                entity.VerificationOfficer = request["VerificationOfficer"];
+                entity.VerificationDate = DateTime.Parse(request["VerificationDate"]);
+                entity.ContractorId = int.Parse(request["Contractor"]);
+                entity.Location = request["Location"];
+                entity.ModifiedBy = request["Modifiedby"];
+                entity.Status = request["Status"];
+                entity.Modified = now;
+                entity.WorkflowId = 3;
+
+                //List<Milestone> items = request["Items"];
+
+
+                foreach (var file in files)
+                {
+                    var f = file.Key.Split('.');
+                    var id = appSettings[f[0]];
+                    var doc = new DocumentInfo
+                    {
+                        DocumentTypeId = int.Parse(id),
+                        Name = f[0],
+                        Path = file.Value,
+                        IssuedDate = now,
+                        ModifiedBy = request["Modifiedby"],
+                        ModifiedDate = now
+                    };
+                    entity.DocumentInfo.Add(doc);
+                }
+                foreach (var item in items) {
+                    var row = new DAL.SupplyItems
+                    {
+                        Description = item.description,
+                        ModifiedBy = item.modifiedBy,
+                        QuantityDelivered = int.Parse(item.quantityDelivered),
+                        QuantityOrdered = int.Parse(item.quantityOrdered),
+                        Remarks = item.remarks,
+                        SerialNumber = item.serialNo,
+                        Modified = now
+                    };
+                    entity.SupplyItems.Add(row);
+                }
+
+                db.Supplies.AddObject(entity);
+               db.SaveChanges();
+                resp.IsSuccessful = true;
+                resp.Message = "Record Added Successful";
+            }
+            catch (Exception ex)
+            {
+                //TODO:Log Error
+                resp.IsSuccessful = false;
+                resp.Message = "Server Error:" + ex.Message;
+            }
+            return resp;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        private static string GetStringFromHash(byte[] hash)
         {
-            return "value";
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                result.Append(hash[i].ToString("X2"));
+            }
+            return result.ToString();
         }
 
-        // POST api/<controller>
-        public void Post([FromBody] string value)
-        {
-        }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }
