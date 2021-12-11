@@ -18,6 +18,9 @@ using System.Web;
 using System.IO;
 using System.Configuration;
 using Newtonsoft.Json;
+using System.Text;
+using System.Security.Cryptography;
+
 
 namespace Project.ApiControllers
 {
@@ -39,6 +42,7 @@ namespace Project.ApiControllers
         //[Route("api/student/names")]
         public LoginResponse Login(LoginRequest request) {
             var resp = new LoginResponse();
+            var appSettings = ConfigurationManager.AppSettings;
             try {
                 if (request == null)
                 {
@@ -57,12 +61,23 @@ namespace Project.ApiControllers
                 resp.IsSuccessful = result;
                 if (result)
                 {
+
                     //var user = _membershipService.GetUser(request.Username);
                     var user = db.Users.FirstOrDefault(x => x.UserName.ToLower() == request.Username.ToLower());
+
+                    var apiKey = appSettings["License"];
+                    resp.License = string.Empty;
+                    var data = Encoding.UTF8.GetBytes(user.UserId + apiKey);
+                    using (SHA512 shaM = new SHA512Managed())
+                    {
+                        var hash = shaM.ComputeHash(data);
+                        resp.License = GetStringFromHash(hash);
+                    }
                     resp.Username = request.Username;
                     resp.UserId = user.UserId;
                     resp.Role = Roles.GetRolesForUser(request.Username).ToList();
                     resp.Message = "Login Successful";
+
                 }
                 else { resp.Message = "Login Failed"; }
             } catch (Exception ex)
@@ -244,7 +259,31 @@ namespace Project.ApiControllers
             var now = DateTime.Now;
             try
             {
+
+                var request = HttpContext.Current.Request.Params;
                 var appSettings = ConfigurationManager.AppSettings;
+
+                //check authentication
+                var username = request["Modifiedby"];
+                var licence = request["License"];
+                var user = db.Users.FirstOrDefault(x => x.UserName.ToLower() == username.ToLower());
+
+                var apiKey = appSettings["License"];
+                var apiHash = string.Empty;
+                var data = Encoding.UTF8.GetBytes(user.UserId + apiKey);
+                using (SHA512 shaM = new SHA512Managed())
+                {
+                    var hash = shaM.ComputeHash(data);
+                    apiHash = GetStringFromHash(hash);
+                }
+                if (licence != apiHash) {
+                    resp.IsSuccessful = false;
+                    resp.Message = "Unauthorised Access";
+                    return resp;
+                }
+
+
+
                 var files = SaveFiles;
                 if (files == null) {
                     resp.IsSuccessful = false;
@@ -252,7 +291,6 @@ namespace Project.ApiControllers
                     return resp;
                 }
                
-                var request = HttpContext.Current.Request.Params;
                 //checked for redundancy
                 var guidTId = Guid.Parse(request["TransactionId"]);//Guid.Parse(request.TransactionId);
                 var existRow = db.Inspection.FirstOrDefault(x => x.TransactionId == guidTId);
@@ -375,7 +413,29 @@ namespace Project.ApiControllers
             var now = DateTime.Now;
             try
             {
+                var request = HttpContext.Current.Request.Params;
                 var appSettings = ConfigurationManager.AppSettings;
+
+                //check authentication
+                var username = request["Modifiedby"];
+                var licence = request["License"];
+                var user = db.Users.FirstOrDefault(x => x.UserName.ToLower() == username.ToLower());
+
+                var apiKey = appSettings["License"];
+                var apiHash = string.Empty;
+                var data = Encoding.UTF8.GetBytes(user.UserId + apiKey);
+                using (SHA512 shaM = new SHA512Managed())
+                {
+                    var hash = shaM.ComputeHash(data);
+                    apiHash = GetStringFromHash(hash);
+                }
+                if (licence != apiHash)
+                {
+                    resp.IsSuccessful = false;
+                    resp.Message = "Unauthorised Access";
+                    return resp;
+                }
+
                 var files = SaveFiles;
                 if (files == null)
                 {
@@ -384,12 +444,11 @@ namespace Project.ApiControllers
                     return resp;
                 }
 
-                var request = HttpContext.Current.Request.Params;
-                List<SupplyItem> items = JsonConvert.DeserializeObject<List<SupplyItem>>(request["itemList"]);
+                List<Contracts.V1.Responses.SupplyItem> items = JsonConvert.DeserializeObject<List<Contracts.V1.Responses.SupplyItem>>(request["itemList"]);
 
                 //checked for redundancy
                 var guidTId = Guid.Parse(request["TransactionId"]);//Guid.Parse(request.TransactionId);
-                var existRow = db.Inspection.FirstOrDefault(x => x.TransactionId == guidTId);
+                var existRow = db.Supplies.FirstOrDefault(x => x.TransactionId == guidTId);
                 if (existRow != null)
                 {
                     resp.IsSuccessful = true;
@@ -458,6 +517,15 @@ namespace Project.ApiControllers
             return resp;
         }
 
+        private static string GetStringFromHash(byte[] hash)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                result.Append(hash[i].ToString("X2"));
+            }
+            return result.ToString();
+        }
 
     }
 }
