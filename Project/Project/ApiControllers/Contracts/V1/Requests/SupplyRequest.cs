@@ -16,6 +16,7 @@ namespace Project.ApiControllers.Contracts.V1.Requests
         public string Location { get; set; }
         public string LGAId { get; set; }
         public string ModifiedBy { get; set; }
+
         public List<SupplyItem> SupplyItems { get; set; }
     }
 
@@ -27,4 +28,5 @@ namespace Project.ApiControllers.Contracts.V1.Requests
         public string QuantityDelivered { get; set; }
         public string Remarks { get; set; }
     }
+
 }
