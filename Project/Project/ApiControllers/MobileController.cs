@@ -36,14 +36,16 @@ namespace Project.ApiControllers
         {
             _membershipService = new MembershipService(Membership.Provider);
             _authenticationService = new AuthenticationService(_membershipService, new FormsAuthenticationService());
-}
+        }
         [AllowAnonymous]
         [HttpPost]
         //[Route("api/student/names")]
-        public LoginResponse Login(LoginRequest request) {
+        public LoginResponse Login(LoginRequest request)
+        {
             var resp = new LoginResponse();
             var appSettings = ConfigurationManager.AppSettings;
-            try {
+            try
+            {
                 if (request == null)
                 {
                     resp.Message = "Missing Request Parameter"; return resp;
@@ -80,29 +82,33 @@ namespace Project.ApiControllers
 
                 }
                 else { resp.Message = "Login Failed"; }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 //TODO:Log Error
                 resp.IsSuccessful = false;
                 resp.Message = "Server Error";
             }
-           
+
             return resp;
         }
 
         //Get All the Codelist
         [HttpGet]
-        public ContractorsResponse GetContractors() {
+        public ContractorsResponse GetContractors()
+        {
             var resp = new ContractorsResponse();
-            try {
-                var rows = db.Contractor.Where(x => x.IsDeleted == false).Select(x=>new CodeList { Id=x.Id,Name=x.Name}).ToList();
+            try
+            {
+                var rows = db.Contractor.Where(x => x.IsDeleted == false).Select(x => new CodeList { Id = x.Id, Name = x.Name }).ToList();
                 if (rows != null)
                 {
                     resp.Records = rows;
                     resp.Message = "Success";
                     resp.IsSuccessful = true;
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 //TODO:Log Error
                 resp.IsSuccessful = false;
@@ -118,7 +124,7 @@ namespace Project.ApiControllers
             var resp = new LGAsResponse();
             try
             {
-                var rows = db.LGA.Where(x => x.IsDeleted == false).Select(x => new CodeList { Id = x.Id, Name =x.State.Name+" - "+ x.Name }).ToList();
+                var rows = db.LGA.Where(x => x.IsDeleted == false).Select(x => new CodeList { Id = x.Id, Name = x.State.Name + " - " + x.Name }).ToList();
                 if (rows != null)
                 {
                     resp.Records = rows;
@@ -212,13 +218,16 @@ namespace Project.ApiControllers
 
 
         [HttpPost]
-        public ProjectResponse ReportProjectStatus(ReportRequest request) {
+        public ProjectResponse ReportProjectStatus(ReportRequest request)
+        {
             var resp = new ProjectResponse();
-            try {
+            try
+            {
                 //checked for redundancy
                 var guidTId = request.TransactionId;//Guid.Parse(request.TransactionId);
                 var existRow = db.Inspection.FirstOrDefault(x => x.TransactionId == guidTId);
-                if (existRow != null) {
+                if (existRow != null)
+                {
                     resp.IsSuccessful = true;
                     resp.Message = "Records Has Been Added Already";
                     return resp;
@@ -244,7 +253,8 @@ namespace Project.ApiControllers
                 resp.IsSuccessful = true;
                 resp.Message = "Record Added Successful";
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 //TODO:Log Error
                 resp.IsSuccessful = false;
                 resp.Message = "Server Error";
@@ -276,7 +286,8 @@ namespace Project.ApiControllers
                     var hash = shaM.ComputeHash(data);
                     apiHash = GetStringFromHash(hash);
                 }
-                if (licence != apiHash) {
+                if (licence != apiHash)
+                {
                     resp.IsSuccessful = false;
                     resp.Message = "Unauthorised Access";
                     return resp;
@@ -285,12 +296,13 @@ namespace Project.ApiControllers
 
 
                 var files = SaveFiles;
-                if (files == null) {
+                if (files == null)
+                {
                     resp.IsSuccessful = false;
                     resp.Message = "Please Upload Images";
                     return resp;
                 }
-               
+
                 //checked for redundancy
                 var guidTId = Guid.Parse(request["TransactionId"]);//Guid.Parse(request.TransactionId);
                 var existRow = db.Inspection.FirstOrDefault(x => x.TransactionId == guidTId);
@@ -310,7 +322,7 @@ namespace Project.ApiControllers
                 entity.StageOfCompletion = request["StageOfCompletion"];
                 entity.DescriptionOfCompletion = request["DescriptionOfCompletion"];
                 entity.ProjectQuality = request["ProjectQuality"];
-                entity.HasDefect = request["HasDefect"]=="Yes"?true:false;
+                entity.HasDefect = request["HasDefect"] == "Yes" ? true : false;
                 entity.DescriptionOfDefect = request["DescriptionOfDefect"];
                 entity.InspectionStatus = request["Status"];
                 entity.InspectionDate = DateTime.Parse(request["InspectionDate"]);
@@ -341,7 +353,7 @@ namespace Project.ApiControllers
             {
                 //TODO:Log Error
                 resp.IsSuccessful = false;
-                resp.Message = "Server Error:"+ex.Message;
+                resp.Message = "Server Error:" + ex.Message;
             }
             return resp;
         }
@@ -356,18 +368,18 @@ namespace Project.ApiControllers
                     return null;
 
                 var files = HttpContext.Current.Request.Files;
-                
-                for (var i=0; i<files.Count;i++)
+
+                for (var i = 0; i < files.Count; i++)
                 {
                     var file = files[i];
                     //var field = files[i];
                     if (file != null && file.ContentLength > 0)
                     {
                         var fArr = file.FileName.Split('.');
-                        var fileName = Guid.NewGuid().ToString()+"."+ fArr[1];//Path.GetFileName(file.FileName);
+                        var fileName = Guid.NewGuid().ToString() + "." + fArr[1];//Path.GetFileName(file.FileName);
 
                         var defaultPath = Properties.Settings.Default.FullPhotoPath;
-                       //var path = Path.Combine("c:\\uploads\\");
+                        //var path = Path.Combine("c:\\uploads\\");
                         var dir = Path.GetDirectoryName(defaultPath);
 
                         if (!Directory.Exists(dir))
@@ -375,7 +387,7 @@ namespace Project.ApiControllers
                         var filepath = Path.Combine(dir, fileName);
 
                         file.SaveAs(filepath);
-                       // var fileNameArr = fileName.Split('_');
+                        // var fileNameArr = fileName.Split('_');
                         resp.Add(new KeyValuePair<string, string>(file.FileName, fileName));
                     }
                 }
@@ -384,8 +396,10 @@ namespace Project.ApiControllers
         }
 
         [HttpGet]
-        public ReportRequest Report() {
-            return db.Inspection.Select(x => new ReportRequest {
+        public ReportRequest Report()
+        {
+            return db.Inspection.Select(x => new ReportRequest
+            {
                 Id = x.Id,
                 ProjectId = x.ProjectId,
                 TransactionId = x.TransactionId,
@@ -489,7 +503,8 @@ namespace Project.ApiControllers
                     };
                     entity.DocumentInfo.Add(doc);
                 }
-                foreach (var item in items) {
+                foreach (var item in items)
+                {
                     var row = new DAL.SupplyItems
                     {
                         Description = item.description,
@@ -504,7 +519,7 @@ namespace Project.ApiControllers
                 }
 
                 db.Supplies.AddObject(entity);
-               db.SaveChanges();
+                db.SaveChanges();
                 resp.IsSuccessful = true;
                 resp.Message = "Record Added Successful";
             }

@@ -209,18 +209,18 @@
     <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="WorkFlowId" Type="int" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Coordinate" Type="varchar(max)" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="500" />
+    <Property Name="Coordinate" Type="varchar(max)" />
     <Property Name="LGAId" Type="int" Nullable="false" />
     <Property Name="StageOfCompletion" Type="varchar" MaxLength="50" />
     <Property Name="ContractorId" Type="int" Nullable="false" />
-    <Property Name="ContractSum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ContractSum" Type="decimal" Precision="18" Scale="0" />
     <Property Name="InspectionUserId" Type="uniqueidentifier" />
-    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="IsDeleted" Type="bit" Nullable="false" />
-    <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="StartDate" Type="datetime2" Precision="7" />
+    <Property Name="EndDate" Type="datetime2" Precision="7" />
     <Property Name="EnableSum" Type="bit" Nullable="false" />
     <Property Name="ProjectTypeId" Type="int" Nullable="false" />
   </EntityType>
