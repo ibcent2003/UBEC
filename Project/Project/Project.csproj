@@ -218,6 +218,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\InspDashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResourceController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplyManagementController.cs" />
@@ -1520,6 +1521,8 @@
     <Content Include="Areas\Admin\Views\SupplyManagement\SupplyDeliverableList.cshtml" />
     <Content Include="Areas\Admin\Views\SupplyManagement\AddSupplyDeliverable.cshtml" />
     <Content Include="Areas\Admin\Views\SupplyManagement\Detail.cshtml" />
+    <Content Include="Content\app-debug.apk" />
+    <Content Include="Areas\Admin\Views\Me\ChangePassword.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="MvcInstaller\ajax-loader.gif" />
     <Content Include="MvcInstaller\jquery-1.6.1.min.js" />

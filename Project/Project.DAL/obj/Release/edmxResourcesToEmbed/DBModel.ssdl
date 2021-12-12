@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="UBECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Alert">
     <Key>
       <PropertyRef Name="Id" />
@@ -212,6 +212,7 @@
     <Property Name="Location" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Coordinate" Type="varchar(max)" Nullable="false" />
     <Property Name="LGAId" Type="int" Nullable="false" />
+    <Property Name="StageOfCompletion" Type="varchar" MaxLength="50" />
     <Property Name="ContractorId" Type="int" Nullable="false" />
     <Property Name="ContractSum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="InspectionUserId" Type="uniqueidentifier" />
@@ -1149,7 +1150,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="UBECModelStoreContainer">
+  <EntityContainer Name="DBModelStoreContainer">
     <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlertNotification" EntityType="Self.AlertNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlertType" EntityType="Self.AlertType" Schema="dbo" store:Type="Tables" />

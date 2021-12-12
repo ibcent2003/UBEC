@@ -385,7 +385,7 @@ namespace Project.ApiControllers
                 }
 
                 var request = HttpContext.Current.Request.Params;
-                List<SupplyItem> items = JsonConvert.DeserializeObject<List<SupplyItem>>(request["itemList"]);
+                List<Contracts.V1.Responses.SupplyItem> items = JsonConvert.DeserializeObject<List<Contracts.V1.Responses.SupplyItem>>(request["itemList"]);
 
                 //checked for redundancy
                 var guidTId = Guid.Parse(request["TransactionId"]);//Guid.Parse(request.TransactionId);

@@ -1,0 +1,159 @@
+﻿@model Project.Areas.Admin.Models.SupplyViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "New Items";
+    ViewBag.IsGreetings = "true";
+
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li><i class="icon-home"></i><a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })">Dashboard</a> </li>
+            <li class="current"><a title="" href="javascript: return void(0)">New Items</a> </li>
+        </ul>
+    </div>
+}
+<style>
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget box">
+            <div class="widget-header">
+                <h4>
+                    <i class="icon-reorder"></i>
+                    Items Entry
+                </h4>
+            </div>
+            <div class="widget-content">
+
+                @using (Html.BeginForm("NewItems", "SupplyManagement", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal row-border" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => x.Supply.TransactionId)
+                    @Html.HiddenFor(x => x.Supply.Id)
+
+                    <div class="form-group">
+                        @Html.Label("Serial No:", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.SupplyItemsform.SerialNo, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SupplyItemsform.SerialNo, null, new { @style = "color:red" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Description:", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.SupplyItemsform.Description, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SupplyItemsform.Description, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label("Quanlity Ordered", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.SupplyItemsform.QuantityOrdered, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SupplyItemsform.QuantityOrdered, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label("Quanlity Delivered", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.SupplyItemsform.QuantityDelivered, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SupplyItemsform.QuantityDelivered, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        @Html.Label("Remarks:", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.SupplyItemsform.Remarks, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SupplyItemsform.Remarks, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        @Html.ActionLink("<< Back to List", "Index", null, new { @class = "btn btn-success" })
+                        <input type="submit" class="btn btn-warning pull-right" value="Save" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    @Scripts.Render("~/Content/Backend/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js")
+
+    <script type="text/javascript">
+        "use strict";
+        function getLga(e) {
+            var stateId = $(e).val();
+
+            var currentRequest = null;
+            var currentRequest = $.ajax({
+                url: '@Url.Action("GetLga", "SupplyManagement")',
+                dataType: 'json',
+                type: 'POST',
+                data: { StateId: stateId },
+                beforeSend: function () {
+                    if (currentRequest != null) {
+                        currentRequest.abort();
+                    }
+                },
+                success: function (msg) {
+                    $("#supplyForm_LGAId").html("");
+                    $.each(msg, function (index, element) {
+                        $("#supplyForm_LGAId").append('<option  value="' + element.Value + '">' + element.Text + '</option>');
+                    });
+                },
+                error: function (errmsg) { }
+            });
+        }
+
+        function GetAllLGA(e) {
+            getLga(e);
+
+        }
+
+        "use strict";
+        $(document).ready(function () {
+            $(".datepicker-issueddate").datepicker({
+                defaultDate: +7,
+                showOtherMonths: true,
+                autoSize: true,
+                dateFormat: "yy-mm-dd",
+                maxDate: '+0D',
+                changeYear: true,
+                changeMonth: true, yearRange: "-100:-0"
+            });
+
+        });
+
+        $(document).ready(function () {
+            $(".datepicker-expirydate").datepicker({
+                defaultDate: +7,
+                showOtherMonths: true,
+                autoSize: true,
+                dateFormat: "yy-mm-dd",
+                //maxDate: '+0D',
+                changeYear: true,
+                changeMonth: true
+
+            });
+        });
+
+
+    </script>
+}

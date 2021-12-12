@@ -140,5 +140,14 @@ namespace Project.Properties {
                 return ((int)(this["Supply"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("G:\\HostingSpaces\\raukzdup\\ubeccms.com\\wwwroot\\Content\\")]
+        public string ApkPath {
+            get {
+                return ((string)(this["ApkPath"]));
+            }
+        }
     }
 }

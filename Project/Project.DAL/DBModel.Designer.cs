@@ -6278,19 +6278,11 @@ namespace Project.DAL
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="workFlowId">Initial value of the WorkFlowId property.</param>
         /// <param name="description">Initial value of the Description property.</param>
-        /// <param name="location">Initial value of the Location property.</param>
-        /// <param name="coordinate">Initial value of the Coordinate property.</param>
         /// <param name="lGAId">Initial value of the LGAId property.</param>
         /// <param name="contractorId">Initial value of the ContractorId property.</param>
-        /// <param name="contractSum">Initial value of the ContractSum property.</param>
-        /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
-        /// <param name="startDate">Initial value of the StartDate property.</param>
-        /// <param name="endDate">Initial value of the EndDate property.</param>
         /// <param name="enableSum">Initial value of the EnableSum property.</param>
         /// <param name="projectTypeId">Initial value of the ProjectTypeId property.</param>
-        public static ProjectApplication CreateProjectApplication(global::System.Int32 id, global::System.Guid transactionId, global::System.String serialNo, global::System.String status, global::System.Int32 workFlowId, global::System.String description, global::System.String location, global::System.String coordinate, global::System.Int32 lGAId, global::System.Int32 contractorId, global::System.Decimal contractSum, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.Boolean isDeleted, global::System.DateTime startDate, global::System.DateTime endDate, global::System.Boolean enableSum, global::System.Int32 projectTypeId)
+        public static ProjectApplication CreateProjectApplication(global::System.Int32 id, global::System.Guid transactionId, global::System.String serialNo, global::System.String status, global::System.Int32 workFlowId, global::System.String description, global::System.Int32 lGAId, global::System.Int32 contractorId, global::System.Boolean enableSum, global::System.Int32 projectTypeId)
         {
             ProjectApplication projectApplication = new ProjectApplication();
             projectApplication.Id = id;
@@ -6299,16 +6291,8 @@ namespace Project.DAL
             projectApplication.Status = status;
             projectApplication.WorkFlowId = workFlowId;
             projectApplication.Description = description;
-            projectApplication.Location = location;
-            projectApplication.Coordinate = coordinate;
             projectApplication.LGAId = lGAId;
             projectApplication.ContractorId = contractorId;
-            projectApplication.ContractSum = contractSum;
-            projectApplication.ModifiedBy = modifiedBy;
-            projectApplication.ModifiedDate = modifiedDate;
-            projectApplication.IsDeleted = isDeleted;
-            projectApplication.StartDate = startDate;
-            projectApplication.EndDate = endDate;
             projectApplication.EnableSum = enableSum;
             projectApplication.ProjectTypeId = projectTypeId;
             return projectApplication;
@@ -6468,7 +6452,7 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Location
         {
@@ -6480,7 +6464,7 @@ namespace Project.DAL
             {
                 OnLocationChanging(value);
                 ReportPropertyChanging("Location");
-                _Location = StructuralObject.SetValidValue(value, false, "Location");
+                _Location = StructuralObject.SetValidValue(value, true, "Location");
                 ReportPropertyChanged("Location");
                 OnLocationChanged();
             }
@@ -6492,7 +6476,7 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Coordinate
         {
@@ -6504,7 +6488,7 @@ namespace Project.DAL
             {
                 OnCoordinateChanging(value);
                 ReportPropertyChanging("Coordinate");
-                _Coordinate = StructuralObject.SetValidValue(value, false, "Coordinate");
+                _Coordinate = StructuralObject.SetValidValue(value, true, "Coordinate");
                 ReportPropertyChanged("Coordinate");
                 OnCoordinateChanged();
             }
@@ -6588,9 +6572,9 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Decimal ContractSum
+        public Nullable<global::System.Decimal> ContractSum
         {
             get
             {
@@ -6605,8 +6589,8 @@ namespace Project.DAL
                 OnContractSumChanged();
             }
         }
-        private global::System.Decimal _ContractSum;
-        partial void OnContractSumChanging(global::System.Decimal value);
+        private Nullable<global::System.Decimal> _ContractSum;
+        partial void OnContractSumChanging(Nullable<global::System.Decimal> value);
         partial void OnContractSumChanged();
     
         /// <summary>
@@ -6636,7 +6620,7 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String ModifiedBy
         {
@@ -6648,7 +6632,7 @@ namespace Project.DAL
             {
                 OnModifiedByChanging(value);
                 ReportPropertyChanging("ModifiedBy");
-                _ModifiedBy = StructuralObject.SetValidValue(value, false, "ModifiedBy");
+                _ModifiedBy = StructuralObject.SetValidValue(value, true, "ModifiedBy");
                 ReportPropertyChanged("ModifiedBy");
                 OnModifiedByChanged();
             }
@@ -6660,9 +6644,9 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public Nullable<global::System.DateTime> ModifiedDate
         {
             get
             {
@@ -6677,16 +6661,16 @@ namespace Project.DAL
                 OnModifiedDateChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Boolean IsDeleted
+        public Nullable<global::System.Boolean> IsDeleted
         {
             get
             {
@@ -6701,16 +6685,16 @@ namespace Project.DAL
                 OnIsDeletedChanged();
             }
         }
-        private global::System.Boolean _IsDeleted;
-        partial void OnIsDeletedChanging(global::System.Boolean value);
+        private Nullable<global::System.Boolean> _IsDeleted;
+        partial void OnIsDeletedChanging(Nullable<global::System.Boolean> value);
         partial void OnIsDeletedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime StartDate
+        public Nullable<global::System.DateTime> StartDate
         {
             get
             {
@@ -6725,16 +6709,16 @@ namespace Project.DAL
                 OnStartDateChanged();
             }
         }
-        private global::System.DateTime _StartDate;
-        partial void OnStartDateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _StartDate;
+        partial void OnStartDateChanging(Nullable<global::System.DateTime> value);
         partial void OnStartDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime EndDate
+        public Nullable<global::System.DateTime> EndDate
         {
             get
             {
@@ -6749,8 +6733,8 @@ namespace Project.DAL
                 OnEndDateChanged();
             }
         }
-        private global::System.DateTime _EndDate;
-        partial void OnEndDateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _EndDate;
+        partial void OnEndDateChanging(Nullable<global::System.DateTime> value);
         partial void OnEndDateChanged();
     
         /// <summary>

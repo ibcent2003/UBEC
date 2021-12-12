@@ -112,7 +112,10 @@ namespace Project.Controllers
 
         public ActionResult DownloadApk()
         {
-            return View();
+            IndexViewModel model = new IndexViewModel();
+            model.PicturePath = Properties.Settings.Default.ApkPath;
+            model.apkfileName = "app-debug.apk";
+            return View(model);
         }
 
         public ActionResult ViewNews(int Id)

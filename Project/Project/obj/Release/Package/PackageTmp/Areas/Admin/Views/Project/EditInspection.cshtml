@@ -1,0 +1,217 @@
+﻿@model Project.Areas.Admin.Models.ProjectViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Edit Report for " + Model.project.SerialNo + "";
+    ViewBag.IsGreetings = "true";
+
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li><i class="icon-home"></i><a href="@Url.Action("Index", "Index", new { area = "Organisations" })">Dashboard</a> </li>
+            <li class="current"><a title="" href="javascript: return void(0)">Edit Report</a> </li>
+        </ul>
+    </div>
+}
+<style>
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("EditInspection", "Project", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(x => x.project.Id)
+                @Html.HiddenFor(x => x.inspectionForm.Id)
+                @Html.AntiForgeryToken()
+                <div class="col-md-12">
+                    <div class="widget">
+
+                        <div class="widget-content">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Location:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.inspectionForm.Location, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.inspectionForm.Location, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Coordinate:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.inspectionForm.Coordinate, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.inspectionForm.Coordinate, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">State:</label>
+                                        <div class="col-md-8">
+
+                                            @Html.DropDownListFor(m => m.StateId, new SelectList(Model.StateList, "Value", "Text"), "Please Select a State", new { @class = "form-control", onChange = "GetAllLGA(this)" })
+                                            @*@Html.ValidationMessageFor(m => m.StateId, null, new { @style = "color:red" })*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">LGA:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.inspectionForm.LGAId, new SelectList(Model.LgaList, "Value", "Text"), "Please Select a LGA", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.inspectionForm.LGAId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Stage Of Completion:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.inspectionForm.StageOfCompletionId, new SelectList(Model.StageOfCompletion, "Value", "Text"), "Select One", new { @class = "form-control", onChange = "GetAllDes(this)" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Description Of Completion:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.StageOfCompletionId, new SelectList(Model.StageOfCompletionList, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Quality of Project:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.inspectionForm.ProjectQuality,
+           new List<SelectListItem> {
+                new SelectListItem { Value = "Good" , Text = "Good" },
+                new SelectListItem { Value = "Fair" , Text = "Fair" },
+                new SelectListItem { Value = "Poor" , Text = "Poor" },
+             },
+           new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Has Defect?:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.inspectionForm.HasDefect,
+         new List<SelectListItem> {
+             new SelectListItem { Value = "False" , Text = "No" },
+              new SelectListItem { Value = "True" , Text = "Yes" },
+
+           },
+         new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Description Of Defect:</label>
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(m => m.inspectionForm.DescriptionOfDefect, new { @class = "form-control", rows = "3", cols = "5" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-vertical no-margin">
+
+                    <div class="form-actions">
+                        <a href="@Url.Action("InspectionList", "Project", new {Id=Model.project.Id, area="Admin"})" class="btn btn-success btn-xs"><< Back to List </a>
+                        <input type="submit" value="Submit" class="btn btn-primary btn-xs pull-right" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    function DisableBackButton() {
+        window.history.forward()
+
+    }
+    DisableBackButton();
+    window.onload = DisableBackButton;
+    window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+    window.onunload = function () { void (0) }
+</script>
+
+<script type="text/javascript">
+        "use strict";
+        function getLga(e) {
+            var stateId = $(e).val();
+
+            var currentRequest = null;
+            var currentRequest = $.ajax({
+                url: '@Url.Action("GetLga", "Project")',
+                dataType: 'json',
+                type: 'POST',
+                data: { StateId: stateId },
+                beforeSend: function () {
+                    if (currentRequest != null) {
+                        currentRequest.abort();
+                    }
+                },
+                success: function (msg) {
+                    $("#inspectionForm_LGAId").html("");
+                    $.each(msg, function (index, element) {
+                        $("#inspectionForm_LGAId").append('<option  value="' + element.Value + '">' + element.Text + '</option>');
+                    });
+                },
+                error: function (errmsg) { }
+            });
+        }
+
+        function GetAllLGA(e) {
+            getLga(e);
+
+        }
+
+
+
+</script>
+
+<script type="text/javascript">
+        "use strict";
+        function getDes(e) {
+            var stageId = $(e).val();
+
+            var currentRequest = null;
+            var currentRequest = $.ajax({
+                url: '@Url.Action("GetDescription", "Project")',
+                dataType: 'json',
+                type: 'POST',
+                data: { StageId: stageId },
+                beforeSend: function () {
+                    if (currentRequest != null) {
+                        currentRequest.abort();
+                    }
+                },
+                success: function (msg) {
+                    $("#StageOfCompletionId").html("");
+                    $.each(msg, function (index, element) {
+                        $("#StageOfCompletionId").append('<option  value="' + element.Value + '">' + element.Text + '</option>');
+                    });
+                },
+                error: function (errmsg) { }
+            });
+        }
+
+    function GetAllDes(e) {
+            getDes(e);
+
+        }
+
+
+
+</script>

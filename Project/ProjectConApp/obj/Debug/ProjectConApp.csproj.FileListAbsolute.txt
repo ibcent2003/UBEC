@@ -1,0 +1,7 @@
+C:\Users\USER\source\repos\UBECApp\Project\ProjectConApp\bin\Debug\ProjectConApp.exe.config
+C:\Users\USER\source\repos\UBECApp\Project\ProjectConApp\bin\Debug\ProjectConApp.exe
+C:\Users\USER\source\repos\UBECApp\Project\ProjectConApp\bin\Debug\ProjectConApp.pdb
+C:\Users\USER\source\repos\UBECApp\Project\ProjectConApp\obj\Debug\ProjectConApp.csprojAssemblyReference.cache
+C:\Users\USER\source\repos\UBECApp\Project\ProjectConApp\obj\Debug\ProjectConApp.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\UBECApp\Project\ProjectConApp\obj\Debug\ProjectConApp.exe
+C:\Users\USER\source\repos\UBECApp\Project\ProjectConApp\obj\Debug\ProjectConApp.pdb

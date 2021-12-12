@@ -1,0 +1,50 @@
+﻿<div class="topbar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="topbar-left">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><i class="fa fa-phone text-blue"></i>+2349038022457, +2347016390000 </li>
+                        <li class="list-inline-item"><i class="fa fa-envelope-o"> </i> info@ubec.gov.ng </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="topbar-right text-right">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <ul class="list-inline iq-left">
+                                @if (!Request.IsAuthenticated)
+                                {
+                                    <li class="list-item"><a href="@Url.Action("Login", "SGAccount", new { Area = ""})"><i class="fa fa-lock"></i>Login</a></li>
+                                    
+                                }
+                                else
+                                {
+
+                                    <li class="list-inline-item">
+                                        <a href="@Url.Action("Index", "Dashboard", new { Area = "Admin"})" style="color:white"><i class="fa fa-dashboard"></i> Dashboard</a>
+
+
+                                    </li>
+
+                                    using (Html.BeginForm("LogOff", "SGAccount", new { Area = "" }, FormMethod.Post, new { id = "logoutForm", style = "display: inline" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <li class="list-inline-item">
+                                            <a href="javascript:document.getElementById('logoutForm').submit()" style="color:white">
+                                                <i class="icon-log-out"></i> Log Out (@User.Identity.Name)
+                                            </a></li>
+                                            }
+                                            }
+
+
+                                    </ul>
+                        </li>
+                        @*<li class="list-inline-item"><a href="#"><i class="fa fa-comments-o"></i>Free Consulting</a></li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

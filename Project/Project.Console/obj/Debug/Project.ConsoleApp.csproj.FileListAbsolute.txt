@@ -1,0 +1,2 @@
+C:\Users\USER\source\repos\UBECApp\Project\Project.Console\obj\Debug\Project.ConsoleApp.csprojAssemblyReference.cache
+C:\Users\USER\source\repos\UBECApp\Project\Project.Console\obj\Debug\Project.ConsoleApp.csproj.CoreCompileInputs.cache

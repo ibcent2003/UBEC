@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UBEC" Class="DataDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=UBEC;User ID=sa" SettingsObjectName="Project.Console.Properties.Settings" SettingsPropertyName="UBECConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AppData" Member="AppDatas">
+    <Type Name="AppData">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SerialNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProjectType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NewSerialNo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WorkFlowId" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LGAId" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="StageOfCompletion" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ContractorId" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EnableSum" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProjectTypeId" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

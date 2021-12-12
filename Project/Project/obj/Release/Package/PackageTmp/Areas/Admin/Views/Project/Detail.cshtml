@@ -1,0 +1,572 @@
+﻿@model Project.Areas.Admin.Models.ProjectViewModel
+@using Project.HtmlHelpers
+@{
+    ViewBag.Title = Model.project.SerialNo + " Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.IsGreetings = "true";
+    var db = new Project.DAL.PROEntities();
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li> <i class="icon-home"></i> <a href="@Url.Action("Index", "Dashboard", new { area="Admin"})">Dashboard</a> </li>
+            <li class="current"> <a title="" href="javascript: return void(0)"></a>Detail</li>
+        </ul>
+    </div>
+}
+<style>
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .item {
+        /*float: left;*/
+        margin: 3px;
+        padding: 3px;
+        width: 400px;
+        height: 300px;
+    }
+</style>
+
+<div id="PrintThisArea">
+    <div class="col-md-12">
+        <h5 class="">
+            <a href="@Url.Action("InspectionList", "Project", new {Id=Model.project.Id, area="Admin"})" class="btn btn-lg btn-warning">Back</a>
+            @if (Model.ReportOwner == true)
+            {
+                if (Model.inspection.InspectionStatus == "Submitted")
+                {
+
+                }
+                else if (Model.inspection.InspectionStatus == "Approved")
+                {
+
+                }
+                else
+                {
+                    @Html.ActionLink("Submit Project", "SubmitInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                }
+            }
+
+            @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+            {
+                if (Model.inspection.InspectionStatus == "Submitted")
+                {
+                    @Html.ActionLink("Approved Report", "ApproveInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                }
+                else if (Model.inspection.InspectionStatus == "Approved")
+                {
+                    @Html.ActionLink("Disapprove Report", "DisapproveInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-danger", onclick = "return ConfirmSubmit()" })
+                }
+            }
+            @*<input type="submit" class="btn btn-lg btn-inverse pull-right" id="btnSubmit" value="Download as PDF" />*@ <input type="button" value="Print" class="btn btn-lg btn-success pull-right" onclick="javascript: printDiv('PrintThisArea')" />
+
+        </h5>
+
+    </div>
+
+    <br /><br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="icon-reorder"></i>
+                        Project Information
+                    </h4>
+
+
+                </div>
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr style="font-size: 12px;">
+                                <th>S/N</th>
+                                <th>Project No</th>
+                                <th>Description</th>
+                                <th>Location</th>
+                                <th>State</th>
+                                <th>LGA</th>
+                                <th>Action</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.projectList.Count != 0)
+                            {
+                                int i = 0;
+                                foreach (var pro in Model.projectList)
+                                {
+                                    ++i;
+                                    <tr style="font-size: 12px;">
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @pro.SerialNo
+                                        </td>
+
+                                        <td>@pro.Description</td>
+                                        <td>@pro.Location</td>
+                                        <td>@pro.LGA.State.Name</td>
+                                        <td>@pro.LGA.Name</td>
+
+                                        <td>
+                                            <a data-toggle="modal" title="Project Information" href="#@pro.TransactionId"><i class="icon-eye-open"></i></a>
+                                            <div class="row">
+                                                <div class="modal fade" id="@pro.TransactionId">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                <h4 class="modal-title">Project Information</h4>
+
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <table class="my-acct">
+                                                                    <tr>
+                                                                        <td><b>Serial No:</b> </td>
+                                                                        <td>@pro.SerialNo</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Location</b></td>
+                                                                        <td>
+                                                                            @pro.Location
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>State</b></td>
+                                                                        <td>
+                                                                            @pro.LGA.State.Name
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>LGA</b></td>
+                                                                        <td>
+                                                                            @pro.LGA.Name
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Description</b></td>
+                                                                        <td>@pro.Description</td>
+                                                                    </tr>
+
+
+
+                                                                    <tr>
+                                                                        <td><b>Contractor</b></td>
+                                                                        <td>@pro.Contractor.Name</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td><b>Contract Sum</b></td>
+                                                                        <td>@pro.ContractSum</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Project Type</b></td>
+                                                                        <td>@pro.ProjectType.Name</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Start Date</b></td>
+                                                                        <td>@pro.StartDate</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>End Date</b></td>
+                                                                        <td>@pro.EndDate</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Show Contract Sum</b></td>
+                                                                        <td>
+                                                                            @if (pro.EnableSum == true)
+                                                                            {
+                                                                                <span class="label label-success">Yes</span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span class="label label-danger">No</span>
+                                                                            }
+
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8">No Records Found!...</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="icon-reorder"></i>
+                        Payment
+                    </h4>
+                </div>
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr style="font-size: 12px;">
+                                <th>S/N</th>
+                                <th>Payment Type</th>
+                                <th>Amount</th>
+                                <th>ModifiedBy</th>
+                                <th>ModifiedDate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.paymentlist.Count != 0)
+                            {
+                                int i = 0;
+                                foreach (var item in Model.paymentlist)
+                                {
+                                    ++i;
+                                    <tr style="font-size: 12px;">
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.PaymentType.Name
+                                        </td>
+
+                                        <td>@item.ContractSum</td>
+                                        <td>@item.ModifiedBy</td>
+                                        <td>@item.ModifiedDate</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8">No Records Found!...</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="icon-reorder"></i>
+                        Monitoring Officer
+                    </h4>
+                </div>
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr style="font-size: 12px;">
+                                <th>S/N</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Mobile No</th>
+                                <th>Email Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.userDetail.Count != 0)
+                            {
+                                int i = 0;
+                                foreach (var item in Model.userDetail)
+                                {
+                                    ++i;
+                                    <tr style="font-size: 12px;">
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.FirstName
+                                        </td>
+
+                                        <td>@item.LastName</td>
+                                        <td>@item.MobileNumber</td>
+                                        <td>@item.EmailAddres</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8">No Records Found!...</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="icon-reorder"></i>
+                        Monitoring Information
+                    </h4>
+
+
+                </div>
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr style="font-size: 12px;">
+                                <th>S/N</th>
+                                <th>Location</th>
+                                <th>Coordinate</th>
+                                <th>State</th>
+                                <th>Lga</th>
+                                <th>State of Completion</th>
+                                <th>Has Defect</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.InspectionList.Count != 0)
+                            {
+                                int i = 0;
+                                foreach (var item in Model.InspectionList)
+                                {
+                                    ++i;
+                                    <tr style="font-size: 12px;">
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @item.Location
+                                        </td>
+
+                                        <td>@item.Coordinate</td>
+                                        <td>@item.LGA.State.Name</td>
+                                        <td>@item.LGA.Name</td>
+                                        <td>@item.StageOfCompletion</td>
+                                        <td>
+                                            @if (item.HasDefect == true)
+                                            {
+                                                <span class="label label-success">Yes</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-danger">No</span>
+                                            }
+                                        </td>
+                                        <td>
+
+                                            @if (item.InspectionStatus == "Approved")
+                                            {
+
+                                                <span class="label label-success">@item.InspectionStatus</span>
+
+                                            }
+                                            else
+                                            {
+                                        <span class="label label-danger">@item.InspectionStatus</span>
+
+                                            }
+
+
+                                        </td>
+                                        <td>
+                                            <a data-toggle="modal" title="Inspection Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+                                            <div class="row">
+                                                <div class="modal fade" id="@item.Id">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                <h4 class="modal-title">Inspection Information</h4>
+
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <table class="my-acct">
+
+                                                                    <tr>
+                                                                        <td><b>Location</b></td>
+                                                                        <td>
+                                                                            @item.Location
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Coordinate</b></td>
+                                                                        <td>@item.Coordinate</td>
+                                                                    </tr>
+
+
+
+                                                                    <tr>
+                                                                        <td><b>Stage Of Completion</b></td>
+                                                                        <td>@item.StageOfCompletion</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td><b>Description of Completion</b></td>
+                                                                        <td>@item.DescriptionOfCompletion</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td><b>Project Quanlity</b></td>
+                                                                        <td>@item.ProjectQuality</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td><b>Has Defect</b></td>
+                                                                        <td>
+                                                                            @if (item.HasDefect == true)
+                                                                            {
+                                                                                <span class="label label-danger">Yes</span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span class="label label-success">No</span>
+                                                                            }
+                                                                        </td>
+                                                                    </tr>
+                                                                    @if (item.HasDefect == true)
+                                                                    {
+                                                                        <tr>
+                                                                            <td><b>Description of Defect</b></td>
+                                                                            <td>@item.DescriptionOfDefect</td>
+                                                                        </tr>
+                                                                    }
+
+
+
+
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8">No Records Found!...</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model.DocumentInfoList.OrderBy(x=>x.DocumentTypeId))
+        {
+            <div class="col-md-6">
+                <div class="widget box">
+                    <div class="widget-header">
+                        <h4><i class="icon-reorder"></i> @item.DocumentType.Name</h4>
+                    </div>
+                    <div class="widget-content align-center">
+                        <p>
+                            <img class="item" src="@Url.Action("DocumentsUploadedPath", new { Path=(Model.FullPhotoPath) + item.Path})" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/Content/Backend/plugins/datatables/jquery.dataTables.min.js")
+    @Scripts.Render("~/Content/Backend/plugins/datatables/tabletools/TableTools.min.js")
+    @Scripts.Render("~/Content/Backend/plugins/datatables/colvis/ColVis.min.js")
+    @Scripts.Render("~/Content/Backend/plugins/datatables/DT_bootstrap.js")
+    <script>
+        "use strict";
+
+        function ConfirmSubmit() {
+            if (confirm("By submitting this report, i confirm that the information given in this form is true, complete and accurate. Please note you will not be able to modify after submission."))
+                return true;
+            else
+                return false;
+        }
+
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+                "<html><head><title></title></head><body>" +
+                divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#PrintThisArea").html());
+            });
+        });
+    </script>
+    
+}

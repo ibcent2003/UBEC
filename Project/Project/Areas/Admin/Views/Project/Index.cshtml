@@ -60,7 +60,17 @@
                                     </td>
 
                                     <td>@item.Description</td>
-                                    <td>@item.Location</td>
+                                    <td>
+                                        @if (item.Location == null)
+                                        {
+                                            <span class="label label-success">No location yet</span>
+                                        }
+                                        else
+                                        { 
+                                            @item.Location
+                                        }
+
+                                    </td>
                                     <td>@item.LGA.State.Name</td>
                                     <td>@item.LGA.Name</td>
                                     <td>

@@ -41,5 +41,8 @@
     <Setting Name="Supply" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="ApkPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">G:\HostingSpaces\raukzdup\ubeccms.com\wwwroot\Content\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

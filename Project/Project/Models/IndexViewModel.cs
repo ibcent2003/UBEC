@@ -10,6 +10,7 @@ namespace Project.Models
     {
         public List<News> NewsList { get; set; }
         public string PicturePath { get; set; }
+        public string apkfileName { get; set; }
         public News news { get; set; }
         public ProjectApplication project { get; set; }
         public List<ProjectApplication> projectList { get; set; }

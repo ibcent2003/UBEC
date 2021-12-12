@@ -1,0 +1,235 @@
+﻿@model Project.Areas.Admin.Models.ProjectViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Edit " + Model.project.SerialNo + " Project";
+    ViewBag.IsGreetings = "true";
+    var db = new Project.DAL.PROEntities();
+
+}
+@section Crumbs{
+    <div class="crumbs">
+
+        <ul class="breadcrumb" id="breadcrumbs">
+            <li><i class="icon-home"></i><a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })">Dashboard</a> </li>
+            <li class="current"><a title="" href="javascript: return void(0)">Edit Project </a> </li>
+        </ul>
+    </div>
+}
+<style>
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("EditProject", "Project", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(x => x.project.TransactionId)
+                @Html.AntiForgeryToken()
+                <div class="col-md-12">
+                    <div class="widget">
+
+                        <div class="widget-content">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Serial No:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.SerialNo, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.SerialNo, null, new { @style = "color:red" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Description:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.Description, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.Description, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Location:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.Location, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.Location, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Coordinate:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.Coordinate, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.Coordinate, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">State:</label>
+                                        <div class="col-md-8">
+
+                                            @Html.DropDownListFor(m => m.StateId, new SelectList(Model.StateList, "Value", "Text"), "Please Select a State", new { @class = "form-control", onChange = "GetAllLGA(this)" })
+                                            @Html.ValidationMessageFor(m => m.StateId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">LGA:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.LGAId, new SelectList(Model.LgaList, "Value", "Text"), "Please Select a LGA", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.LGAId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Contractor:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.ContractorId, new SelectList(Model.ContractorList, "Value", "Text"), "Please Select a Contractor", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.ContractorId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Contract Sum:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.ContractSum, null, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.ContractSum, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Project Type:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.ProjectTypeId, new SelectList(Model.ProjectTypeList, "Value", "Text"), "Select One", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.projectForm.ProjectTypeId, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Show Contract Sum:</label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(m => m.projectForm.ShowCost,
+           new List<SelectListItem> {
+                new SelectListItem { Value = "Yes" , Text = "Yes" },
+                new SelectListItem { Value = "No" , Text = "No" },
+             },
+           new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">Start Date:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.StartDate, null, new { @class = "form-control datepicker-issueddate", @readonly = true })
+                                            @Html.ValidationMessageFor(m => m.projectForm.StartDate, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label required">End Date:</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.projectForm.EndDate, null, new { @class = "form-control datepicker-expirydate", @readonly = true })
+                                            @Html.ValidationMessageFor(m => m.projectForm.EndDate, null, new { @style = "color:red" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-vertical no-margin">
+
+                    <div class="form-actions">
+                        <a href="@Url.Action("Index", "Project", new {Id=Model.project.WorkFlowId, area="Admin"})" class="btn btn-success btn-xs"><< Back to List </a>
+                        <input type="submit" value="Submit" class="btn btn-primary btn-xs pull-right" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    @Scripts.Render("~/Content/Backend/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js")
+
+
+    <script type="text/javascript">
+        "use strict";
+        function getLga(e) {
+            var stateId = $(e).val();
+
+            var currentRequest = null;
+            var currentRequest = $.ajax({
+                url: '@Url.Action("GetLga", "Project")',
+                dataType: 'json',
+                type: 'POST',
+                data: { StateId: stateId },
+                beforeSend: function () {
+                    if (currentRequest != null) {
+                        currentRequest.abort();
+                    }
+                },
+                success: function (msg) {
+                    $("#projectForm_LGAId").html("");
+                    $.each(msg, function (index, element) {
+                        $("#projectForm_LGAId").append('<option  value="' + element.Value + '">' + element.Text + '</option>');
+                    });
+                },
+                error: function (errmsg) { }
+            });
+        }
+
+        function GetAllLGA(e) {
+            getLga(e);
+
+        }
+
+    "use strict";
+    $(document).ready(function () {
+        $(".datepicker-issueddate").datepicker({
+            defaultDate: +7,
+            showOtherMonths: true,
+            autoSize: true,
+            dateFormat: "yy-mm-dd",
+            maxDate: '+0D',
+            changeYear: true,
+            changeMonth: true, yearRange: "-100:-0"
+        });
+
+    });
+
+    $(document).ready(function () {
+        $(".datepicker-expirydate").datepicker({
+            defaultDate: +7,
+            showOtherMonths: true,
+            autoSize: true,
+            dateFormat: "yy-mm-dd",
+            //maxDate: '+0D',
+            changeYear: true,
+            changeMonth: true
+
+        });
+    });
+
+
+    </script>
+}

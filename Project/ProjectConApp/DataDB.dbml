@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UBEC" Class="DataDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=UBEC;User ID=sa" SettingsObjectName="ProjectConApp.Properties.Settings" SettingsPropertyName="UBECConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Contractor" Member="Contractors">
+    <Type Name="Contractor">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Company" Member="Companies">
+    <Type Name="Company">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AppData" Member="AppDatas">
+    <Type Name="AppData">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SerialNo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WorkFlowId" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LGAId" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="StageOfCompletion" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ContractorId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContractorName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EnableSum" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProjectTypeId" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AppData2" Member="AppData2s">
+    <Type Name="AppData2">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransactionId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SerialNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="WorkFlowId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Location" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LGAId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StageOfCompletion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ContractorId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContractSum" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="InspectionUserId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EnableSum" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ProjectTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
