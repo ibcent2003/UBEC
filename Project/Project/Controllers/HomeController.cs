@@ -46,6 +46,7 @@ namespace Project.Controllers
             try
             {
                 IndexViewModel model = new IndexViewModel();
+                
                 return View(model);
             }
             catch(Exception ex)
@@ -56,7 +57,58 @@ namespace Project.Controllers
                 return RedirectToAction("Error404");
             }
         }
-       
+
+        [HttpPost]
+        public ActionResult Contact(IndexViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Feedback addnew = new Feedback
+                    {
+                        FullName = model.feedbackForm.FullName,
+                        EmailAddress = model.feedbackForm.EmailAddress,
+                        MobileNo = model.feedbackForm.MobileNo,
+                        Comment = model.feedbackForm.Comment,
+                        IsReply = false,
+                        SentDate = DateTime.Now
+                    };
+                    db.Feedback.AddObject(addnew);
+                    db.SaveChanges();                   
+                    TempData["message"] = "Your feedback has been submitted successfully. We'll contact you within 5 working day. Thank you.";                  
+                    return RedirectToAction("FeedbackSent");
+                }
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = "Error: Please make sure you enter all fields";
+              
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+        }
+
+        public ActionResult FeedbackSent()
+        {
+            try
+            {
+                return View();
+            }
+            catch(Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+        }
+
+
         public ActionResult DocumentsUploadedPath(string path)
         {
             try
@@ -138,19 +190,24 @@ namespace Project.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult GetLga(int stateId)
+        {
+            List<IntegerSelectListItem> ListLga = (from d in db.LGA where d.StateId == stateId && d.IsDeleted == false orderby d.Name select new IntegerSelectListItem { Text = d.Name, Value = d.Id }).ToList();
+            return Json(ListLga);
+        }
 
         public ActionResult ViewProject(int Id)
         {
             try
             {
-                IndexViewModel model = new IndexViewModel();
+                IndexViewModel model = new IndexViewModel();              
                 var getworkflow = db.Workflow.Where(x => x.Id == Id).FirstOrDefault();
                 if(getworkflow != null)
                 {
                     var getproject = db.ProjectApplication.Where(x => x.WorkFlowId == Id && x.IsDeleted==false).ToList();
                     model.projectList = getproject;
-
-                    model.workflow = getworkflow;
+                    model.workflow = getworkflow;                    
                     return View(model);
                 }
                 else
@@ -219,7 +276,6 @@ namespace Project.Controllers
                 return RedirectToAction("Error404");
             }
         }
-
         public ActionResult SupplyList()
         {
             try
@@ -250,7 +306,6 @@ namespace Project.Controllers
                 return RedirectToAction("Error404");
             }
         }
-
         public ActionResult ViewSupply(Guid Id)
         {
             try
@@ -262,6 +317,56 @@ namespace Project.Controllers
                 model.Supply = getsupply;
                 model.PicturePath = Properties.Settings.Default.FullPhotoPath;
                 return View(model);
+            }
+            catch(Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+        }
+        public ActionResult Search(int  Id)
+        {
+            try
+            {
+                IndexViewModel model = new IndexViewModel();
+                var getworkflow = db.Workflow.Where(x => x.Id == Id).FirstOrDefault();
+                if (getworkflow == null)
+                {                  
+                    return RedirectToAction("Error404");
+                }
+                model.workflow = getworkflow;
+                model.StateList = (from s in db.State where s.IsDeleted == false select new IntegerSelectListItem { Text = s.Name, Value = s.Id }).ToList();
+                model.LgaList = (from d in db.LGA select new IntegerSelectListItem { Value = d.Id, Text = d.Name }).ToList();
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                TempData["messageType"] = "alert-danger";
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return RedirectToAction("Error404");
+            }
+        }
+        public ActionResult ViewResult(IndexViewModel model)
+        {
+            try
+            {
+                var getworkflow = db.Workflow.Where(x => x.Id == model.workflow.Id).FirstOrDefault();
+                if (getworkflow != null)
+                {
+                    var getproject = db.ProjectApplication.Where(x => x.WorkFlowId == getworkflow.Id && x.LGA.State.Id==model.serachForm.StateId && x.LGAId==model.serachForm.LgaId && x.IsDeleted == false).ToList();
+                    model.projectList = getproject;
+                    model.workflow = getworkflow;
+                    return View(model);
+                }
+                else
+                {
+                    TempData["messageType"] = "alert-danger";
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;                   
+                    return RedirectToAction("Error404");
+                }              
             }
             catch(Exception ex)
             {

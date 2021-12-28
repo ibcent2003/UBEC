@@ -396,6 +396,19 @@
           <Property Name="DeliverableTypeId" Type="int" Nullable="false" />
           <Property Name="DeveliverableFormatId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsReply" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Inspection">
           <Key>
             <PropertyRef Name="Id" />
@@ -1190,6 +1203,7 @@
           <EntitySet Name="DeliverableFormat" EntityType="Self.DeliverableFormat" Schema="ubecdb" store:Type="Tables" />
           <EntitySet Name="DeliverableType" EntityType="Self.DeliverableType" Schema="ubecdb" store:Type="Tables" />
           <EntitySet Name="DeliverableTypeFormat" EntityType="Self.DeliverableTypeFormat" Schema="ubecdb" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="ubecdb" store:Type="Tables" />
           <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="ubecdb" store:Type="Tables" />
           <EntitySet Name="InspectionDocumentInfo" EntityType="Self.InspectionDocumentInfo" Schema="ubecdb" store:Type="Tables" />
           <EntitySet Name="ProjectDeliverable" EntityType="Self.ProjectDeliverable" Schema="ubecdb" store:Type="Tables" />
@@ -1417,293 +1431,75 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="PROEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Alert" EntityType="DBModel.Alert" />
-          <EntitySet Name="AlertNotification" EntityType="DBModel.AlertNotification" />
-          <EntitySet Name="AlertType" EntityType="DBModel.AlertType" />
-          <EntitySet Name="Applications" EntityType="DBModel.Applications" />
-          <EntitySet Name="Contractor" EntityType="DBModel.Contractor" />
-          <EntitySet Name="DataGenerator" EntityType="DBModel.DataGenerator" />
-          <EntitySet Name="DocumentCategory" EntityType="DBModel.DocumentCategory" />
-          <EntitySet Name="DocumentFormat" EntityType="DBModel.DocumentFormat" />
-          <EntitySet Name="DocumentInfo" EntityType="DBModel.DocumentInfo" />
-          <EntitySet Name="DocumentType" EntityType="DBModel.DocumentType" />
-          <EntitySet Name="LGA" EntityType="DBModel.LGA" />
-          <EntitySet Name="Memberships" EntityType="DBModel.Memberships" />
-          <EntitySet Name="News" EntityType="DBModel.News" />
-          <EntitySet Name="Payment" EntityType="DBModel.Payment" />
-          <EntitySet Name="PaymentType" EntityType="DBModel.PaymentType" />
-          <EntitySet Name="Profiles" EntityType="DBModel.Profiles" />
-          <EntitySet Name="ProjectApplication" EntityType="DBModel.ProjectApplication" />
-          <EntitySet Name="Resource" EntityType="DBModel.Resource" />
-          <EntitySet Name="ResourcesInRole" EntityType="DBModel.ResourcesInRole" />
-          <EntitySet Name="Roles" EntityType="DBModel.Roles" />
-          <EntitySet Name="State" EntityType="DBModel.State" />
-          <EntitySet Name="UserDetail" EntityType="DBModel.UserDetail" />
-          <EntitySet Name="Users" EntityType="DBModel.Users" />
-          <EntitySet Name="Workflow" EntityType="DBModel.Workflow" />
-          <EntitySet Name="WorkFlowActions" EntityType="DBModel.WorkFlowActions" />
-          <EntitySet Name="WorkflowStepActions" EntityType="DBModel.WorkflowStepActions" />
-          <EntitySet Name="WorkflowSteps" EntityType="DBModel.WorkflowSteps" />
-          <EntitySet Name="DeliverableFormat" EntityType="DBModel.DeliverableFormat" />
-          <EntitySet Name="DeliverableType" EntityType="DBModel.DeliverableType" />
-          <EntitySet Name="Inspection" EntityType="DBModel.Inspection" />
-          <EntitySet Name="ProjectDeliverable" EntityType="DBModel.ProjectDeliverable" />
-          <EntitySet Name="ProjectType" EntityType="DBModel.ProjectType" />
-          <EntitySet Name="StageOfCompletion" EntityType="DBModel.StageOfCompletion" />
-          <EntitySet Name="Supplies" EntityType="DBModel.Supplies" />
-          <EntitySet Name="SupplyDeliverable" EntityType="DBModel.SupplyDeliverable" />
-          <EntitySet Name="SupplyItems" EntityType="DBModel.SupplyItems" />
-          <AssociationSet Name="FK_Alert_WorkFlow" Association="DBModel.FK_Alert_WorkFlow">
-            <End Role="Workflow" EntitySet="Workflow" />
-            <End Role="Alert" EntitySet="Alert" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkflowStepActions_Alert" Association="DBModel.FK_WorkflowStepActions_Alert">
-            <End Role="Alert" EntitySet="Alert" />
-            <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AlertNotification_AlertType" Association="DBModel.FK_AlertNotification_AlertType">
-            <End Role="AlertType" EntitySet="AlertType" />
-            <End Role="AlertNotification" EntitySet="AlertNotification" />
-          </AssociationSet>
-          <AssociationSet Name="MembershipApplication" Association="DBModel.MembershipApplication">
-            <End Role="Applications" EntitySet="Applications" />
-            <End Role="Memberships" EntitySet="Memberships" />
-          </AssociationSet>
-          <AssociationSet Name="RoleApplication" Association="DBModel.RoleApplication">
-            <End Role="Applications" EntitySet="Applications" />
-            <End Role="Roles" EntitySet="Roles" />
-          </AssociationSet>
-          <AssociationSet Name="UserApplication" Association="DBModel.UserApplication">
-            <End Role="Applications" EntitySet="Applications" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Project_Contractor" Association="DBModel.FK_Project_Contractor">
-            <End Role="Contractor" EntitySet="Contractor" />
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supplies_Contractor" Association="DBModel.FK_Supplies_Contractor">
-            <End Role="Contractor" EntitySet="Contractor" />
-            <End Role="Supplies" EntitySet="Supplies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DocumentType_DocumentCategory" Association="DBModel.FK_DocumentType_DocumentCategory">
-            <End Role="DocumentCategory" EntitySet="DocumentCategory" />
-            <End Role="DocumentType" EntitySet="DocumentType" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DocumentInfo_DocumentType" Association="DBModel.FK_DocumentInfo_DocumentType">
-            <End Role="DocumentType" EntitySet="DocumentType" />
-            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_LGA" Association="DBModel.FK_Inspection_LGA">
-            <End Role="LGA" EntitySet="LGA" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LGA_State" Association="DBModel.FK_LGA_State">
-            <End Role="State" EntitySet="State" />
-            <End Role="LGA" EntitySet="LGA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Project_LGA" Association="DBModel.FK_Project_LGA">
-            <End Role="LGA" EntitySet="LGA" />
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supplies_LGA" Association="DBModel.FK_Supplies_LGA">
-            <End Role="LGA" EntitySet="LGA" />
-            <End Role="Supplies" EntitySet="Supplies" />
-          </AssociationSet>
-          <AssociationSet Name="MembershipUser" Association="DBModel.MembershipUser">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Memberships" EntitySet="Memberships" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_PaymentType" Association="DBModel.FK_Payment_PaymentType">
-            <End Role="PaymentType" EntitySet="PaymentType" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_Project" Association="DBModel.FK_Payment_Project">
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
-          <AssociationSet Name="UserProfile" Association="DBModel.UserProfile">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Profiles" EntitySet="Profiles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_ProjectApplication" Association="DBModel.FK_Inspection_ProjectApplication">
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Project_Workflow" Association="DBModel.FK_Project_Workflow">
-            <End Role="Workflow" EntitySet="Workflow" />
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectApplication_ProjectApplication" Association="DBModel.FK_ProjectApplication_ProjectApplication">
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-            <End Role="ProjectApplication1" EntitySet="ProjectApplication" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectApplication_ProjectType" Association="DBModel.FK_ProjectApplication_ProjectType">
-            <End Role="ProjectType" EntitySet="ProjectType" />
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectDeliverable_ProjectApplication" Association="DBModel.FK_ProjectDeliverable_ProjectApplication">
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-            <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserDetail_Users" Association="DBModel.FK_UserDetail_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserDetail" EntitySet="UserDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supplies_Workflow" Association="DBModel.FK_Supplies_Workflow">
-            <End Role="Workflow" EntitySet="Workflow" />
-            <End Role="Supplies" EntitySet="Supplies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkFlowActions_Workflow" Association="DBModel.FK_WorkFlowActions_Workflow">
-            <End Role="Workflow" EntitySet="Workflow" />
-            <End Role="WorkFlowActions" EntitySet="WorkFlowActions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkflowSteps_Workflow" Association="DBModel.FK_WorkflowSteps_Workflow">
-            <End Role="Workflow" EntitySet="Workflow" />
-            <End Role="WorkflowSteps" EntitySet="WorkflowSteps" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkflowStepActions_WorkFlowActions" Association="DBModel.FK_WorkflowStepActions_WorkFlowActions">
-            <End Role="WorkFlowActions" EntitySet="WorkFlowActions" />
-            <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkflowStepActions_WorkflowSteps" Association="DBModel.FK_WorkflowStepActions_WorkflowSteps">
-            <End Role="WorkflowSteps" EntitySet="WorkflowSteps" />
-            <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectDeliverable_DeliverableFormat" Association="DBModel.FK_ProjectDeliverable_DeliverableFormat">
-            <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
-            <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SupplyDeliverable_DeliverableFormat" Association="DBModel.FK_SupplyDeliverable_DeliverableFormat">
-            <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
-            <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectDeliverable_DeliverableType" Association="DBModel.FK_ProjectDeliverable_DeliverableType">
-            <End Role="DeliverableType" EntitySet="DeliverableType" />
-            <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SupplyDeliverable_DeliverableType" Association="DBModel.FK_SupplyDeliverable_DeliverableType">
-            <End Role="DeliverableType" EntitySet="DeliverableType" />
-            <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_StageOfCompletion" Association="DBModel.FK_Inspection_StageOfCompletion">
-            <End Role="StageOfCompletion" EntitySet="StageOfCompletion" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StageOfCompletion_ProjectType" Association="DBModel.FK_StageOfCompletion_ProjectType">
-            <End Role="ProjectType" EntitySet="ProjectType" />
-            <End Role="StageOfCompletion" EntitySet="StageOfCompletion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SupplyDeliverable_SupplyDeliverable" Association="DBModel.FK_SupplyDeliverable_SupplyDeliverable">
-            <End Role="Supplies" EntitySet="Supplies" />
-            <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SupplyItems_Supplies" Association="DBModel.FK_SupplyItems_Supplies">
-            <End Role="Supplies" EntitySet="Supplies" />
-            <End Role="SupplyItems" EntitySet="SupplyItems" />
-          </AssociationSet>
-          <AssociationSet Name="DocumentTypeFormat" Association="DBModel.DocumentTypeFormat">
-            <End Role="DocumentFormat" EntitySet="DocumentFormat" />
-            <End Role="DocumentType" EntitySet="DocumentType" />
-          </AssociationSet>
-          <AssociationSet Name="ProjectDocumentInfo" Association="DBModel.ProjectDocumentInfo">
-            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
-            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
-          </AssociationSet>
-          <AssociationSet Name="UsersInRoles" Association="DBModel.UsersInRoles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="WorkflowDocument" Association="DBModel.WorkflowDocument">
-            <End Role="DocumentType" EntitySet="DocumentType" />
-            <End Role="Workflow" EntitySet="Workflow" />
-          </AssociationSet>
-          <AssociationSet Name="DeliverableTypeFormat" Association="DBModel.DeliverableTypeFormat">
-            <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
-            <End Role="DeliverableType" EntitySet="DeliverableType" />
-          </AssociationSet>
-          <AssociationSet Name="InspectionDocumentInfo" Association="DBModel.InspectionDocumentInfo">
-            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="SupplyDocumentInfo" Association="DBModel.SupplyDocumentInfo">
-            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
-            <End Role="Supplies" EntitySet="Supplies" />
-          </AssociationSet>
-          <AssociationSet Name="WorkFlowDeliverable" Association="DBModel.WorkFlowDeliverable">
-            <End Role="DeliverableType" EntitySet="DeliverableType" />
-            <End Role="Workflow" EntitySet="Workflow" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Alert">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WorkflowId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SubjectSms" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SubjectEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Sms" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectSms" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sms" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Workflow" Relationship="DBModel.FK_Alert_WorkFlow" FromRole="Alert" ToRole="Workflow" />
-          <NavigationProperty Name="WorkflowStepActions" Relationship="DBModel.FK_WorkflowStepActions_Alert" FromRole="Alert" ToRole="WorkflowStepActions" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_Alert_WorkFlow" FromRole="Alert" ToRole="Workflow" />
+          <NavigationProperty Name="WorkflowStepActions" Relationship="Self.FK_WorkflowStepActions_Alert" FromRole="Alert" ToRole="WorkflowStepActions" />
         </EntityType>
         <EntityType Name="AlertNotification">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Sender" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Receiver" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Subject" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Sender" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Receiver" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="AlertTypeId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="ModifedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="AlertType" Relationship="DBModel.FK_AlertNotification_AlertType" FromRole="AlertNotification" ToRole="AlertType" />
+          <NavigationProperty Name="AlertType" Relationship="Self.FK_AlertNotification_AlertType" FromRole="AlertNotification" ToRole="AlertType" />
         </EntityType>
         <EntityType Name="AlertType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AlertNotification" Relationship="DBModel.FK_AlertNotification_AlertType" FromRole="AlertType" ToRole="AlertNotification" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AlertNotification" Relationship="Self.FK_AlertNotification_AlertType" FromRole="AlertType" ToRole="AlertNotification" />
         </EntityType>
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="ApplicationId" />
           </Key>
-          <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="235" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationName" Type="String" MaxLength="235" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ApplicationId" Type="Guid" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Memberships" Relationship="DBModel.MembershipApplication" FromRole="Applications" ToRole="Memberships" />
-          <NavigationProperty Name="Roles" Relationship="DBModel.RoleApplication" FromRole="Applications" ToRole="Roles" />
-          <NavigationProperty Name="Users" Relationship="DBModel.UserApplication" FromRole="Applications" ToRole="Users" />
+          <NavigationProperty Name="Memberships" Relationship="Self.MembershipApplication" FromRole="Applications" ToRole="Memberships" />
+          <NavigationProperty Name="Roles" Relationship="Self.RoleApplication" FromRole="Applications" ToRole="Roles" />
+          <NavigationProperty Name="Users" Relationship="Self.UserApplication" FromRole="Applications" ToRole="Users" />
         </EntityType>
         <EntityType Name="Contractor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.FK_Project_Contractor" FromRole="Contractor" ToRole="ProjectApplication" />
-          <NavigationProperty Name="Supplies" Relationship="DBModel.FK_Supplies_Contractor" FromRole="Contractor" ToRole="Supplies" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.FK_Project_Contractor" FromRole="Contractor" ToRole="ProjectApplication" />
+          <NavigationProperty Name="Supplies" Relationship="Self.FK_Supplies_Contractor" FromRole="Contractor" ToRole="Supplies" />
         </EntityType>
         <EntityType Name="DataGenerator">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="TableName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TableName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TableID" Type="Int32" Nullable="false" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
@@ -1712,71 +1508,71 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DocumentType" Relationship="DBModel.FK_DocumentType_DocumentCategory" FromRole="DocumentCategory" ToRole="DocumentType" />
+          <NavigationProperty Name="DocumentType" Relationship="Self.FK_DocumentType_DocumentCategory" FromRole="DocumentCategory" ToRole="DocumentType" />
         </EntityType>
         <EntityType Name="DocumentFormat">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Extension" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DocumentType" Relationship="DBModel.DocumentTypeFormat" FromRole="DocumentFormat" ToRole="DocumentType" />
+          <NavigationProperty Name="DocumentType" Relationship="Self.DocumentTypeFormat" FromRole="DocumentFormat" ToRole="DocumentType" />
         </EntityType>
         <EntityType Name="DocumentInfo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Path" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DocumentTypeId" Type="Int32" Nullable="false" />
           <Property Name="IssuedDate" Type="DateTime" Precision="0" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="DocumentType" Relationship="DBModel.FK_DocumentInfo_DocumentType" FromRole="DocumentInfo" ToRole="DocumentType" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.ProjectDocumentInfo" FromRole="DocumentInfo" ToRole="ProjectApplication" />
-          <NavigationProperty Name="Inspection" Relationship="DBModel.InspectionDocumentInfo" FromRole="DocumentInfo" ToRole="Inspection" />
-          <NavigationProperty Name="Supplies" Relationship="DBModel.SupplyDocumentInfo" FromRole="DocumentInfo" ToRole="Supplies" />
+          <NavigationProperty Name="DocumentType" Relationship="Self.FK_DocumentInfo_DocumentType" FromRole="DocumentInfo" ToRole="DocumentType" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.ProjectDocumentInfo" FromRole="DocumentInfo" ToRole="ProjectApplication" />
+          <NavigationProperty Name="Inspection" Relationship="Self.InspectionDocumentInfo" FromRole="DocumentInfo" ToRole="Inspection" />
+          <NavigationProperty Name="Supplies" Relationship="Self.SupplyDocumentInfo" FromRole="DocumentInfo" ToRole="Supplies" />
         </EntityType>
         <EntityType Name="DocumentType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DocumentCategoryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DocumentCategory" Relationship="DBModel.FK_DocumentType_DocumentCategory" FromRole="DocumentType" ToRole="DocumentCategory" />
-          <NavigationProperty Name="DocumentInfo" Relationship="DBModel.FK_DocumentInfo_DocumentType" FromRole="DocumentType" ToRole="DocumentInfo" />
-          <NavigationProperty Name="DocumentFormat" Relationship="DBModel.DocumentTypeFormat" FromRole="DocumentType" ToRole="DocumentFormat" />
-          <NavigationProperty Name="Workflow" Relationship="DBModel.WorkflowDocument" FromRole="DocumentType" ToRole="Workflow" />
+          <NavigationProperty Name="DocumentCategory" Relationship="Self.FK_DocumentType_DocumentCategory" FromRole="DocumentType" ToRole="DocumentCategory" />
+          <NavigationProperty Name="DocumentInfo" Relationship="Self.FK_DocumentInfo_DocumentType" FromRole="DocumentType" ToRole="DocumentInfo" />
+          <NavigationProperty Name="DocumentFormat" Relationship="Self.DocumentTypeFormat" FromRole="DocumentType" ToRole="DocumentFormat" />
+          <NavigationProperty Name="Workflow" Relationship="Self.WorkflowDocument" FromRole="DocumentType" ToRole="Workflow" />
         </EntityType>
         <EntityType Name="LGA">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StateId" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="DBModel.FK_Inspection_LGA" FromRole="LGA" ToRole="Inspection" />
-          <NavigationProperty Name="State" Relationship="DBModel.FK_LGA_State" FromRole="LGA" ToRole="State" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.FK_Project_LGA" FromRole="LGA" ToRole="ProjectApplication" />
-          <NavigationProperty Name="Supplies" Relationship="DBModel.FK_Supplies_LGA" FromRole="LGA" ToRole="Supplies" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_LGA" FromRole="LGA" ToRole="Inspection" />
+          <NavigationProperty Name="State" Relationship="Self.FK_LGA_State" FromRole="LGA" ToRole="State" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.FK_Project_LGA" FromRole="LGA" ToRole="ProjectApplication" />
+          <NavigationProperty Name="Supplies" Relationship="Self.FK_Supplies_LGA" FromRole="LGA" ToRole="Supplies" />
         </EntityType>
         <EntityType Name="Memberships">
           <Key>
@@ -1784,9 +1580,9 @@
           </Key>
           <Property Name="ApplicationId" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
-          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -1801,22 +1597,22 @@
           <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
           <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Comment" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Applications" Relationship="DBModel.MembershipApplication" FromRole="Memberships" ToRole="Applications" />
-          <NavigationProperty Name="Users" Relationship="DBModel.MembershipUser" FromRole="Memberships" ToRole="Users" />
+          <NavigationProperty Name="Applications" Relationship="Self.MembershipApplication" FromRole="Memberships" ToRole="Applications" />
+          <NavigationProperty Name="Users" Relationship="Self.MembershipUser" FromRole="Memberships" ToRole="Users" />
         </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NewsHeadline" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NewsContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Photo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewsHeadline" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewsContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="IsPublished" Type="Boolean" Nullable="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="NoOfView" Type="Int32" Nullable="false" />
         </EntityType>
@@ -1827,33 +1623,33 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
-          <Property Name="ContractSum" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContractSum" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="PaymentType" Relationship="DBModel.FK_Payment_PaymentType" FromRole="Payment" ToRole="PaymentType" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.FK_Payment_Project" FromRole="Payment" ToRole="ProjectApplication" />
+          <NavigationProperty Name="PaymentType" Relationship="Self.FK_Payment_PaymentType" FromRole="Payment" ToRole="PaymentType" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.FK_Payment_Project" FromRole="Payment" ToRole="ProjectApplication" />
         </EntityType>
         <EntityType Name="PaymentType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Payment" Relationship="DBModel.FK_Payment_PaymentType" FromRole="PaymentType" ToRole="Payment" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_PaymentType" FromRole="PaymentType" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Profiles">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="PropertyNames" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="PropertyValueStrings" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="PropertyValueBinary" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="PropertyNames" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyValueStrings" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyValueBinary" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Users" Relationship="DBModel.UserProfile" FromRole="Profiles" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.UserProfile" FromRole="Profiles" ToRole="Users" />
         </EntityType>
         <EntityType Name="ProjectApplication">
           <Key>
@@ -1861,10 +1657,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TransactionId" Type="Guid" Nullable="false" />
-          <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="WorkFlowId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Coordinate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LGAId" Type="Int32" Nullable="false" />
@@ -1879,16 +1675,16 @@
           <Property Name="EndDate" Type="DateTime" Precision="7" />
           <Property Name="EnableSum" Type="Boolean" Nullable="false" />
           <Property Name="ProjectTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contractor" Relationship="DBModel.FK_Project_Contractor" FromRole="ProjectApplication" ToRole="Contractor" />
-          <NavigationProperty Name="LGA" Relationship="DBModel.FK_Project_LGA" FromRole="ProjectApplication" ToRole="LGA" />
-          <NavigationProperty Name="Payment" Relationship="DBModel.FK_Payment_Project" FromRole="ProjectApplication" ToRole="Payment" />
-          <NavigationProperty Name="Inspection" Relationship="DBModel.FK_Inspection_ProjectApplication" FromRole="ProjectApplication" ToRole="Inspection" />
-          <NavigationProperty Name="Workflow" Relationship="DBModel.FK_Project_Workflow" FromRole="ProjectApplication" ToRole="Workflow" />
-          <NavigationProperty Name="ProjectApplication1" Relationship="DBModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication" ToRole="ProjectApplication1" />
-          <NavigationProperty Name="ProjectApplication2" Relationship="DBModel.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication1" ToRole="ProjectApplication" />
-          <NavigationProperty Name="ProjectType" Relationship="DBModel.FK_ProjectApplication_ProjectType" FromRole="ProjectApplication" ToRole="ProjectType" />
-          <NavigationProperty Name="ProjectDeliverable" Relationship="DBModel.FK_ProjectDeliverable_ProjectApplication" FromRole="ProjectApplication" ToRole="ProjectDeliverable" />
-          <NavigationProperty Name="DocumentInfo" Relationship="DBModel.ProjectDocumentInfo" FromRole="ProjectApplication" ToRole="DocumentInfo" />
+          <NavigationProperty Name="Contractor" Relationship="Self.FK_Project_Contractor" FromRole="ProjectApplication" ToRole="Contractor" />
+          <NavigationProperty Name="LGA" Relationship="Self.FK_Project_LGA" FromRole="ProjectApplication" ToRole="LGA" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_Project" FromRole="ProjectApplication" ToRole="Payment" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_ProjectApplication" FromRole="ProjectApplication" ToRole="Inspection" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_Project_Workflow" FromRole="ProjectApplication" ToRole="Workflow" />
+          <NavigationProperty Name="ProjectApplication1" Relationship="Self.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication" ToRole="ProjectApplication1" />
+          <NavigationProperty Name="ProjectApplication2" Relationship="Self.FK_ProjectApplication_ProjectApplication" FromRole="ProjectApplication1" ToRole="ProjectApplication" />
+          <NavigationProperty Name="ProjectType" Relationship="Self.FK_ProjectApplication_ProjectType" FromRole="ProjectApplication" ToRole="ProjectType" />
+          <NavigationProperty Name="ProjectDeliverable" Relationship="Self.FK_ProjectDeliverable_ProjectApplication" FromRole="ProjectApplication" ToRole="ProjectDeliverable" />
+          <NavigationProperty Name="DocumentInfo" Relationship="Self.ProjectDocumentInfo" FromRole="ProjectApplication" ToRole="DocumentInfo" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -1920,35 +1716,35 @@
           </Key>
           <Property Name="ApplicationId" Type="Guid" Nullable="false" />
           <Property Name="RoleId" Type="Guid" Nullable="false" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Applications" Relationship="DBModel.RoleApplication" FromRole="Roles" ToRole="Applications" />
-          <NavigationProperty Name="Users" Relationship="DBModel.UsersInRoles" FromRole="Roles" ToRole="Users" />
+          <NavigationProperty Name="Applications" Relationship="Self.RoleApplication" FromRole="Roles" ToRole="Applications" />
+          <NavigationProperty Name="Users" Relationship="Self.UsersInRoles" FromRole="Roles" ToRole="Users" />
         </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="LGA" Relationship="DBModel.FK_LGA_State" FromRole="State" ToRole="LGA" />
+          <NavigationProperty Name="LGA" Relationship="Self.FK_LGA_State" FromRole="State" ToRole="LGA" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailAddres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Users" Relationship="DBModel.FK_UserDetail_Users" FromRole="UserDetail" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_UserDetail_Users" FromRole="UserDetail" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -1956,34 +1752,34 @@
           </Key>
           <Property Name="ApplicationId" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
           <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Applications" Relationship="DBModel.UserApplication" FromRole="Users" ToRole="Applications" />
-          <NavigationProperty Name="Memberships" Relationship="DBModel.MembershipUser" FromRole="Users" ToRole="Memberships" />
-          <NavigationProperty Name="Profiles" Relationship="DBModel.UserProfile" FromRole="Users" ToRole="Profiles" />
-          <NavigationProperty Name="UserDetail" Relationship="DBModel.FK_UserDetail_Users" FromRole="Users" ToRole="UserDetail" />
-          <NavigationProperty Name="Roles" Relationship="DBModel.UsersInRoles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Applications" Relationship="Self.UserApplication" FromRole="Users" ToRole="Applications" />
+          <NavigationProperty Name="Memberships" Relationship="Self.MembershipUser" FromRole="Users" ToRole="Memberships" />
+          <NavigationProperty Name="Profiles" Relationship="Self.UserProfile" FromRole="Users" ToRole="Profiles" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserDetail_Users" FromRole="Users" ToRole="UserDetail" />
+          <NavigationProperty Name="Roles" Relationship="Self.UsersInRoles" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <EntityType Name="Workflow">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="guideline" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Alert" Relationship="DBModel.FK_Alert_WorkFlow" FromRole="Workflow" ToRole="Alert" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.FK_Project_Workflow" FromRole="Workflow" ToRole="ProjectApplication" />
-          <NavigationProperty Name="Supplies" Relationship="DBModel.FK_Supplies_Workflow" FromRole="Workflow" ToRole="Supplies" />
-          <NavigationProperty Name="WorkFlowActions" Relationship="DBModel.FK_WorkFlowActions_Workflow" FromRole="Workflow" ToRole="WorkFlowActions" />
-          <NavigationProperty Name="WorkflowSteps" Relationship="DBModel.FK_WorkflowSteps_Workflow" FromRole="Workflow" ToRole="WorkflowSteps" />
-          <NavigationProperty Name="DocumentType" Relationship="DBModel.WorkflowDocument" FromRole="Workflow" ToRole="DocumentType" />
-          <NavigationProperty Name="DeliverableType" Relationship="DBModel.WorkFlowDeliverable" FromRole="Workflow" ToRole="DeliverableType" />
+          <NavigationProperty Name="Alert" Relationship="Self.FK_Alert_WorkFlow" FromRole="Workflow" ToRole="Alert" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.FK_Project_Workflow" FromRole="Workflow" ToRole="ProjectApplication" />
+          <NavigationProperty Name="Supplies" Relationship="Self.FK_Supplies_Workflow" FromRole="Workflow" ToRole="Supplies" />
+          <NavigationProperty Name="WorkFlowActions" Relationship="Self.FK_WorkFlowActions_Workflow" FromRole="Workflow" ToRole="WorkFlowActions" />
+          <NavigationProperty Name="WorkflowSteps" Relationship="Self.FK_WorkflowSteps_Workflow" FromRole="Workflow" ToRole="WorkflowSteps" />
+          <NavigationProperty Name="DocumentType" Relationship="Self.WorkflowDocument" FromRole="Workflow" ToRole="DocumentType" />
+          <NavigationProperty Name="DeliverableType" Relationship="Self.WorkFlowDeliverable" FromRole="Workflow" ToRole="DeliverableType" />
         </EntityType>
         <EntityType Name="WorkFlowActions">
           <Key>
@@ -1991,13 +1787,13 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WorkFlowId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsMovable" Type="Boolean" Nullable="false" />
-          <Property Name="Direction" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Workflow" Relationship="DBModel.FK_WorkFlowActions_Workflow" FromRole="WorkFlowActions" ToRole="Workflow" />
-          <NavigationProperty Name="WorkflowStepActions" Relationship="DBModel.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkFlowActions" ToRole="WorkflowStepActions" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_WorkFlowActions_Workflow" FromRole="WorkFlowActions" ToRole="Workflow" />
+          <NavigationProperty Name="WorkflowStepActions" Relationship="Self.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkFlowActions" ToRole="WorkflowStepActions" />
         </EntityType>
         <EntityType Name="WorkflowStepActions">
           <Key>
@@ -2009,9 +1805,9 @@
           <Property Name="AlertId" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="PresetReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Alert" Relationship="DBModel.FK_WorkflowStepActions_Alert" FromRole="WorkflowStepActions" ToRole="Alert" />
-          <NavigationProperty Name="WorkFlowActions" Relationship="DBModel.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkflowStepActions" ToRole="WorkFlowActions" />
-          <NavigationProperty Name="WorkflowSteps" Relationship="DBModel.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowStepActions" ToRole="WorkflowSteps" />
+          <NavigationProperty Name="Alert" Relationship="Self.FK_WorkflowStepActions_Alert" FromRole="WorkflowStepActions" ToRole="Alert" />
+          <NavigationProperty Name="WorkFlowActions" Relationship="Self.FK_WorkflowStepActions_WorkFlowActions" FromRole="WorkflowStepActions" ToRole="WorkFlowActions" />
+          <NavigationProperty Name="WorkflowSteps" Relationship="Self.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowStepActions" ToRole="WorkflowSteps" />
         </EntityType>
         <EntityType Name="WorkflowSteps">
           <Key>
@@ -2019,41 +1815,41 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WorkflowId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Priority" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Workflow" Relationship="DBModel.FK_WorkflowSteps_Workflow" FromRole="WorkflowSteps" ToRole="Workflow" />
-          <NavigationProperty Name="WorkflowStepActions" Relationship="DBModel.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowSteps" ToRole="WorkflowStepActions" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_WorkflowSteps_Workflow" FromRole="WorkflowSteps" ToRole="Workflow" />
+          <NavigationProperty Name="WorkflowStepActions" Relationship="Self.FK_WorkflowStepActions_WorkflowSteps" FromRole="WorkflowSteps" ToRole="WorkflowStepActions" />
         </EntityType>
         <EntityType Name="DeliverableFormat">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ProjectDeliverable" Relationship="DBModel.FK_ProjectDeliverable_DeliverableFormat" FromRole="DeliverableFormat" ToRole="ProjectDeliverable" />
-          <NavigationProperty Name="SupplyDeliverable" Relationship="DBModel.FK_SupplyDeliverable_DeliverableFormat" FromRole="DeliverableFormat" ToRole="SupplyDeliverable" />
-          <NavigationProperty Name="DeliverableType" Relationship="DBModel.DeliverableTypeFormat" FromRole="DeliverableFormat" ToRole="DeliverableType" />
+          <NavigationProperty Name="ProjectDeliverable" Relationship="Self.FK_ProjectDeliverable_DeliverableFormat" FromRole="DeliverableFormat" ToRole="ProjectDeliverable" />
+          <NavigationProperty Name="SupplyDeliverable" Relationship="Self.FK_SupplyDeliverable_DeliverableFormat" FromRole="DeliverableFormat" ToRole="SupplyDeliverable" />
+          <NavigationProperty Name="DeliverableType" Relationship="Self.DeliverableTypeFormat" FromRole="DeliverableFormat" ToRole="DeliverableType" />
         </EntityType>
         <EntityType Name="DeliverableType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ProjectDeliverable" Relationship="DBModel.FK_ProjectDeliverable_DeliverableType" FromRole="DeliverableType" ToRole="ProjectDeliverable" />
-          <NavigationProperty Name="SupplyDeliverable" Relationship="DBModel.FK_SupplyDeliverable_DeliverableType" FromRole="DeliverableType" ToRole="SupplyDeliverable" />
-          <NavigationProperty Name="DeliverableFormat" Relationship="DBModel.DeliverableTypeFormat" FromRole="DeliverableType" ToRole="DeliverableFormat" />
-          <NavigationProperty Name="Workflow" Relationship="DBModel.WorkFlowDeliverable" FromRole="DeliverableType" ToRole="Workflow" />
+          <NavigationProperty Name="ProjectDeliverable" Relationship="Self.FK_ProjectDeliverable_DeliverableType" FromRole="DeliverableType" ToRole="ProjectDeliverable" />
+          <NavigationProperty Name="SupplyDeliverable" Relationship="Self.FK_SupplyDeliverable_DeliverableType" FromRole="DeliverableType" ToRole="SupplyDeliverable" />
+          <NavigationProperty Name="DeliverableFormat" Relationship="Self.DeliverableTypeFormat" FromRole="DeliverableType" ToRole="DeliverableFormat" />
+          <NavigationProperty Name="Workflow" Relationship="Self.WorkFlowDeliverable" FromRole="DeliverableType" ToRole="Workflow" />
         </EntityType>
         <EntityType Name="Inspection">
           <Key>
@@ -2061,24 +1857,24 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TransactionId" Type="Guid" Nullable="false" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Coordinate" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Coordinate" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LgaId" Type="Int32" Nullable="false" />
           <Property Name="StageOfCompletionId" Type="Int32" Nullable="false" />
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
-          <Property Name="StageOfCompletion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DescriptionOfCompletion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ProjectQuality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StageOfCompletion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescriptionOfCompletion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProjectQuality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HasDefect" Type="Boolean" Nullable="false" />
           <Property Name="DescriptionOfDefect" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="InspectionDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="InspectionStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="LGA" Relationship="DBModel.FK_Inspection_LGA" FromRole="Inspection" ToRole="LGA" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.FK_Inspection_ProjectApplication" FromRole="Inspection" ToRole="ProjectApplication" />
-          <NavigationProperty Name="StageOfCompletion1" Relationship="DBModel.FK_Inspection_StageOfCompletion" FromRole="Inspection" ToRole="StageOfCompletion" />
-          <NavigationProperty Name="DocumentInfo" Relationship="DBModel.InspectionDocumentInfo" FromRole="Inspection" ToRole="DocumentInfo" />
+          <Property Name="InspectionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LGA" Relationship="Self.FK_Inspection_LGA" FromRole="Inspection" ToRole="LGA" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.FK_Inspection_ProjectApplication" FromRole="Inspection" ToRole="ProjectApplication" />
+          <NavigationProperty Name="StageOfCompletion1" Relationship="Self.FK_Inspection_StageOfCompletion" FromRole="Inspection" ToRole="StageOfCompletion" />
+          <NavigationProperty Name="DocumentInfo" Relationship="Self.InspectionDocumentInfo" FromRole="Inspection" ToRole="DocumentInfo" />
         </EntityType>
         <EntityType Name="ProjectDeliverable">
           <Key>
@@ -2089,12 +1885,12 @@
           <Property Name="DeliverableId" Type="Int32" Nullable="false" />
           <Property Name="DeliverableFormatId" Type="Int32" Nullable="false" />
           <Property Name="DeliverableUnit" Type="Int32" Nullable="false" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.FK_ProjectDeliverable_ProjectApplication" FromRole="ProjectDeliverable" ToRole="ProjectApplication" />
-          <NavigationProperty Name="DeliverableFormat" Relationship="DBModel.FK_ProjectDeliverable_DeliverableFormat" FromRole="ProjectDeliverable" ToRole="DeliverableFormat" />
-          <NavigationProperty Name="DeliverableType" Relationship="DBModel.FK_ProjectDeliverable_DeliverableType" FromRole="ProjectDeliverable" ToRole="DeliverableType" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.FK_ProjectDeliverable_ProjectApplication" FromRole="ProjectDeliverable" ToRole="ProjectApplication" />
+          <NavigationProperty Name="DeliverableFormat" Relationship="Self.FK_ProjectDeliverable_DeliverableFormat" FromRole="ProjectDeliverable" ToRole="DeliverableFormat" />
+          <NavigationProperty Name="DeliverableType" Relationship="Self.FK_ProjectDeliverable_DeliverableType" FromRole="ProjectDeliverable" ToRole="DeliverableType" />
         </EntityType>
         <EntityType Name="ProjectType">
           <Key>
@@ -2102,8 +1898,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProjectApplication" Relationship="DBModel.FK_ProjectApplication_ProjectType" FromRole="ProjectType" ToRole="ProjectApplication" />
-          <NavigationProperty Name="StageOfCompletion" Relationship="DBModel.FK_StageOfCompletion_ProjectType" FromRole="ProjectType" ToRole="StageOfCompletion" />
+          <NavigationProperty Name="ProjectApplication" Relationship="Self.FK_ProjectApplication_ProjectType" FromRole="ProjectType" ToRole="ProjectApplication" />
+          <NavigationProperty Name="StageOfCompletion" Relationship="Self.FK_StageOfCompletion_ProjectType" FromRole="ProjectType" ToRole="StageOfCompletion" />
         </EntityType>
         <EntityType Name="StageOfCompletion">
           <Key>
@@ -2114,8 +1910,8 @@
           <Property Name="Percentage" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="DBModel.FK_Inspection_StageOfCompletion" FromRole="StageOfCompletion" ToRole="Inspection" />
-          <NavigationProperty Name="ProjectType" Relationship="DBModel.FK_StageOfCompletion_ProjectType" FromRole="StageOfCompletion" ToRole="ProjectType" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_StageOfCompletion" FromRole="StageOfCompletion" ToRole="Inspection" />
+          <NavigationProperty Name="ProjectType" Relationship="Self.FK_StageOfCompletion_ProjectType" FromRole="StageOfCompletion" ToRole="ProjectType" />
         </EntityType>
         <EntityType Name="Supplies">
           <Key>
@@ -2126,23 +1922,23 @@
           <Property Name="TransactionId" Type="Guid" Nullable="false" />
           <Property Name="WorkflowId" Type="Int32" Nullable="false" />
           <Property Name="LGAId" Type="Int32" Nullable="false" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContractorId" Type="Int32" Nullable="false" />
           <Property Name="VerificationDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="VerificationOfficer" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Representative" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="RepresentativeDesignation" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="RepresentativePhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VerificationOfficer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Representative" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RepresentativeDesignation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RepresentativePhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Coordinate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Contractor" Relationship="DBModel.FK_Supplies_Contractor" FromRole="Supplies" ToRole="Contractor" />
-          <NavigationProperty Name="LGA" Relationship="DBModel.FK_Supplies_LGA" FromRole="Supplies" ToRole="LGA" />
-          <NavigationProperty Name="Workflow" Relationship="DBModel.FK_Supplies_Workflow" FromRole="Supplies" ToRole="Workflow" />
-          <NavigationProperty Name="SupplyDeliverable" Relationship="DBModel.FK_SupplyDeliverable_SupplyDeliverable" FromRole="Supplies" ToRole="SupplyDeliverable" />
-          <NavigationProperty Name="SupplyItems" Relationship="DBModel.FK_SupplyItems_Supplies" FromRole="Supplies" ToRole="SupplyItems" />
-          <NavigationProperty Name="DocumentInfo" Relationship="DBModel.SupplyDocumentInfo" FromRole="Supplies" ToRole="DocumentInfo" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contractor" Relationship="Self.FK_Supplies_Contractor" FromRole="Supplies" ToRole="Contractor" />
+          <NavigationProperty Name="LGA" Relationship="Self.FK_Supplies_LGA" FromRole="Supplies" ToRole="LGA" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_Supplies_Workflow" FromRole="Supplies" ToRole="Workflow" />
+          <NavigationProperty Name="SupplyDeliverable" Relationship="Self.FK_SupplyDeliverable_SupplyDeliverable" FromRole="Supplies" ToRole="SupplyDeliverable" />
+          <NavigationProperty Name="SupplyItems" Relationship="Self.FK_SupplyItems_Supplies" FromRole="Supplies" ToRole="SupplyItems" />
+          <NavigationProperty Name="DocumentInfo" Relationship="Self.SupplyDocumentInfo" FromRole="Supplies" ToRole="DocumentInfo" />
         </EntityType>
         <EntityType Name="SupplyDeliverable">
           <Key>
@@ -2153,12 +1949,12 @@
           <Property Name="DeliverableId" Type="Int32" Nullable="false" />
           <Property Name="DeliverableFormatId" Type="Int32" Nullable="false" />
           <Property Name="DeliverableUnit" Type="Int32" Nullable="false" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="DeliverableFormat" Relationship="DBModel.FK_SupplyDeliverable_DeliverableFormat" FromRole="SupplyDeliverable" ToRole="DeliverableFormat" />
-          <NavigationProperty Name="DeliverableType" Relationship="DBModel.FK_SupplyDeliverable_DeliverableType" FromRole="SupplyDeliverable" ToRole="DeliverableType" />
-          <NavigationProperty Name="Supplies" Relationship="DBModel.FK_SupplyDeliverable_SupplyDeliverable" FromRole="SupplyDeliverable" ToRole="Supplies" />
+          <NavigationProperty Name="DeliverableFormat" Relationship="Self.FK_SupplyDeliverable_DeliverableFormat" FromRole="SupplyDeliverable" ToRole="DeliverableFormat" />
+          <NavigationProperty Name="DeliverableType" Relationship="Self.FK_SupplyDeliverable_DeliverableType" FromRole="SupplyDeliverable" ToRole="DeliverableType" />
+          <NavigationProperty Name="Supplies" Relationship="Self.FK_SupplyDeliverable_SupplyDeliverable" FromRole="SupplyDeliverable" ToRole="Supplies" />
         </EntityType>
         <EntityType Name="SupplyItems">
           <Key>
@@ -2173,11 +1969,11 @@
           <Property Name="Remarks" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="Modified" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Supplies" Relationship="DBModel.FK_SupplyItems_Supplies" FromRole="SupplyItems" ToRole="Supplies" />
+          <NavigationProperty Name="Supplies" Relationship="Self.FK_SupplyItems_Supplies" FromRole="SupplyItems" ToRole="Supplies" />
         </EntityType>
         <Association Name="FK_Alert_WorkFlow">
-          <End Type="DBModel.Workflow" Role="Workflow" Multiplicity="1" />
-          <End Type="DBModel.Alert" Role="Alert" Multiplicity="*" />
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workflow">
               <PropertyRef Name="Id" />
@@ -2188,8 +1984,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkflowStepActions_Alert">
-          <End Type="DBModel.Alert" Role="Alert" Multiplicity="1" />
-          <End Type="DBModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="1" />
+          <End Role="WorkflowStepActions" Type="Self.WorkflowStepActions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alert">
               <PropertyRef Name="Id" />
@@ -2200,8 +1996,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlertNotification_AlertType">
-          <End Type="DBModel.AlertType" Role="AlertType" Multiplicity="1" />
-          <End Type="DBModel.AlertNotification" Role="AlertNotification" Multiplicity="*" />
+          <End Role="AlertType" Type="Self.AlertType" Multiplicity="1" />
+          <End Role="AlertNotification" Type="Self.AlertNotification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AlertType">
               <PropertyRef Name="Id" />
@@ -2212,8 +2008,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="MembershipApplication">
-          <End Type="DBModel.Applications" Role="Applications" Multiplicity="1" />
-          <End Type="DBModel.Memberships" Role="Memberships" Multiplicity="*" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
               <PropertyRef Name="ApplicationId" />
@@ -2224,8 +2020,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RoleApplication">
-          <End Type="DBModel.Applications" Role="Applications" Multiplicity="1" />
-          <End Type="DBModel.Roles" Role="Roles" Multiplicity="*" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
               <PropertyRef Name="ApplicationId" />
@@ -2236,8 +2032,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserApplication">
-          <End Type="DBModel.Applications" Role="Applications" Multiplicity="1" />
-          <End Type="DBModel.Users" Role="Users" Multiplicity="*" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
               <PropertyRef Name="ApplicationId" />
@@ -2248,8 +2044,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Project_Contractor">
-          <End Type="DBModel.Contractor" Role="Contractor" Multiplicity="1" />
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+          <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractor">
               <PropertyRef Name="Id" />
@@ -2260,8 +2056,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Supplies_Contractor">
-          <End Type="DBModel.Contractor" Role="Contractor" Multiplicity="1" />
-          <End Type="DBModel.Supplies" Role="Supplies" Multiplicity="*" />
+          <End Role="Contractor" Type="Self.Contractor" Multiplicity="1" />
+          <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractor">
               <PropertyRef Name="Id" />
@@ -2272,8 +2068,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DocumentType_DocumentCategory">
-          <End Type="DBModel.DocumentCategory" Role="DocumentCategory" Multiplicity="1" />
-          <End Type="DBModel.DocumentType" Role="DocumentType" Multiplicity="*" />
+          <End Role="DocumentCategory" Type="Self.DocumentCategory" Multiplicity="1" />
+          <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DocumentCategory">
               <PropertyRef Name="Id" />
@@ -2284,8 +2080,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DocumentInfo_DocumentType">
-          <End Type="DBModel.DocumentType" Role="DocumentType" Multiplicity="1" />
-          <End Type="DBModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
+          <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="1" />
+          <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DocumentType">
               <PropertyRef Name="Id" />
@@ -2296,8 +2092,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspection_LGA">
-          <End Type="DBModel.LGA" Role="LGA" Multiplicity="1" />
-          <End Type="DBModel.Inspection" Role="Inspection" Multiplicity="*" />
+          <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LGA">
               <PropertyRef Name="Id" />
@@ -2308,8 +2104,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_LGA_State">
-          <End Type="DBModel.State" Role="State" Multiplicity="1" />
-          <End Type="DBModel.LGA" Role="LGA" Multiplicity="*" />
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="LGA" Type="Self.LGA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
               <PropertyRef Name="Id" />
@@ -2320,8 +2116,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Project_LGA">
-          <End Type="DBModel.LGA" Role="LGA" Multiplicity="1" />
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+          <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LGA">
               <PropertyRef Name="Id" />
@@ -2332,8 +2128,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Supplies_LGA">
-          <End Type="DBModel.LGA" Role="LGA" Multiplicity="1" />
-          <End Type="DBModel.Supplies" Role="Supplies" Multiplicity="*" />
+          <End Role="LGA" Type="Self.LGA" Multiplicity="1" />
+          <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LGA">
               <PropertyRef Name="Id" />
@@ -2344,8 +2140,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="MembershipUser">
-          <End Type="DBModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="DBModel.Memberships" Role="Memberships" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
@@ -2356,8 +2152,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Payment_PaymentType">
-          <End Type="DBModel.PaymentType" Role="PaymentType" Multiplicity="1" />
-          <End Type="DBModel.Payment" Role="Payment" Multiplicity="*" />
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PaymentType">
               <PropertyRef Name="Id" />
@@ -2368,8 +2164,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Payment_Project">
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-          <End Type="DBModel.Payment" Role="Payment" Multiplicity="*" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectApplication">
               <PropertyRef Name="Id" />
@@ -2380,8 +2176,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserProfile">
-          <End Type="DBModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="DBModel.Profiles" Role="Profiles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
@@ -2392,8 +2188,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspection_ProjectApplication">
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-          <End Type="DBModel.Inspection" Role="Inspection" Multiplicity="*" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectApplication">
               <PropertyRef Name="Id" />
@@ -2404,8 +2200,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Project_Workflow">
-          <End Type="DBModel.Workflow" Role="Workflow" Multiplicity="1" />
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workflow">
               <PropertyRef Name="Id" />
@@ -2416,8 +2212,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectApplication_ProjectApplication">
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication1" Multiplicity="0..1" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
+          <End Role="ProjectApplication1" Type="Self.ProjectApplication" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="ProjectApplication">
               <PropertyRef Name="Id" />
@@ -2428,8 +2224,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectApplication_ProjectType">
-          <End Type="DBModel.ProjectType" Role="ProjectType" Multiplicity="1" />
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+          <End Role="ProjectType" Type="Self.ProjectType" Multiplicity="1" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectType">
               <PropertyRef Name="Id" />
@@ -2440,8 +2236,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectDeliverable_ProjectApplication">
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="1" />
-          <End Type="DBModel.ProjectDeliverable" Role="ProjectDeliverable" Multiplicity="*" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="1" />
+          <End Role="ProjectDeliverable" Type="Self.ProjectDeliverable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectApplication">
               <PropertyRef Name="Id" />
@@ -2452,8 +2248,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserDetail_Users">
-          <End Type="DBModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="DBModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
@@ -2464,8 +2260,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Supplies_Workflow">
-          <End Type="DBModel.Workflow" Role="Workflow" Multiplicity="1" />
-          <End Type="DBModel.Supplies" Role="Supplies" Multiplicity="*" />
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workflow">
               <PropertyRef Name="Id" />
@@ -2476,8 +2272,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkFlowActions_Workflow">
-          <End Type="DBModel.Workflow" Role="Workflow" Multiplicity="1" />
-          <End Type="DBModel.WorkFlowActions" Role="WorkFlowActions" Multiplicity="*" />
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkFlowActions" Type="Self.WorkFlowActions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workflow">
               <PropertyRef Name="Id" />
@@ -2488,8 +2284,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkflowSteps_Workflow">
-          <End Type="DBModel.Workflow" Role="Workflow" Multiplicity="1" />
-          <End Type="DBModel.WorkflowSteps" Role="WorkflowSteps" Multiplicity="*" />
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkflowSteps" Type="Self.WorkflowSteps" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workflow">
               <PropertyRef Name="Id" />
@@ -2500,8 +2296,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkflowStepActions_WorkFlowActions">
-          <End Type="DBModel.WorkFlowActions" Role="WorkFlowActions" Multiplicity="1" />
-          <End Type="DBModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
+          <End Role="WorkFlowActions" Type="Self.WorkFlowActions" Multiplicity="1" />
+          <End Role="WorkflowStepActions" Type="Self.WorkflowStepActions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WorkFlowActions">
               <PropertyRef Name="Id" />
@@ -2512,8 +2308,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkflowStepActions_WorkflowSteps">
-          <End Type="DBModel.WorkflowSteps" Role="WorkflowSteps" Multiplicity="1" />
-          <End Type="DBModel.WorkflowStepActions" Role="WorkflowStepActions" Multiplicity="*" />
+          <End Role="WorkflowSteps" Type="Self.WorkflowSteps" Multiplicity="1" />
+          <End Role="WorkflowStepActions" Type="Self.WorkflowStepActions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WorkflowSteps">
               <PropertyRef Name="Id" />
@@ -2524,8 +2320,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectDeliverable_DeliverableFormat">
-          <End Type="DBModel.DeliverableFormat" Role="DeliverableFormat" Multiplicity="1" />
-          <End Type="DBModel.ProjectDeliverable" Role="ProjectDeliverable" Multiplicity="*" />
+          <End Role="DeliverableFormat" Type="Self.DeliverableFormat" Multiplicity="1" />
+          <End Role="ProjectDeliverable" Type="Self.ProjectDeliverable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DeliverableFormat">
               <PropertyRef Name="Id" />
@@ -2536,8 +2332,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SupplyDeliverable_DeliverableFormat">
-          <End Type="DBModel.DeliverableFormat" Role="DeliverableFormat" Multiplicity="1" />
-          <End Type="DBModel.SupplyDeliverable" Role="SupplyDeliverable" Multiplicity="*" />
+          <End Role="DeliverableFormat" Type="Self.DeliverableFormat" Multiplicity="1" />
+          <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DeliverableFormat">
               <PropertyRef Name="Id" />
@@ -2548,8 +2344,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectDeliverable_DeliverableType">
-          <End Type="DBModel.DeliverableType" Role="DeliverableType" Multiplicity="1" />
-          <End Type="DBModel.ProjectDeliverable" Role="ProjectDeliverable" Multiplicity="*" />
+          <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="1" />
+          <End Role="ProjectDeliverable" Type="Self.ProjectDeliverable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DeliverableType">
               <PropertyRef Name="Id" />
@@ -2560,8 +2356,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SupplyDeliverable_DeliverableType">
-          <End Type="DBModel.DeliverableType" Role="DeliverableType" Multiplicity="1" />
-          <End Type="DBModel.SupplyDeliverable" Role="SupplyDeliverable" Multiplicity="*" />
+          <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="1" />
+          <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DeliverableType">
               <PropertyRef Name="Id" />
@@ -2572,8 +2368,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspection_StageOfCompletion">
-          <End Type="DBModel.StageOfCompletion" Role="StageOfCompletion" Multiplicity="1" />
-          <End Type="DBModel.Inspection" Role="Inspection" Multiplicity="*" />
+          <End Role="StageOfCompletion" Type="Self.StageOfCompletion" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StageOfCompletion">
               <PropertyRef Name="Id" />
@@ -2584,8 +2380,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StageOfCompletion_ProjectType">
-          <End Type="DBModel.ProjectType" Role="ProjectType" Multiplicity="1" />
-          <End Type="DBModel.StageOfCompletion" Role="StageOfCompletion" Multiplicity="*" />
+          <End Role="ProjectType" Type="Self.ProjectType" Multiplicity="1" />
+          <End Role="StageOfCompletion" Type="Self.StageOfCompletion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectType">
               <PropertyRef Name="Id" />
@@ -2596,8 +2392,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SupplyDeliverable_SupplyDeliverable">
-          <End Type="DBModel.Supplies" Role="Supplies" Multiplicity="1" />
-          <End Type="DBModel.SupplyDeliverable" Role="SupplyDeliverable" Multiplicity="*" />
+          <End Role="Supplies" Type="Self.Supplies" Multiplicity="1" />
+          <End Role="SupplyDeliverable" Type="Self.SupplyDeliverable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplies">
               <PropertyRef Name="Id" />
@@ -2608,8 +2404,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SupplyItems_Supplies">
-          <End Type="DBModel.Supplies" Role="Supplies" Multiplicity="1" />
-          <End Type="DBModel.SupplyItems" Role="SupplyItems" Multiplicity="*" />
+          <End Role="Supplies" Type="Self.Supplies" Multiplicity="1" />
+          <End Role="SupplyItems" Type="Self.SupplyItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplies">
               <PropertyRef Name="Id" />
@@ -2620,37 +2416,269 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="DocumentTypeFormat">
-          <End Type="DBModel.DocumentFormat" Role="DocumentFormat" Multiplicity="*" />
-          <End Type="DBModel.DocumentType" Role="DocumentType" Multiplicity="*" />
+          <End Role="DocumentFormat" Type="Self.DocumentFormat" Multiplicity="*" />
+          <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="*" />
         </Association>
         <Association Name="ProjectDocumentInfo">
-          <End Type="DBModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
-          <End Type="DBModel.ProjectApplication" Role="ProjectApplication" Multiplicity="*" />
+          <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="*" />
+          <End Role="ProjectApplication" Type="Self.ProjectApplication" Multiplicity="*" />
         </Association>
         <Association Name="UsersInRoles">
-          <End Type="DBModel.Roles" Role="Roles" Multiplicity="*" />
-          <End Type="DBModel.Users" Role="Users" Multiplicity="*" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
         </Association>
         <Association Name="WorkflowDocument">
-          <End Type="DBModel.DocumentType" Role="DocumentType" Multiplicity="*" />
-          <End Type="DBModel.Workflow" Role="Workflow" Multiplicity="*" />
+          <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="*" />
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="*" />
         </Association>
         <Association Name="DeliverableTypeFormat">
-          <End Type="DBModel.DeliverableFormat" Role="DeliverableFormat" Multiplicity="*" />
-          <End Type="DBModel.DeliverableType" Role="DeliverableType" Multiplicity="*" />
+          <End Role="DeliverableFormat" Type="Self.DeliverableFormat" Multiplicity="*" />
+          <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="*" />
         </Association>
         <Association Name="InspectionDocumentInfo">
-          <End Type="DBModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
-          <End Type="DBModel.Inspection" Role="Inspection" Multiplicity="*" />
+          <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="*" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
         </Association>
         <Association Name="SupplyDocumentInfo">
-          <End Type="DBModel.DocumentInfo" Role="DocumentInfo" Multiplicity="*" />
-          <End Type="DBModel.Supplies" Role="Supplies" Multiplicity="*" />
+          <End Role="DocumentInfo" Type="Self.DocumentInfo" Multiplicity="*" />
+          <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
         </Association>
         <Association Name="WorkFlowDeliverable">
-          <End Type="DBModel.DeliverableType" Role="DeliverableType" Multiplicity="*" />
-          <End Type="DBModel.Workflow" Role="Workflow" Multiplicity="*" />
+          <End Role="DeliverableType" Type="Self.DeliverableType" Multiplicity="*" />
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="*" />
         </Association>
+        <EntityContainer Name="PROEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alert" EntityType="Self.Alert" />
+          <EntitySet Name="AlertNotification" EntityType="Self.AlertNotification" />
+          <EntitySet Name="AlertType" EntityType="Self.AlertType" />
+          <EntitySet Name="Applications" EntityType="Self.Applications" />
+          <EntitySet Name="Contractor" EntityType="Self.Contractor" />
+          <EntitySet Name="DataGenerator" EntityType="Self.DataGenerator" />
+          <EntitySet Name="DocumentCategory" EntityType="Self.DocumentCategory" />
+          <EntitySet Name="DocumentFormat" EntityType="Self.DocumentFormat" />
+          <EntitySet Name="DocumentInfo" EntityType="Self.DocumentInfo" />
+          <EntitySet Name="DocumentType" EntityType="Self.DocumentType" />
+          <EntitySet Name="LGA" EntityType="Self.LGA" />
+          <EntitySet Name="Memberships" EntityType="Self.Memberships" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" />
+          <EntitySet Name="PaymentType" EntityType="Self.PaymentType" />
+          <EntitySet Name="Profiles" EntityType="Self.Profiles" />
+          <EntitySet Name="ProjectApplication" EntityType="Self.ProjectApplication" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" />
+          <EntitySet Name="ResourcesInRole" EntityType="Self.ResourcesInRole" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="State" EntityType="Self.State" />
+          <EntitySet Name="UserDetail" EntityType="Self.UserDetail" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Workflow" EntityType="Self.Workflow" />
+          <EntitySet Name="WorkFlowActions" EntityType="Self.WorkFlowActions" />
+          <EntitySet Name="WorkflowStepActions" EntityType="Self.WorkflowStepActions" />
+          <EntitySet Name="WorkflowSteps" EntityType="Self.WorkflowSteps" />
+          <EntitySet Name="DeliverableFormat" EntityType="Self.DeliverableFormat" />
+          <EntitySet Name="DeliverableType" EntityType="Self.DeliverableType" />
+          <EntitySet Name="Inspection" EntityType="Self.Inspection" />
+          <EntitySet Name="ProjectDeliverable" EntityType="Self.ProjectDeliverable" />
+          <EntitySet Name="ProjectType" EntityType="Self.ProjectType" />
+          <EntitySet Name="StageOfCompletion" EntityType="Self.StageOfCompletion" />
+          <EntitySet Name="Supplies" EntityType="Self.Supplies" />
+          <EntitySet Name="SupplyDeliverable" EntityType="Self.SupplyDeliverable" />
+          <EntitySet Name="SupplyItems" EntityType="Self.SupplyItems" />
+          <AssociationSet Name="FK_Alert_WorkFlow" Association="Self.FK_Alert_WorkFlow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowStepActions_Alert" Association="Self.FK_WorkflowStepActions_Alert">
+            <End Role="Alert" EntitySet="Alert" />
+            <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlertNotification_AlertType" Association="Self.FK_AlertNotification_AlertType">
+            <End Role="AlertType" EntitySet="AlertType" />
+            <End Role="AlertNotification" EntitySet="AlertNotification" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipApplication" Association="Self.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="Self.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserApplication" Association="Self.UserApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Contractor" Association="Self.FK_Project_Contractor">
+            <End Role="Contractor" EntitySet="Contractor" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplies_Contractor" Association="Self.FK_Supplies_Contractor">
+            <End Role="Contractor" EntitySet="Contractor" />
+            <End Role="Supplies" EntitySet="Supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_DocumentCategory" Association="Self.FK_DocumentType_DocumentCategory">
+            <End Role="DocumentCategory" EntitySet="DocumentCategory" />
+            <End Role="DocumentType" EntitySet="DocumentType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentInfo_DocumentType" Association="Self.FK_DocumentInfo_DocumentType">
+            <End Role="DocumentType" EntitySet="DocumentType" />
+            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_LGA" Association="Self.FK_Inspection_LGA">
+            <End Role="LGA" EntitySet="LGA" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LGA_State" Association="Self.FK_LGA_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="LGA" EntitySet="LGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_LGA" Association="Self.FK_Project_LGA">
+            <End Role="LGA" EntitySet="LGA" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplies_LGA" Association="Self.FK_Supplies_LGA">
+            <End Role="LGA" EntitySet="LGA" />
+            <End Role="Supplies" EntitySet="Supplies" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="Self.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_PaymentType" Association="Self.FK_Payment_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentType" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Project" Association="Self.FK_Payment_Project">
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="Self.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_ProjectApplication" Association="Self.FK_Inspection_ProjectApplication">
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Workflow" Association="Self.FK_Project_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectApplication_ProjectApplication" Association="Self.FK_ProjectApplication_ProjectApplication">
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+            <End Role="ProjectApplication1" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectApplication_ProjectType" Association="Self.FK_ProjectApplication_ProjectType">
+            <End Role="ProjectType" EntitySet="ProjectType" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectDeliverable_ProjectApplication" Association="Self.FK_ProjectDeliverable_ProjectApplication">
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+            <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_Users" Association="Self.FK_UserDetail_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserDetail" EntitySet="UserDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplies_Workflow" Association="Self.FK_Supplies_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="Supplies" EntitySet="Supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkFlowActions_Workflow" Association="Self.FK_WorkFlowActions_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="WorkFlowActions" EntitySet="WorkFlowActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowSteps_Workflow" Association="Self.FK_WorkflowSteps_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="WorkflowSteps" EntitySet="WorkflowSteps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowStepActions_WorkFlowActions" Association="Self.FK_WorkflowStepActions_WorkFlowActions">
+            <End Role="WorkFlowActions" EntitySet="WorkFlowActions" />
+            <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowStepActions_WorkflowSteps" Association="Self.FK_WorkflowStepActions_WorkflowSteps">
+            <End Role="WorkflowSteps" EntitySet="WorkflowSteps" />
+            <End Role="WorkflowStepActions" EntitySet="WorkflowStepActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectDeliverable_DeliverableFormat" Association="Self.FK_ProjectDeliverable_DeliverableFormat">
+            <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+            <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyDeliverable_DeliverableFormat" Association="Self.FK_SupplyDeliverable_DeliverableFormat">
+            <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+            <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectDeliverable_DeliverableType" Association="Self.FK_ProjectDeliverable_DeliverableType">
+            <End Role="DeliverableType" EntitySet="DeliverableType" />
+            <End Role="ProjectDeliverable" EntitySet="ProjectDeliverable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyDeliverable_DeliverableType" Association="Self.FK_SupplyDeliverable_DeliverableType">
+            <End Role="DeliverableType" EntitySet="DeliverableType" />
+            <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_StageOfCompletion" Association="Self.FK_Inspection_StageOfCompletion">
+            <End Role="StageOfCompletion" EntitySet="StageOfCompletion" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StageOfCompletion_ProjectType" Association="Self.FK_StageOfCompletion_ProjectType">
+            <End Role="ProjectType" EntitySet="ProjectType" />
+            <End Role="StageOfCompletion" EntitySet="StageOfCompletion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyDeliverable_SupplyDeliverable" Association="Self.FK_SupplyDeliverable_SupplyDeliverable">
+            <End Role="Supplies" EntitySet="Supplies" />
+            <End Role="SupplyDeliverable" EntitySet="SupplyDeliverable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyItems_Supplies" Association="Self.FK_SupplyItems_Supplies">
+            <End Role="Supplies" EntitySet="Supplies" />
+            <End Role="SupplyItems" EntitySet="SupplyItems" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentTypeFormat" Association="Self.DocumentTypeFormat">
+            <End Role="DocumentFormat" EntitySet="DocumentFormat" />
+            <End Role="DocumentType" EntitySet="DocumentType" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectDocumentInfo" Association="Self.ProjectDocumentInfo">
+            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
+            <End Role="ProjectApplication" EntitySet="ProjectApplication" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoles" Association="Self.UsersInRoles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="WorkflowDocument" Association="Self.WorkflowDocument">
+            <End Role="DocumentType" EntitySet="DocumentType" />
+            <End Role="Workflow" EntitySet="Workflow" />
+          </AssociationSet>
+          <AssociationSet Name="DeliverableTypeFormat" Association="Self.DeliverableTypeFormat">
+            <End Role="DeliverableFormat" EntitySet="DeliverableFormat" />
+            <End Role="DeliverableType" EntitySet="DeliverableType" />
+          </AssociationSet>
+          <AssociationSet Name="InspectionDocumentInfo" Association="Self.InspectionDocumentInfo">
+            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="SupplyDocumentInfo" Association="Self.SupplyDocumentInfo">
+            <End Role="DocumentInfo" EntitySet="DocumentInfo" />
+            <End Role="Supplies" EntitySet="Supplies" />
+          </AssociationSet>
+          <AssociationSet Name="WorkFlowDeliverable" Association="Self.WorkFlowDeliverable">
+            <End Role="DeliverableType" EntitySet="DeliverableType" />
+            <End Role="Workflow" EntitySet="Workflow" />
+          </AssociationSet>
+          <EntitySet Name="Feedback" EntityType="DBModel.Feedback" />
+        </EntityContainer>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsReply" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2660,552 +2688,566 @@
           <EntitySetMapping Name="Alert">
             <EntityTypeMapping TypeName="DBModel.Alert">
               <MappingFragment StoreEntitySet="Alert">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Sms" ColumnName="Sms" />
-                <ScalarProperty Name="SubjectEmail" ColumnName="SubjectEmail" />
-                <ScalarProperty Name="SubjectSms" ColumnName="SubjectSms" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SubjectSms" ColumnName="SubjectSms" />
+                <ScalarProperty Name="SubjectEmail" ColumnName="SubjectEmail" />
+                <ScalarProperty Name="Sms" ColumnName="Sms" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AlertNotification">
             <EntityTypeMapping TypeName="DBModel.AlertNotification">
               <MappingFragment StoreEntitySet="AlertNotification">
-                <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
-                <ScalarProperty Name="ModifedBy" ColumnName="ModifedBy" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="AlertTypeId" ColumnName="AlertTypeId" />
-                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
-                <ScalarProperty Name="Sender" ColumnName="Sender" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="AlertTypeId" ColumnName="AlertTypeId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModifedBy" ColumnName="ModifedBy" />
+                <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AlertType">
             <EntityTypeMapping TypeName="DBModel.AlertType">
               <MappingFragment StoreEntitySet="AlertType">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="DBModel.Applications">
               <MappingFragment StoreEntitySet="Applications">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contractor">
             <EntityTypeMapping TypeName="DBModel.Contractor">
               <MappingFragment StoreEntitySet="Contractor">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DataGenerator">
             <EntityTypeMapping TypeName="DBModel.DataGenerator">
               <MappingFragment StoreEntitySet="DataGenerator">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TableID" ColumnName="TableID" />
                 <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocumentCategory">
             <EntityTypeMapping TypeName="DBModel.DocumentCategory">
               <MappingFragment StoreEntitySet="DocumentCategory">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocumentFormat">
             <EntityTypeMapping TypeName="DBModel.DocumentFormat">
               <MappingFragment StoreEntitySet="DocumentFormat">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Extension" ColumnName="Extension" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocumentInfo">
             <EntityTypeMapping TypeName="DBModel.DocumentInfo">
               <MappingFragment StoreEntitySet="DocumentInfo">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
-                <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
-                <ScalarProperty Name="Extension" ColumnName="Extension" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocumentType">
             <EntityTypeMapping TypeName="DBModel.DocumentType">
               <MappingFragment StoreEntitySet="DocumentType">
-                <ScalarProperty Name="DocumentCategoryId" ColumnName="DocumentCategoryId" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DocumentCategoryId" ColumnName="DocumentCategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LGA">
             <EntityTypeMapping TypeName="DBModel.LGA">
               <MappingFragment StoreEntitySet="LGA">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Memberships">
             <EntityTypeMapping TypeName="DBModel.Memberships">
               <MappingFragment StoreEntitySet="Memberships">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
-                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
-                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
-                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
-                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
-                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
-                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
-                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
-                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="DBModel.News">
               <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="NoOfView" ColumnName="NoOfView" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="NewsContent" ColumnName="NewsContent" />
-                <ScalarProperty Name="NewsHeadline" ColumnName="NewsHeadline" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NewsHeadline" ColumnName="NewsHeadline" />
+                <ScalarProperty Name="NewsContent" ColumnName="NewsContent" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="NoOfView" ColumnName="NoOfView" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payment">
             <EntityTypeMapping TypeName="DBModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PaymentType">
             <EntityTypeMapping TypeName="DBModel.PaymentType">
               <MappingFragment StoreEntitySet="PaymentType">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Profiles">
             <EntityTypeMapping TypeName="DBModel.Profiles">
               <MappingFragment StoreEntitySet="Profiles">
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
-                <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
-                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+                <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
+                <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectApplication">
             <EntityTypeMapping TypeName="DBModel.ProjectApplication">
               <MappingFragment StoreEntitySet="ProjectApplication">
-                <ScalarProperty Name="ProjectTypeId" ColumnName="ProjectTypeId" />
-                <ScalarProperty Name="EnableSum" ColumnName="EnableSum" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="InspectionUserId" ColumnName="InspectionUserId" />
-                <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
-                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
-                <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
-                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
-                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
+                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+                <ScalarProperty Name="ContractSum" ColumnName="ContractSum" />
+                <ScalarProperty Name="InspectionUserId" ColumnName="InspectionUserId" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="EnableSum" ColumnName="EnableSum" />
+                <ScalarProperty Name="ProjectTypeId" ColumnName="ProjectTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Resource">
             <EntityTypeMapping TypeName="DBModel.Resource">
               <MappingFragment StoreEntitySet="Resource">
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Areas" ColumnName="Areas" />
-                <ScalarProperty Name="Controller" ColumnName="Controller" />
-                <ScalarProperty Name="Action" ColumnName="Action" />
-                <ScalarProperty Name="Icon" ColumnName="Icon" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Areas" ColumnName="Areas" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ResourcesInRole">
             <EntityTypeMapping TypeName="DBModel.ResourcesInRole">
               <MappingFragment StoreEntitySet="ResourcesInRole">
-                <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="DBModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="State">
             <EntityTypeMapping TypeName="DBModel.State">
               <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetail">
             <EntityTypeMapping TypeName="DBModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetail">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="EmailAddres" ColumnName="EmailAddres" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddres" ColumnName="EmailAddres" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DBModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
-                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Workflow">
             <EntityTypeMapping TypeName="DBModel.Workflow">
               <MappingFragment StoreEntitySet="Workflow">
-                <ScalarProperty Name="feedback" ColumnName="feedback" />
-                <ScalarProperty Name="guideline" ColumnName="guideline" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="guideline" ColumnName="guideline" />
+                <ScalarProperty Name="feedback" ColumnName="feedback" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkFlowActions">
             <EntityTypeMapping TypeName="DBModel.WorkFlowActions">
               <MappingFragment StoreEntitySet="WorkFlowActions">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Direction" ColumnName="Direction" />
-                <ScalarProperty Name="IsMovable" ColumnName="IsMovable" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WorkFlowId" ColumnName="WorkFlowId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsMovable" ColumnName="IsMovable" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkflowStepActions">
             <EntityTypeMapping TypeName="DBModel.WorkflowStepActions">
               <MappingFragment StoreEntitySet="WorkflowStepActions">
-                <ScalarProperty Name="PresetReason" ColumnName="PresetReason" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="AlertId" ColumnName="AlertId" />
-                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
-                <ScalarProperty Name="StepId" ColumnName="StepId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StepId" ColumnName="StepId" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="AlertId" ColumnName="AlertId" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="PresetReason" ColumnName="PresetReason" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkflowSteps">
             <EntityTypeMapping TypeName="DBModel.WorkflowSteps">
               <MappingFragment StoreEntitySet="WorkflowSteps">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableFormat">
             <EntityTypeMapping TypeName="DBModel.DeliverableFormat">
               <MappingFragment StoreEntitySet="DeliverableFormat">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeliverableType">
             <EntityTypeMapping TypeName="DBModel.DeliverableType">
               <MappingFragment StoreEntitySet="DeliverableType">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inspection">
             <EntityTypeMapping TypeName="DBModel.Inspection">
               <MappingFragment StoreEntitySet="Inspection">
-                <ScalarProperty Name="InspectionStatus" ColumnName="InspectionStatus" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
-                <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
-                <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
-                <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
-                <ScalarProperty Name="DescriptionOfCompletion" ColumnName="DescriptionOfCompletion" />
-                <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="StageOfCompletionId" ColumnName="StageOfCompletionId" />
-                <ScalarProperty Name="LgaId" ColumnName="LgaId" />
-                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="LgaId" ColumnName="LgaId" />
+                <ScalarProperty Name="StageOfCompletionId" ColumnName="StageOfCompletionId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="StageOfCompletion" ColumnName="StageOfCompletion" />
+                <ScalarProperty Name="DescriptionOfCompletion" ColumnName="DescriptionOfCompletion" />
+                <ScalarProperty Name="ProjectQuality" ColumnName="ProjectQuality" />
+                <ScalarProperty Name="HasDefect" ColumnName="HasDefect" />
+                <ScalarProperty Name="DescriptionOfDefect" ColumnName="DescriptionOfDefect" />
+                <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="InspectionStatus" ColumnName="InspectionStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectDeliverable">
             <EntityTypeMapping TypeName="DBModel.ProjectDeliverable">
               <MappingFragment StoreEntitySet="ProjectDeliverable">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="DeliverableUnit" ColumnName="DeliverableUnit" />
-                <ScalarProperty Name="DeliverableFormatId" ColumnName="DeliverableFormatId" />
-                <ScalarProperty Name="DeliverableId" ColumnName="DeliverableId" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="DeliverableId" ColumnName="DeliverableId" />
+                <ScalarProperty Name="DeliverableFormatId" ColumnName="DeliverableFormatId" />
+                <ScalarProperty Name="DeliverableUnit" ColumnName="DeliverableUnit" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectType">
             <EntityTypeMapping TypeName="DBModel.ProjectType">
               <MappingFragment StoreEntitySet="ProjectType">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StageOfCompletion">
             <EntityTypeMapping TypeName="DBModel.StageOfCompletion">
               <MappingFragment StoreEntitySet="StageOfCompletion">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="ProjectTypeId" ColumnName="ProjectTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectTypeId" ColumnName="ProjectTypeId" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Supplies">
             <EntityTypeMapping TypeName="DBModel.Supplies">
               <MappingFragment StoreEntitySet="Supplies">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="RepresentativePhoneNumber" ColumnName="RepresentativePhoneNumber" />
-                <ScalarProperty Name="RepresentativeDesignation" ColumnName="RepresentativeDesignation" />
-                <ScalarProperty Name="Representative" ColumnName="Representative" />
-                <ScalarProperty Name="VerificationOfficer" ColumnName="VerificationOfficer" />
-                <ScalarProperty Name="VerificationDate" ColumnName="VerificationDate" />
-                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
-                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+                <ScalarProperty Name="VerificationDate" ColumnName="VerificationDate" />
+                <ScalarProperty Name="VerificationOfficer" ColumnName="VerificationOfficer" />
+                <ScalarProperty Name="Representative" ColumnName="Representative" />
+                <ScalarProperty Name="RepresentativeDesignation" ColumnName="RepresentativeDesignation" />
+                <ScalarProperty Name="RepresentativePhoneNumber" ColumnName="RepresentativePhoneNumber" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SupplyDeliverable">
             <EntityTypeMapping TypeName="DBModel.SupplyDeliverable">
               <MappingFragment StoreEntitySet="SupplyDeliverable">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="DeliverableUnit" ColumnName="DeliverableUnit" />
-                <ScalarProperty Name="DeliverableFormatId" ColumnName="DeliverableFormatId" />
-                <ScalarProperty Name="DeliverableId" ColumnName="DeliverableId" />
-                <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
+                <ScalarProperty Name="DeliverableId" ColumnName="DeliverableId" />
+                <ScalarProperty Name="DeliverableFormatId" ColumnName="DeliverableFormatId" />
+                <ScalarProperty Name="DeliverableUnit" ColumnName="DeliverableUnit" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SupplyItems">
             <EntityTypeMapping TypeName="DBModel.SupplyItems">
               <MappingFragment StoreEntitySet="SupplyItems">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="QuantityDelivered" ColumnName="QuantityDelivered" />
-                <ScalarProperty Name="QuantityOrdered" ColumnName="QuantityOrdered" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuantityOrdered" ColumnName="QuantityOrdered" />
+                <ScalarProperty Name="QuantityDelivered" ColumnName="QuantityDelivered" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="DocumentTypeFormat" TypeName="DBModel.DocumentTypeFormat" StoreEntitySet="DocumentTypeFormat">
-            <EndProperty Name="DocumentType">
-              <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
-            </EndProperty>
             <EndProperty Name="DocumentFormat">
               <ScalarProperty Name="Id" ColumnName="DocumentTypeFormatId" />
             </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="DBModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
-            <EndProperty Name="ProjectApplication">
-              <ScalarProperty Name="Id" ColumnName="ProjectId" />
-            </EndProperty>
-            <EndProperty Name="DocumentInfo">
-              <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UsersInRoles" TypeName="DBModel.UsersInRoles" StoreEntitySet="UsersInRoles">
-            <EndProperty Name="Users">
-              <ScalarProperty Name="UserId" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="Roles">
-              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="WorkflowDocument" TypeName="DBModel.WorkflowDocument" StoreEntitySet="WorkflowDocument">
-            <EndProperty Name="Workflow">
-              <ScalarProperty Name="Id" ColumnName="WorkFlowId" />
-            </EndProperty>
             <EndProperty Name="DocumentType">
               <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="DeliverableTypeFormat" TypeName="DBModel.DeliverableTypeFormat" StoreEntitySet="DeliverableTypeFormat">
-            <EndProperty Name="DeliverableType">
-              <ScalarProperty Name="Id" ColumnName="DeliverableTypeId" />
+          <AssociationSetMapping Name="ProjectDocumentInfo" TypeName="DBModel.ProjectDocumentInfo" StoreEntitySet="ProjectDocumentInfo">
+            <EndProperty Name="DocumentInfo">
+              <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
             </EndProperty>
+            <EndProperty Name="ProjectApplication">
+              <ScalarProperty Name="Id" ColumnName="ProjectId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UsersInRoles" TypeName="DBModel.UsersInRoles" StoreEntitySet="UsersInRoles">
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WorkflowDocument" TypeName="DBModel.WorkflowDocument" StoreEntitySet="WorkflowDocument">
+            <EndProperty Name="DocumentType">
+              <ScalarProperty Name="Id" ColumnName="DocumentTypeId" />
+            </EndProperty>
+            <EndProperty Name="Workflow">
+              <ScalarProperty Name="Id" ColumnName="WorkFlowId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="DeliverableTypeFormat" TypeName="DBModel.DeliverableTypeFormat" StoreEntitySet="DeliverableTypeFormat">
             <EndProperty Name="DeliverableFormat">
               <ScalarProperty Name="Id" ColumnName="DeveliverableFormatId" />
             </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="InspectionDocumentInfo" TypeName="DBModel.InspectionDocumentInfo" StoreEntitySet="InspectionDocumentInfo">
-            <EndProperty Name="Inspection">
-              <ScalarProperty Name="Id" ColumnName="InspectionId" />
-            </EndProperty>
-            <EndProperty Name="DocumentInfo">
-              <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="SupplyDocumentInfo" TypeName="DBModel.SupplyDocumentInfo" StoreEntitySet="SupplyDocumentInfo">
-            <EndProperty Name="Supplies">
-              <ScalarProperty Name="Id" ColumnName="SupplyId" />
-            </EndProperty>
-            <EndProperty Name="DocumentInfo">
-              <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="WorkFlowDeliverable" TypeName="DBModel.WorkFlowDeliverable" StoreEntitySet="WorkFlowDeliverable">
-            <EndProperty Name="Workflow">
-              <ScalarProperty Name="Id" ColumnName="WorkflowId" />
-            </EndProperty>
             <EndProperty Name="DeliverableType">
               <ScalarProperty Name="Id" ColumnName="DeliverableTypeId" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="InspectionDocumentInfo" TypeName="DBModel.InspectionDocumentInfo" StoreEntitySet="InspectionDocumentInfo">
+            <EndProperty Name="DocumentInfo">
+              <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
+            </EndProperty>
+            <EndProperty Name="Inspection">
+              <ScalarProperty Name="Id" ColumnName="InspectionId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SupplyDocumentInfo" TypeName="DBModel.SupplyDocumentInfo" StoreEntitySet="SupplyDocumentInfo">
+            <EndProperty Name="DocumentInfo">
+              <ScalarProperty Name="Id" ColumnName="DocumentInfoId" />
+            </EndProperty>
+            <EndProperty Name="Supplies">
+              <ScalarProperty Name="Id" ColumnName="SupplyId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WorkFlowDeliverable" TypeName="DBModel.WorkFlowDeliverable" StoreEntitySet="WorkFlowDeliverable">
+            <EndProperty Name="DeliverableType">
+              <ScalarProperty Name="Id" ColumnName="DeliverableTypeId" />
+            </EndProperty>
+            <EndProperty Name="Workflow">
+              <ScalarProperty Name="Id" ColumnName="WorkflowId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Feedback">
+            <EntityTypeMapping TypeName="DBModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsReply" ColumnName="IsReply" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

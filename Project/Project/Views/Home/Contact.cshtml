@@ -24,55 +24,106 @@
     </div>
 </section>
 
+<div class="main-content iq-contact2">
+    <!-- Contact Us 2 -->
+    <div class="iq-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3939.9997278744695!2d7.471374614786936!3d9.063787893496784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0b0380bc4b35%3A0x345bc26ff2eebd3e!2sZone%204%2C%207%20Gwani%20St%2C%20Zone%204%20904101%2C%20Abuja!5e0!3m2!1sen!2sng!4v1640376941156!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <section class="iq-our-touch overview-block-pb">
+        <div class="container">
+            <div class="iq-get-in iq-pall-40 white-bg">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 iq-mtb-15">
 
-<section class="overview-block-ptb2 green-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-12">
-                <div class="contact-blog text-center iq-font-white iq-mtb-20">
-                    <div class="iq-line">
-                        <div class="feature-icon">
-                            <i aria-hidden="true" class="ion-ios-location-outline"></i>
-                        </div>
-                        <h4 class="iq-font-black iq-mt-20 iq-mb-10 iq-tw-6">Address</h4>
-                        <p>UBEC Building,No 7 Gwani Street, Wuse Zone 4, Abuja, Nigeria</p>
+                        @*@if (TempData["Message"] != null)
+                        {
+                            var alertType = (TempData["MessageType"] != null) ? TempData["MessageType"] : "alert-info";
+                            <div class="alert @alertType fade in">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                @Html.Raw(TempData["Message"])
+                            </div>
+                        }*@
+
+                        <h4 class="heading-left iq-tw-6 iq-pb-20 iq-mb-20">Get in Touch</h4>
+                        @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal row-border" }))
+                        {
+
+                            @Html.AntiForgeryToken()
+                            <div class="contact-form">
+                                <div class="section-field iq-mt-10">
+
+                                    @Html.TextBoxFor(m => m.feedbackForm.FullName, new { @class = "form-control require", placeholder = "Full Name" })
+                                    @Html.ValidationMessageFor(model => model.feedbackForm.FullName, null, new { @style = "color:red" })
+
+                                </div>
+                                <div class="section-field iq-mt-10">
+
+                                    @Html.TextBoxFor(m => m.feedbackForm.EmailAddress, new { @class = "form-control require", placeholder = "Email Address" })
+                                    @Html.ValidationMessageFor(model => model.feedbackForm.EmailAddress, null, new { @style = "color:red" })
+                                </div>
+                                <div class="section-field iq-mt-10">
+
+                                    @Html.TextBoxFor(m => m.feedbackForm.MobileNo, new { @class = "form-control require", placeholder = "Mobile No" })
+                                    @Html.ValidationMessageFor(model => model.feedbackForm.MobileNo, null, new { @style = "color:red" })
+                                </div>
+                                <div class="section-field textarea iq-mt-10">
+
+                                    @Html.TextAreaFor(m => m.feedbackForm.Comment, new { @class = "input-message require", placeholder = "Comment" })
+                                    @Html.ValidationMessageFor(model => model.feedbackForm.Comment, null, new { @style = "color:red" })
+                                </div>
+                                @*<div class="section-field">
+                    <div class="g-recaptcha" data-sitekey="6Lc5XV4UAAAAAJzUmGomye9Peru8lXyzT22FH0lX"></div>
+                </div>*@
+
+                                <input type="submit" class="button pull-right iq-mt-20" pull-right" value="Send Message" />
+                                <p role="alert"></p>
+                            </div>
+                        }
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="contact-blog text-center iq-font-white iq-mtb-20">
-                    <div class="iq-line">
-                        <div class="feature-icon">
-                            <i aria-hidden="true" class="ion-ios-telephone-outline"></i>
+                    <div class="col-lg-6 col-md-12 col-sm-12 iq-mtb-15">
+                        <div class="contact-info  pt-0 iq-pl-60 iq-pr-60">
+                            <h4 class="heading-left iq-tw-6 iq-mb-20 iq-pb-20">Contact Us</h4>
+                            <div class="iq-contact-box media">
+                                <div class="iq-icon left">
+                                    <i aria-hidden="true" class="ion-ios-location-outline"></i>
+                                </div>
+                                <div class="contact-box right media-body">
+                                    <h5 class="iq-tw-6">Address</h5>
+                                    <p>UBEC Building,No 7 Gwani Street, Wuse Zone 4, Abuja, Nigeria</p>
+                                </div>
+                            </div>
+                            <div class=".iq-contact-box right media iq-mt-40">
+                                <div class="iq-icon left">
+                                    <i aria-hidden="true" class="ion-ios-telephone-outline"></i>
+                                </div>
+                                <div class="contact-box right media-body">
+                                    <h5 class="iq-tw-6">Phone</h5>
+                                    <span class="lead iq-tw-5">+2349038022457, +2347016390000</span>
+                                    <div class="iq-mb-0">Mon-Fri 8:00am - 5:00pm</div>
+                                </div>
+                            </div>
+                            <div class=".iq-contact-box right media iq-mt-40">
+                                <div class="iq-icon left">
+                                    <i aria-hidden="true" class="ion-ios-email-outline"></i>
+                                </div>
+                                <div class="contact-box right media-body">
+                                    <h5 class="iq-tw-6">Mail</h5>
+                                    <span class="lead iq-tw-5">info@ubec.gov.ng</span>
+                                    <div class="iq-mb-0">24 X 7 online support</div>
+                                </div>
+                            </div>
+                            @*<ul class="info-share list-inline">
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-github"></i></a></li>
+                            </ul>*@
                         </div>
-                        <h4 class="iq-font-black iq-mt-20 iq-mb-10 iq-tw-6">Phone</h4>
-                        <span class="iq-lead iq-tw-6">+2349038022457, +2347016390000</span>
-                        <p class="iq-mb-0">Mon-Fri 8:00am - 5:00pm</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="contact-blog text-center iq-font-white iq-mtb-20">
-                    <div class="iq-line">
-                        <div class="feature-icon">
-                            <i aria-hidden="true" class="ion-ios-email-outline"></i>
-                        </div>
-                        <h4 class="iq-font-black iq-mt-20 iq-mb-10 iq-tw-6">Email</h4>
-                        <span class="iq-lead iq-tw-6">
-                            info@ubec.gov.ng
-                        </span>
-                        
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="overview-block-ptb2">
-    <div class="container">
-        <div class="row">
-           
-        </div>
-    </div>
-</section>
+    </section>
+</div>

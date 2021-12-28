@@ -78,7 +78,7 @@ namespace Project.Areas.Admin.Models
         public int ContractorId { get; set; }
 
         [Required(ErrorMessage = "Please enter the Contract Sum")]
-        public decimal ContractSum { get; set; }
+        public decimal? ContractSum { get; set; }
 
         [Required(ErrorMessage = "Please select the Project Type")]
         public int ProjectTypeId { get; set; }
@@ -87,10 +87,10 @@ namespace Project.Areas.Admin.Models
         public string Status { get; set; }
         public int workflowId { get; set; }
         public string DescriptionOfDefect { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
         public bool ShowCost { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 
     public class ProjectPaymentForm

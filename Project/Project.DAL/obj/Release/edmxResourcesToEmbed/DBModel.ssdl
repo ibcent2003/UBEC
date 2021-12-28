@@ -391,6 +391,19 @@
     <Property Name="DeliverableTypeId" Type="int" Nullable="false" />
     <Property Name="DeveliverableFormatId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsReply" Type="bit" Nullable="false" />
+    <Property Name="SentDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Inspection">
     <Key>
       <PropertyRef Name="Id" />
@@ -1185,6 +1198,7 @@
     <EntitySet Name="DeliverableFormat" EntityType="Self.DeliverableFormat" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="DeliverableType" EntityType="Self.DeliverableType" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="DeliverableTypeFormat" EntityType="Self.DeliverableTypeFormat" Schema="ubecdb" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="InspectionDocumentInfo" EntityType="Self.InspectionDocumentInfo" Schema="ubecdb" store:Type="Tables" />
     <EntitySet Name="ProjectDeliverable" EntityType="Self.ProjectDeliverable" Schema="ubecdb" store:Type="Tables" />

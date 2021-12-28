@@ -81,15 +81,6 @@ namespace Project.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("G:\\HostingSpaces\\raukzdup\\ubeccms.com\\wwwroot\\Content\\Backend\\Photo\\")]
-        public string FullPhotoPath {
-            get {
-                return ((string)(this["FullPhotoPath"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G:\\HostingSpaces\\raukzdup\\ubeccms.com\\wwwroot\\Content\\Backend\\Photo\\")]
         public string ServerPath {
             get {
                 return ((string)(this["ServerPath"]));
@@ -147,6 +138,15 @@ namespace Project.Properties {
         public string ApkPath {
             get {
                 return ((string)(this["ApkPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("G:\\HostingSpaces\\raukzdup\\ubeccms.com\\wwwroot\\Content\\Backend\\Photo\\")]
+        public string FullPhotoPath {
+            get {
+                return ((string)(this["FullPhotoPath"]));
             }
         }
     }

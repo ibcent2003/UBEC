@@ -62,3 +62,46 @@
         </div>
     </div>
 </div>
+
+<div class="row row-bg">
+    <div class="col-sm-6 col-md-3">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual green"><i class="icon-building"></i></div>
+                <div class="title">New Feedback</div>
+                <div class="value">@Model.NewFeedback</div>
+                <a class="more" href="@Url.Action("Index", "Feedback", new {feedtype="New", area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual green"><i class="icon-road"></i></div>
+                <div class="title">Replied Feedback</div>
+                <div class="value">@Model.RepliedFeedback</div>
+                <a class="more" href="@Url.Action("Index", "Feedback", new {feedtype="Replied", area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 hidden-xs">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual yellow"><i class="icon-dollar"></i></div>
+                <div class="title">Deleted Feedback</div>
+                <div class="value">@Model.DeletedFeedback</div>
+                <a class="more" href="@Url.Action("Index", "Feedback", new {feedtype="Deleted", area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 hidden-xs">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content">
+                <div class="visual red"><i class="icon-user"></i></div>
+                <div class="title">Total Feedback</div>
+                <div class="value">@Model.TotalFeedback</div>
+                <a class="more" href="@Url.Action("Index", "Feedback", new {feedtype="Total", area="Admin"})">View More <i class="pull-right icon-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,88 +4,89 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="62904fb08194484fa10fa08b9703c091" Name="Diagram1">
-        <EntityTypeShape EntityType="DBModel.Alert" Width="1.5" PointX="7.5" PointY="43.375" />
-        <EntityTypeShape EntityType="DBModel.AlertNotification" Width="1.5" PointX="8" PointY="1" />
-        <EntityTypeShape EntityType="DBModel.AlertType" Width="1.5" PointX="5.75" PointY="1.75" />
-        <EntityTypeShape EntityType="DBModel.Applications" Width="1.5" PointX="0.75" PointY="6" />
-        <EntityTypeShape EntityType="DBModel.Contractor" Width="1.5" PointX="5.25" PointY="30.625" />
-        <EntityTypeShape EntityType="DBModel.DataGenerator" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBModel.DocumentCategory" Width="1.5" PointX="0.75" PointY="32.375" />
-        <EntityTypeShape EntityType="DBModel.DocumentFormat" Width="1.5" PointX="0.75" PointY="29.25" />
-        <EntityTypeShape EntityType="DBModel.DocumentInfo" Width="1.5" PointX="5.25" PointY="16.375" />
-        <EntityTypeShape EntityType="DBModel.DocumentType" Width="1.5" PointX="3" PointY="30.375" />
-        <EntityTypeShape EntityType="DBModel.LGA" Width="1.5" PointX="5.25" PointY="36.375" />
-        <EntityTypeShape EntityType="DBModel.Memberships" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="DBModel.News" Width="1.5" PointX="9.75" PointY="5.75" />
-        <EntityTypeShape EntityType="DBModel.Payment" Width="1.5" PointX="12.75" PointY="36.625" />
-        <EntityTypeShape EntityType="DBModel.PaymentType" Width="1.5" PointX="10.5" PointY="31.75" />
-        <EntityTypeShape EntityType="DBModel.Profiles" Width="1.5" PointX="7.5" PointY="7.25" />
-        <EntityTypeShape EntityType="DBModel.ProjectApplication" Width="1.5" PointX="7.5" PointY="29.5" />
-        <EntityTypeShape EntityType="DBModel.Resource" Width="1.5" PointX="9.75" PointY="9.75" />
-        <EntityTypeShape EntityType="DBModel.ResourcesInRole" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBModel.Roles" Width="1.5" PointX="3" PointY="11.875" />
-        <EntityTypeShape EntityType="DBModel.State" Width="1.5" PointX="3" PointY="36.75" />
-        <EntityTypeShape EntityType="DBModel.UserDetail" Width="1.5" PointX="7.5" PointY="10.125" />
-        <EntityTypeShape EntityType="DBModel.Users" Width="1.5" PointX="5.25" PointY="8.625" />
-        <EntityTypeShape EntityType="DBModel.Workflow" Width="1.5" PointX="5.25" PointY="25.875" />
-        <EntityTypeShape EntityType="DBModel.WorkFlowActions" Width="1.5" PointX="7.5" PointY="39.875" />
-        <EntityTypeShape EntityType="DBModel.WorkflowStepActions" Width="1.5" PointX="9.75" PointY="34.75" />
-        <EntityTypeShape EntityType="DBModel.WorkflowSteps" Width="1.5" PointX="7.5" PointY="25.625" />
-        <EntityTypeShape EntityType="DBModel.DeliverableFormat" Width="1.5" PointX="0.75" PointY="17.75" />
-        <EntityTypeShape EntityType="DBModel.DeliverableType" Width="1.5" PointX="3" PointY="25.5" />
-        <EntityTypeShape EntityType="DBModel.Inspection" Width="1.5" PointX="12.75" PointY="30.375" />
-        <EntityTypeShape EntityType="DBModel.ProjectDeliverable" Width="1.5" PointX="5.25" PointY="21.5" />
-        <EntityTypeShape EntityType="DBModel.ProjectType" Width="1.5" PointX="5.25" PointY="33.75" />
-        <EntityTypeShape EntityType="DBModel.StageOfCompletion" Width="1.5" PointX="10.5" PointY="38.625" />
-        <EntityTypeShape EntityType="DBModel.Supplies" Width="1.5" PointX="10.5" PointY="25.25" />
-        <EntityTypeShape EntityType="DBModel.SupplyDeliverable" Width="1.5" PointX="8.25" PointY="21.5" />
-        <EntityTypeShape EntityType="DBModel.SupplyItems" Width="1.5" PointX="12.75" PointY="26.375" />
-        <AssociationConnector Association="DBModel.FK_Alert_WorkFlow" />
-        <AssociationConnector Association="DBModel.FK_WorkflowStepActions_Alert" />
-        <AssociationConnector Association="DBModel.FK_AlertNotification_AlertType" />
-        <AssociationConnector Association="DBModel.MembershipApplication" />
-        <AssociationConnector Association="DBModel.RoleApplication" />
-        <AssociationConnector Association="DBModel.UserApplication" />
-        <AssociationConnector Association="DBModel.FK_Project_Contractor" />
-        <AssociationConnector Association="DBModel.FK_Supplies_Contractor" />
-        <AssociationConnector Association="DBModel.FK_DocumentType_DocumentCategory" />
-        <AssociationConnector Association="DBModel.FK_DocumentInfo_DocumentType" />
-        <AssociationConnector Association="DBModel.FK_Inspection_LGA" />
-        <AssociationConnector Association="DBModel.FK_LGA_State" />
-        <AssociationConnector Association="DBModel.FK_Project_LGA" />
-        <AssociationConnector Association="DBModel.FK_Supplies_LGA" />
-        <AssociationConnector Association="DBModel.MembershipUser" />
-        <AssociationConnector Association="DBModel.FK_Payment_PaymentType" />
-        <AssociationConnector Association="DBModel.FK_Payment_Project" />
-        <AssociationConnector Association="DBModel.UserProfile" />
-        <AssociationConnector Association="DBModel.FK_Inspection_ProjectApplication" />
-        <AssociationConnector Association="DBModel.FK_Project_Workflow" />
-        <AssociationConnector Association="DBModel.FK_ProjectApplication_ProjectApplication" />
-        <AssociationConnector Association="DBModel.FK_ProjectApplication_ProjectType" />
-        <AssociationConnector Association="DBModel.FK_ProjectDeliverable_ProjectApplication" />
-        <AssociationConnector Association="DBModel.FK_UserDetail_Users" />
-        <AssociationConnector Association="DBModel.FK_Supplies_Workflow" />
-        <AssociationConnector Association="DBModel.FK_WorkFlowActions_Workflow" />
-        <AssociationConnector Association="DBModel.FK_WorkflowSteps_Workflow" />
-        <AssociationConnector Association="DBModel.FK_WorkflowStepActions_WorkFlowActions" />
-        <AssociationConnector Association="DBModel.FK_WorkflowStepActions_WorkflowSteps" />
-        <AssociationConnector Association="DBModel.FK_ProjectDeliverable_DeliverableFormat" />
-        <AssociationConnector Association="DBModel.FK_SupplyDeliverable_DeliverableFormat" />
-        <AssociationConnector Association="DBModel.FK_ProjectDeliverable_DeliverableType" />
-        <AssociationConnector Association="DBModel.FK_SupplyDeliverable_DeliverableType" />
-        <AssociationConnector Association="DBModel.FK_Inspection_StageOfCompletion" />
-        <AssociationConnector Association="DBModel.FK_StageOfCompletion_ProjectType" />
-        <AssociationConnector Association="DBModel.FK_SupplyDeliverable_SupplyDeliverable" />
-        <AssociationConnector Association="DBModel.FK_SupplyItems_Supplies" />
-        <AssociationConnector Association="DBModel.DocumentTypeFormat" />
-        <AssociationConnector Association="DBModel.ProjectDocumentInfo" />
-        <AssociationConnector Association="DBModel.UsersInRoles" />
-        <AssociationConnector Association="DBModel.WorkflowDocument" />
-        <AssociationConnector Association="DBModel.DeliverableTypeFormat" />
-        <AssociationConnector Association="DBModel.InspectionDocumentInfo" />
-        <AssociationConnector Association="DBModel.SupplyDocumentInfo" />
-        <AssociationConnector Association="DBModel.WorkFlowDeliverable" />
+      <Diagram DiagramId="c46082e4a49c4d07b61aa0e883a507f8" Name="Diagram1">
+        <EntityTypeShape EntityType="DBModel.Alert" Width="1.5" PointX="7.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.AlertNotification" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.AlertType" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Applications" Width="1.5" PointX="17.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Contractor" Width="1.5" PointX="11.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.DataGenerator" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.DocumentCategory" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.DocumentFormat" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.DocumentInfo" Width="1.5" PointX="11.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.DocumentType" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.LGA" Width="1.5" PointX="11.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Memberships" Width="1.5" PointX="20" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.News" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Payment" Width="1.5" PointX="12.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.PaymentType" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Profiles" Width="1.5" PointX="24.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.ProjectApplication" Width="1.5" PointX="10.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Resource" Width="1.5" PointX="2.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.ResourcesInRole" Width="1.5" PointX="5.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Roles" Width="1.5" PointX="20" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.State" Width="1.5" PointX="9" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.UserDetail" Width="1.5" PointX="24.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Users" Width="1.5" PointX="22.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Workflow" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.WorkFlowActions" Width="1.5" PointX="7.5" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.WorkflowStepActions" Width="1.5" PointX="10.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.WorkflowSteps" Width="1.5" PointX="7.5" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.DeliverableFormat" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.DeliverableType" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Inspection" Width="1.5" PointX="15.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.ProjectDeliverable" Width="1.5" PointX="8.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.ProjectType" Width="1.5" PointX="8.25" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.StageOfCompletion" Width="1.5" PointX="13.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Supplies" Width="1.5" PointX="13.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.SupplyDeliverable" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.SupplyItems" Width="1.5" PointX="15.75" PointY="18.375" IsExpanded="true" />
+        <AssociationConnector Association="DBModel.FK_Alert_WorkFlow" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_WorkflowStepActions_Alert" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_AlertNotification_AlertType" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.MembershipApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.RoleApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.UserApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Project_Contractor" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Supplies_Contractor" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_DocumentType_DocumentCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_DocumentInfo_DocumentType" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Inspection_LGA" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_LGA_State" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Project_LGA" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Supplies_LGA" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.MembershipUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Payment_PaymentType" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Payment_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Inspection_ProjectApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Project_Workflow" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_ProjectApplication_ProjectApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_ProjectApplication_ProjectType" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_ProjectDeliverable_ProjectApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_UserDetail_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Supplies_Workflow" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_WorkFlowActions_Workflow" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_WorkflowSteps_Workflow" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_WorkflowStepActions_WorkFlowActions" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_WorkflowStepActions_WorkflowSteps" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_ProjectDeliverable_DeliverableFormat" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_SupplyDeliverable_DeliverableFormat" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_ProjectDeliverable_DeliverableType" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_SupplyDeliverable_DeliverableType" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Inspection_StageOfCompletion" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_StageOfCompletion_ProjectType" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_SupplyDeliverable_SupplyDeliverable" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_SupplyItems_Supplies" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.DocumentTypeFormat" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.ProjectDocumentInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.UsersInRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.WorkflowDocument" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.DeliverableTypeFormat" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.InspectionDocumentInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.SupplyDocumentInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.WorkFlowDeliverable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBModel.Feedback" Width="1.5" PointX="13.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

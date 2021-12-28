@@ -11,5 +11,10 @@ namespace Project.Areas.Admin.Models
         public int TotalRenovation { get; set; }
         public int TotalSupply { get; set; }
         public int TotalProject { get; set; }
+
+        public int NewFeedback { get; set; }
+        public int RepliedFeedback { get; set; }
+        public int DeletedFeedback { get; set; }
+        public int TotalFeedback { get; set; }
     }
 }

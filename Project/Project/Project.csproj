@@ -68,7 +68,7 @@
     </Reference>
     <Reference Include="Project.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Project.DAL\bin\Debug\Project.DAL.dll</HintPath>
+      <HintPath>..\Project.DAL\bin\Release\Project.DAL.dll</HintPath>
     </Reference>
     <Reference Include="SecurityGuard, Version=1.0.53.580, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SecurityGuard.MVC4.1.0.14\lib\net40\SecurityGuard.dll</HintPath>
@@ -217,12 +217,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\InspDashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\MeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResourceController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplyManagementController.cs" />
     <Compile Include="Areas\Admin\Models\DashboardViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\FeedbackViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GrantResourceToRoleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InspDashboardViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProjectViewModel.cs" />
@@ -1523,6 +1525,8 @@
     <Content Include="Areas\Admin\Views\SupplyManagement\Detail.cshtml" />
     <Content Include="Content\app-debug.apk" />
     <Content Include="Areas\Admin\Views\Me\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedback\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedback\FeedbackInfo.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="MvcInstaller\ajax-loader.gif" />
     <Content Include="MvcInstaller\jquery-1.6.1.min.js" />
@@ -1633,11 +1637,15 @@
     <Content Include="Views\Home\DownloadApk.cshtml" />
     <Content Include="Views\Home\SupplyList.cshtml" />
     <Content Include="Views\Home\ViewSupply.cshtml" />
+    <Content Include="Views\Home\FeedbackSent.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\ViewResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Setup\Views\Shared\" />
+    <Folder Include="bin\" />
     <Folder Include="Content\Backend\datatables\extensions\AutoFill\css\" />
     <Folder Include="Content\Backend\datatables\extensions\AutoFill\examples\" />
     <Folder Include="Content\Backend\datatables\extensions\AutoFill\images\" />

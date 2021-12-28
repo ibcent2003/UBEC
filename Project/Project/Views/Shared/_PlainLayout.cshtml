@@ -109,18 +109,19 @@
             </section>
         </nav>
     </header>
-   
-   
-    
+
+
+
     <div class="main-content">
-      
+
         @RenderBody()
-       
+
     </div>
     <!--=================================
     Main Content -->
     <!--=================================
     Footer -->
+    @RenderSection("scripts", required: false)
     @Html.Partial("Partial/_Footer")
     <!--=================================
     Footer -->

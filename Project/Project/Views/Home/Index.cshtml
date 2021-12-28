@@ -124,11 +124,10 @@
                             {
                                 <div class="item">
                                     <div>
-                                        <a href="portfolio-single-1.html">                                          
+                                        <a href="@Url.Action("ViewReport", "Home", new {Id=i.ProjectApplication.TransactionId, Area = ""})">                                          
                                             <img class="img-fluid wd-full itemImage" src="@Url.Action("DocumentsUploadedPath", new { Path = (Model.PicturePath) + p.Path }) " />
                                         </a>
                                         <h6 class="iq-font-white iq-tw-5 iq-mt-15">@p.DocumentType.Name</h6>
-
                                     </div>
                                 </div>
                             }

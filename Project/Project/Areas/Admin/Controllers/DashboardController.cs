@@ -51,6 +51,18 @@ namespace Project.Areas.Admin.Controllers
 
                     model.TotalProject = CountConstruction + CountRenovation + CountSupply;
 
+                    int totalnewfeedback = db.Feedback.Where(x=>x.IsReply==false).Count();
+                    model.NewFeedback = totalnewfeedback;
+
+                    int replied = db.Feedback.Where(x => x.IsReply == true).Count();
+                    model.RepliedFeedback = replied;
+
+                    int deleted = db.Feedback.Where(x => x.IsDeleted == true).Count();
+                    model.DeletedFeedback = deleted;
+
+                    int total = db.Feedback.Count();
+                    model.TotalFeedback = total;
+
                     return View(model);
                 }
                 else if (Roles.GetRolesForUser(User.Identity.Name).Contains("Inspection Officer"))

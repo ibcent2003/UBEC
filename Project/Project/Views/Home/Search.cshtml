@@ -1,0 +1,106 @@
+﻿@model Project.Models.IndexViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_PlainLayout.cshtml";
+}
+
+<section class="overview-block-ptb iq-over-black-70 jarallax iq-breadcrumb3 text-left iq-font-white" style="background-image: url('/Content/Frontend/revolution/assets/s1.jpg'); background-position: center center; background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-sm-12">
+                <div class="iq-mb-0">
+                    <h2 class="iq-font-white iq-tw-6">Search</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <nav aria-label="breadcrumb" class="text-right">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="ion-android-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Search</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="main-content iq-contact2">
+    <section class="iq-our-touch overview-block-pb">
+        <div class="container">
+            <div class="iq-get-in iq-pall-40 white-bg">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 iq-mtb-15">
+
+                        @*@if (TempData["Message"] != null)
+                            {
+                                var alertType = (TempData["MessageType"] != null) ? TempData["MessageType"] : "alert-info";
+                                <div class="alert @alertType fade in">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    @Html.Raw(TempData["Message"])
+                                </div>
+                            }*@
+
+                        @*<h4 class="heading-left iq-tw-6 iq-pb-20 iq-mb-20">Get in Touch</h4>*@
+                        @using (Html.BeginForm("ViewResult", "Home", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal row-border" }))
+                        {
+                            @Html.HiddenFor(x=>x.workflow.Id)
+                            @Html.AntiForgeryToken()
+                            <div class="contact-form">
+                                <div class="section-field iq-mt-10">
+
+                                    @Html.DropDownListFor(m => m.serachForm.StateId, new SelectList(Model.StateList, "Value", "Text"), "Please Select a State", new { @class = "form-control", onChange = "GetAllLGA(this)" })
+                                    @Html.ValidationMessageFor(m => m.serachForm.StateId, null, new { @style = "color:red" })
+                                </div>
+                                <div class="section-field iq-mt-10">
+                                    @Html.DropDownListFor(m => m.serachForm.LgaId, new SelectList(Model.LgaList, "Value", "Text"), "Please Select a LGA", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.serachForm.LgaId, null, new { @style = "color:red" })
+                                </div>
+                                <input type="submit" class="button pull-right iq-mt-10" pull-right" value="Search" />
+                                <p role="alert"></p>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    @section Scripts
+    {
+        @Scripts.Render("~/Content/Backend/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js")
+
+        <script type="text/javascript">
+        "use strict";
+        function getLga(e) {
+            var stateId = $(e).val();
+
+            var currentRequest = null;
+            var currentRequest = $.ajax({
+                url: '@Url.Action("GetLga", "Project")',
+                dataType: 'json',
+                type: 'POST',
+                data: { StateId: stateId },
+                beforeSend: function () {
+                    if (currentRequest != null) {
+                        currentRequest.abort();
+                    }
+                },
+                success: function (msg) {
+                    $("#serachForm_LgaId").html("");
+                    $.each(msg, function (index, element) {
+                        $("#serachForm_LgaId").append('<option  value="' + element.Value + '">' + element.Text + '</option>');
+                    });
+                },
+                error: function (errmsg) { }
+            });
+        }
+
+        function GetAllLGA(e) {
+            getLga(e);
+
+        }
+        </script>
+    }

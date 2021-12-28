@@ -73,6 +73,8 @@ namespace Project.Areas.Admin.Controllers
                 ProjectViewModel model = new ProjectViewModel();
                 getInspection.InspectionStatus = "Approved";
                 getproject.StageOfCompletion = getInspection.StageOfCompletion;
+                getproject.Coordinate = getInspection.Coordinate;
+                getproject.Status = "Approved";
                 db.SaveChanges();
                 TempData["message"] = "Report has been approved successfully.";
                 return RedirectToAction("Detail", "Project", new {Id= getInspection.Id, area = "Admin" });
@@ -106,7 +108,7 @@ namespace Project.Areas.Admin.Controllers
                     return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
                 ProjectViewModel model = new ProjectViewModel();
-                getInspection.InspectionStatus = "Not Submitted";
+                getInspection.InspectionStatus = "Submitted";
                 getproject.StageOfCompletion = getInspection.StageOfCompletion;
                 db.SaveChanges();
                 TempData["message"] = "Report has been Disapproved successfully.";
@@ -267,8 +269,8 @@ namespace Project.Areas.Admin.Controllers
                 model.projectForm.ProjectTypeId = getproject.ProjectTypeId;
                 model.project = getproject;
                 model.projectForm.Coordinate = getproject.Coordinate;
-                model.projectForm.StartDate = getproject.StartDate;
-                model.projectForm.EndDate = getproject.EndDate;
+               model.projectForm.StartDate = getproject.StartDate;
+               model.projectForm.EndDate = getproject.EndDate;
                 model.projectForm.ShowCost = getproject.EnableSum;
                 return View(model);
             }

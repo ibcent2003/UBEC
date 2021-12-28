@@ -690,6 +690,22 @@ namespace Project.DAL
             }
         }
         private ObjectSet<SupplyItems> _SupplyItems;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Feedback> Feedback
+        {
+            get
+            {
+                if ((_Feedback == null))
+                {
+                    _Feedback = base.CreateObjectSet<Feedback>("Feedback");
+                }
+                return _Feedback;
+            }
+        }
+        private ObjectSet<Feedback> _Feedback;
 
         #endregion
 
@@ -981,6 +997,14 @@ namespace Project.DAL
         public void AddToSupplyItems(SupplyItems supplyItems)
         {
             base.AddObject("SupplyItems", supplyItems);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Feedback EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFeedback(Feedback feedback)
+        {
+            base.AddObject("Feedback", feedback);
         }
 
         #endregion
@@ -3810,6 +3834,244 @@ namespace Project.DAL
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DBModel", Name="Feedback")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Feedback : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Feedback object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="fullName">Initial value of the FullName property.</param>
+        /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
+        /// <param name="mobileNo">Initial value of the MobileNo property.</param>
+        /// <param name="comment">Initial value of the Comment property.</param>
+        /// <param name="isReply">Initial value of the IsReply property.</param>
+        /// <param name="sentDate">Initial value of the SentDate property.</param>
+        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
+        public static Feedback CreateFeedback(global::System.Int32 id, global::System.String fullName, global::System.String emailAddress, global::System.String mobileNo, global::System.String comment, global::System.Boolean isReply, global::System.DateTime sentDate, global::System.Boolean isDeleted)
+        {
+            Feedback feedback = new Feedback();
+            feedback.Id = id;
+            feedback.FullName = fullName;
+            feedback.EmailAddress = emailAddress;
+            feedback.MobileNo = mobileNo;
+            feedback.Comment = comment;
+            feedback.IsReply = isReply;
+            feedback.SentDate = sentDate;
+            feedback.IsDeleted = isDeleted;
+            return feedback;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FullName
+        {
+            get
+            {
+                return _FullName;
+            }
+            set
+            {
+                OnFullNameChanging(value);
+                ReportPropertyChanging("FullName");
+                _FullName = StructuralObject.SetValidValue(value, false, "FullName");
+                ReportPropertyChanged("FullName");
+                OnFullNameChanged();
+            }
+        }
+        private global::System.String _FullName;
+        partial void OnFullNameChanging(global::System.String value);
+        partial void OnFullNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                OnEmailAddressChanging(value);
+                ReportPropertyChanging("EmailAddress");
+                _EmailAddress = StructuralObject.SetValidValue(value, false, "EmailAddress");
+                ReportPropertyChanged("EmailAddress");
+                OnEmailAddressChanged();
+            }
+        }
+        private global::System.String _EmailAddress;
+        partial void OnEmailAddressChanging(global::System.String value);
+        partial void OnEmailAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String MobileNo
+        {
+            get
+            {
+                return _MobileNo;
+            }
+            set
+            {
+                OnMobileNoChanging(value);
+                ReportPropertyChanging("MobileNo");
+                _MobileNo = StructuralObject.SetValidValue(value, false, "MobileNo");
+                ReportPropertyChanged("MobileNo");
+                OnMobileNoChanged();
+            }
+        }
+        private global::System.String _MobileNo;
+        partial void OnMobileNoChanging(global::System.String value);
+        partial void OnMobileNoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Comment
+        {
+            get
+            {
+                return _Comment;
+            }
+            set
+            {
+                OnCommentChanging(value);
+                ReportPropertyChanging("Comment");
+                _Comment = StructuralObject.SetValidValue(value, false, "Comment");
+                ReportPropertyChanged("Comment");
+                OnCommentChanged();
+            }
+        }
+        private global::System.String _Comment;
+        partial void OnCommentChanging(global::System.String value);
+        partial void OnCommentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsReply
+        {
+            get
+            {
+                return _IsReply;
+            }
+            set
+            {
+                OnIsReplyChanging(value);
+                ReportPropertyChanging("IsReply");
+                _IsReply = StructuralObject.SetValidValue(value, "IsReply");
+                ReportPropertyChanged("IsReply");
+                OnIsReplyChanged();
+            }
+        }
+        private global::System.Boolean _IsReply;
+        partial void OnIsReplyChanging(global::System.Boolean value);
+        partial void OnIsReplyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime SentDate
+        {
+            get
+            {
+                return _SentDate;
+            }
+            set
+            {
+                OnSentDateChanging(value);
+                ReportPropertyChanging("SentDate");
+                _SentDate = StructuralObject.SetValidValue(value, "SentDate");
+                ReportPropertyChanged("SentDate");
+                OnSentDateChanged();
+            }
+        }
+        private global::System.DateTime _SentDate;
+        partial void OnSentDateChanging(global::System.DateTime value);
+        partial void OnSentDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeleted
+        {
+            get
+            {
+                return _IsDeleted;
+            }
+            set
+            {
+                OnIsDeletedChanging(value);
+                ReportPropertyChanging("IsDeleted");
+                _IsDeleted = StructuralObject.SetValidValue(value, "IsDeleted");
+                ReportPropertyChanged("IsDeleted");
+                OnIsDeletedChanged();
+            }
+        }
+        private global::System.Boolean _IsDeleted;
+        partial void OnIsDeletedChanging(global::System.Boolean value);
+        partial void OnIsDeletedChanged();
 
         #endregion
 
