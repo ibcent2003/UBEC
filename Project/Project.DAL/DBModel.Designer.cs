@@ -582,6 +582,22 @@ namespace Project.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Feedback> Feedback
+        {
+            get
+            {
+                if ((_Feedback == null))
+                {
+                    _Feedback = base.CreateObjectSet<Feedback>("Feedback");
+                }
+                return _Feedback;
+            }
+        }
+        private ObjectSet<Feedback> _Feedback;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Inspection> Inspection
         {
             get
@@ -690,22 +706,6 @@ namespace Project.DAL
             }
         }
         private ObjectSet<SupplyItems> _SupplyItems;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Feedback> Feedback
-        {
-            get
-            {
-                if ((_Feedback == null))
-                {
-                    _Feedback = base.CreateObjectSet<Feedback>("Feedback");
-                }
-                return _Feedback;
-            }
-        }
-        private ObjectSet<Feedback> _Feedback;
 
         #endregion
 
@@ -944,6 +944,14 @@ namespace Project.DAL
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Feedback EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFeedback(Feedback feedback)
+        {
+            base.AddObject("Feedback", feedback);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Inspection EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToInspection(Inspection inspection)
@@ -997,14 +1005,6 @@ namespace Project.DAL
         public void AddToSupplyItems(SupplyItems supplyItems)
         {
             base.AddObject("SupplyItems", supplyItems);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Feedback EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToFeedback(Feedback feedback)
-        {
-            base.AddObject("Feedback", feedback);
         }
 
         #endregion
@@ -4105,7 +4105,8 @@ namespace Project.DAL
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
         /// <param name="inspectionStatus">Initial value of the InspectionStatus property.</param>
-        public static Inspection CreateInspection(global::System.Int32 id, global::System.Guid transactionId, global::System.String location, global::System.String coordinate, global::System.Int32 lgaId, global::System.Int32 stageOfCompletionId, global::System.Int32 projectId, global::System.String stageOfCompletion, global::System.String descriptionOfCompletion, global::System.String projectQuality, global::System.Boolean hasDefect, global::System.DateTime inspectionDate, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.String inspectionStatus)
+        /// <param name="isVerified">Initial value of the IsVerified property.</param>
+        public static Inspection CreateInspection(global::System.Int32 id, global::System.Guid transactionId, global::System.String location, global::System.String coordinate, global::System.Int32 lgaId, global::System.Int32 stageOfCompletionId, global::System.Int32 projectId, global::System.String stageOfCompletion, global::System.String descriptionOfCompletion, global::System.String projectQuality, global::System.Boolean hasDefect, global::System.DateTime inspectionDate, global::System.String modifiedBy, global::System.DateTime modifiedDate, global::System.String inspectionStatus, global::System.Boolean isVerified)
         {
             Inspection inspection = new Inspection();
             inspection.Id = id;
@@ -4123,6 +4124,7 @@ namespace Project.DAL
             inspection.ModifiedBy = modifiedBy;
             inspection.ModifiedDate = modifiedDate;
             inspection.InspectionStatus = inspectionStatus;
+            inspection.IsVerified = isVerified;
             return inspection;
         }
 
@@ -4516,6 +4518,30 @@ namespace Project.DAL
         private global::System.String _InspectionStatus;
         partial void OnInspectionStatusChanging(global::System.String value);
         partial void OnInspectionStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsVerified
+        {
+            get
+            {
+                return _IsVerified;
+            }
+            set
+            {
+                OnIsVerifiedChanging(value);
+                ReportPropertyChanging("IsVerified");
+                _IsVerified = StructuralObject.SetValidValue(value, "IsVerified");
+                ReportPropertyChanged("IsVerified");
+                OnIsVerifiedChanged();
+            }
+        }
+        private global::System.Boolean _IsVerified;
+        partial void OnIsVerifiedChanging(global::System.Boolean value);
+        partial void OnIsVerifiedChanged();
 
         #endregion
 
@@ -6544,7 +6570,8 @@ namespace Project.DAL
         /// <param name="contractorId">Initial value of the ContractorId property.</param>
         /// <param name="enableSum">Initial value of the EnableSum property.</param>
         /// <param name="projectTypeId">Initial value of the ProjectTypeId property.</param>
-        public static ProjectApplication CreateProjectApplication(global::System.Int32 id, global::System.Guid transactionId, global::System.String serialNo, global::System.String status, global::System.Int32 workFlowId, global::System.String description, global::System.Int32 lGAId, global::System.Int32 contractorId, global::System.Boolean enableSum, global::System.Int32 projectTypeId)
+        /// <param name="isVerified">Initial value of the IsVerified property.</param>
+        public static ProjectApplication CreateProjectApplication(global::System.Int32 id, global::System.Guid transactionId, global::System.String serialNo, global::System.String status, global::System.Int32 workFlowId, global::System.String description, global::System.Int32 lGAId, global::System.Int32 contractorId, global::System.Boolean enableSum, global::System.Int32 projectTypeId, global::System.Boolean isVerified)
         {
             ProjectApplication projectApplication = new ProjectApplication();
             projectApplication.Id = id;
@@ -6557,6 +6584,7 @@ namespace Project.DAL
             projectApplication.ContractorId = contractorId;
             projectApplication.EnableSum = enableSum;
             projectApplication.ProjectTypeId = projectTypeId;
+            projectApplication.IsVerified = isVerified;
             return projectApplication;
         }
 
@@ -7046,6 +7074,30 @@ namespace Project.DAL
         private global::System.Int32 _ProjectTypeId;
         partial void OnProjectTypeIdChanging(global::System.Int32 value);
         partial void OnProjectTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsVerified
+        {
+            get
+            {
+                return _IsVerified;
+            }
+            set
+            {
+                OnIsVerifiedChanging(value);
+                ReportPropertyChanging("IsVerified");
+                _IsVerified = StructuralObject.SetValidValue(value, "IsVerified");
+                ReportPropertyChanged("IsVerified");
+                OnIsVerifiedChanged();
+            }
+        }
+        private global::System.Boolean _IsVerified;
+        partial void OnIsVerifiedChanging(global::System.Boolean value);
+        partial void OnIsVerifiedChanged();
 
         #endregion
 

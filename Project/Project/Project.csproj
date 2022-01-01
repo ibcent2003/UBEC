@@ -1523,10 +1523,11 @@
     <Content Include="Areas\Admin\Views\SupplyManagement\SupplyDeliverableList.cshtml" />
     <Content Include="Areas\Admin\Views\SupplyManagement\AddSupplyDeliverable.cshtml" />
     <Content Include="Areas\Admin\Views\SupplyManagement\Detail.cshtml" />
-    <Content Include="Content\app-debug.apk" />
     <Content Include="Areas\Admin\Views\Me\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\Feedback\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Feedback\FeedbackInfo.cshtml" />
+    <Content Include="Content\app-debug.apk" />
+    <Content Include="Content\UserManual.pdf" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="MvcInstaller\ajax-loader.gif" />
     <Content Include="MvcInstaller\jquery-1.6.1.min.js" />

@@ -38,7 +38,14 @@
             {
                 if (Model.inspection.InspectionStatus == "Submitted")
                 {
-
+                    if (Model.inspection.IsVerified == false)
+                    {
+                        @Html.ActionLink("Verify & Submit Project", "SubmitInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                    }
+                    @*else
+                {
+                    @Html.ActionLink("Verify Project", "SubmitInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                }*@
                 }
                 else if (Model.inspection.InspectionStatus == "Approved")
                 {
@@ -46,13 +53,16 @@
                 }
                 else
                 {
-                    @Html.ActionLink("Submit Project", "SubmitInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                    if (Model.inspection.IsVerified == false)
+                    {
+                        @Html.ActionLink("Verify & Submit Project", "SubmitInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
+                    }
                 }
             }
 
             @if (Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
             {
-                if (Model.inspection.InspectionStatus == "Submitted")
+                if (Model.inspection.InspectionStatus == "Submitted" && Model.inspection.IsVerified==true)
                 {
                     @Html.ActionLink("Approved Report", "ApproveInspection", new { Id = Model.inspection.Id }, new { @class = "btn btn-lg btn-primary", onclick = "return ConfirmSubmit()" })
                 }
@@ -355,6 +365,7 @@
                                 <th>State of Completion</th>
                                 <th>Has Defect</th>
                                 <th>Status</th>
+                                <th>Is Verified</th>
                                 <th>Action</th>
 
 
@@ -367,125 +378,142 @@
                                 foreach (var item in Model.InspectionList)
                                 {
                                     ++i;
-                                    <tr style="font-size: 12px;">
-                                        <td>
-                                            @i
-                                        </td>
-                                        <td>
-                                            @item.Location
-                                        </td>
+                            <tr style="font-size: 12px;">
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @item.Location
+                                </td>
 
-                                        <td>@item.Coordinate</td>
-                                        <td>@item.LGA.State.Name</td>
-                                        <td>@item.LGA.Name</td>
-                                        <td>@item.StageOfCompletion</td>
-                                        <td>
-                                            @if (item.HasDefect == true)
-                                            {
-                                                <span class="label label-success">Yes</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="label label-danger">No</span>
-                                            }
-                                        </td>
-                                        <td>
+                                <td>@item.Coordinate</td>
+                                <td>@item.LGA.State.Name</td>
+                                <td>@item.LGA.Name</td>
+                                <td>@item.StageOfCompletion</td>
+                                <td>
+                                    @if (item.HasDefect == true)
+                                    {
+                                        <span class="label label-success">Yes</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">No</span>
+                                    }
+                                </td>
+                                <td>
 
-                                            @if (item.InspectionStatus == "Approved")
-                                            {
+                                    @if (item.InspectionStatus == "Approved")
+                                    {
 
-                                                <span class="label label-success">@item.InspectionStatus</span>
+                                        <span class="label label-success">@item.InspectionStatus</span>
 
-                                            }
-                                            else
-                                            {
+                                    }
+                                    else
+                                    {
                                         <span class="label label-danger">@item.InspectionStatus</span>
 
-                                            }
+                                    }
 
 
-                                        </td>
-                                        <td>
-                                            <a data-toggle="modal" title="Inspection Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
-                                            <div class="row">
-                                                <div class="modal fade" id="@item.Id">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title">Inspection Information</h4>
+                                </td>
+                                <td>
 
-                                                            </div>
-                                                            <div class="modal-body">
+                                    @if (item.IsVerified == true)
+                                    {
 
-                                                                <table class="my-acct">
+                                        <span class="label label-primary">Yes</span>
 
-                                                                    <tr>
-                                                                        <td><b>Location</b></td>
-                                                                        <td>
-                                                                            @item.Location
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><b>Coordinate</b></td>
-                                                                        <td>@item.Coordinate</td>
-                                                                    </tr>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-info">No</span>
+
+                                    }
 
 
+                                </td>
+                                
+                                <td>
+                                    <a data-toggle="modal" title="Inspection Information" href="#@item.Id"><i class="icon-eye-open"></i></a>
+                                    <div class="row">
+                                        <div class="modal fade" id="@item.Id">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Inspection Information</h4>
 
-                                                                    <tr>
-                                                                        <td><b>Stage Of Completion</b></td>
-                                                                        <td>@item.StageOfCompletion</td>
-                                                                    </tr>
+                                                    </div>
+                                                    <div class="modal-body">
 
-                                                                    <tr>
-                                                                        <td><b>Description of Completion</b></td>
-                                                                        <td>@item.DescriptionOfCompletion</td>
-                                                                    </tr>
+                                                        <table class="my-acct">
 
-                                                                    <tr>
-                                                                        <td><b>Project Quanlity</b></td>
-                                                                        <td>@item.ProjectQuality</td>
-                                                                    </tr>
+                                                            <tr>
+                                                                <td><b>Location</b></td>
+                                                                <td>
+                                                                    @item.Location
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Coordinate</b></td>
+                                                                <td>@item.Coordinate</td>
+                                                            </tr>
 
-                                                                    <tr>
-                                                                        <td><b>Has Defect</b></td>
-                                                                        <td>
-                                                                            @if (item.HasDefect == true)
-                                                                            {
-                                                                                <span class="label label-danger">Yes</span>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <span class="label label-success">No</span>
-                                                                            }
-                                                                        </td>
-                                                                    </tr>
+
+
+                                                            <tr>
+                                                                <td><b>Stage Of Completion</b></td>
+                                                                <td>@item.StageOfCompletion</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><b>Description of Completion</b></td>
+                                                                <td>@item.DescriptionOfCompletion</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><b>Project Quanlity</b></td>
+                                                                <td>@item.ProjectQuality</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><b>Has Defect</b></td>
+                                                                <td>
                                                                     @if (item.HasDefect == true)
                                                                     {
-                                                                        <tr>
-                                                                            <td><b>Description of Defect</b></td>
-                                                                            <td>@item.DescriptionOfDefect</td>
-                                                                        </tr>
+                                                                        <span class="label label-danger">Yes</span>
                                                                     }
+                                                                    else
+                                                                    {
+                                                                        <span class="label label-success">No</span>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                            @if (item.HasDefect == true)
+                                                            {
+                                                                <tr>
+                                                                    <td><b>Description of Defect</b></td>
+                                                                    <td>@item.DescriptionOfDefect</td>
+                                                                </tr>
+                                                            }
 
 
 
 
-                                                                </table>
+                                                        </table>
 
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
+                                        </div>
+                                    </div>
+                                </td>
 
 
-                                    </tr>
+                            </tr>
                                 }
                             }
                             else

@@ -205,7 +205,7 @@ namespace Project.Controllers
                 var getworkflow = db.Workflow.Where(x => x.Id == Id).FirstOrDefault();
                 if(getworkflow != null)
                 {
-                    var getproject = db.ProjectApplication.Where(x => x.WorkFlowId == Id && x.IsDeleted==false).ToList();
+                    var getproject = db.ProjectApplication.Where(x => x.WorkFlowId == Id  && x.Status=="Approved" && x.IsDeleted==false).ToList();
                     model.projectList = getproject;
                     model.workflow = getworkflow;                    
                     return View(model);

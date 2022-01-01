@@ -109,6 +109,7 @@ namespace Project.Areas.Admin.Controllers
                 }
                 ProjectViewModel model = new ProjectViewModel();
                 getInspection.InspectionStatus = "Submitted";
+                getInspection.IsVerified = false;
                 getproject.StageOfCompletion = getInspection.StageOfCompletion;
                 db.SaveChanges();
                 TempData["message"] = "Report has been Disapproved successfully.";
@@ -212,8 +213,11 @@ namespace Project.Areas.Admin.Controllers
                     ModifiedBy = User.Identity.Name,
                     ModifiedDate = DateTime.Now,
                     IsDeleted = false,
-                    EnableSum = model.projectForm.ShowCost,                    
+                    EnableSum = model.projectForm.ShowCost,
                     StageOfCompletion = "0%"
+                    
+                    
+
                         // =                  
                     };
                     db.ProjectApplication.AddObject(addnew);
@@ -269,9 +273,10 @@ namespace Project.Areas.Admin.Controllers
                 model.projectForm.ProjectTypeId = getproject.ProjectTypeId;
                 model.project = getproject;
                 model.projectForm.Coordinate = getproject.Coordinate;
-               model.projectForm.StartDate = getproject.StartDate;
-               model.projectForm.EndDate = getproject.EndDate;
+                model.projectForm.StartDate = getproject.StartDate;
+                model.projectForm.EndDate = getproject.EndDate;
                 model.projectForm.ShowCost = getproject.EnableSum;
+               // model.projectForm.IsVerfied = getproject.IsVerified;
                 return View(model);
             }
             catch(Exception ex)
@@ -938,9 +943,16 @@ namespace Project.Areas.Admin.Controllers
                 model.project = getproject;
                 var getdraftProject = db.ProjectApplication.Where(x => x.Id == Id).ToList();
                 model.projectList = getdraftProject;
-                var inspection = getproject.Inspection.ToList();
-                model.InspectionList = inspection;
+                if(Roles.GetRolesForUser(User.Identity.Name).Contains("Administrator"))
+                {
+                    var inspection = getproject.Inspection.Where(x=>x.IsVerified==true).ToList();
+                    model.InspectionList = inspection;
+                    return View(model);
+                }
+                var inspectionlist = getproject.Inspection.ToList();
+                model.InspectionList = inspectionlist;
                 return View(model);
+
             }
             catch(Exception ex)
             {
@@ -975,6 +987,7 @@ namespace Project.Areas.Admin.Controllers
                 model.inspectionForm.LGAId = getproject.LGAId;
                 model.inspectionForm.ProjectId = Id;                
                 model.StateId = getproject.LGA.StateId;
+                
                 return View(model);
             }
             catch(Exception ex)
@@ -1011,7 +1024,7 @@ namespace Project.Areas.Admin.Controllers
                     Inspection addnew = new Inspection
                     {
                         TransactionId = Guid.NewGuid(),
-                        InspectionStatus = "Not Submitted",
+                        InspectionStatus = "Submitted",
                         Location = model.inspectionForm.Location,
                         Coordinate = model.inspectionForm.Coordinate,
                         LgaId = model.inspectionForm.LGAId,
@@ -1024,7 +1037,8 @@ namespace Project.Areas.Admin.Controllers
                         ModifiedBy = User.Identity.Name,
                         ModifiedDate = DateTime.Now, 
                         InspectionDate = DateTime.Now,
-                        ProjectId = model.inspectionForm.ProjectId
+                        ProjectId = model.inspectionForm.ProjectId,
+                        IsVerified = false
                     };
                     db.Inspection.AddObject(addnew);
                     db.SaveChanges();
@@ -1083,6 +1097,7 @@ namespace Project.Areas.Admin.Controllers
                 model.inspectionForm.HasDefect = getInspection.HasDefect;
                 model.inspectionForm.DescriptionOfDefect = getInspection.DescriptionOfDefect;
                 model.inspectionForm.Id = Id;
+                
                 return View(model);
             }
             catch (Exception ex)
@@ -1133,6 +1148,7 @@ namespace Project.Areas.Admin.Controllers
                     getInspection.DescriptionOfDefect = model.inspectionForm.DescriptionOfDefect;
                     getInspection.ModifiedBy = User.Identity.Name;
                     getInspection.ModifiedDate = DateTime.Now;
+                    
                     db.SaveChanges();
                     TempData["message"] = "The report has been update successfully.";
                     return RedirectToAction("InspectionList", "Project", new { Id = getInspection.ProjectId, area = "Admin" });
@@ -1171,6 +1187,7 @@ namespace Project.Areas.Admin.Controllers
                     return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
                 }
                 getInspection.InspectionStatus = "Submitted";
+                getInspection.IsVerified = true;
                 db.SaveChanges();
                 TempData["message"] = "The report has been submitted successfully.";
                 return RedirectToAction("InspectionList", "Project", new { Id = getInspection.ProjectId, area = "Admin" });
@@ -1181,6 +1198,66 @@ namespace Project.Areas.Admin.Controllers
                 TempData["message"] = Settings.Default.GenericExceptionMessage;
                 TempData["messageType"] = "danger";
                 return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+        }
+
+        public ActionResult DeleteInspection(int Id)
+        {
+            try
+            {
+                ProjectViewModel model = new ProjectViewModel();
+                var getInspection = db.Inspection.Where(x => x.Id == Id).FirstOrDefault();
+                if (getInspection == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+
+                var getproject = db.ProjectApplication.Where(x => x.Id == getInspection.ProjectId).FirstOrDefault();
+                if (getproject == null)
+                {
+                    TempData["message"] = Settings.Default.GenericExceptionMessage;
+                    TempData["messageType"] = "danger";
+                    return RedirectToAction("Index", "InspDashboard", new { area = "Admin" });
+                }
+                 var DocumentInfoList = getInspection.DocumentInfo.ToList<DocumentInfo>();
+                model.FullPhotoPath = Properties.Settings.Default.FullPhotoPath;
+                foreach(var d in DocumentInfoList)
+                {
+                    string url = Settings.Default.FullPhotoPath;
+                    System.IO.Directory.CreateDirectory(url);
+
+                    var documentInfo = db.DocumentInfo.Where(x => x.Id == d.Id).FirstOrDefault();
+                    if (documentInfo.Path != null)
+                    {
+                        System.IO.FileInfo fi = new System.IO.FileInfo(url + documentInfo.Path);
+                        fi.Delete();
+                    }
+                    DocumentInfo del = new DocumentInfo
+                    {
+
+                    };
+                    db.DocumentInfo.DeleteObject(documentInfo);
+                    getInspection.DocumentInfo.Remove(documentInfo);
+                    db.SaveChanges();
+                }
+                Inspection remove = new Inspection
+                {
+
+                };
+                db.Inspection.DeleteObject(getInspection);
+                db.SaveChanges();
+                TempData["message"] = "The report has been deleted successfull.";
+                return RedirectToAction("InspectionList", "Project", new { Id = getproject.Id, area = "Admin" });
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                TempData["message"] = Settings.Default.GenericExceptionMessage;
+                TempData["messageType"] = "danger";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+
             }
         }
 

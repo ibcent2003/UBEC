@@ -223,6 +223,7 @@
     <Property Name="EndDate" Type="datetime2" Precision="7" />
     <Property Name="EnableSum" Type="bit" Nullable="false" />
     <Property Name="ProjectTypeId" Type="int" Nullable="false" />
+    <Property Name="IsVerified" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ProjectDocumentInfo">
     <Key>
@@ -424,6 +425,7 @@
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="InspectionStatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsVerified" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="InspectionDocumentInfo">
     <Key>

@@ -91,6 +91,7 @@ namespace Project.Areas.Admin.Models
         public bool ShowCost { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+       
     }
 
     public class ProjectPaymentForm
@@ -139,7 +140,8 @@ namespace Project.Areas.Admin.Models
         public bool HasDefect { get; set; }
         public string DescriptionOfDefect { get; set; }
         public  int ProjectId { get; set; }
- 
+        public bool IsVerfied { get; set; }
+
     }
 
     public class ProjectDeliverableForm
